@@ -6,6 +6,9 @@ import NotFound from "./pages/NotFound";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import Dashboard from "./components/Dashboard/Dashboard";
 import ForgetPassword from "./components/ForgetPassword/ForgetPassword";
+import Home from "./components/Home/Home";
+import PeerEvaluation from "./components/PeerEvaluation/PeerEvaluation";
+import SelfEvaluation from "./components/SelfEvaluation/SelfEvaluation";
 
 function App() {
   return (
@@ -27,6 +30,17 @@ function App() {
             <ForgetPassword />
           </Route>
 
+          <Route exact path="/home">
+            <Home />
+          </Route>
+
+          <Route exact path="/peerevaluation">
+            <PeerEvaluation/>
+          </Route>
+
+          <Route exact path="/selfevaluation">
+            <SelfEvaluation/>
+          </Route>
 
           <Route exact path="/forbidden">
             <Forbidden />
