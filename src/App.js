@@ -9,7 +9,9 @@ import ForgetPassword from "./components/ForgetPassword/ForgetPassword";
 import Home from "./components/Home/Home";
 import PeerEvaluation from "./components/PeerEvaluation/PeerEvaluation";
 import SelfEvaluation from "./components/SelfEvaluation/SelfEvaluation";
-
+import Attendance from "./components/Attendance/Attendance";
+import SupervisorFeedback from "./components/SupervisorFeedback/SupervisorFeedback";
+import Accolades from "./components/Accolades/Accolades";
 function App() {
   return (
     <Router>
@@ -26,6 +28,10 @@ function App() {
             <ProtectedRoute component={Dashboard} />
           </Route>
 
+          <Route exact path="/accolades">
+            <Accolades />
+          </Route>
+
           <Route exact path="/forget-password">
             <ForgetPassword />
           </Route>
@@ -40,6 +46,14 @@ function App() {
 
           <Route exact path="/selfevaluation">
             <SelfEvaluation/>
+          </Route>
+
+          <Route exact path="/attendance">
+            <Attendance/>
+          </Route>
+
+          <Route exact path="/supervisorfeedback">
+            <SupervisorFeedback />
           </Route>
 
           <Route exact path="/forbidden">
