@@ -1,5 +1,5 @@
 export default function Accolades() {
-    function(
+    return(
     <div>
         <h1>Accolades for   </h1>
     </div >
