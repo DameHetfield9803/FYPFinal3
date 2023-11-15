@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Switch } from  "react-router-dom/cjs/react-router-dom.min";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom/cjs/react-router-dom.min";
 import Login from "./components/Login/Login";
 import Forbidden from "./pages/Forbidden";
 import "./style.css";
@@ -13,6 +13,7 @@ import Attendance from "./components/Attendance/Attendance";
 import SupervisorFeedback from "./components/SupervisorFeedback/SupervisorFeedback";
 import Accolades from "./components/Accolades/Accolades";
 function App() {
+
   return (
     <Router>
       <div className="App">
@@ -23,7 +24,7 @@ function App() {
             <Login />
           </Route>
 
-          
+
           <Route exact path="/dashboard">
             <ProtectedRoute component={Dashboard} />
           </Route>
@@ -41,15 +42,15 @@ function App() {
           </Route>
 
           <Route exact path="/peerevaluation">
-            <PeerEvaluation/>
+            <PeerEvaluation />
           </Route>
 
           <Route exact path="/selfevaluation">
-            <SelfEvaluation/>
+            <SelfEvaluation />
           </Route>
 
           <Route exact path="/attendance">
-            <Attendance/>
+            <Attendance />
           </Route>
 
           <Route exact path="/supervisorfeedback">
