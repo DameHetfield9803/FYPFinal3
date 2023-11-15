@@ -13,7 +13,6 @@ import Attendance from "./components/Attendance/Attendance";
 import SupervisorFeedback from "./components/SupervisorFeedback/SupervisorFeedback";
 import Accolades from "./components/Accolades/Accolades";
 function App() {
-
   return (
     <Router>
       <div className="App">
