@@ -13,28 +13,28 @@ export default function Attendance() {
 
   return (
     <div className="container mt-5">
-      <table class="table table-hover">
+      <table className="table table-hover">
         <thead>
           <tr>
             <th>Full Name</th>
             <th>Supervisor</th>
             <th>Email</th>
             {noOfWeeks.map((week) => (
-              <th>{week}</th>
+              <th key={week.id}>{week}</th>
             ))}
           </tr>
         </thead>
 
         <tbody>
           {myEmployees.map((employee) => (
-            <tr>
+            <tr key={employee.id}>
               <td>{employee}</td>
               <td>Doe</td>
               <td>{employee}@example.com</td>
               {noOfWeeks.map((week) => (
-                <td>
+                <td key={week.id}>
 
-                  <div className="dropdown">
+                <div className="dropdown">
                     <div className="weekly-eval-box alert-success"
                       type="button"
                       data-toggle="dropdown"

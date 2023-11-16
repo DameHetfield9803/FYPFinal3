@@ -12,6 +12,7 @@ import SelfEvaluation from "./components/SelfEvaluation/SelfEvaluation";
 import Attendance from "./components/Attendance/Attendance";
 import SupervisorFeedback from "./components/SupervisorFeedback/SupervisorFeedback";
 import Accolades from "./components/Accolades/Accolades";
+import AppraisalForm from "./components/AppraisalForm/AppraisalForm";
 function App() {
   return (
     <Router>
@@ -54,6 +55,10 @@ function App() {
 
           <Route exact path="/supervisorfeedback">
             <SupervisorFeedback />
+          </Route>
+
+          <Route exact path="/appraisalform">
+            <AppraisalForm />
           </Route>
 
           <Route exact path="/forbidden">
