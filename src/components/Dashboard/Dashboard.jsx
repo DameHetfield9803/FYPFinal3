@@ -1,7 +1,7 @@
-//import 'bootstrap/dist/css/bootstrap.css';
-//import Chart from "react-apexcharts";
+import React from 'react';
+import './Dashboard.css'; // Import the CSS for your Dashboard component
+import { Link } from 'react-router-dom';
 import { auth } from "../../config/firebase";
-import { useParams } from "react-router-dom";
 import { signOut } from "firebase/auth";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
@@ -17,15 +17,24 @@ export default function Dashboard() {
         }
     };
 
-    const { id } = useParams();
-    // For dashboard ID checking // To be implemented
     return (
-        <>
+        <div>
+            
+            <div className="topnav">
+                <a href="http://localhost:3000/Home" className="logo-link">
+                    <img src="Assets/TSH.jpg" alt="Logo" width="310px" height="90px" />
+                </a>
+            
+                <a href="http://localhost:3000/Dashboard">Dashboard</a>
+                <a href="http://localhost:3000/Attendance">Attendance</a>
+                <a href="http://localhost:3000/Accolades">Accolades</a>
+            </div>
+
             <div id="dashboard" className="mb-2">
-                <h1>Dashboard {id}</h1>
+                <h1>Dashboard</h1>
                 <button onClick={logout}>LOGOUT</button>
                 <p>Charts (updated monthly)</p>
             </div>
-        </>
-    )
+        </div>
+    );
 }

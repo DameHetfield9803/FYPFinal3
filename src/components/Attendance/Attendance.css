@@ -1,0 +1,62 @@
+/* Attendance.css */
+
+/* Your existing styles for body, weekly-eval-box, dropdown-menu, and liner */
+body {
+    /* background-color: rgb(190, 211, 228); */ /* Commented out background color */
+}
+
+.weekly-eval-box {
+    width: 20px !important;
+    height: 20px !important;
+    border: 1px solid black !important;
+    padding: 10px 30px 38px 18px !important; /* Adjusted padding */
+}
+
+.dropdown-menu {
+    border-radius: 2px !important;
+    width: 250px;
+}
+
+.dropdown-menu {
+    margin-top: -10px !important; /* Adjusted margin-top */
+    word-wrap: break-word !important;
+}
+
+.liner {
+    border-bottom: 1px solid #dee2e6 !important;
+}
+
+/* New styles for the topnav */
+.topnav {
+    overflow: hidden;
+    background-color: #ffffff; /* Background color for the top navigation bar */
+    display: flex; /* Use a flex container to align child elements */
+    align-items: center; /* Center-align child elements vertically */
+}
+
+/* Style for each link in the top navigation bar */
+.topnav a {
+    float: left; /* Float the links to the left side */
+    color: #1d1919; /* Text color for the links */
+    text-align: center; /* Center-align the text within the links */
+    padding: 14px 16px; /* Padding around each link */
+    text-decoration: none; /* Remove default underline styling for links */
+    font-size: 17px; /* Font size for the links */
+}
+
+/* Style for the links when hovered over */
+.topnav a:hover {
+    background-color: #ddd; /* Background color on hover */
+    color: black; /* Text color on hover */
+}
+
+/* Style for the active link in the top navigation bar */
+.topnav a.active {
+    background-color: #04AA6D; /* Background color for the active link */
+    color: white; /* Text color for the active link */
+}
+
+/* Additional styling for the logo link, adding right margin */
+.logo-link {
+    margin-right: 20px; /* Adjust the margin as needed for the logo link */
+}
