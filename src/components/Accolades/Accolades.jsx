@@ -22,8 +22,8 @@ export default function Accolades() {
       const isLastInputEmpty =
         lastInput.input === "" &&
         lastInput.dropdown1 === "" &&
-        lastInput.dropdown2 === "" &&
         lastInput.textarea1 === "" &&
+        lastInput.dropdown2 === "" &&
         lastInput.textarea2 === "";
 
       setIsDisabled(isLastInputEmpty);
@@ -72,7 +72,6 @@ export default function Accolades() {
         <a href="http://localhost:3000/Attendance">Attendance</a>
         <a href="http://localhost:3000/Accolades">Accolades</a>
         <a href="http://localhost:3000/AppraisalForm">AppraisalForm</a>
-
       </div>
 
       <h1>Accolades page</h1>
@@ -98,10 +97,22 @@ export default function Accolades() {
                   handleInputChange(event, index, "dropdown1")
                 }
               >
-                {/* Add options for dropdown1 */}
-                <option value="">Select Option 1</option>
+                {/* Updated options for dropdown1 */}
+                <option value="">Select Department</option>
+                <option value="Financial Department">Financial Department</option>
+                <option value="Logistics Department">Logistics Department</option>
+                <option value="Sales Department">Sales Department</option>
+                <option value="IT Department">IT Department</option>
                 {/* Add more options as needed */}
               </select>
+              <textarea
+                className="form-control"
+                placeholder={`Textarea 1`}
+                value={input.textarea1}
+                onChange={(event) =>
+                  handleInputChange(event, index, "textarea1")
+                }
+              />
               <select
                 className="form-control"
                 value={input.dropdown2}
@@ -113,14 +124,6 @@ export default function Accolades() {
                 <option value="">Select Option 2</option>
                 {/* Add more options as needed */}
               </select>
-              <textarea
-                className="form-control"
-                placeholder={`Textarea 1`}
-                value={input.textarea1}
-                onChange={(event) =>
-                  handleInputChange(event, index, "textarea1")
-                }
-              />
               <textarea
                 className="form-control"
                 placeholder={`Textarea 2`}
