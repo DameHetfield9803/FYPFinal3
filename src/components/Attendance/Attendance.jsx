@@ -37,6 +37,8 @@ export default function Attendance() {
         <Link to="/dashboard">Dashboard</Link>
         <Link to="/attendance">Attendance</Link>
         <Link to="/accolades">Accolades</Link>
+        <Link to="/AppraisalForm">AppraisalForm</Link>
+        
       </div>
 
       <div className="container mt-5">

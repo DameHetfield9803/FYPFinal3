@@ -28,6 +28,8 @@ export default function Dashboard() {
                 <a href="http://localhost:3000/Dashboard">Dashboard</a>
                 <a href="http://localhost:3000/Attendance">Attendance</a>
                 <a href="http://localhost:3000/Accolades">Accolades</a>
+                <a href="http://localhost:3000/AppraisalForm">AppraisalForm</a>
+
             </div>
 
             <div id="dashboard" className="mb-2">

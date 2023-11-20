@@ -21,7 +21,11 @@ export default function Home() {
                 <a href="http://localhost:3000/Dashboard">Dashboard</a>
                 <a href="http://localhost:3000/Attendance">Attendance</a>
                 <a href="http://localhost:3000/Accolades">Accolades</a>
+                <a href="http://localhost:3000/AppraisalForm">AppraisalForm</a>
+
             </div>
+
+
 
             {/* Welcome message */}
             <h1>Welcome Employee, This is your homepage</h1>
