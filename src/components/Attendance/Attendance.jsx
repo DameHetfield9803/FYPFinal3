@@ -38,6 +38,11 @@ export default function Attendance() {
         <Link to="/attendance">Attendance</Link>
         <Link to="/accolades">Accolades</Link>
         <Link to="/AppraisalForm">AppraisalForm</Link>
+
+        <Link to="/Profile" className="profile">
+          <img src="Assets/Profile-icon.jpg" alt="Profile Icon" width="30px" height="30px" />
+          <span>My Profile</span>
+        </Link>
         
       </div>
 

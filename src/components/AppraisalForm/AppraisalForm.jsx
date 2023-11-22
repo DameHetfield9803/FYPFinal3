@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import { Link } from 'react-router-dom';
 
 export default function App() {
   const [inputList, setInputList] = useState([
@@ -46,7 +47,7 @@ export default function App() {
 
   return (
     <div className="App">
-      <h1>Enter the appraisal item </h1>
+      <h1>Enter the appraisal performance </h1>
 
       {inputList.length > 0 ? (
         inputList.map((input, index) => (

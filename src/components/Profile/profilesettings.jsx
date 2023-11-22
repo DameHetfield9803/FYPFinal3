@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import './profilesettings.css';
 
 const ProfileSettings = () => {
@@ -40,10 +41,20 @@ const ProfileSettings = () => {
           <img src="Assets/TSH.jpg" alt="Logo" width="310px" height="90px" />
         </a>
         
-        <a href="http://localhost:3000/Profile" className="active">
-          Profile
-        </a>
-        <a href="http://localhost:3000/Dashboard">Dashboard</a>
+        <Link to="/Profile" className="active">
+          
+        </Link>
+        <Link to="/Dashboard">Dashboard</Link>
+        <Link to="/Attendance">Attendance</Link>
+        <Link to="/Accolades">Accolades</Link>
+        <Link to="/AppraisalForm">AppraisalForm</Link>
+
+        <Link to="/Profile" className="profile">
+          <img src="Assets/Profile-icon.jpg" alt="Profile Icon" width="30px" height="30px" />
+          <span>My Profile</span>
+        </Link>
+
+        {/* Add more links as needed */}
       </div>
 
       {/* Profile container */}

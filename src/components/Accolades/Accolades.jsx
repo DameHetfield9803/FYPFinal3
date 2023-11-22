@@ -1,6 +1,5 @@
-// Accolades.jsx
-
 import React, { useEffect, useState } from "react";
+import { Link } from 'react-router-dom';
 
 const Accolades = () => {
   const [inputList, setInputList] = useState([
@@ -71,6 +70,12 @@ const Accolades = () => {
         <a href="http://localhost:3000/Attendance">Attendance</a>
         <a href="http://localhost:3000/Accolades">Accolades</a>
         <a href="http://localhost:3000/AppraisalForm">AppraisalForm</a>
+
+        {/* My Profile link */}
+        <Link to="/Profile" className="profile">
+          <img src="Assets/Profile-icon.jpg" alt="Profile Icon" width="30px" height="30px" />
+          <span>My Profile</span>
+        </Link>
       </div>
 
       <h1>Accolades page</h1>
