@@ -46,7 +46,7 @@ export default function App() {
 
   return (
     <div className="App">
-      <h1>Enter the appraisal performance </h1>
+      <h1>Enter the appraisal item </h1>
 
       {inputList.length > 0 ? (
         inputList.map((input, index) => (
@@ -54,7 +54,7 @@ export default function App() {
             <input
               type="text"
               className="form-control"
-              placeholder={`Input ${index + 1}`}
+              placeholder={`Enter Appraisal Item`}
               value={input.input}
               onChange={(event) => handleInputChange(event, index)}
             />
