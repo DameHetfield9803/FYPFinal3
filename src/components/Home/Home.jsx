@@ -30,7 +30,7 @@ const Navigation = () => {
 
         {/* Profile link */}
         <Link to="/Profile" className="profile">
-          <img src="Assets/profile-icon.jpg" alt="Profile Icon" width="30px" height="30px" />
+          <img src="Assets/Profile-icon.jpg" alt="Profile Icon" width="30px" height="30px" />
           <span>My Profile</span>
         </Link>
       </div>
