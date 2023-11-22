@@ -4,8 +4,12 @@ import { Link } from 'react-router-dom';
 export default function App() {
   const [inputList, setInputList] = useState([
     {
-      input: "",
-      input_rank: null
+      performance: "",
+      excellent: "",
+      good: "",
+      fair: "",
+      poor: "",
+      comments: ""
     }
   ]);
 
@@ -13,9 +17,9 @@ export default function App() {
 
   useEffect(() => {
     if (inputList.length > 0) {
-      inputList[inputList.length - 1].input === ""
-        ? setIsDisabled(true)
-        : setIsDisabled(false);
+      const lastItem = inputList[inputList.length - 1];
+      const isLastItemEmpty = Object.values(lastItem).some(value => value === "");
+      setIsDisabled(isLastItemEmpty);
     }
   }, [inputList]);
 
@@ -23,17 +27,20 @@ export default function App() {
     setInputList([
       ...inputList,
       {
-        input: "",
-        input_rank: null
+        performance: "",
+        excellent: "",
+        good: "",
+        fair: "",
+        poor: "",
+        comments: ""
       }
     ]);
   };
 
-  const handleInputChange = (event, index) => {
+  const handleInputChange = (event, index, columnName) => {
     const { value } = event.target;
     const newInputList = [...inputList];
-    newInputList[index].input = value;
-    newInputList[index].input_rank = index + 1;
+    newInputList[index][columnName] = value;
     setInputList(newInputList);
   };
 
@@ -48,13 +55,13 @@ export default function App() {
   return (
     <div>
       <div className="topnav">
-        <a href="http://localhost:3000/Home" className="logo-link">
+        <Link to="/Home" className="logo-link">
           <img src="Assets/TSH.jpg" alt="Logo" width="310px" height="90px" />
-        </a>
-        <a href="http://localhost:3000/Dashboard">Dashboard</a>
-        <a href="http://localhost:3000/Attendance">Attendance</a>
-        <a href="http://localhost:3000/Accolades">Accolades</a>
-        <a href="http://localhost:3000/AppraisalForm">AppraisalForm</a>
+        </Link>
+        <Link to="/Dashboard">Dashboard</Link>
+        <Link to="/Attendance">Attendance</Link>
+        <Link to="/Accolades">Accolades</Link>
+        <Link to="/AppraisalForm">AppraisalForm</Link>
 
         {/* My Profile link */}
         <Link to="/Profile" className="profile">
@@ -65,17 +72,62 @@ export default function App() {
 
       <h1>Enter the appraisal performance </h1>
 
-      {inputList.length > 0 ? (
-        inputList.map((input, index) => (
-          <div key={index} className="input-group" style={inputStyles}>
-            <input
-              type="text"
-              className="form-control"
-              placeholder={`Input ${index + 1}`}
-              value={input.input}
-              onChange={(event) => handleInputChange(event, index)}
-            />
-            <div className="input-group-append">
+      <div className="row">
+        {inputList.map((input, index) => (
+          <div key={index} className="col-md-2">
+            <div className="form-group">
+              <label>Performance Evaluation</label>
+              <input
+                type="text"
+                className="form-control"
+                value={input.performance}
+                onChange={(event) => handleInputChange(event, index, 'performance')}
+              />
+            </div>
+            <div className="form-group">
+              <label>Excellent</label>
+              <input
+                type="text"
+                className="form-control"
+                value={input.excellent}
+                onChange={(event) => handleInputChange(event, index, 'excellent')}
+              />
+            </div>
+            <div className="form-group">
+              <label>Good</label>
+              <input
+                type="text"
+                className="form-control"
+                value={input.good}
+                onChange={(event) => handleInputChange(event, index, 'good')}
+              />
+            </div>
+            <div className="form-group">
+              <label>Fair</label>
+              <input
+                type="text"
+                className="form-control"
+                value={input.fair}
+                onChange={(event) => handleInputChange(event, index, 'fair')}
+              />
+            </div>
+            <div className="form-group">
+              <label>Poor</label>
+              <input
+                type="text"
+                className="form-control"
+                value={input.poor}
+                onChange={(event) => handleInputChange(event, index, 'poor')}
+              />
+            </div>
+            <div className="form-group">
+              <label>Comments</label>
+              <input
+                type="text"
+                className="form-control"
+                value={input.comments}
+                onChange={(event) => handleInputChange(event, index, 'comments')}
+              />
               <button
                 className="btn btn-outline-danger"
                 type="button"
@@ -85,26 +137,20 @@ export default function App() {
               </button>
             </div>
           </div>
-        ))
-      ) : (
-        <p>No item in the list</p>
-      )}
+        ))}
+      </div>
       <button
         className="btn btn-primary"
         style={btnStyle}
         onClick={handleListAdd}
         disabled={isDisabled}
       >
-        Add choice
+        Add row
       </button>
     </div>
   );
 }
 
 const btnStyle = {
-  marginTop: "1rem"
-};
-
-const inputStyles = {
   marginTop: "1rem"
 };
