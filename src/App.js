@@ -31,7 +31,7 @@ function App() {
           </Route>
 
           <Route exact path="/accolades">
-            <Accolades />
+            <ProtectedRoute component={Accolades} />
           </Route>
 
           <Route exact path="/forget-password">
@@ -59,11 +59,11 @@ function App() {
           </Route>
 
           <Route exact path="/appraisalform">
-            <AppraisalForm />
+            <ProtectedRoute component={AppraisalForm} />
           </Route>
 
           <Route exact path="/profile">
-            <Profile />
+            <ProtectedRoute component={Profile} />
           </Route>
 
           <Route exact path="/forbidden">

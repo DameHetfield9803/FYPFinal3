@@ -9,8 +9,7 @@ export default function Accolades() {
       input_rank: null,
       dropdown1: "",
       dropdown2: "",
-      textarea1: "",
-      textarea2: ""
+      textarea1: ""
     }
   ]);
 
@@ -23,8 +22,7 @@ export default function Accolades() {
         lastInput.input === "" &&
         lastInput.dropdown1 === "" &&
         lastInput.textarea1 === "" &&
-        lastInput.dropdown2 === "" &&
-        lastInput.textarea2 === "";
+        lastInput.dropdown2 === "";
 
       setIsDisabled(isLastInputEmpty);
     }
@@ -38,8 +36,7 @@ export default function Accolades() {
         input_rank: null,
         dropdown1: "",
         dropdown2: "",
-        textarea1: "",
-        textarea2: ""
+        textarea1: ""
       }
     ]);
   };
@@ -99,10 +96,9 @@ export default function Accolades() {
               >
                 {/* Updated options for dropdown1 */}
                 <option value="">Select Department</option>
-                <option value="Financial Department">Financial Department</option>
-                <option value="Logistics Department">Logistics Department</option>
-                <option value="Sales Department">Sales Department</option>
-                <option value="IT Department">IT Department</option>
+                <option value="HQ">HQ</option>
+                <option value="MC">MC</option>
+                <option value="BMW">BMW</option>
                 {/* Add more options as needed */}
               </select>
               <textarea
@@ -124,14 +120,15 @@ export default function Accolades() {
                 <option value="">Select Option 2</option>
                 {/* Add more options as needed */}
               </select>
-              <textarea
+              {/* Remove the following block related to textarea2 */}
+              {/* <textarea
                 className="form-control"
                 placeholder={`Textarea 2`}
                 value={input.textarea2}
                 onChange={(event) =>
                   handleInputChange(event, index, "textarea2")
                 }
-              />
+              /> */}
               <div className="input-group-append">
                 <button
                   className="btn btn-outline-danger"
