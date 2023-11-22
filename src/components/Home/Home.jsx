@@ -1,36 +1,44 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { auth } from "../../config/firebase";
+import { signOut } from "firebase/auth";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import './Home.css';
 
-const Navigation = () => (
-  <div className="topnav">
-    <Link to="/Home" className="logo-link">
-      <img src="Assets/TSH.jpg" alt="Company Logo" width="310px" height="90px" />
-    </Link>
-    <Link to="/Dashboard">Dashboard</Link>
-    <Link to="/Attendance">Attendance</Link>
-    <Link to="/Accolades">Accolades</Link>
-    <Link to="/AppraisalForm">AppraisalForm</Link>
+const Navigation = () => {
+  const history = useHistory();
 
-    {/* Profile icon and text as a link to "/Profile" */}
-    <Link to="/Profile" className="profile">
-      <img src="path/to/profile-icon.png" alt="Profile Icon" width="30px" height="30px" />
-      <span>My Profile</span>
-    </Link>
-  </div>
-);
-
-const Home = () => {
-  function getUser() {
-    // Your logic to fetch user information
-  }
+  const logout = async () => {
+    try {
+      await signOut(auth);
+      history.push("/");
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <div>
-      <Navigation />
+      <div className="topnav">
+        <a href="http://localhost:3000/Home" className="logo-link">
+          <img src="Assets/TSH.jpg" alt="Company Logo" width="310px" height="90px" />
+        </a>
+        <a href="http://localhost:3000/Dashboard">Dashboard</a>
+        <a href="http://localhost:3000/Attendance">Attendance</a>
+        <a href="http://localhost:3000/Accolades">Accolades</a>
+        <a href="http://localhost:3000/AppraisalForm">AppraisalForm</a>
+
+        {/* Profile link */}
+        <Link to="/Profile" className="profile">
+          <img src="Assets/profile-icon.jpg" alt="Profile Icon" width="30px" height="30px" />
+          <span>My Profile</span>
+        </Link>
+      </div>
+
+      {/* Welcome message */}
       <h1>Welcome Employee, This is your homepage</h1>
     </div>
   );
 };
 
-export default Home;
+export default Navigation;
