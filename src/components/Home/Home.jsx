@@ -1,34 +1,36 @@
 import React from 'react';
-import './Home.css'; // Import the CSS for your Home component
+import { Link } from 'react-router-dom';
+import './Home.css';
 
-export default function Home() {
-    // Function to get user information, you can add the logic here
-    function getUser() {
-        // Your function logic here
-    }
+const Navigation = () => (
+  <div className="topnav">
+    <Link to="/Home" className="logo-link">
+      <img src="Assets/TSH.jpg" alt="Company Logo" width="310px" height="90px" />
+    </Link>
+    <Link to="/Dashboard">Dashboard</Link>
+    <Link to="/Attendance">Attendance</Link>
+    <Link to="/Accolades">Accolades</Link>
+    <Link to="/AppraisalForm">AppraisalForm</Link>
 
-    return (
-        <div>
-            {/* Top navigation bar */}
-            <div className="topnav">
-                {/* Logo link */}
-                <a href="http://localhost:3000/Home" className="logo-link">
-                    {/* Logo image */}
-                    <img src="Assets/TSH.jpg" alt="Logo" width="310px" height="90px" />
-                </a>
+    {/* Profile icon and text as a link to "/Profile" */}
+    <Link to="/Profile" className="profile">
+      <img src="path/to/profile-icon.png" alt="Profile Icon" width="30px" height="30px" />
+      <span>My Profile</span>
+    </Link>
+  </div>
+);
 
-                {/* Navigation links */}
-                <a href="http://localhost:3000/Dashboard">Dashboard</a>
-                <a href="http://localhost:3000/Attendance">Attendance</a>
-                <a href="http://localhost:3000/Accolades">Accolades</a>
-                <a href="http://localhost:3000/AppraisalForm">AppraisalForm</a>
+const Home = () => {
+  function getUser() {
+    // Your logic to fetch user information
+  }
 
-            </div>
+  return (
+    <div>
+      <Navigation />
+      <h1>Welcome Employee, This is your homepage</h1>
+    </div>
+  );
+};
 
-
-
-            {/* Welcome message */}
-            <h1>Welcome Employee, This is your homepage</h1>
-        </div>
-    );
-}
+export default Home;

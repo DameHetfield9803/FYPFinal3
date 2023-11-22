@@ -13,6 +13,7 @@ import Attendance from "./components/Attendance/Attendance";
 import SupervisorFeedback from "./components/SupervisorFeedback/SupervisorFeedback";
 import Accolades from "./components/Accolades/Accolades";
 import AppraisalForm from "./components/AppraisalForm/AppraisalForm";
+import Profile from "./components/Profile/profilesettings";
 function App() {
   return (
     <Router>
@@ -59,6 +60,10 @@ function App() {
 
           <Route exact path="/appraisalform">
             <AppraisalForm />
+          </Route>
+
+          <Route exact path="/profile">
+            <Profile />
           </Route>
 
           <Route exact path="/forbidden">
