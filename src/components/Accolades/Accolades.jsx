@@ -71,6 +71,8 @@ export default function Accolades() {
         <a href="http://localhost:3000/AppraisalForm">AppraisalForm</a>
       </div>
 
+      
+
       <h1>Accolades page</h1>
 
       {/* Include the App component content here */}
