@@ -2,15 +2,16 @@
 
 import React, { useEffect, useState } from "react";
 
-export default function Accolades() {
+const Accolades = () => {
   const [inputList, setInputList] = useState([
     {
       input: "",
       input_rank: null,
       dropdown1: "",
       dropdown2: "",
-      textarea1: ""
-    }
+      textarea1: "",
+      file: null, // Add a new property for file
+    },
   ]);
 
   const [isDisabled, setIsDisabled] = useState(false);
@@ -22,7 +23,8 @@ export default function Accolades() {
         lastInput.input === "" &&
         lastInput.dropdown1 === "" &&
         lastInput.textarea1 === "" &&
-        lastInput.dropdown2 === "";
+        lastInput.dropdown2 === "" &&
+        !lastInput.file;
 
       setIsDisabled(isLastInputEmpty);
     }
@@ -36,15 +38,16 @@ export default function Accolades() {
         input_rank: null,
         dropdown1: "",
         dropdown2: "",
-        textarea1: ""
-      }
+        textarea1: "",
+        file: null,
+      },
     ]);
   };
 
   const handleInputChange = (event, index, field) => {
-    const { value } = event.target;
+    const { value, files } = event.target;
     const newInputList = [...inputList];
-    newInputList[index][field] = value;
+    newInputList[index][field] = field === "file" ? files[0] : value;
     newInputList[index].input_rank = index + 1;
     setInputList(newInputList);
   };
@@ -60,7 +63,6 @@ export default function Accolades() {
   return (
     <div>
       <div className="topnav">
-        {/* Place the logo directly in the topnav and adjust the order */}
         <a href="http://localhost:3000/Home" className="logo-link">
           <img src="Assets/TSH.jpg" alt="Logo" width="310px" height="90px" />
         </a>
@@ -75,9 +77,8 @@ export default function Accolades() {
 
       <h1>Accolades page</h1>
 
-      {/* Include the App component content here */}
       <div className="App">
-        <h1>Enter the appraisal performance </h1>
+        <h1>Enter your accolades achievement</h1>
 
         {inputList.length > 0 ? (
           inputList.map((input, index) => (
@@ -85,7 +86,7 @@ export default function Accolades() {
               <input
                 type="text"
                 className="form-control"
-                placeholder={`Input ${index + 1}`}
+                placeholder={`Employee Name`}
                 value={input.input}
                 onChange={(event) => handleInputChange(event, index, "input")}
               />
@@ -96,16 +97,14 @@ export default function Accolades() {
                   handleInputChange(event, index, "dropdown1")
                 }
               >
-                {/* Updated options for dropdown1 */}
                 <option value="">Select Department</option>
                 <option value="HQ">HQ</option>
                 <option value="MC">MC</option>
                 <option value="BMW">BMW</option>
-                {/* Add more options as needed */}
               </select>
               <textarea
                 className="form-control"
-                placeholder={`Textarea 1`}
+                placeholder={`Description`}
                 value={input.textarea1}
                 onChange={(event) =>
                   handleInputChange(event, index, "textarea1")
@@ -118,19 +117,17 @@ export default function Accolades() {
                   handleInputChange(event, index, "dropdown2")
                 }
               >
-                {/* Add options for dropdown2 */}
-                <option value="">Select Option 2</option>
-                {/* Add more options as needed */}
+                <option value="">Select Achievement Level</option>
+                <option value="Level 1">Level 1</option>
+                <option value="Level 2">Level 2</option>
+                <option value="Level 3">Level 3</option>
+                <option value="Level 4">Level 4</option>
               </select>
-              {/* Remove the following block related to textarea2 */}
-              {/* <textarea
+              <input
+                type="file"
                 className="form-control"
-                placeholder={`Textarea 2`}
-                value={input.textarea2}
-                onChange={(event) =>
-                  handleInputChange(event, index, "textarea2")
-                }
-              /> */}
+                onChange={(event) => handleInputChange(event, index, "file")}
+              />
               <div className="input-group-append">
                 <button
                   className="btn btn-outline-danger"
@@ -156,12 +153,14 @@ export default function Accolades() {
       </div>
     </div>
   );
-}
+};
 
 const btnStyle = {
-  marginTop: "1rem"
+  marginTop: "1rem",
 };
 
 const inputStyles = {
-  marginTop: "1rem"
+  marginTop: "1rem",
 };
+
+export default Accolades;
