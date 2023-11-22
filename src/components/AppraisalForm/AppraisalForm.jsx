@@ -56,13 +56,14 @@ export default function App() {
         <a href="http://localhost:3000/Accolades">Accolades</a>
         <a href="http://localhost:3000/AppraisalForm">AppraisalForm</a>
 
+       
         {/* My Profile link */}
-        <Link to="/Profile" className="profile">
-          <img src="Assets/Profile-icon.jpg" alt="Profile Icon" width="30px" height="30px" />
-          <span>My Profile</span>
-        </Link>
-      </div>
+<a href="/Profile" className="profile">
+  <img src="Assets/Profile-icon.jpg" alt="Profile Icon" width="30px" height="30px" />
+  <span>My Profile</span>
+</a>
 
+      </div>
       <h1>Enter the appraisal performance </h1>
 
       {inputList.length > 0 ? (
