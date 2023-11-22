@@ -14,6 +14,7 @@ import SupervisorFeedback from "./components/SupervisorFeedback/SupervisorFeedba
 import Accolades from "./components/Accolades/Accolades";
 import AppraisalForm from "./components/AppraisalForm/AppraisalForm";
 import Profile from "./components/Profile/profilesettings";
+import AppraisalItem from "./components/AppraisalItem/AppraisalItem";
 function App() {
   return (
     <Router>
@@ -40,6 +41,10 @@ function App() {
 
           <Route exact path="/home">
             <Home />
+          </Route>
+
+          <Route exact path="/appraisalitem">
+            <ProtectedRoute component={AppraisalItem} />
           </Route>
 
           <Route exact path="/peerevaluation">
