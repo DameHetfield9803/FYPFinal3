@@ -56,11 +56,11 @@ function App() {
           </Route>
 
           <Route exact path="/attendance">
-            <Attendance />
+            <Attendance component={Attendance}/>
           </Route>
 
           <Route exact path="/supervisorfeedback">
-            <SupervisorFeedback />
+            <SupervisorFeedback component={SupervisorFeedback} />
           </Route>
 
           <Route exact path="/appraisalform">
