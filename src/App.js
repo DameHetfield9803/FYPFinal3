@@ -35,12 +35,12 @@ function App() {
             <ProtectedRoute component={Accolades} />
           </Route>
 
-          <Route exact path="/forget-password">
-            <ForgetPassword />
+          <Route exact path="/forgetpassword">
+            <ProtectedRoute component={ForgetPassword}  />
           </Route>
 
           <Route exact path="/home">
-            <Home />
+            <ProtectedRoute component={Home}  />
           </Route>
 
           <Route exact path="/appraisalitem">
@@ -48,11 +48,11 @@ function App() {
           </Route>
 
           <Route exact path="/peerevaluation">
-            <PeerEvaluation />
+            <ProtectedRoute component={PeerEvaluation} />
           </Route>
 
           <Route exact path="/selfevaluation">
-            <SelfEvaluation />
+            <ProtectedRoute component={SelfEvaluation}  />
           </Route>
 
           <Route exact path="/attendance">
@@ -60,7 +60,7 @@ function App() {
           </Route>
 
           <Route exact path="/supervisorfeedback">
-            <SupervisorFeedback component={SupervisorFeedback} />
+            <ProtectedRoute component={SupervisorFeedback} />
           </Route>
 
           <Route exact path="/appraisalform">
