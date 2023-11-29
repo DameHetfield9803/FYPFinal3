@@ -26,6 +26,9 @@ function App() {
             <Login />
           </Route>
 
+          <Route exact path="/home">
+            <ProtectedRoute component={Home}  />
+          </Route>
 
           <Route exact path="/dashboard">
             <ProtectedRoute component={Dashboard} />
@@ -37,10 +40,6 @@ function App() {
 
           <Route exact path="/forgetpassword">
             <ProtectedRoute component={ForgetPassword}  />
-          </Route>
-
-          <Route exact path="/home">
-            <ProtectedRoute component={Home}  />
           </Route>
 
           <Route exact path="/appraisalitem">
