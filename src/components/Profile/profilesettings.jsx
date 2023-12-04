@@ -3,6 +3,11 @@ import { auth } from "../../config/firebase";
 import { signOut } from "firebase/auth";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import './profilesettings.css';
+import DataFetchingComponent from "./DataFetchingComponent.jsx";
+
+
+
+
 
 const Navigation = () => {
   const history = useHistory();
