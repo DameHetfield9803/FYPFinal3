@@ -21,7 +21,7 @@ export default function Dashboard() {
         <div>
             
             <div className="topnav">
-                <a href="http://localhost:3000/Home" className="logo-link">
+                <a href="" className="logo-link">
                     <img src="Assets/TSH.jpg" alt="Logo" width="310px" height="90px" />
                 </a>
             
