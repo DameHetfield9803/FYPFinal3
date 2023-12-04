@@ -13,7 +13,7 @@ import Attendance from "./components/Attendance/Attendance";
 import SupervisorFeedback from "./components/SupervisorFeedback/SupervisorFeedback";
 import Accolades from "./components/Accolades/Accolades";
 import AppraisalForm from "./components/AppraisalForm/AppraisalForm";
-import Profile from "./components/Profile/ProfileSettings";
+import Profile from "./components/Profile/profilesettings";
 import AppraisalItem from "./components/AppraisalItem/AppraisalItem";
 function App() {
   return (
