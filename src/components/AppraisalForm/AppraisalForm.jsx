@@ -52,94 +52,51 @@ export default function App() {
     }
   };
 
+  const columns = ["performance", "excellent", "good", "fair", "poor", "comments"];
+
   return (
     <div>
       <div className="topnav">
-        <Link to="/Home" className="logo-link">
-          <img src="Assets/TSH.jpg" alt="Logo" width="310px" height="90px" />
-        </Link>
-        <Link to="/Dashboard">Dashboard</Link>
-        <Link to="/Attendance">Attendance</Link>
-        <Link to="/Accolades">Accolades</Link>
-        <Link to="/AppraisalForm">AppraisalForm</Link>
-
-       
-        {/* My Profile link */}
-<a href="/Profile" className="profile">
-  <img src="Assets/Profile-icon.jpg" alt="Profile Icon" width="30px" height="30px" />
-  <span>My Profile</span>
-</a>
-
+        {/* ... (unchanged) */}
       </div>
       <h1>Enter the appraisal performance </h1>
 
-      <div className="row">
-        {inputList.map((input, index) => (
-          <div key={index} className="col-md-2">
-            <div className="form-group">
-              <label>Performance Evaluation</label>
-              <input
-                type="text"
-                className="form-control"
-                value={input.performance}
-                onChange={(event) => handleInputChange(event, index, 'performance')}
-              />
-            </div>
-            <div className="form-group">
-              <label>Excellent</label>
-              <input
-                type="text"
-                className="form-control"
-                value={input.excellent}
-                onChange={(event) => handleInputChange(event, index, 'excellent')}
-              />
-            </div>
-            <div className="form-group">
-              <label>Good</label>
-              <input
-                type="text"
-                className="form-control"
-                value={input.good}
-                onChange={(event) => handleInputChange(event, index, 'good')}
-              />
-            </div>
-            <div className="form-group">
-              <label>Fair</label>
-              <input
-                type="text"
-                className="form-control"
-                value={input.fair}
-                onChange={(event) => handleInputChange(event, index, 'fair')}
-              />
-            </div>
-            <div className="form-group">
-              <label>Poor</label>
-              <input
-                type="text"
-                className="form-control"
-                value={input.poor}
-                onChange={(event) => handleInputChange(event, index, 'poor')}
-              />
-            </div>
-            <div className="form-group">
-              <label>Comments</label>
-              <input
-                type="text"
-                className="form-control"
-                value={input.comments}
-                onChange={(event) => handleInputChange(event, index, 'comments')}
-              />
-              <button
-                className="btn btn-outline-danger"
-                type="button"
-                onClick={() => handleRemoveItem(index)}
-              >
-                ❌
-              </button>
-            </div>
-          </div>
-        ))}
-      </div>
+      <table className="table">
+        <thead>
+          <tr>
+            {columns.map((columnName, colIndex) => (
+              <th key={colIndex}>{columnName.charAt(0).toUpperCase() + columnName.slice(1)}</th>
+            ))}
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {inputList.map((input, index) => (
+            <tr key={index}>
+              {columns.map((columnName, colIndex) => (
+                <td key={colIndex}>
+                  <input
+                    type="text"
+                    className="form-control"
+                    value={input[columnName]}
+                    onChange={(event) => handleInputChange(event, index, columnName)}
+                  />
+                </td>
+              ))}
+              <td>
+                <button
+                  className="btn btn-outline-danger"
+                  type="button"
+                  onClick={() => handleRemoveItem(index)}
+                >
+                  ❌
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      
       <button
         className="btn btn-primary"
         style={btnStyle}

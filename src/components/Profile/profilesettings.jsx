@@ -35,7 +35,7 @@ const Navigation = () => {
       </div>
 
       {/* Welcome message */}
-      <h1>Welcome Employee, This is your homepage</h1>
+        {/* <h1>Welcome Employee, This is your homepage</h1>*/}
     </div>
   );
 };

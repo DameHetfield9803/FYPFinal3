@@ -72,7 +72,6 @@ const Accolades = () => {
         <a href="http://localhost:3000/AppraisalForm">AppraisalForm</a>
 
         {/* My Profile link */}
-        {/* My Profile link */}
 <a href="/Profile" className="profile">
   <img src="Assets/Profile-icon.jpg" alt="Profile Icon" width="30px" height="30px" />
   <span>My Profile</span>
