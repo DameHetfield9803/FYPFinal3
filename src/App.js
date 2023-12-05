@@ -15,6 +15,9 @@ import Accolades from "./components/Accolades/Accolades";
 import AppraisalForm from "./components/AppraisalForm/AppraisalForm";
 import Profile from "./components/Profile/profilesettings";
 import AppraisalItem from "./components/AppraisalItem/AppraisalItem";
+import ReportForm from "./components/ReportForm/reporterror";
+
+
 function App() {
   return (
     <Router>
@@ -68,6 +71,10 @@ function App() {
 
           <Route exact path="/profile">
             <ProtectedRoute component={Profile} />
+          </Route>
+
+          <Route exact path="/reportform">
+            <ProtectedRoute component={ReportForm} />
           </Route>
 
           <Route exact path="/forbidden">
