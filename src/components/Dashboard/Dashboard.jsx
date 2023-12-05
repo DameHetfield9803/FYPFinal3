@@ -20,21 +20,27 @@ export default function Dashboard() {
     return (
         <div>
             
-            <div className="topnav">
-                <a href="" className="logo-link">
-                    <img src="Assets/TSH.jpg" alt="Logo" width="310px" height="90px" />
-                </a>
+            {/* NAVBAR ITEMS */}  
+      <div className="topnav">
+        <a href="/Home" className="logo-link">
+          <img src="Assets/TSH.jpg" alt="Logo" width="310px" height="90px" />
+        </a>
             
-                <a href="http://localhost:3000/Dashboard">Dashboard</a>
-                <a href="http://localhost:3000/Attendance">Attendance</a>
-                <a href="http://localhost:3000/Accolades">Accolades</a>
-                <a href="http://localhost:3000/AppraisalForm">AppraisalForm</a>
-                <Link to="/Profile" className="profile">
+                <a href="/Dashboard">Dashboard</a>
+                <a href="/Attendance">Attendance</a>
+                <a href="/Accolades">Accolades</a>
+                <a href="/AppraisalForm">AppraisalForm</a>
+
+                
+         {/* My Profile link */}  
+         <a href="/Profile" className="profile">
           <img src="Assets/Profile-icon.jpg" alt="Profile Icon" width="30px" height="30px" />
-          <span>My Profile</span>
-        </Link>
+        
+        <span>My Profile</span>
+        </a>
 
             </div>
+            {/*END OF NAVBAR ITEMS */} 
 
             <div id="dashboard" className="mb-2">
                 <h1>Dashboard</h1>

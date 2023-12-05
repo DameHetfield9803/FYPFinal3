@@ -27,24 +27,27 @@ export default function Attendance() {
 
   return (
     <div>
-      {/* Navbar with logo and links */}
+      {/* NAVBAR ITEMS */}  
       <div className="topnav">
-        <Link to="/home" className="logo-link">
+        <a href="/Home" className="logo-link">
           <img src="Assets/TSH.jpg" alt="Logo" width="310px" height="90px" />
-        </Link>
+        </a>
+            
+                <a href="/Dashboard">Dashboard</a>
+                <a href="/Attendance">Attendance</a>
+                <a href="/Accolades">Accolades</a>
+                <a href="/AppraisalForm">AppraisalForm</a>
 
-        
-        <Link to="/dashboard">Dashboard</Link>
-        <Link to="/attendance">Attendance</Link>
-        <Link to="/accolades">Accolades</Link>
-        <Link to="/AppraisalForm">AppraisalForm</Link>
-
-        <Link to="/Profile" className="profile">
+                
+         {/* My Profile link */}  
+         <a href="/Profile" className="profile">
           <img src="Assets/Profile-icon.jpg" alt="Profile Icon" width="30px" height="30px" />
-          <span>My Profile</span>
-        </Link>
         
-      </div>
+        <span>My Profile</span>
+        </a>
+
+            </div>
+            {/*END OF NAVBAR ITEMS */} 
 
       <div className="container mt-5">
         <table className="table table-hover">

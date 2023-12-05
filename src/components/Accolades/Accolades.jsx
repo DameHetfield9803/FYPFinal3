@@ -61,23 +61,28 @@ const Accolades = () => {
 
   return (
     <div>
+      
+      {/* NAVBAR ITEMS */}  
       <div className="topnav">
-        <a href="http://localhost:3000/Home" className="logo-link">
+        <a href="/Home" className="logo-link">
           <img src="Assets/TSH.jpg" alt="Logo" width="310px" height="90px" />
         </a>
+            
+                <a href="/Dashboard">Dashboard</a>
+                <a href="/Attendance">Attendance</a>
+                <a href="/Accolades">Accolades</a>
+                <a href="/AppraisalForm">AppraisalForm</a>
 
-        <a href="http://localhost:3000/Dashboard">Dashboard</a>
-        <a href="http://localhost:3000/Attendance">Attendance</a>
-        <a href="http://localhost:3000/Accolades">Accolades</a>
-        <a href="http://localhost:3000/AppraisalForm">AppraisalForm</a>
+                
+         {/* My Profile link */}  
+         <a href="/Profile" className="profile">
+          <img src="Assets/Profile-icon.jpg" alt="Profile Icon" width="30px" height="30px" />
+        
+        <span>My Profile</span>
+        </a>
 
-        {/* My Profile link */}
-<a href="/Profile" className="profile">
-  <img src="Assets/Profile-icon.jpg" alt="Profile Icon" width="30px" height="30px" />
-  <span>My Profile</span>
-</a>
-
-      </div>
+            </div>
+            {/*END OF NAVBAR ITEMS */} 
 
       <h1>Accolades page</h1>
 
