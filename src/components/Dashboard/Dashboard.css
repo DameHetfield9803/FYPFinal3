@@ -28,6 +28,12 @@
   color: white; /* Text color for the active link */
 }
 
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+
 /* Additional styling for the logo link, adding right margin */
 .logo-link {
   margin-right: 20px; /* Adjust the margin as needed for the logo link */

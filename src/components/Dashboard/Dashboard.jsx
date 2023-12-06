@@ -16,7 +16,7 @@ export default function Dashboard() {
           console.log(err);
         }
     };
-
+    
     return (
         <div>
             
@@ -41,6 +41,20 @@ export default function Dashboard() {
 
             </div>
             {/*END OF NAVBAR ITEMS */} 
+            <div>
+              <h1>Quick Access</h1>
+              
+              <div className='Quick-Access'></div>
+             
+              <a href="/Dashboard">Dashboard /br</a>
+            
+                <a href="/Attendance">Attendance</a> <br></br>
+                <a href="/Accolades">Accolades</a>
+                <a href="/AppraisalForm">AppraisalForm</a>
+              
+            </div>
+           
+            
 
             <div id="dashboard" className="mb-2">
                 <h1>Dashboard</h1>
@@ -50,3 +64,5 @@ export default function Dashboard() {
         </div>
     );
 }
+
+
