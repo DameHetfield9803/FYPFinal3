@@ -16,6 +16,7 @@ import AppraisalForm from "./components/AppraisalForm/AppraisalForm";
 import Profile from "./components/Profile/profilesettings";
 import AppraisalItem from "./components/AppraisalItem/AppraisalItem";
 import ReportForm from "./components/ReportForm/reporterror";
+import EmpTab from "./components/EmployeeTable/Employee";
 
 
 function App() {
@@ -75,6 +76,10 @@ function App() {
 
           <Route exact path="/reportform">
             <ProtectedRoute component={ReportForm} />
+          </Route>
+
+          <Route exact path="/employee">
+            <ProtectedRoute component={EmpTab} />
           </Route>
 
           <Route exact path="/forbidden">
