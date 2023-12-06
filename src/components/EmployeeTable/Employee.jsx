@@ -31,8 +31,8 @@ const EmpTab = () => {
                     <thead>
                         {/* A table row in the header with three cells (th elements) */}
                         <tr>
-                            <th>EmpName</th>
                             <th>BatchNo</th>
+                            <th>EmpName</th>
                             <th>Department</th>
                         </tr>
                     </thead>
@@ -41,9 +41,9 @@ const EmpTab = () => {
                         {/* A table row with three cells (td elements) */}
                         <tr>
                             {/* Cell containing the employee name */}
-                            <td>Firdaus</td>
+                            <td>110504</td>
                             {/* Cell containing the batch number */}
-                            <td>110235</td>
+                            <td>Firdaus</td>
                             {/* Cell containing the department name */}
                             <td>BMW</td>
                         </tr>
