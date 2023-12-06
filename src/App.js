@@ -42,7 +42,7 @@ function App() {
           </Route>
 
           <Route exact path="/forgetpassword">
-            <ProtectedRoute component={ForgetPassword}  />
+            <ForgetPassword />
           </Route>
 
           <Route exact path="/appraisalitem">

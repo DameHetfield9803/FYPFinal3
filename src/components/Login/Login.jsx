@@ -54,7 +54,7 @@ export default function Login() {
                     <button className="btn btn-primary" style={{marginRight:"10px"}} 
                         onClick = {loginAction}
                     >Submit</button>
-                    <Link to="/forget-password">
+                    <Link to="/forgetpassword">
                         Forget password
                     </Link>
                     {errorMsg && 
