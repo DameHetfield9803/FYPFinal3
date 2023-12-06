@@ -40,7 +40,7 @@ export default function Login() {
     return (
         <>
             <div className="container mt-5">
-            <img src="Assets/TSH.jpg" width="310px" height="90px" href="/"/>
+            <img src="/Assets/TSH.jpg" width="310px" height="90px" href="/"/>
             <br />
                     <h1 className="mb-2">Login</h1>
                     <label>Email</label>
@@ -54,7 +54,7 @@ export default function Login() {
                     <button className="btn btn-primary" style={{marginRight:"10px"}} 
                         onClick = {loginAction}
                     >Submit</button>
-                    <Link to="/forget-password">
+                    <Link to="/forgetpassword">
                         Forget password
                     </Link>
                     {errorMsg && 
