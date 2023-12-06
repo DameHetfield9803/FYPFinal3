@@ -48,6 +48,13 @@ export default function Dashboard() {
               <a href="/Attendance">Attendance</a> <br></br>
               <a href="/Accolades">Accolades</a><br></br>
               <a href="/AppraisalForm">AppraisalForm</a><br></br>
+              <a href="/AppraisalItem">AppraisalItem</a><br></br>
+              <a href="/Employee">Employee</a><br></br>
+              <a href="/PeerEvaluation">PeerEvaluation</a><br></br>
+              <a href="/SelfEvaluation">SelfEvaluation</a><br></br>
+              <a href="/Home">Home</a><br></br>
+              <a href="/ReportForm">ReportForm</a><br></br>
+              <a href="/SupervisorFeedback">SupervisorFeedback</a><br></br>
               <a href="/Employee">Employee</a><br></br>
               
             </div>
