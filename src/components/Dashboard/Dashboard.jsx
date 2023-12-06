@@ -45,12 +45,10 @@ export default function Dashboard() {
               <h1>Quick Access</h1>
               
               <div className='Quick-Access'></div>
-             
-              <a href="/Dashboard">Dashboard /br</a>
-            
-                <a href="/Attendance">Attendance</a> <br></br>
-                <a href="/Accolades">Accolades</a>
-                <a href="/AppraisalForm">AppraisalForm</a>
+              <a href="/Attendance">Attendance</a> <br></br>
+              <a href="/Accolades">Accolades</a><br></br>
+              <a href="/AppraisalForm">AppraisalForm</a><br></br>
+              <a href="/Employee">Employee</a><br></br>
               
             </div>
            
