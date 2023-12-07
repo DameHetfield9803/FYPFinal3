@@ -5,7 +5,7 @@ export default function ForgetPassword() {
             <p>
                 To reset your password please contact us at: <br />
                 <a href="mailto:admin@webite.com">
-                Tech support
+                    Tech support
                 </a>
             </p>
         </>

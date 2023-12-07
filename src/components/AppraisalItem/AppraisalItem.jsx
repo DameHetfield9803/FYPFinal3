@@ -1,5 +1,5 @@
-export default function AppraisalItem(){
-    return(
+export default function AppraisalItem() {
+    return (
         <div>
             <h1>Appraisal item addition</h1>
             <tbody className="container mr-3">

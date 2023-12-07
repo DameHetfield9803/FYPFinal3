@@ -55,32 +55,32 @@ export default function App() {
   const columns = ["performance", "excellent", "good", "fair", "poor", "comments"];
 
   return (
-    
+
     <div>
-      {/* NAVBAR ITEMS */}  
+      {/* NAVBAR ITEMS */}
       <div className="topnav">
         <a href="/Home" className="logo-link">
           <img src="Assets/TSH.jpg" alt="Logo" width="310px" height="90px" />
         </a>
-            
-                <a href="/Dashboard">Dashboard</a>
-                <a href="/Attendance">Attendance</a>
-                <a href="/Accolades">Accolades</a>
-                <a href="/AppraisalForm">AppraisalForm</a>
 
-                
-         {/* My Profile link */}  
-         <a href="/Profile" className="profile">
+        <a href="/Dashboard">Dashboard</a>
+        <a href="/Attendance">Attendance</a>
+        <a href="/Accolades">Accolades</a>
+        <a href="/AppraisalForm">AppraisalForm</a>
+
+
+        {/* My Profile link */}
+        <a href="/Profile" className="profile">
           <img src="Assets/Profile-icon.jpg" alt="Profile Icon" width="30px" height="30px" />
-        
-        <span>My Profile</span>
+
+          <span>My Profile</span>
         </a>
 
-            </div>
-            {/*END OF NAVBAR ITEMS */} 
+      </div>
+      {/*END OF NAVBAR ITEMS */}
 
       <div className="topnav">
-      
+
       </div>
       <h1>Enter the appraisal performance </h1>
 
@@ -119,7 +119,7 @@ export default function App() {
           ))}
         </tbody>
       </table>
-      
+
       <button
         className="btn btn-primary"
         style={btnStyle}
