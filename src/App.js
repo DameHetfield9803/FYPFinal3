@@ -17,6 +17,7 @@ import Profile from "./components/Profile/profilesettings";
 import AppraisalItem from "./components/AppraisalItem/AppraisalItem";
 import ReportForm from "./components/ReportForm/reporterror";
 import EmpTab from "./components/EmployeeTable/Employee";
+import UserGuide from "./components/UserGuide/userguides";
 
 
 function App() {
@@ -80,6 +81,10 @@ function App() {
 
           <Route exact path="/employee">
             <ProtectedRoute component={EmpTab} />
+          </Route>
+
+          <Route exact path="/userguides">
+            <ProtectedRoute component={UserGuide} />
           </Route>
 
           <Route exact path="/forbidden">
