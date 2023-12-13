@@ -10,7 +10,7 @@ import Home from "./components/Home/Home";
 import PeerEvaluation from "./components/PeerEvaluation/PeerEvaluation";
 import SelfEvaluation from "./components/SelfEvaluation/SelfEvaluation";
 import Attendance from "./components/Attendance/Attendance";
-import SupervisorFeedback from "./components/SupervisorFeedback/SupervisorFeedback";
+import ManagerFeedback from "./components/ManagerFeedback/ManagerFeedback";
 import Accolades from "./components/Accolades/Accolades";
 import AppraisalForm from "./components/AppraisalForm/AppraisalForm";
 import Profile from "./components/Profile/profilesettings";
@@ -63,8 +63,8 @@ function App() {
             <Attendance component={Attendance}/>
           </Route>
 
-          <Route exact path="/supervisorfeedback">
-            <ProtectedRoute component={SupervisorFeedback} />
+          <Route exact path="/managerfeedback">
+            <ProtectedRoute component={ManagerFeedback} />
           </Route>
 
           <Route exact path="/appraisalform">

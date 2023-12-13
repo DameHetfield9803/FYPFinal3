@@ -26,13 +26,14 @@ export default function UserGuides() {
             {/*END OF NAVBAR ITEMS */}
             {/*Start Of Embedded Video Items */}
             <h2> User Guide</h2>
-            <p>Video Guide Example</p>
+            <p>Video Guide Example 1 (How to edit your profile)</p>
             <ReactPlayer
                 url="https://www.youtube.com/watch?v=lHpYyYtkmrw"
                 controls
                 width="400"
                 height="400"
             />
+            <p>Video Guide Example 2 (How to provide peer evaluation)</p>
             <ReactPlayer
                 url="https://www.youtube.com/watch?v=lHpYyYtkmrw"
                 controls
