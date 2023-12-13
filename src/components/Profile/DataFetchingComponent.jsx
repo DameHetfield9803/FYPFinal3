@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-
+// THIS FILE IS NOT IN USE, YOU MAY DELETE THIS IF IT DOESNT EFFECT THE WEB APP
 const YourComponent = () => {
   const [data, setData] = useState(null);
 
