@@ -1,120 +1,92 @@
+// AppraisalForm.jsx
+import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 
-import React, { useEffect, useState } from "react";
-import { Link } from 'react-router-dom';
-export default function App() {
-  const [inputList, setInputList] = useState([
-    {
-      performance: "",
-      excellent: "",
-      good: "",
-      fair: "",
-      poor: "",
-      comments: ""
-    }
-  ]);
-  const [isDisabled, setIsDisabled] = useState(false);
-  useEffect(() => {
-    if (inputList.length > 0) {
-      const lastItem = inputList[inputList.length - 1];
-      const isLastItemEmpty = Object.values(lastItem).some(value => value === "");
-      setIsDisabled(isLastItemEmpty);
-    }
-  }, [inputList]);
-  const handleListAdd = () => {
-    setInputList([
-      ...inputList,
-      {
-        performance: "",
-        excellent: "",
-        good: "",
-        fair: "",
-        poor: "",
-        comments: ""
-      }
-    ]);
+const AppraisalFormPage1 = ({ onNext }) => {
+  const [data, setData] = useState({ question1: "", question2: "" });
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setData((prevData) => ({ ...prevData, [name]: value }));
   };
-  const handleInputChange = (event, index, columnName) => {
-    const { value } = event.target;
-    const newInputList = [...inputList];
-    newInputList[index][columnName] = value;
-    setInputList(newInputList);
-  };
-  const handleRemoveItem = (index) => {
-    if (inputList.length > 1) {
-      const newList = [...inputList];
-      newList.splice(index, 1);
-      setInputList(newList);
-    }
-  };
-  const columns = ["performance", "excellent", "good", "fair", "poor", "comments"];
+
   return (
     <div>
-      {/* NAVBAR ITEMS */}
-      <div className="topnav">
-        <a href="/Home" className="logo-link">
-          <img src="Assets/TSH.jpg" alt="Logo" width="310px" height="90px" />
-        </a>
-        <a href="/Dashboard">Dashboard</a>
-        <a href="/Attendance">Attendance</a>
-        <a href="/Accolades">Accolades</a>
-        <a href="/AppraisalForm">AppraisalForm</a>
-
-        {/* My Profile link */}
-        <a href="/Profile" className="profile">
-          <img src="Assets/Profile-icon.jpg" alt="Profile Icon" width="30px" height="30px" />
-          <span>My Profile</span>
-        </a>
-      </div>
-      {/*END OF NAVBAR ITEMS */}
-      <div className="topnav">
-      </div>
-      <h1>Enter the appraisal performance </h1>
-      <table className="table">
-        <thead>
-          <tr>
-            {columns.map((columnName, colIndex) => (
-              <th key={colIndex}>{columnName.charAt(0).toUpperCase() + columnName.slice(1)}</th>
-            ))}
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {inputList.map((input, index) => (
-            <tr key={index}>
-              {columns.map((columnName, colIndex) => (
-                <td key={colIndex}>
-                  <input
-                    type="text"
-                    className="form-control"
-                    value={input[columnName]}
-                    onChange={(event) => handleInputChange(event, index, columnName)}
-                  />
-                </td>
-              ))}
-              <td>
-                <button
-                  className="btn btn-outline-danger"
-                  type="button"
-                  onClick={() => handleRemoveItem(index)}
-                >
-                  ❌
-                </button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      <button
-        className="btn btn-primary"
-        style={btnStyle}
-        onClick={handleListAdd}
-        disabled={isDisabled}
-      >
-        Add row
-      </button>
+      <h2>Appraisal Form - Page 1</h2>
+      <label>Question 1:</label>
+      <input type="text" name="question1" value={data.question1} onChange={handleInputChange} />
+      <br />
+      <label>Question 2:</label>
+      <input type="text" name="question2" value={data.question2} onChange={handleInputChange} />
+      <br />
+      <button onClick={() => onNext(data)}>Next</button>
     </div>
   );
-}
-const btnStyle = {
-  marginTop: "1rem"
 };
+
+const AppraisalFormPage2 = ({ data, onBack, onNext }) => {
+  const [additionalData, setAdditionalData] = useState({ question3: "", question4: "" });
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setAdditionalData((prevData) => ({ ...prevData, [name]: value }));
+  };
+
+  return (
+    <div>
+      <h2>Appraisal Form - Page 2</h2>
+      <p>Data from Page 1:</p>
+      <pre>{JSON.stringify(data, null, 2)}</pre>
+      <label>Question 3:</label>
+      <input type="text" name="question3" value={additionalData.question3} onChange={handleInputChange} />
+      <br />
+      <label>Question 4:</label>
+      <input type="text" name="question4" value={additionalData.question4} onChange={handleInputChange} />
+      <br />
+      <button onClick={onBack}>Back</button>
+      <button onClick={() => onNext({ ...data, ...additionalData })}>Next</button>
+    </div>
+  );
+};
+
+const AppraisalFormPage3 = ({ data, onBack, onSubmit }) => {
+  return (
+    <div>
+      <h2>Appraisal Form - Page 3</h2>
+      <p>Data from Previous Pages:</p>
+      <pre>{JSON.stringify(data, null, 2)}</pre>
+      <button onClick={onBack}>Back</button>
+      <button onClick={() => onSubmit(data)}>Submit</button>
+    </div>
+  );
+};
+
+const AppraisalForm = () => {
+  const history = useHistory();
+  const [formData, setFormData] = useState({});
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const handlePageChange = (data) => {
+    setFormData((prevData) => ({ ...prevData, ...data }));
+    setCurrentPage((prevPage) => prevPage + 1);
+  };
+
+  const handleBack = () => setCurrentPage((prevPage) => prevPage - 1);
+
+  const handleSubmit = (data) => {
+    // Handle the final submission (e.g., send data to the server)
+    console.log("Final Appraisal Form Data:", data);
+    // Redirect or perform other actions after submission
+    history.push("/dashboard");
+  };
+
+  return (
+    <div>
+      {currentPage === 1 && <AppraisalFormPage1 onNext={handlePageChange} />}
+      {currentPage === 2 && <AppraisalFormPage2 data={formData} onBack={handleBack} onNext={handlePageChange} />}
+      {currentPage === 3 && <AppraisalFormPage3 data={formData} onBack={handleBack} onSubmit={handleSubmit} />}
+    </div>
+  );
+};
+
+export default AppraisalForm;
