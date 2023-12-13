@@ -9,7 +9,7 @@ const Accolades = () => {
       dropdown1: "",
       dropdown2: "",
       textarea1: "",
-      file: null, // Add a new property for file
+      file: null,
     },
   ]);
 
@@ -61,7 +61,6 @@ const Accolades = () => {
 
   return (
     <div>
-
       {/* NAVBAR ITEMS */}
       <div className="topnav">
         <a href="/Home" className="logo-link">
@@ -73,14 +72,11 @@ const Accolades = () => {
         <a href="/Accolades">Accolades</a>
         <a href="/AppraisalForm">AppraisalForm</a>
 
-
         {/* My Profile link */}
         <a href="/Profile" className="profile">
           <img src="Assets/Profile-icon.jpg" alt="Profile Icon" width="30px" height="30px" />
-
           <span>My Profile</span>
         </a>
-
       </div>
       {/*END OF NAVBAR ITEMS */}
 
@@ -102,9 +98,7 @@ const Accolades = () => {
               <select
                 className="form-control"
                 value={input.dropdown1}
-                onChange={(event) =>
-                  handleInputChange(event, index, "dropdown1")
-                }
+                onChange={(event) => handleInputChange(event, index, "dropdown1")}
               >
                 <option value="">Select Department</option>
                 <option value="HQ">HQ</option>
@@ -115,16 +109,12 @@ const Accolades = () => {
                 className="form-control"
                 placeholder={`Description`}
                 value={input.textarea1}
-                onChange={(event) =>
-                  handleInputChange(event, index, "textarea1")
-                }
+                onChange={(event) => handleInputChange(event, index, "textarea1")}
               />
               <select
                 className="form-control"
                 value={input.dropdown2}
-                onChange={(event) =>
-                  handleInputChange(event, index, "dropdown2")
-                }
+                onChange={(event) => handleInputChange(event, index, "dropdown2")}
               >
                 <option value="">Select Achievement Level</option>
                 <option value="Level 1">Level 1</option>
@@ -132,11 +122,16 @@ const Accolades = () => {
                 <option value="Level 3">Level 3</option>
                 <option value="Level 4">Level 4</option>
               </select>
-              <input
-                type="file"
-                className="form-control"
-                onChange={(event) => handleInputChange(event, index, "file")}
-              />
+              <div className="custom-file">
+                <input
+                  type="file"
+                  className="custom-file-input"
+                  onChange={(event) => handleInputChange(event, index, "file")}
+                />
+                <label className="custom-file-label">
+                  {input.file ? input.file.name : "Choose file"}
+                </label>
+              </div>
               <div className="input-group-append">
                 <button
                   className="btn btn-outline-danger"

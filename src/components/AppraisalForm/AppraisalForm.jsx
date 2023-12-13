@@ -1,6 +1,6 @@
+
 import React, { useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
-
 export default function App() {
   const [inputList, setInputList] = useState([
     {
@@ -12,9 +12,7 @@ export default function App() {
       comments: ""
     }
   ]);
-
   const [isDisabled, setIsDisabled] = useState(false);
-
   useEffect(() => {
     if (inputList.length > 0) {
       const lastItem = inputList[inputList.length - 1];
@@ -22,7 +20,6 @@ export default function App() {
       setIsDisabled(isLastItemEmpty);
     }
   }, [inputList]);
-
   const handleListAdd = () => {
     setInputList([
       ...inputList,
@@ -36,14 +33,12 @@ export default function App() {
       }
     ]);
   };
-
   const handleInputChange = (event, index, columnName) => {
     const { value } = event.target;
     const newInputList = [...inputList];
     newInputList[index][columnName] = value;
     setInputList(newInputList);
   };
-
   const handleRemoveItem = (index) => {
     if (inputList.length > 1) {
       const newList = [...inputList];
@@ -51,39 +46,29 @@ export default function App() {
       setInputList(newList);
     }
   };
-
   const columns = ["performance", "excellent", "good", "fair", "poor", "comments"];
-
   return (
-
     <div>
       {/* NAVBAR ITEMS */}
       <div className="topnav">
         <a href="/Home" className="logo-link">
           <img src="Assets/TSH.jpg" alt="Logo" width="310px" height="90px" />
         </a>
-
         <a href="/Dashboard">Dashboard</a>
         <a href="/Attendance">Attendance</a>
         <a href="/Accolades">Accolades</a>
         <a href="/AppraisalForm">AppraisalForm</a>
 
-
         {/* My Profile link */}
         <a href="/Profile" className="profile">
           <img src="Assets/Profile-icon.jpg" alt="Profile Icon" width="30px" height="30px" />
-
           <span>My Profile</span>
         </a>
-
       </div>
       {/*END OF NAVBAR ITEMS */}
-
       <div className="topnav">
-
       </div>
       <h1>Enter the appraisal performance </h1>
-
       <table className="table">
         <thead>
           <tr>
@@ -119,7 +104,6 @@ export default function App() {
           ))}
         </tbody>
       </table>
-
       <button
         className="btn btn-primary"
         style={btnStyle}
@@ -131,7 +115,6 @@ export default function App() {
     </div>
   );
 }
-
 const btnStyle = {
   marginTop: "1rem"
 };
