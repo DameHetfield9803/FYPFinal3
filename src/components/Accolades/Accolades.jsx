@@ -120,7 +120,7 @@ const Accolades = () => {
                 <option value="Level 1">Level 1</option>
                 <option value="Level 2">Level 2</option>
                 <option value="Level 3">Level 3</option>
-                <option value="Level 4">Level 4</option>
+                
               </select>
               <div className="custom-file">
                 <input
