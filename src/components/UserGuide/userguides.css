@@ -1,0 +1,17 @@
+/* ... (existing styles) */
+
+.square-video-container {
+    text-align: center;
+  }
+  
+  .square-video-container p {
+    margin-bottom: 100px;
+  }
+  
+  .square-video-container video {
+    width: 1000%;
+    height: auto;
+    max-width: 1000px; /* Adjust the maximum width as needed */
+    aspect-ratio: 4/3; /* Maintain a 1:1 aspect ratio for square shape */
+  }
+  
