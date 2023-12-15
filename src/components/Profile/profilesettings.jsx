@@ -1,6 +1,9 @@
 // Import the necessary modules.
 import React, { useState } from "react";
 import "./profilesettings.css";
+import { auth } from "../../config/firebase";
+import { signOut } from "firebase/auth";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 // Define the functional component ProfileSettings.
 const ProfileSettings = () => {
@@ -9,6 +12,17 @@ const ProfileSettings = () => {
     name: "User",
     department: "BMX",
     batchNumber: "1101",
+  };
+
+  const history = useHistory();
+
+  const logout = async () => {
+    try {
+      await signOut(auth);
+      history.push("/");
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   // Default personal information (can be edited).
@@ -117,6 +131,7 @@ const ProfileSettings = () => {
               {isEditing ? "Cancel" : "Edit"}
             </button>
           </p>
+          
         </div>
 
         {/* Form for saving changes. */}
@@ -127,8 +142,10 @@ const ProfileSettings = () => {
             </button>
           </form>
         )}
+        <button onClick={logout}>LOGOUT</button>
       </div>
       {/* End of Profile Settings Section */}
+      
     </div>
   );
 };
