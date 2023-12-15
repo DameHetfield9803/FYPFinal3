@@ -1,6 +1,10 @@
 // Import the necessary modules.
 import React, { useState } from "react";
 import "./profilesettings.css";
+import { auth } from "../../config/firebase";
+import { signOut } from "firebase/auth";
+import { useHistory } from "react-router-dom";
+import Navbar from "../NavBar/NavBar";
 
 // Define the functional component ProfileSettings.
 const ProfileSettings = () => {
@@ -9,6 +13,17 @@ const ProfileSettings = () => {
     name: "User",
     department: "BMX",
     batchNumber: "1101",
+  };
+
+  const history = useHistory();
+
+  const logout = async () => {
+    try {
+      await signOut(auth);
+      history.push("/");
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   // Default personal information (can be edited).
@@ -37,24 +52,7 @@ const ProfileSettings = () => {
   return (
     <div>
       {/* Navbar Items */}
-      <div className="topnav">
-        {/* Logo */}
-        <a href="/Home" className="logo-link">
-          <img src="Assets/TSH.jpg" alt="Logo" width="310px" height="90px" />
-        </a>
-
-        {/* Navigation Links */}
-        <a href="/Dashboard">Dashboard</a>
-        <a href="/Attendance">Attendance</a>
-        <a href="/Accolades">Accolades</a>
-        <a href="/AppraisalForm">AppraisalForm</a>
-
-        {/* My Profile link*/}
-        <a href="/Profile" className="profile">
-          <img src="Assets/Profile-icon.jpg" alt="Profile Icon" width="30px" height="30px" />
-          <span>My Profile</span>
-        </a>
-      </div>
+      <Navbar></Navbar>
       {/* End of Navbar Items */}
 
       {/* Profile Settings Section */}
@@ -117,6 +115,7 @@ const ProfileSettings = () => {
               {isEditing ? "Cancel" : "Edit"}
             </button>
           </p>
+
         </div>
 
         {/* Form for saving changes. */}
@@ -127,8 +126,10 @@ const ProfileSettings = () => {
             </button>
           </form>
         )}
+        <button onClick={logout}>LOGOUT</button>
       </div>
       {/* End of Profile Settings Section */}
+
     </div>
   );
 };
