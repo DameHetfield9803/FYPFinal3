@@ -19,7 +19,7 @@ export default function Login() {
             .then((userCredential) => {
                 const user = userCredential.user;
                 if (user) {
-                    history.push("/dashboard")
+                    history.push("/Home")
                 }
             })
             .catch((error) => {

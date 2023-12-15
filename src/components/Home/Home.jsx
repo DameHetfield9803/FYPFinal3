@@ -35,7 +35,7 @@ export default function Home() {
         <a href="/Home">Home</a><br></br>
         <a href="/ReportForm">ReportForm</a><br></br>
         <a href="/ManagerFeedback">ManagerFeedback</a><br></br>
-        <a href="/Employee">Employee</a><br></br>
+        <a href="/userguides">UserGuide</a><br></br>
 
       </div>
       
