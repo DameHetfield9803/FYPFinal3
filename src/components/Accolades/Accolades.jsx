@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
+import "./Accolades.css"; 
 
 const Accolades = () => {
   const [inputList, setInputList] = useState([
@@ -83,7 +84,7 @@ const Accolades = () => {
       <h1>Accolades page</h1>
 
       <div className="App">
-        <h1>Enter your accolades achievement</h1>
+        <h1>Input your accolades achievement</h1>
 
         {inputList.length > 0 ? (
           inputList.map((input, index) => (
