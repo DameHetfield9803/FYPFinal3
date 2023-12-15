@@ -1,4 +1,4 @@
-// AppraisalForm.jsx
+import Navbar from "../NavBar/NavBar";
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 
@@ -11,7 +11,9 @@ const AppraisalFormPage1 = ({ onNext }) => {
   };
 
   return (
+    
     <div>
+      <Navbar></Navbar>
       <h2>Appraisal Form - Page 1</h2>
       <label>Question 1:</label>
       <input type="text" name="question1" value={data.question1} onChange={handleInputChange} />
