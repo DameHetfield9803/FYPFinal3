@@ -1,0 +1,80 @@
+/* Style.css */
+
+/* Container styling */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  /* Form table styling */
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  /* Table header styling */
+  .table th {
+    background-color: #f2f2f2;
+  }
+  
+  /* Table cell styling */
+  .table td,
+  .table th {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #ddd;
+  }
+  
+  /* Form submit button styling */
+  .btn-primary {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+  
+  /* Success message styling */
+  .alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 10px;
+    margin-top: 20px;
+  }
+  
+  /* Error message styling */
+  .alert-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 10px;
+    margin-top: 20px;
+  }
+  
+  /* Question cell styling */
+  .td-se-question {
+    font-weight: bold;
+  }
+  
+  /* Float right styling for the submit button */
+  .float-right {
+    float: right;
+  }
+  
+  /* Margin top for elements */
+  .mt-3 {
+    margin-top: 20px;
+  }
+  
+  /* Margin top for submit button */
+  .mt-5 {
+    margin-top: 30px;
+  }
+  
+  /* Label styling for accessibility */
+  label {
+    margin-bottom: 5px;
+    display: block;
+    font-weight: bold;
+  }
+  
