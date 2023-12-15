@@ -18,7 +18,7 @@ import AppraisalItem from "./components/AppraisalItem/AppraisalItem";
 import ReportForm from "./components/ReportForm/reporterror";
 import EmpTab from "./components/EmployeeTable/Employee";
 import UserGuide from "./components/UserGuide/userguides";
-
+import Navbar from "./components/NavBar/NavBar";
 
 function App() {
   return (
@@ -85,6 +85,10 @@ function App() {
 
           <Route exact path="/userguides">
             <ProtectedRoute component={UserGuide} />
+          </Route>
+
+          <Route exact path="/Navbar">
+            <ProtectedRoute component={Navbar} />
           </Route>
 
           <Route exact path="/forbidden">
