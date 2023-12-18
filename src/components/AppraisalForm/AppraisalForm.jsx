@@ -1,60 +1,111 @@
-// AppraisalForm.jsx
+import Navbar from "../NavBar/NavBar";
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 
-const AppraisalFormPage1 = ({ onNext }) => {
-  const [data, setData] = useState({ question1: "", question2: "" });
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setData((prevData) => ({ ...prevData, [name]: value }));
-  };
-
+const AppraisalFormPage1 = ({ onNext, handleChange, data }) => {
   return (
+    
     <div>
+      <Navbar></Navbar>
       <h2>Appraisal Form - Page 1</h2>
-      <label>Question 1:</label>
-      <input type="text" name="question1" value={data.question1} onChange={handleInputChange} />
+      <label>Name of Appraisee:</label>
+      <input type="text" name="nameOfAppraisee" value={data.nameOfAppraisee} onChange={handleChange} />
       <br />
-      <label>Question 2:</label>
-      <input type="text" name="question2" value={data.question2} onChange={handleInputChange} />
+      <label>Appraisee’s Emp No:</label>
+      <input type="text" name="appraiseeEmpNo" value={data.appraiseeEmpNo} onChange={handleChange} />
+      <br />
+      <label>Designation:</label>
+      <input type="text" name="designation" value={data.designation} onChange={handleChange} />
+      <br />
+      <label>Job Grade:</label>
+      <input type="text" name="jobGrade" value={data.jobGrade} onChange={handleChange} />
+      <br />
+      <label>Department:</label>
+      <input type="text" name="department" value={data.department} onChange={handleChange} />
+      <br />
+      <label>Date Joined:</label>
+      <input type="text" name="dateJoined" value={data.dateJoined} onChange={handleChange} />
+      <br />
+      <label>Appraisal Review Period:</label>
+      <input type="text" name="appraisalReviewPeriod" value={data.appraisalReviewPeriod} onChange={handleChange} />
+      <br />
+      <label>Performance Rating:</label>
+      <input type="text" name="performanceRating" value={data.performanceRating} onChange={handleChange} />
+      <br />
+      <label>Appraisal Conducted By:</label>
+      <input type="text" name="appraisalConductedBy" value={data.appraisalConductedBy} onChange={handleChange} />
+      <br />
+      <label>Designation:</label>
+      <input type="text" name="conductedByDesignation" value={data.conductedByDesignation} onChange={handleChange} />
       <br />
       <button onClick={() => onNext(data)}>Next</button>
     </div>
   );
 };
 
-const AppraisalFormPage2 = ({ data, onBack, onNext }) => {
-  const [additionalData, setAdditionalData] = useState({ question3: "", question4: "" });
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setAdditionalData((prevData) => ({ ...prevData, [name]: value }));
-  };
-
+const AppraisalFormPage2 = ({ onNext, onBack, handleChange, data }) => {
   return (
     <div>
       <h2>Appraisal Form - Page 2</h2>
       <p>Data from Page 1:</p>
       <pre>{JSON.stringify(data, null, 2)}</pre>
       <label>Question 3:</label>
-      <input type="text" name="question3" value={additionalData.question3} onChange={handleInputChange} />
+      <input type="text" name="question3" value={data.question3} onChange={handleChange} />
       <br />
       <label>Question 4:</label>
-      <input type="text" name="question4" value={additionalData.question4} onChange={handleInputChange} />
+      <input type="text" name="question4" value={data.question4} onChange={handleChange} />
       <br />
       <button onClick={onBack}>Back</button>
-      <button onClick={() => onNext({ ...data, ...additionalData })}>Next</button>
+      <button onClick={() => onNext(data)}>Next</button>
     </div>
   );
 };
 
-const AppraisalFormPage3 = ({ data, onBack, onSubmit }) => {
+const AppraisalFormPage3 = ({ onNext, onBack, handleChange, data }) => {
   return (
     <div>
       <h2>Appraisal Form - Page 3</h2>
       <p>Data from Previous Pages:</p>
       <pre>{JSON.stringify(data, null, 2)}</pre>
+      <label>Question 5:</label>
+      <input type="text" name="question5" value={data.question5} onChange={handleChange} />
+      <br />
+      <label>Question 6:</label>
+      <input type="text" name="question6" value={data.question6} onChange={handleChange} />
+      <br />
+      <button onClick={onBack}>Back</button>
+      <button onClick={() => onNext(data)}>Next</button>
+    </div>
+  );
+};
+
+const AppraisalFormPage4 = ({ onNext, onBack, handleChange, data }) => {
+  return (
+    <div>
+      <h2>Appraisal Form - Page 4</h2>
+      <p>Data from Previous Pages:</p>
+      <pre>{JSON.stringify(data, null, 2)}</pre>
+      <label>Question 7:</label>
+      <input type="text" name="question7" value={data.question7} onChange={handleChange} />
+      <br />
+      <label>Question 8:</label>
+      <input type="text" name="question8" value={data.question8} onChange={handleChange} />
+      <br />
+      <button onClick={onBack}>Back</button>
+      <button onClick={() => onNext(data)}>Next</button>
+    </div>
+  );
+};
+
+const AppraisalFormPage5 = ({ onSubmit, onBack, handleChange, data }) => {
+  return (
+    <div>
+      <h2>Appraisal Form - Page 5</h2>
+      <p>Data from Previous Pages:</p>
+      <pre>{JSON.stringify(data, null, 2)}</pre>
+      <label>Final Question:</label>
+      <input type="text" name="finalQuestion" value={data.finalQuestion} onChange={handleChange} />
+      <br />
       <button onClick={onBack}>Back</button>
       <button onClick={() => onSubmit(data)}>Submit</button>
     </div>
@@ -63,8 +114,23 @@ const AppraisalFormPage3 = ({ data, onBack, onSubmit }) => {
 
 const AppraisalForm = () => {
   const history = useHistory();
-  const [formData, setFormData] = useState({});
+  const [formData, setFormData] = useState({
+    question1: "",
+    question2: "",
+    question3: "",
+    question4: "",
+    question5: "",
+    question6: "",
+    question7: "",
+    question8: "",
+    finalQuestion: "",
+  });
   const [currentPage, setCurrentPage] = useState(1);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
+  };
 
   const handlePageChange = (data) => {
     setFormData((prevData) => ({ ...prevData, ...data }));
@@ -82,9 +148,36 @@ const AppraisalForm = () => {
 
   return (
     <div>
-      {currentPage === 1 && <AppraisalFormPage1 onNext={handlePageChange} />}
-      {currentPage === 2 && <AppraisalFormPage2 data={formData} onBack={handleBack} onNext={handlePageChange} />}
-      {currentPage === 3 && <AppraisalFormPage3 data={formData} onBack={handleBack} onSubmit={handleSubmit} />}
+      {currentPage === 1 && (
+        <AppraisalFormPage1 onNext={handlePageChange} handleChange={handleChange} data={formData} />
+      )}
+      {currentPage === 2 && (
+        <AppraisalFormPage2
+          data={formData}
+          onBack={handleBack}
+          onNext={handlePageChange}
+          handleChange={handleChange}
+        />
+      )}
+      {currentPage === 3 && (
+        <AppraisalFormPage3
+          data={formData}
+          onBack={handleBack}
+          onNext={handlePageChange}
+          handleChange={handleChange}
+        />
+      )}
+      {currentPage === 4 && (
+        <AppraisalFormPage4
+          data={formData}
+          onBack={handleBack}
+          onNext={handlePageChange}
+          handleChange={handleChange}
+        />
+      )}
+      {currentPage === 5 && (
+        <AppraisalFormPage5 onSubmit={handleSubmit} onBack={handleBack} handleChange={handleChange} data={formData} />
+      )}
     </div>
   );
 };

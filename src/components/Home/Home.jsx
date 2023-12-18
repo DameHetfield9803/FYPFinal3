@@ -1,11 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { auth } from "../../config/firebase";
 import { signOut } from "firebase/auth";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-import './Home.css';
+import Navbar from "../NavBar/NavBar";
+import "./Home.css";
 
-const Navigation = () => {
+export default function Home() {
   const history = useHistory();
 
   const logout = async () => {
@@ -19,27 +19,34 @@ const Navigation = () => {
 
   return (
     <div>
-      <div className="topnav">
-        <a href="http://localhost:3000/Home" className="logo-link">
-          <img src="Assets/TSH.jpg" alt="Company Logo" width="310px" height="90px" />
-        </a>
-        <a href="http://localhost:3000/Dashboard">Dashboard</a>
-        <a href="http://localhost:3000/Attendance">Attendance</a>
-        <a href="http://localhost:3000/Accolades">Accolades</a>
-        <a href="http://localhost:3000/AppraisalForm">AppraisalForm</a>
+      {/*Start of Dashboard Contents*/}
+      <div>
+      <Navbar> </Navbar>
+        <h1>Quick Access</h1>
 
-        {/* My Profile link */}
-        <a href="/Profile" className="profile">
-          <img src="Assets/Profile-icon.jpg" alt="Profile Icon" width="30px" height="30px" />
-          <span>My Profile</span>
-        </a>
+        <div className='Quick-Access'></div>
+        <a href="/Attendance">Attendance</a> <br></br>
+        <a href="/Accolades">Accolades</a><br></br>
+        <a href="/AppraisalForm">AppraisalForm</a><br></br>
+        <a href="/AppraisalItem">AppraisalItem</a><br></br>
+        <a href="/Employee">Employee</a><br></br>
+        <a href="/PeerEvaluation">PeerEvaluation</a><br></br>
+        <a href="/SelfEvaluation">SelfEvaluation</a><br></br>
+        <a href="/Home">Home</a><br></br>
+        <a href="/ReportForm">ReportForm</a><br></br>
+        <a href="/ManagerFeedback">ManagerFeedback</a><br></br>
+        <a href="/userguides">UserGuide</a><br></br>
 
       </div>
-
-      {/* Welcome message */}
-      <h1> This is your homepage</h1>
+      
+      <div id="Home" className="mb-2">
+        <h1>Home</h1>
+        <button onClick={logout}>LOGOUT</button>
+        <p>Charts (updated monthly)</p>
+      </div>
+      {/*End of Dashboard Contents*/}
     </div>
   );
-};
+}
 
-export default Navigation;
+

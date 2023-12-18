@@ -1,34 +1,53 @@
+/* === Variable Declarations === */
+:root {
+  --primary-color: #db1e1e;
+  --link-color: #371c6b;
+  --hover-bg-color: #ddd;
+  --hover-text-color: black;
+  --active-bg-color: #04AA6D;
+  --active-text-color: rgb(17, 3, 3);
+}
+
+/* === Top Navigation Styles === */
+
 /* Style for the top navigation bar */
 .topnav {
-  overflow: hidden; /* Hides overflowing content */
-  background-color: #ffffff; /* Background color for the top navigation bar */
-  display: flex; /* Use a flex container to align child elements */
-  align-items: center; /* Center-align child elements vertically */
+  overflow: hidden;
+  background-color: var(--primary-color);
+  display: flex;
+  align-items: center;
 }
 
 /* Style for each link in the top navigation bar */
 .topnav a {
-  float: left; /* Float the links to the left side */
-  color: #1d1919; /* Text color for the links */
-  text-align: center; /* Center-align the text within the links */
-  padding: 14px 16px; /* Padding around each link */
-  text-decoration: none; /* Remove default underline styling for links */
-  font-size: 17px; /* Font size for the links */
+  float: left;
+  color: var(--link-color);
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
 }
 
 /* Style for the links when hovered over */
 .topnav a:hover {
-  background-color: #ddd; /* Background color on hover */
-  color: black; /* Text color on hover */
+  background-color: var(--hover-bg-color);
+  color: var(--hover-text-color);
 }
 
 /* Style for the active link in the top navigation bar */
 .topnav a.active {
-  background-color: #04AA6D; /* Background color for the active link */
-  color: white; /* Text color for the active link */
+  background-color: var(--active-bg-color);
+  color: var(--active-text-color);
 }
 
 /* Additional styling for the logo link, adding right margin */
 .logo-link {
-  margin-right: 20px; /* Adjust the margin as needed for the logo link */
+  margin-right: 20px;
+}
+
+/* === Responsive Design === */
+
+@media screen and (max-width: 600px) {
+  /* Add styles for smaller screens */
+  
 }

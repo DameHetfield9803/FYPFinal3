@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from 'react-router-dom';
+import "./Accolades.css"; 
 
 const Accolades = () => {
   const [inputList, setInputList] = useState([
@@ -66,8 +66,6 @@ const Accolades = () => {
         <a href="/Home" className="logo-link">
           <img src="Assets/TSH.jpg" alt="Logo" width="310px" height="90px" />
         </a>
-
-        <a href="/Dashboard">Dashboard</a>
         <a href="/Attendance">Attendance</a>
         <a href="/Accolades">Accolades</a>
         <a href="/AppraisalForm">AppraisalForm</a>
@@ -83,7 +81,7 @@ const Accolades = () => {
       <h1>Accolades page</h1>
 
       <div className="App">
-        <h1>Enter your accolades achievement</h1>
+        <h1>Input your accolades achievement</h1>
 
         {inputList.length > 0 ? (
           inputList.map((input, index) => (

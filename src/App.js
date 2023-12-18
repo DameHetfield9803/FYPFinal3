@@ -4,9 +4,7 @@ import Forbidden from "./pages/Forbidden";
 import "./style.css";
 import NotFound from "./pages/NotFound";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
-import Dashboard from "./components/Dashboard/Dashboard";
 import ForgetPassword from "./components/ForgetPassword/ForgetPassword";
-import Home from "./components/Home/Home";
 import PeerEvaluation from "./components/PeerEvaluation/PeerEvaluation";
 import SelfEvaluation from "./components/SelfEvaluation/SelfEvaluation";
 import Attendance from "./components/Attendance/Attendance";
@@ -19,6 +17,7 @@ import ReportForm from "./components/ReportForm/reporterror";
 import EmpTab from "./components/EmployeeTable/Employee";
 import UserGuide from "./components/UserGuide/userguides";
 import Navbar from "./components/NavBar/NavBar";
+import Home from "./components/Home/Home";
 
 function App() {
   return (
@@ -31,12 +30,8 @@ function App() {
             <Login />
           </Route>
 
-          <Route exact path="/home">
-            <ProtectedRoute component={Home}  />
-          </Route>
-
-          <Route exact path="/dashboard">
-            <ProtectedRoute component={Dashboard} />
+          <Route exact path="/Home">
+            <ProtectedRoute component={Home} />
           </Route>
 
           <Route exact path="/accolades">

@@ -33,7 +33,6 @@ export default function Attendance() {
           <img src="Assets/TSH.jpg" alt="Logo" width="310px" height="90px" />
         </a>
 
-        <a href="/Dashboard">Dashboard</a>
         <a href="/Attendance">Attendance</a>
         <a href="/Accolades">Accolades</a>
         <a href="/AppraisalForm">AppraisalForm</a>
