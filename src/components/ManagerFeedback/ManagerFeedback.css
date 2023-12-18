@@ -1,0 +1,24 @@
+.container{
+    border-radius: 1.3rem;
+}
+
+.title{
+    font-family: monospace;
+    text-align: left;
+}
+
+.formarea{
+    display:center;
+    max-width: 80rem;
+    max-height: 15rem;
+    text-align: center;
+    margin-left: 28rem;
+}
+.comments{
+    margin-left: 40rem;
+    display: flex;
+    text-align: center;
+    border-radius: 2rem;
+    max-width: auto;
+    max-height: auto;
+}
