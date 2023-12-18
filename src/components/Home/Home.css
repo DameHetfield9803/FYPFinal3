@@ -38,3 +38,44 @@
 .logo-link {
   margin-right: 20px; /* Adjust the margin as needed for the logo link */
 }
+
+.general-container {
+  width: 400px; /* Adjust the width as needed */
+  margin-right: 20px;
+  padding: 20px;
+  border: 2px solid #ccc; /* Border color can be adjusted */
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Center items to the left */
+  min-height: 90vh;/* Adjust the min-height as needed for the desired vertical centering */
+  float:left;
+  vertical-align: text-top;
+}
+
+.manager-container {
+  width: 400px; /* Adjust the width as needed */
+  margin-right: 20px;
+  padding: 20px;
+  border: 2px solid #ccc; /* Border color can be adjusted */
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Center items to the left */
+  min-height: 90vh;/* Adjust the min-height as needed for the desired vertical centering */
+  text-align:top;
+  float:left;
+}
+.HR-container {
+  width: 400px; /* Adjust the width as needed */
+  margin: auto;
+  padding: 20px;
+  border: 2px solid #ccc; /* Border color can be adjusted */
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Center items to the left */
+  min-height: 90vh;/* Adjust the min-height as needed for the desired vertical centering */
+  float:left;
+}
+
