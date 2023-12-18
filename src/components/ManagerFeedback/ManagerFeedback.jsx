@@ -66,12 +66,14 @@ export default function ManagerFeedback() {
 
                     <div className="App">
                         <div className="container">
-                            <h1 className="mt-3">Manager Feedback</h1>
+                            <h1 className="mt-3">Manager Evaluation towards Employee</h1>
+                            <br></br>
+                            <h2 className="mt-3">Work Performance</h2>
                             <table className="table table-striped mt-3">
                                 <tbody>
 
                                     <tr>
-                                        <td className="td-se-question">Your manager is ready to help you.</td>
+                                        <td className="td-se-question"><b>Willingness to share and impact knowledge to subordinates/colleagues </b> eg: Have a good knowledge of job , aware of the key result areas , performance standards and responsibilities</td>
                                         <td>
                                             <select
                                                 onChange={(e) => setOptionOne(e.target.value)}
@@ -87,7 +89,55 @@ export default function ManagerFeedback() {
                                     </tr>
 
                                     <tr>
-                                        <td className="td-se-question">Your manager is knowledgable in his/her field of work.</td>
+                                        <td className="td-se-question"><b>Quality of Work </b> eg: Accurate,Attentive to details,Complete and Timely</td>
+                                        <td className="td-se-question">
+                                            <select
+                                                onChange={(e) => setOptionTwo(e.target.value)}
+                                            >
+                                                <option value={""}>Choose option</option>
+                                                <option value={"SD"}>Strongly Disagree</option>
+                                                <option value={"D"}>Disagree</option>
+                                                <option value={"N"}>Neutral</option>
+                                                <option value={"A"}>Agree</option>
+                                                <option value={"SA"}>Strongly Agree</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td className="td-se-question"><b>Ability to meet deadlines </b> eg: Consistency to meet the deadline</td>
+                                        <td className="td-se-question">
+                                            <select
+                                                onChange={(e) => setOptionTwo(e.target.value)}
+                                            >
+                                                <option value={""}>Choose option</option>
+                                                <option value={"SD"}>Strongly Disagree</option>
+                                                <option value={"D"}>Disagree</option>
+                                                <option value={"N"}>Neutral</option>
+                                                <option value={"A"}>Agree</option>
+                                                <option value={"SA"}>Strongly Agree</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td className="td-se-question"><b>Communication </b>eg: Effectively express and present ideas and information in both oral and written form so as to have the desired effect on the reader using acceptable language, grammar and style bearing in mind the culture and background. </td>
+                                        <td className="td-se-question">
+                                            <select
+                                                onChange={(e) => setOptionTwo(e.target.value)}
+                                            >
+                                                <option value={""}>Choose option</option>
+                                                <option value={"SD"}>Strongly Disagree</option>
+                                                <option value={"D"}>Disagree</option>
+                                                <option value={"N"}>Neutral</option>
+                                                <option value={"A"}>Agree</option>
+                                                <option value={"SA"}>Strongly Agree</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <h2 className="mt-3">Work Attitude</h2>
+                                    <tr>
+                                        <td className="td-se-question"><b>Reliablity/Responsibility/Commitment</b> eg: Reliable and responsible in all situations and does not require special supervisory attention. Keen to accept responsibilities. </td>
                                         <td className="td-se-question">
                                             <select
                                                 onChange={(e) => setOptionTwo(e.target.value)}
@@ -102,10 +152,10 @@ export default function ManagerFeedback() {
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td className="td-se-question">Your manager cared for your safety.</td>
-                                        <td>
+                                        <td className="td-se-question"><b>Analytical Ability / Problem Solving</b> eg: Have the ability to identify causes of problems and able to recommend effective solutions. At times able to make constructive suggestions. </td>
+                                        <td className="td-se-question">
                                             <select
-                                                onChange={(e) => setOptionThree(e.target.value)}
+                                                onChange={(e) => setOptionTwo(e.target.value)}
                                             >
                                                 <option value={""}>Choose option</option>
                                                 <option value={"SD"}>Strongly Disagree</option>
@@ -117,10 +167,10 @@ export default function ManagerFeedback() {
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td className="td-se-question">Overall i am able to work with this manager.</td>
-                                        <td>
+                                        <td className="td-se-question"><b>Initiative</b> eg: Enterprising, willingly assume greater responsibilities beyond his/her basic job </td>
+                                        <td className="td-se-question">
                                             <select
-                                                onChange={(e) => setOptionFour(e.target.value)}
+                                                onChange={(e) => setOptionTwo(e.target.value)}
                                             >
                                                 <option value={""}>Choose option</option>
                                                 <option value={"SD"}>Strongly Disagree</option>
@@ -131,6 +181,81 @@ export default function ManagerFeedback() {
                                             </select>
                                         </td>
                                     </tr>
+                                    <tr>
+                                        <td className="td-se-question"><b>Decision-Making</b> eg: Able to make sound and decisive decision</td>
+                                        <td className="td-se-question">
+                                            <select
+                                                onChange={(e) => setOptionTwo(e.target.value)}
+                                            >
+                                                <option value={""}>Choose option</option>
+                                                <option value={"SD"}>Strongly Disagree</option>
+                                                <option value={"D"}>Disagree</option>
+                                                <option value={"N"}>Neutral</option>
+                                                <option value={"A"}>Agree</option>
+                                                <option value={"SA"}>Strongly Agree</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td className="td-se-question"><b>Reaction under Pressure</b> eg: Continue to be stable and productive under pressure </td>
+                                        <td className="td-se-question">
+                                            <select
+                                                onChange={(e) => setOptionTwo(e.target.value)}
+                                            >
+                                                <option value={""}>Choose option</option>
+                                                <option value={"SD"}>Strongly Disagree</option>
+                                                <option value={"D"}>Disagree</option>
+                                                <option value={"N"}>Neutral</option>
+                                                <option value={"A"}>Agree</option>
+                                                <option value={"SA"}>Strongly Agree</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td className="td-se-question"><b>Adaptability & Flexibility</b> eg: Adjust effectively in approach and behavior to new and changed situations and interacting with different people. </td>
+                                        <td className="td-se-question">
+                                            <select
+                                                onChange={(e) => setOptionTwo(e.target.value)}
+                                            >
+                                                <option value={""}>Choose option</option>
+                                                <option value={"SD"}>Strongly Disagree</option>
+                                                <option value={"D"}>Disagree</option>
+                                                <option value={"N"}>Neutral</option>
+                                                <option value={"A"}>Agree</option>
+                                                <option value={"SA"}>Strongly Agree</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td className="td-se-question"><b>Innovation</b> eg: Have an open mindset. Demonstrates originality and imagination in ideas and solutions that leads to novel ways to deal with work problems and opportunities.</td>
+                                        <td className="td-se-question">
+                                            <select
+                                                onChange={(e) => setOptionTwo(e.target.value)}
+                                            >
+                                                <option value={""}>Choose option</option>
+                                                <option value={"SD"}>Strongly Disagree</option>
+                                                <option value={"D"}>Disagree</option>
+                                                <option value={"N"}>Neutral</option>
+                                                <option value={"A"}>Agree</option>
+                                                <option value={"SA"}>Strongly Agree</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td className="td-se-question"><b>Drive & Determination</b> eg: Act with drive, confidence and personal commitment in setting and achieving departmental/company goals </td>
+                                        <td className="td-se-question">
+                                            <select
+                                                onChange={(e) => setOptionTwo(e.target.value)}
+                                            >
+                                                <option value={""}>Choose option</option>
+                                                <option value={"SD"}>Strongly Disagree</option>
+                                                <option value={"D"}>Disagree</option>
+                                                <option value={"N"}>Neutral</option>
+                                                <option value={"A"}>Agree</option>
+                                                <option value={"SA"}>Strongly Agree</option>
+                                            </select>
+                                        </td>
+                                    </tr>   
                                 </tbody>
                             </table>
 
@@ -153,7 +278,7 @@ export default function ManagerFeedback() {
                     
                     <div class="mb-4">
                         
-                        <label class="form-label" for="feedback_comments">Other Comments:</label>
+                        <label class="form-label" for="feedback_comments">Manager's Feedback to Employee:</label>
                         <textarea class="form-control" required rows="6" name="comments" id="feedback_comments"></textarea>
                     </div>
                     <div class="row">

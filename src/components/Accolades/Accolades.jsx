@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./Accolades.css"; 
+import "./Accolades.css";
 
 const Accolades = () => {
   const [inputList, setInputList] = useState([
@@ -29,6 +29,37 @@ const Accolades = () => {
     }
   }, [inputList]);
 
+  const allowedFileExtensions = ["pdf", "jpg", "jpeg", "png"];
+
+  const handleInputChange = (event, index, field) => {
+    const { value, files } = event.target;
+    const newInputList = [...inputList];
+
+    // Validate file type if the field is "file"
+    if (field === "file" && files && files.length > 0) {
+      const fileName = files[0].name;
+      const fileExtension = fileName.split(".").pop().toLowerCase();
+
+      if (!allowedFileExtensions.includes(fileExtension)) {
+        // Display an error message or handle the invalid file extension
+        console.error("Invalid file extension. Please choose a valid file (PDF, JPG, JPEG).");
+        return;
+      }
+    }
+
+    newInputList[index][field] = field === "file" ? files[0] : value;
+    newInputList[index].input_rank = index + 1;
+    setInputList(newInputList);
+  };
+
+  const handleRemoveItem = (index) => {
+    if (inputList.length > 1) {
+      const newList = [...inputList];
+      newList.splice(index, 1);
+      setInputList(newList);
+    }
+  };
+
   const handleListAdd = () => {
     setInputList([
       ...inputList,
@@ -41,22 +72,6 @@ const Accolades = () => {
         file: null,
       },
     ]);
-  };
-
-  const handleInputChange = (event, index, field) => {
-    const { value, files } = event.target;
-    const newInputList = [...inputList];
-    newInputList[index][field] = field === "file" ? files[0] : value;
-    newInputList[index].input_rank = index + 1;
-    setInputList(newInputList);
-  };
-
-  const handleRemoveItem = (index) => {
-    if (inputList.length > 1) {
-      const newList = [...inputList];
-      newList.splice(index, 1);
-      setInputList(newList);
-    }
   };
 
   return (
@@ -118,13 +133,13 @@ const Accolades = () => {
                 <option value="Level 1">Level 1</option>
                 <option value="Level 2">Level 2</option>
                 <option value="Level 3">Level 3</option>
-                
               </select>
               <div className="custom-file">
                 <input
                   type="file"
                   className="custom-file-input"
                   onChange={(event) => handleInputChange(event, index, "file")}
+                  accept=".pdf, image/*"
                 />
                 <label className="custom-file-label">
                   {input.file ? input.file.name : "Choose file"}
