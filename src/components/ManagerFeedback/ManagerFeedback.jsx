@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import "./ManagerFeedback.css";
 
 export default function ManagerFeedback() {
 
@@ -41,7 +41,7 @@ export default function ManagerFeedback() {
             {/* NAVBAR ITEMS */}
             <div className="topnav">
                 <a href="/Home" className="logo-link">
-                    <img src="Assets/TSH.jpg" alt="Logo" width="310px" height="90px" />
+                    <img src="Assets/TSH.jpg" alt="Logo" width="310px" height="80px"/>
                 </a>
                 <a href="/Attendance">Attendance</a>
                 <a href="/Accolades">Accolades</a>
@@ -60,15 +60,11 @@ export default function ManagerFeedback() {
 
             
 
-            <div class="mb-4 small">P
+            <div className="mb-4 small">
                 <form name="feedback_form" id="feedback_form" method="post">
-
-
                     <div className="App">
                         <div className="container">
-                            <h1 className="mt-3">Manager Evaluation towards Employee</h1>
-                            <br></br>
-                            <h2 className="mt-3">Work Performance</h2>
+                            <h1 className="mt-3">Manager Feedback</h1>
                             <table className="table table-striped mt-3">
                                 <tbody>
 
@@ -278,13 +274,13 @@ export default function ManagerFeedback() {
                     
                     <div class="mb-4">
                         
-                        <label class="form-label" for="feedback_comments">Manager's Feedback to Employee:</label>
+                        <label class="form-label" for="feedback_comments">Other Comments:</label>
                         <textarea class="form-control" required rows="6" name="comments" id="feedback_comments"></textarea>
                     </div>
-                    <div class="row">
+                    <div className="row">
 
                     </div>
-                    <button type="submit" class="btn btn-primary d-block mx-auto mt-5">Submit</button>
+                    <button type="submit" className="btn btn-primary d-block mx-auto mt-5">Submit</button>
                 </form>
                 
             </div>
