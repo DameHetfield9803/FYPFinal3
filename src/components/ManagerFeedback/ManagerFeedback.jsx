@@ -274,7 +274,7 @@ export default function ManagerFeedback() {
                     
                     <div class="mb-4">
                         
-                        <label class="form-label" for="feedback_comments">Other Comments:</label>
+                        <label class="form-label" for="feedback_comments"><h5>Supervisor Feedback to Employees:</h5></label>
                         <textarea class="form-control" required rows="6" name="comments" id="feedback_comments"></textarea>
                     </div>
                     <div className="row">
