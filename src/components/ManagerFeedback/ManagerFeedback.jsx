@@ -64,7 +64,9 @@ export default function ManagerFeedback() {
                 <form name="feedback_form" id="feedback_form" method="post">
                     <div className="App">
                         <div className="container">
-                            <h1 className="mt-3">Manager Feedback</h1>
+                            <h1 className="mt-3">Manager Evaluation To Employees</h1>
+                            <h2 className="mt-3">Work Performance</h2>
+
                             <table className="table table-striped mt-3">
                                 <tbody>
 
