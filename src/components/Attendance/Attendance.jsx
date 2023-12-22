@@ -17,7 +17,7 @@ export default function Attendance() {
     }
   };
 
-  const noOfWeeks = ["Week 1", "Week 2", "Week 3", "Week 4", "Week 5"];
+  const noOfWeeks = ["Week 1", "Week 2", "Week 3", "Week 4", "Week 5" , "Week 6"];
 
   const myEmployees = [
     "Alan", "Bob", "Charlie", "David", "Eva", "Frank", "Grace", "Hank", "Ivy",

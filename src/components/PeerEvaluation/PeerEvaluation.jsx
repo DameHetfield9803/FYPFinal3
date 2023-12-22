@@ -95,6 +95,36 @@ export default function PeerEvaluation() {
               </td>
             </tr>
             <tr>
+              <td className="td-se-question">
+                This team member contributed useful ideas.
+              </td>
+              <td>
+                <select onChange={(e) => setOptionFour(e.target.value)}>
+                  <option value={""}>Choose option</option>
+                  <option value={"SD"}>Strongly Disagree</option>
+                  <option value={"D"}>Disagree</option>
+                  <option value={"N"}>Neutral</option>
+                  <option value={"A"}>Agree</option>
+                  <option value={"SA"}>Strongly Agree</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td className="td-se-question">
+                This team member contributed useful ideas.
+              </td>
+              <td>
+                <select onChange={(e) => setOptionFour(e.target.value)}>
+                  <option value={""}>Choose option</option>
+                  <option value={"SD"}>Strongly Disagree</option>
+                  <option value={"D"}>Disagree</option>
+                  <option value={"N"}>Neutral</option>
+                  <option value={"A"}>Agree</option>
+                  <option value={"SA"}>Strongly Agree</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
               <td className="td-se-question"> Other Comments:</td>
               <td>
                 <textarea

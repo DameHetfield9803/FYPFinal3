@@ -7,7 +7,7 @@ const AppraisalFormPage1 = ({ onNext, handleChange, data }) => {
     
     <div>
       <Navbar></Navbar>
-      <h2>Appraisal Form - Page 1</h2>
+      <h1>Appraisal Form - Page 1</h1>
       <label>Name of Appraisee:</label>
       <input type="text" name="nameOfAppraisee" value={data.nameOfAppraisee} onChange={handleChange} />
       <br />
@@ -47,12 +47,12 @@ const AppraisalFormPage2 = ({ onNext, onBack, handleChange, data }) => {
   return (
     <div>
       <h2>Appraisal Form - Page 2</h2>
-      <p>Data from Page 1:</p>
+      <p>Data from Page 1 previous page:</p>
       <pre>{JSON.stringify(data, null, 2)}</pre>
-      <label>Question 3:</label>
+      <label>Peer Evaluation:</label>
       <input type="text" name="question3" value={data.question3} onChange={handleChange} />
       <br />
-      <label>Question 4:</label>
+      <label>Self Evaluation:</label>
       <input type="text" name="question4" value={data.question4} onChange={handleChange} />
       <br />
       <button onClick={onBack}>Back</button>
