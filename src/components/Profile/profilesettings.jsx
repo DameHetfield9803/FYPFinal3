@@ -110,11 +110,36 @@ const ProfileSettings = () => {
             )}
             <button
               className="btn btn-link"
-              onClick={() => setIsEditing(!isEditing)}
+               onClick={() => setIsEditing(!isEditing)}
             >
               {isEditing ? "Cancel" : "Edit"}
             </button>
           </p>
+
+   {/* Accoldates */}
+<p> 
+<strong> Accoldates</strong>
+{isEditing ? (
+              <input
+                type="email"
+                className="form-control"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            ) : (
+              <span>{email}</span>
+            )}
+            <button
+              className="btn btn-link"
+               onClick={() => setIsEditing(!isEditing)}
+            >
+              {isEditing ? "Cancel" : "Edit"}
+            </button>
+ 
+
+
+</p>
+
 
         </div>
 
