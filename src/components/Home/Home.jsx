@@ -22,7 +22,9 @@ export default function Home() {
       {/*Start of Dashboard Contents*/}
       <div>
         <Navbar> </Navbar>
+        <div className="central-font">
         <h1>Homepage Quick Access</h1>
+        </div>
         <div className="general-container">
           
           <strong>Employee</strong>
@@ -65,13 +67,10 @@ export default function Home() {
         <a href="/userguides">UserGuide</a><br></br>
       </div>
 
-
-
-      <div id="Home" className="LogoutButton">
+        
         <h1>Homepage Contents</h1>
         <button onClick={logout}>LOGOUT</button>
         <p>Charts (updated monthly)</p>
-      </div>
       {/*End of Dashboard Contents*/}
     </div>
   );

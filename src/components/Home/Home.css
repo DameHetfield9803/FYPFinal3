@@ -39,9 +39,18 @@
   margin-right: 20px; /* Adjust the margin as needed for the logo link */
 }
 
+.central-font{
+  display: flex; /* Use flexbox to arrange child elements */
+  flex-direction: column; /* Arrange child elements in a column */
+  align-items: center; /* Center child elements horizontally */
+ 
+}
+
+
 .general-container {
   width: 400px; /* Adjust the width as needed */
   margin-right: 20px;
+  margin-left: 20px;
   padding: 20px;
   border: 2px solid #ccc; /* Border color can be adjusted */
   border-radius: 10px;
