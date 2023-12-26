@@ -1,39 +1,45 @@
 /* UserGuides.css */
 
+/* Styling for the container of user guides */
 .user-guides-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
+  display: flex; /* Use flexbox to arrange child elements */
+  flex-direction: column; /* Arrange child elements in a column */
+  align-items: center; /* Center child elements horizontally */
+  padding: 20px; /* Add padding to the container */
 }
 
+/* Styling for the container of the video accordion */
 .video-accordion-container {
-  width: 100%;
-  max-width: 800px; /* Adjust the max width as needed */
-  box-sizing: border-box; /* Ensures padding is included in the width */
+  width: 100%; /* Set the width to 100% of the parent container */
+  max-width: 800px; /* Set a maximum width to avoid the container becoming too wide */
+  box-sizing: border-box; /* Include padding and border in the element's total width */
 }
 
+/* Styling for each accordion item */
 .accordion-item {
-  border: 1px solid #ddd;
-  margin-bottom: 10px;
+  border: 1px solid #ddd; /* Add a border to separate accordion items */
+  margin-bottom: 10px; /* Add spacing between accordion items */
 }
 
+/* Styling for the accordion header (title) */
 .accordion-header {
-  background-color: #f1f1f1;
-  padding: 10px;
-  cursor: pointer;
+  background-color: #f1f1f1; /* Set a background color for the header */
+  padding: 10px; /* Add padding to the header */
+  cursor: pointer; /* Change cursor to pointer to indicate interactivity */
 }
 
+/* Styling for the open accordion header */
 .accordion-header.open {
-  background-color: #ddd;
+  background-color: #ddd; /* Change background color when accordion is open */
 }
 
+/* Styling for the content of the accordion (description and video) */
 .accordion-content {
-  padding: 10px;
+  padding: 10px; /* Add padding to the content */
 }
 
 /* Center the videos within the accordion */
 .react-player {
-  margin: 0 auto;
-  display: block;
+  margin: 0 auto; /* Center the video horizontally */
+  display: block; /* Make the video a block-level element */
 }
