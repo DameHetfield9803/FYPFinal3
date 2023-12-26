@@ -1,17 +1,39 @@
-/* ... (existing styles) */
+/* UserGuides.css */
 
-.square-video-container {
-    text-align: center;
-  }
-  
-  .square-video-container p {
-    margin-bottom: 100px;
-  }
-  
-  .square-video-container video {
-    width: 1000%;
-    height: auto;
-    max-width: 1000px; /* Adjust the maximum width as needed */
-    aspect-ratio: 4/3; /* Maintain a 1:1 aspect ratio for square shape */
-  }
-  
+.user-guides-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.video-accordion-container {
+  width: 100%;
+  max-width: 800px; /* Adjust the max width as needed */
+  box-sizing: border-box; /* Ensures padding is included in the width */
+}
+
+.accordion-item {
+  border: 1px solid #ddd;
+  margin-bottom: 10px;
+}
+
+.accordion-header {
+  background-color: #f1f1f1;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.accordion-header.open {
+  background-color: #ddd;
+}
+
+.accordion-content {
+  padding: 10px;
+}
+
+/* Center the videos within the accordion */
+.react-player {
+  margin: 0 auto;
+  display: block;
+}
