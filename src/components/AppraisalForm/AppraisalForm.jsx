@@ -5,9 +5,24 @@ import "./AppraisalForm.css";
 import { Sections } from "./Sections";
 import ManagerFeedback from "../ManagerFeedback/ManagerFeedback";
 import SelfEvaluation from '../SelfEvaluation/SelfEvaluation'
-import {Accolate} from "../Accolades/Accolates";
+import Accolades from "../Accolades/Accolades";
 import PeerEvaluation from "../PeerEvaluation/PeerEvaluation";
 
 export default function AppraisalForm() {
-  return <Sections />;
+  return (
+    <>
+      <Sections/>
+      <SelfEvaluation/>
+      <PeerEvaluation/>
+      <ManagerFeedback/>
+      <Accolades/>
+    </>
+    
+
+
+
+  
+    )
+  
 }
+
