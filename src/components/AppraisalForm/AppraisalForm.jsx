@@ -5,7 +5,7 @@ import "./AppraisalForm.css";
 import { Sections } from "./Sections";
 import ManagerFeedback from "../ManagerFeedback/ManagerFeedback";
 import SelfEvaluation from '../SelfEvaluation/SelfEvaluation'
-import Accolades from "../Accolades/Accolades";
+import {Accolades} from "../Accolades/Accolates";
 import PeerEvaluation from "../PeerEvaluation/PeerEvaluation";
 
 export default function AppraisalForm() {
