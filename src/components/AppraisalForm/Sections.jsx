@@ -1,4 +1,5 @@
 export function Sections() {
+  const url = '127.0.0.1:3306'
   return (
     <>
       <body>
@@ -7,7 +8,7 @@ export function Sections() {
           <h1>(Exempt Staff)- E1 to E5</h1>
         </div>
         <div>
-          <form method="post" action=""></form> {/** fill in action later**/}
+          <form method="post" action='127.0.0.1:3306'></form> 
           <fieldset>
             <label for="name">
               Name of Appraisee
