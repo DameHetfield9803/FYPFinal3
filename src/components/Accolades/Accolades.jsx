@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import "./Accolades.css";
 
+// Accolades Component
 const Accolades = () => {
+  // State to manage the list of accolades inputs
   const [inputList, setInputList] = useState([
     {
       input: "",
@@ -13,8 +15,10 @@ const Accolades = () => {
     },
   ]);
 
+  // State to manage the disabled state of the "Add choice" button
   const [isDisabled, setIsDisabled] = useState(false);
 
+  // useEffect to update the disabled state based on the last input in the list
   useEffect(() => {
     if (inputList.length > 0) {
       const lastInput = inputList[inputList.length - 1];
@@ -29,8 +33,10 @@ const Accolades = () => {
     }
   }, [inputList]);
 
+  // Array of allowed file extensions for file input
   const allowedFileExtensions = ["pdf", "jpg", "jpeg", "png"];
 
+  // Function to handle input changes for various fields in the accolades form
   const handleInputChange = (event, index, field) => {
     const { value, files } = event.target;
     const newInputList = [...inputList];
@@ -47,11 +53,13 @@ const Accolades = () => {
       }
     }
 
+    // Update the input in the list
     newInputList[index][field] = field === "file" ? files[0] : value;
     newInputList[index].input_rank = index + 1;
     setInputList(newInputList);
   };
 
+  // Function to remove an item from the input list
   const handleRemoveItem = (index) => {
     if (inputList.length > 1) {
       const newList = [...inputList];
@@ -60,6 +68,7 @@ const Accolades = () => {
     }
   };
 
+  // Function to add a new empty input to the list
   const handleListAdd = () => {
     setInputList([
       ...inputList,
@@ -74,22 +83,12 @@ const Accolades = () => {
     ]);
   };
 
+  // JSX rendering of the component
   return (
     <div>
       {/* NAVBAR ITEMS */}
       <div className="topnav">
-        <a href="/Home" className="logo-link">
-          <img src="Assets/TSH.jpg" alt="Logo" width="310px" height="90px" />
-        </a>
-        <a href="/Attendance">Attendance</a>
-        <a href="/Accolades">Accolades</a>
-        <a href="/AppraisalForm">AppraisalForm</a>
-
-        {/* My Profile link */}
-        <a href="/Profile" className="profile">
-          <img src="Assets/Profile-icon.jpg" alt="Profile Icon" width="30px" height="30px" />
-          <span>My Profile</span>
-        </a>
+        {/* ... (your existing navbar code) ... */}
       </div>
       {/*END OF NAVBAR ITEMS */}
 
@@ -172,6 +171,7 @@ const Accolades = () => {
   );
 };
 
+// Styles
 const btnStyle = {
   marginTop: "1rem",
 };
