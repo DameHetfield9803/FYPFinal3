@@ -36,6 +36,7 @@ export default function PeerEvaluation() {
     <div className="App">
       <div className="container">
         <h1 className="mt-3">Peer Evaluation</h1>
+       <b> <p className="mt-3">(Lowest Rating: 1, Neutral : 3, Highest Rating: 5)</p></b>
         <table className="table table-striped mt-3">
           <tbody>
             <tr>
@@ -98,8 +99,7 @@ export default function PeerEvaluation() {
             </tr>
             <tr>
               <td className="td-se-question">
-                This team member contributed useful ideas.
-              </td>
+              This team member has strong interpersonal skills and helps everyone feel welcome on the team.              </td>
               <td>
                 <select onChange={(e) => setOptionFour(e.target.value)}>
                   <option value={""}>Choose option (1-5) where option 1 is the lowest and option 5 is the highest </option>
@@ -126,6 +126,23 @@ export default function PeerEvaluation() {
                 </select>
               </td>
             </tr>
+
+            <tr>
+              <td className="td-se-question">
+              This team member exhibits strong leadership skills
+              </td>
+              <td>
+                <select onChange={(e) => setOptionFour(e.target.value)}>
+                  <option value={""}>Choose option (1-5) where option 1 is the lowest and option 5 is the highest</option>
+                  <option value={"SD"}>1</option>
+                  <option value={"D"}>2</option>
+                  <option value={"N"}>3</option>
+                  <option value={"A"}>4</option>
+                  <option value={"SA"}>5</option>
+                </select>
+              </td>
+            </tr>
+            
             <tr>
               <td className="td-se-question"> Other Comments:</td>
               <td>

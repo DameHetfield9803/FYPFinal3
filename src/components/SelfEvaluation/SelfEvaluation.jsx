@@ -33,11 +33,11 @@ export default function SelfEvaluation() {
     <div className="App">
       <div className="container">
         <h1 className="mt-3">Self Evaluation</h1>
-        <p className="mt-3">(Lowest rating: 1, Highest Rating: 5)</p>
+        <b> <p className="mt-3">(Lowest Rating: 1, Neutral : 3, Highest Rating: 5)</p></b>
         <table className="table table-striped mt-3">
           <tbody>
             <tr>
-              <td className="td-se-question">I understood what I did today.</td>
+              <td className="td-se-question">Do you understood what you did today.</td>
               <td>
                 <select onChange={(e) => setOptionOne(e.target.value)}>
 
@@ -52,7 +52,7 @@ export default function SelfEvaluation() {
             </tr>
             <tr>
               <td className="td-se-question">
-                I am confident that I can apply what I have learnt.
+                Are you confident that you can apply what I have learnt.
               </td>
               <td>
                 <select onChange={(e) => setOptionTwo(e.target.value)}>
@@ -98,6 +98,21 @@ export default function SelfEvaluation() {
             <tr>
               <td className="td-se-question">
                 I find the guides given to me useful for deepening my understanding.
+              </td>
+              <td>
+                <select onChange={(e) => setOptionFive(e.target.value)}>
+                <option value={""}>Choose option</option>
+                  <option value={"SD"}>1</option>
+                  <option value={"D"}>2</option>
+                  <option value={"N"}>3</option>
+                  <option value={"A"}>4</option>
+                  <option value={"SA"}>5</option>             
+                  </select>
+              </td>
+            </tr>
+            <tr>
+              <td className="td-se-question">
+              Do you feel that you spent the time to perform quality work?
               </td>
               <td>
                 <select onChange={(e) => setOptionFive(e.target.value)}>

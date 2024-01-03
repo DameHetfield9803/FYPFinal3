@@ -65,6 +65,9 @@ export default function ManagerFeedback() {
                     <div className="App">
                         <div className="container">
                             <h1 className="mt-3">Manager Evaluation To Employees</h1>
+
+                            <b> <p className="mt-3">(Lowest Rating: 1, Neutral : 3, Highest Rating: 5)</p></b>
+
                             <h2 className="mt-3">Work Performance</h2>
 
                             <table className="table table-striped mt-3">
