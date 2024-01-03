@@ -33,6 +33,7 @@ export default function SelfEvaluation() {
     <div className="App">
       <div className="container">
         <h1 className="mt-3">Self Evaluation</h1>
+        <p className="mt-3">(Lowest rating: 1, Highest Rating: 5)</p>
         <table className="table table-striped mt-3">
           <tbody>
             <tr>
@@ -40,12 +41,12 @@ export default function SelfEvaluation() {
               <td>
                 <select onChange={(e) => setOptionOne(e.target.value)}>
 
-                  <option value={""}>Choose option</option>
-                  <option value={"SD"}>Strongly Disagree</option>
-                  <option value={"D"}>Disagree</option>
-                  <option value={"N"}>Neutral</option>
-                  <option value={"A"}>Agree</option>
-                  <option value={"SA"}>Strongly Agree</option>
+                <option value={""}>Choose option</option>
+                  <option value={"SD"}>1</option>
+                  <option value={"D"}>2</option>
+                  <option value={"N"}>3</option>
+                  <option value={"A"}>4</option>
+                  <option value={"SA"}>5</option>
                 </select>
               </td>
             </tr>
@@ -56,11 +57,11 @@ export default function SelfEvaluation() {
               <td>
                 <select onChange={(e) => setOptionTwo(e.target.value)}>
                   <option value={""}>Choose option</option>
-                  <option value={"SD"}>Strongly Disagree</option>
-                  <option value={"D"}>Disagree</option>
-                  <option value={"N"}>Neutral</option>
-                  <option value={"A"}>Agree</option>
-                  <option value={"SA"}>Strongly Agree</option>
+                  <option value={"SD"}>1</option>
+                  <option value={"D"}>2</option>
+                  <option value={"N"}>3</option>
+                  <option value={"A"}>4</option>
+                  <option value={"SA"}>5</option>
                 </select>
               </td>
             </tr>
@@ -71,11 +72,11 @@ export default function SelfEvaluation() {
               <td>
                 <select onChange={(e) => setOptionThree(e.target.value)}>              
                   <option value={""}>Choose option</option>
-                  <option value={"SD"}>Strongly Disagree</option>
-                  <option value={"D"}>Disagree</option>
-                  <option value={"N"}>Neutral</option>
-                  <option value={"A"}>Agree</option>
-                  <option value={"SA"}>Strongly Agree</option>
+                  <option value={"SD"}>1</option>
+                  <option value={"D"}>2</option>
+                  <option value={"N"}>3</option>
+                  <option value={"A"}>4</option>
+                  <option value={"SA"}>5</option>
                 </select>
               </td>
             </tr>
@@ -85,12 +86,12 @@ export default function SelfEvaluation() {
               </td>
               <td>
                 <select onChange={(e) => setOptionFour(e.target.value)}>
-                  <option value={""}>Choose option</option>
-                  <option value={"SD"}>Strongly Disagree</option>
-                  <option value={"D"}>Disagree</option>
-                  <option value={"N"}>Neutral</option>
-                  <option value={"A"}>Agree</option>
-                  <option value={"SA"}>Strongly Agree</option>
+                <option value={""}>Choose option</option>
+                  <option value={"SD"}>1</option>
+                  <option value={"D"}>2</option>
+                  <option value={"N"}>3</option>
+                  <option value={"A"}>4</option>
+                  <option value={"SA"}>5</option>
                 </select>
               </td>
             </tr>
@@ -100,12 +101,12 @@ export default function SelfEvaluation() {
               </td>
               <td>
                 <select onChange={(e) => setOptionFive(e.target.value)}>
-                  <option value={""}>Choose option</option>
-                  <option value={"SD"}>Strongly Disagree</option>
-                  <option value={"D"}>Disagree</option>
-                  <option value={"N"}>Neutral</option>
-                  <option value={"A"}>Agree</option>
-                  <option value={"SA"}>Strongly Agree</option>                
+                <option value={""}>Choose option</option>
+                  <option value={"SD"}>1</option>
+                  <option value={"D"}>2</option>
+                  <option value={"N"}>3</option>
+                  <option value={"A"}>4</option>
+                  <option value={"SA"}>5</option>             
                   </select>
               </td>
             </tr>
