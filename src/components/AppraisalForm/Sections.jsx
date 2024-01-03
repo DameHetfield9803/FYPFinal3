@@ -1,3 +1,29 @@
+
+/*
+async function getSelfEva(){
+  try{
+    await
+  }
+}
+
+async function getPeerEva(){
+  try{
+    await
+  }
+}
+async function getManagerEva(){
+  try{
+    await
+  }
+}
+
+async function accolates(){
+  try
+}
+
+
+*/
+
 export function Sections() {
   const url = '127.0.0.1:3306'
   return (

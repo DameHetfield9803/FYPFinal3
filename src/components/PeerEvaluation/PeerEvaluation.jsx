@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./PeerEvaluation.css";
+import Navbar from "../NavBar/NavBar";
 
 export default function PeerEvaluation() {
   // gets and sets the fields
@@ -31,6 +32,7 @@ export default function PeerEvaluation() {
   }
 
   return (
+    
     <div className="App">
       <div className="container">
         <h1 className="mt-3">Peer Evaluation</h1>
@@ -158,6 +160,8 @@ export default function PeerEvaluation() {
           </div>
         )}
       </div>
-    </div>
+      
+   </div>
+    
   );
 }

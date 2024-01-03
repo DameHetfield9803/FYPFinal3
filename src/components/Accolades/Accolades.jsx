@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./Accolades.css";
+import Navbar from "../NavBar/NavBar";
 
 // Accolades Component
 const Accolades = () => {
@@ -85,10 +86,12 @@ const Accolades = () => {
 
   // JSX rendering of the component
   return (
+
     <div>
+      <Navbar></Navbar>
       {/* NAVBAR ITEMS */}
       <div className="topnav">
-        {/* ... (your existing navbar code) ... */}
+        
       </div>
       {/*END OF NAVBAR ITEMS */}
 
