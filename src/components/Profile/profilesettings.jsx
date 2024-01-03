@@ -118,7 +118,7 @@ const ProfileSettings = () => {
 
    {/* Accoldates */}
 <p> 
-<strong> Accoldates</strong>
+<strong> Accoldates: </strong>
 {isEditing ? (
               <input
                 type="email"
