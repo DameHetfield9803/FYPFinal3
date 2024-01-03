@@ -89,3 +89,22 @@
   float:left;
 }
 
+.HomepageContents {
+  width: 400px; /* Adjust the width as needed */
+  margin-left: 20px; /* Keep the container on the left */
+  margin-top: 50rem; /* Add margin from the top as needed */
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-height: 10vh;
+  position: absolute;
+}
+
+
+
+
+
+
+
+
