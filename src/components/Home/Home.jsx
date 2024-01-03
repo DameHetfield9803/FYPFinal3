@@ -67,10 +67,11 @@ export default function Home() {
         <a href="/userguides">UserGuide</a><br></br>
       </div>
 
-        
+        <div className="HomepageContents">
         <h1>Homepage Contents</h1>
         <button onClick={logout}>LOGOUT</button>
         <p>Charts (updated monthly)</p>
+        </div>
       {/*End of Dashboard Contents*/}
     </div>
   );
