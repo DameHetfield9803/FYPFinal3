@@ -18,6 +18,7 @@ import EmpTab from "./components/EmployeeTable/Employee";
 import UserGuide from "./components/UserGuide/userguides";
 import Navbar from "./components/NavBar/NavBar";
 import Home from "./components/Home/Home";
+import MCHandling from "./components/MCHandling/MCHandling";
 
 function App() {
   return (
@@ -86,10 +87,15 @@ function App() {
             <ProtectedRoute component={Navbar} />
           </Route>
 
+          <Route exact path="/mchandling">
+            <ProtectedRoute component={MCHandling} />
+          </Route>
+
           <Route exact path="/forbidden">
             <Forbidden />
           </Route>
 
+        
           <Route path="*">
             <NotFound />
           </Route>
