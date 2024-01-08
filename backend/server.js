@@ -16,13 +16,12 @@ const db = mysql.createConnection({
 app.get('', (req,res) => {
     const sql = "SELECT * FROM ";
     db.query(sql, (err, result) => {
-        if (err){
-            return res.json(
-                {Message: "Error retrieving data from database"}
-                );
+        if (err) {
+            console.error('Error retrieving data from database:', err);
+            return res.json({ Message: "Error retrieving data from database" });
         }
         return res.json(result);
-    })
+    });
 });
 
 // delete employee
@@ -33,5 +32,5 @@ async function delEmp(name,id)
 }
 
 app.listen(8081, () => {
-    console.log("listening...");
+    console.log("listening on port 8081...");
 });
