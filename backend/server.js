@@ -12,6 +12,7 @@ const db = mysql.createConnection({
     database: "mydb"
 });
 
+// example of getting something from somewhere taking parameters request and response 
 app.get('', (req,res) => {
     const sql = "SELECT * FROM ";
     db.query(sql, (err, result) => {
@@ -23,6 +24,13 @@ app.get('', (req,res) => {
         return res.json(result);
     })
 });
+
+// delete employee
+async function delEmp(name,id) 
+{
+    await db.query(`DELETE ${id} FROM employee.id WHERE IS ${name};`);
+    return delEmp();
+}
 
 app.listen(8081, () => {
     console.log("listening...");
