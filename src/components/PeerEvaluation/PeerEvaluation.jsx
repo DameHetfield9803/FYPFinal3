@@ -43,7 +43,7 @@ export default function PeerEvaluation() {
               <td className="td-se-question">The team member was cooperative</td>
               <td>
                 <select onChange={(e) => setOptionOne(e.target.value)}>
-                  <option value={""}>Choose option (1-5) where option 1 is the lowest and option 5 is the highest </option>
+                  <option value={""}>Choose option </option>
                   <option value={"SD"}>1</option>
                   <option value={"D"}>2</option>
                   <option value={"N"}>3</option>
@@ -58,7 +58,7 @@ export default function PeerEvaluation() {
               </td>
               <td className="td-se-question">
                 <select onChange={(e) => setOptionTwo(e.target.value)}>
-                  <option value={""}>Choose option (1-5) where option 1 is the lowest and option 5 is the highest</option>
+                  <option value={""}>Choose option</option>
                   <option value={"SD"}>1</option>
                   <option value={"D"}>2</option>
                   <option value={"N"}>3</option>
@@ -73,7 +73,7 @@ export default function PeerEvaluation() {
               </td>
               <td>
                 <select onChange={(e) => setOptionThree(e.target.value)}>
-                  <option value={""}>Choose option (1-5) where option 1 is the lowest and option 5 is the highest</option>
+                  <option value={""}>Choose option</option>
                   <option value={"SD"}>1</option>
                   <option value={"D"}>2</option>
                   <option value={"N"}>3</option>
@@ -88,7 +88,7 @@ export default function PeerEvaluation() {
               </td>
               <td>
                 <select onChange={(e) => setOptionFour(e.target.value)}>
-                  <option value={""}>Choose option (1-5) where option 1 is the lowest and option 5 is the highest</option>
+                  <option value={""}>Choose option</option>
                   <option value={"SD"}>1</option>
                   <option value={"D"}>2</option>
                   <option value={"N"}>3</option>
@@ -102,7 +102,7 @@ export default function PeerEvaluation() {
               This team member has strong interpersonal skills and helps everyone feel welcome on the team.              </td>
               <td>
                 <select onChange={(e) => setOptionFour(e.target.value)}>
-                  <option value={""}>Choose option (1-5) where option 1 is the lowest and option 5 is the highest </option>
+                  <option value={""}>Choose option</option>
                   <option value={"SD"}>1</option>
                   <option value={"D"}>2</option>
                   <option value={"N"}>3</option>
@@ -117,7 +117,7 @@ export default function PeerEvaluation() {
               </td>
               <td>
                 <select onChange={(e) => setOptionFour(e.target.value)}>
-                  <option value={""}>Choose option (1-5) where option 1 is the lowest and option 5 is the highest</option>
+                  <option value={""}>Choose option</option>
                   <option value={"SD"}>1</option>
                   <option value={"D"}>2</option>
                   <option value={"N"}>3</option>
@@ -133,7 +133,7 @@ export default function PeerEvaluation() {
               </td>
               <td>
                 <select onChange={(e) => setOptionFour(e.target.value)}>
-                  <option value={""}>Choose option (1-5) where option 1 is the lowest and option 5 is the highest</option>
+                  <option value={""}>Choose option</option>
                   <option value={"SD"}>1</option>
                   <option value={"D"}>2</option>
                   <option value={"N"}>3</option>

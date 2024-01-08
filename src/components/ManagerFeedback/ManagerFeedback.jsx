@@ -79,7 +79,7 @@ export default function ManagerFeedback() {
                                             <select
                                                 onChange={(e) => setOptionOne(e.target.value)}
                                             >
-                                                <option value={""}>Choose option (1-5) where option 1 is the lowest and option 5 is the highest</option>
+                                                <option value={""}>Choose option</option>
                                                 <option value={"SD"}>1</option>
                                                 <option value={"D"}>2</option>
                                                 <option value={"N"}>3</option>
@@ -95,7 +95,7 @@ export default function ManagerFeedback() {
                                             <select
                                                 onChange={(e) => setOptionTwo(e.target.value)}
                                             >
-                                                <option value={""}>Choose option (1-5) where option 1 is the lowest and option 5 is the highest</option>
+                                                <option value={""}>Choose option</option>
                                                 <option value={"SD"}>1</option>
                                                 <option value={"D"}>2</option>
                                                 <option value={"N"}>3</option>
@@ -111,7 +111,7 @@ export default function ManagerFeedback() {
                                             <select
                                                 onChange={(e) => setOptionTwo(e.target.value)}
                                             >
-                                                <option value={""}>Choose option (1-5) where option 1 is the lowest and option 5 is the highest</option>
+                                                <option value={""}>Choose option</option>
                                                 <option value={"SD"}>1</option>
                                                 <option value={"D"}>2</option>
                                                 <option value={"N"}>3</option>
@@ -127,7 +127,7 @@ export default function ManagerFeedback() {
                                             <select
                                                 onChange={(e) => setOptionTwo(e.target.value)}
                                             >
-                                                <option value={""}>Choose option (1-5) where option 1 is the lowest and option 5 is the highest</option>
+                                                <option value={""}>Choose option</option>
                                                 <option value={"SD"}>1</option>
                                                 <option value={"D"}>2</option>
                                                 <option value={"N"}>3</option>
@@ -143,7 +143,7 @@ export default function ManagerFeedback() {
                                             <select
                                                 onChange={(e) => setOptionTwo(e.target.value)}
                                             >
-                                                <option value={""}>Choose option (1-5) where option 1 is the lowest and option 5 is the highest</option>
+                                                <option value={""}>Choose option</option>
                                                 <option value={"SD"}>1</option>
                                                 <option value={"D"}>2</option>
                                                 <option value={"N"}>3</option>
@@ -158,7 +158,7 @@ export default function ManagerFeedback() {
                                             <select
                                                 onChange={(e) => setOptionTwo(e.target.value)}
                                             >
-                                                <option value={""}>Choose option (1-5) where option 1 is the lowest and option 5 is the highest</option>
+                                                <option value={""}>Choose option</option>
                                                 <option value={"SD"}>1</option>
                                                 <option value={"D"}>2</option>
                                                 <option value={"N"}>3</option>
@@ -173,7 +173,7 @@ export default function ManagerFeedback() {
                                             <select
                                                 onChange={(e) => setOptionTwo(e.target.value)}
                                             >
-                                                <option value={""}>Choose option (1-5) where option 1 is the lowest and option 5 is the highest</option>
+                                                <option value={""}>Choose option</option>
                                                 <option value={"SD"}>1</option>
                                                 <option value={"D"}>2</option>
                                                 <option value={"N"}>3</option>
@@ -188,7 +188,7 @@ export default function ManagerFeedback() {
                                             <select
                                                 onChange={(e) => setOptionTwo(e.target.value)}
                                             >
-                                                <option value={""}>Choose option (1-5) where option 1 is the lowest and option 5 is the highest</option>
+                                                <option value={""}>Choose option</option>
                                                 <option value={"SD"}>1</option>
                                                 <option value={"D"}>2</option>
                                                 <option value={"N"}>3</option>
@@ -203,7 +203,7 @@ export default function ManagerFeedback() {
                                             <select
                                                 onChange={(e) => setOptionTwo(e.target.value)}
                                             >
-                                                <option value={""}>Choose option (1-5) where option 1 is the lowest and option 5 is the highest</option>
+                                                <option value={""}>Choose option</option>
                                                 <option value={"SD"}>1</option>
                                                 <option value={"D"}>2</option>
                                                 <option value={"N"}>3</option>
@@ -218,7 +218,7 @@ export default function ManagerFeedback() {
                                             <select
                                                 onChange={(e) => setOptionTwo(e.target.value)}
                                             >
-                                                <option value={""}>Choose option (1-5) where option 1 is the lowest and option 5 is the highest</option>
+                                                <option value={""}>Choose option</option>
                                                 <option value={"SD"}>1</option>
                                                 <option value={"D"}>2</option>
                                                 <option value={"N"}>3</option>
@@ -233,7 +233,7 @@ export default function ManagerFeedback() {
                                             <select
                                                 onChange={(e) => setOptionTwo(e.target.value)}
                                             >
-                                                <option value={""}>Choose option (1-5) where option 1 is the lowest and option 5 is the highest</option>
+                                                <option value={""}>Choose option</option>
                                                 <option value={"SD"}>1</option>
                                                 <option value={"D"}>2</option>
                                                 <option value={"N"}>3</option>
@@ -248,7 +248,7 @@ export default function ManagerFeedback() {
                                             <select
                                                 onChange={(e) => setOptionTwo(e.target.value)}
                                             >
-                                                <option value={""}>Choose option (1-5) where option 1 is the lowest and option 5 is the highest</option>
+                                                <option value={""}>Choose option</option>
                                                 <option value={"SD"}>1</option>
                                                 <option value={"D"}>2</option>
                                                 <option value={"N"}>3</option>

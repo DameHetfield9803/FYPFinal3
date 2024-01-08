@@ -12,18 +12,27 @@ const db = mysql.createConnection({
     database: "mydb"
 });
 
-app.get('', (req,res) => {
-    const sql = "SELECT * FROM ";
+// Check for database connection errors
+db.connect((err) => {
+    if (err) {
+        console.error('Database connection error:', err);
+    } else {
+        console.log('Connected to the database');
+    }
+});
+
+app.get('/yourTableName', (req, res) => {
+    const tableName = "yourTableName"; // Replace with your actual table name
+    const sql = `SELECT * FROM ${tableName}`;
     db.query(sql, (err, result) => {
-        if (err){
-            return res.json(
-                {Message: "Error retrieving data from database"}
-                );
+        if (err) {
+            console.error('Error retrieving data from database:', err);
+            return res.json({ Message: "Error retrieving data from database" });
         }
         return res.json(result);
-    })
+    });
 });
 
 app.listen(8081, () => {
-    console.log("listening...");
+    console.log("listening on port 8081...");
 });
