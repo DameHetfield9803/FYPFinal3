@@ -1,36 +1,51 @@
-const express = require('express');
-const mysql = require('mysql');
-const cors = require('cors');
+const express = require("express");
+const mysql = require("mysql");
+const cors = require("cors");
 
 const app = express();
 app.use(cors());
 
 const db = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "root",
-    database: "mydb"
+  host: "localhost",
+  user: "root",
+  password: "root",
+  database: "mydb",
 });
 
-// example of getting something from somewhere taking parameters request and response 
-app.get('', (req,res) => {
-    const sql = "SELECT * FROM ";
-    db.query(sql, (err, result) => {
-        if (err) {
-            console.error('Error retrieving data from database:', err);
-            return res.json({ Message: "Error retrieving data from database" });
-        }
-        return res.json(result);
-    });
+// example of getting something from somewhere taking parameters request and response
+app.get("", (req, res) => {
+  const sql = "SELECT * FROM ";
+  db.query(sql, (err, result) => {
+    if (err) {
+      console.error("Error retrieving data from database:", err);
+      return res.json({ Message: "Error retrieving data from database" });
+    }
+    return res.json(result);
+  });
 });
 
 // delete employee
-async function delEmp(name,id) 
-{
-    await db.query(`DELETE ${id} FROM employee.id WHERE IS ${name};`);
-    return delEmp();
+async function delEmp(name, id) {
+  await db.query(`DELETE ${id} FROM employee.id WHERE IS ${name};`);
+  return delEmp();
+}
+
+// get manager feedback
+async function getManagerFeedback(id) {
+  await db.query(`SELECT ${id} FROM manager_feedback_id;`);
+  // return getManagerFeedback();
+}
+
+// get peer feedback
+async function getPeerFeedback(id) {
+  await db.query(`SELECT ${id} FROM peer_feedback_id;`);
+}
+
+// get accolades
+async function getAccolades(id) {
+  await db.query(`SELECT ${id} FROM accolade_id WHERE `);
 }
 
 app.listen(8081, () => {
-    console.log("listening on port 8081...");
+  console.log("listening on port 8081...");
 });
