@@ -7,7 +7,9 @@ app.use(cors());
 
 const db = mysql.createConnection({
   // host is using mysql and a portable localhost
-  host: "127.0.0.1:3306",
+  host: "127.0.0.1",
+  // specified port number
+  port: 3306,
   //root permission
   user: "root",
   password: "root",
