@@ -16,7 +16,7 @@ const db = mysql.createConnection({
 });
 
 // example of getting something from somewhere taking parameters request and response 
-app.get('', (req,res) => {
+/*app.get('', (req,res) => {
     const sql = "SELECT * FROM ";
     db.query(sql, (err, result) => {
         if (err) {
@@ -25,13 +25,22 @@ app.get('', (req,res) => {
         }
         return res.json(result);
     });
-});
+});*/
 
 // delete employee
-async function delEmp(name,id) 
+async function delEmp(id) 
 {
-    await db.query(`DELETE ${id} FROM employee.id WHERE IS ${name};`);
+    await db.query(`DELETE ${id} FROM employee.id;`);
     //return delEmp();
+}
+async function getEmp(id)
+{
+    await db.query(`SELECT * WHERE employee.id = ${id};`);
+}
+
+async function createEmpAcc()
+{
+    await db.query(``);
 }
 
 app.listen(8081, () => {
