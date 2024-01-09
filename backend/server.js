@@ -34,7 +34,8 @@ app.get("/", (re, res) => {
   return res.json("From Server.js...");
 });
 
-db.query(`SELECT * FROM employee`, (err, result, fields) => {
+// Get employee records
+db.query(`SELECT * FROM employee`, (err, result) => {
   if (err) {
     return console.log(err);
   }
