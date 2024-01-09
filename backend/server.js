@@ -4,6 +4,7 @@ const cors = require("cors");
 
 const app = express();
 app.use(cors());
+app.use(express.json());
 
 const db = mysql.createConnection({
   // host is using mysql and a portable localhost
@@ -34,16 +35,17 @@ app.get("/", (re, res) => {
 });
 
 // Get employee records
-db.query(`SELECT * FROM employee`, (err, result) => {
-  if (err) {
-    return console.log(err);
-  }
-  return console.log(result);
-});
+// db.query(`SELECT * FROM employee`, (err, result) => {
+//   if (err) {
+//     return console.log(err);
+//   }
+//   return console.log(result);
+// });
 
 // Manager feedback
 // Route to handle submission of manager feedback
 app.post("/submitManagerFeedback", (req, res) => {
+  console.log("Received feedback:", req.body); // Check if the request body is properly parsed
   const { feedback, employeeId } = req.body;
 
   // Check if required data is provided
