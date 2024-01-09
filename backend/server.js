@@ -6,9 +6,12 @@ const app = express();
 app.use(cors());
 
 const db = mysql.createConnection({
-    host: "localhost",
+    // host is using mysql and a portable localhost
+    host: "127.0.0.1:3306",
+    //root permission
     user: "root",
     password: "root",
+    // using database named mydb... all our fyp data comes from there
     database: "mydb"
 });
 
@@ -28,7 +31,7 @@ app.get('', (req,res) => {
 async function delEmp(name,id) 
 {
     await db.query(`DELETE ${id} FROM employee.id WHERE IS ${name};`);
-    return delEmp();
+    //return delEmp();
 }
 
 app.listen(8081, () => {
