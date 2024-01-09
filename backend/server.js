@@ -6,17 +6,13 @@ const app = express();
 app.use(cors());
 
 const db = mysql.createConnection({
-  host: "localhost",
+  // host is using mysql and a portable localhost
+  host: "127.0.0.1:3306",
+  //root permission
   user: "root",
   password: "root",
+  // using database named mydb... all our fyp data comes from there
   database: "mydb",
-    // host is using mysql and a portable localhost
-    host: "127.0.0.1:3306",
-    //root permission
-    user: "root",
-    password: "root",
-    // using database named mydb... all our fyp data comes from there
-    database: "mydb"
 });
 
 // example of getting something from somewhere taking parameters request and response
@@ -35,12 +31,11 @@ app.get("", (req, res) => {
 async function delEmp(name, id) {
   await db.query(`DELETE ${id} FROM employee.id WHERE IS ${name};`);
   return delEmp();
-async function delEmp(name,id) 
-{
+  async function delEmp(name, id) {
     await db.query(`DELETE ${id} FROM employee.id WHERE IS ${name};`);
     //return delEmp();
+  }
 }
-
 app.listen(8081, () => {
   console.log("listening on port 8081...");
 });
