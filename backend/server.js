@@ -16,26 +16,30 @@ const db = mysql.createConnection({
 });
 
 // example of getting something from somewhere taking parameters request and response
-app.get("", (req, res) => {
-  const sql = "SELECT * FROM ";
-  db.query(sql, (err, result) => {
-    if (err) {
-      console.error("Error retrieving data from database:", err);
-      return res.json({ Message: "Error retrieving data from database" });
-    }
-    return res.json(result);
-  });
-});
+/*app.get('', (req,res) => {
+    const sql = "SELECT * FROM ";
+    db.query(sql, (err, result) => {
+        if (err) {
+            console.error('Error retrieving data from database:', err);
+            return res.json({ Message: "Error retrieving data from database" });
+        }
+        return res.json(result);
+    });
+});*/
 
 // delete employee
-async function delEmp(name, id) {
-  await db.query(`DELETE ${id} FROM employee.id WHERE IS ${name};`);
-  return delEmp();
-  async function delEmp(name, id) {
-    await db.query(`DELETE ${id} FROM employee.id WHERE IS ${name};`);
-    //return delEmp();
-  }
+async function delEmp(id) {
+  await db.query(`DELETE ${id} FROM employee.id;`);
+  //return delEmp();
 }
+async function getEmp(id) {
+  await db.query(`SELECT * WHERE employee.id = ${id};`);
+}
+
+async function createEmpAcc() {
+  await db.query(``);
+}
+
 app.listen(8081, () => {
   console.log("listening on port 8081...");
 });
