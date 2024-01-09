@@ -27,18 +27,9 @@ const db = mysql.createConnection({
     });
 });*/
 
-// delete employee
-async function delEmp(id) {
-  await db.query(`DELETE ${id} FROM employee.id;`);
-  //return delEmp();
-}
-async function getEmp(id) {
-  await db.query(`SELECT * WHERE employee.id = ${id};`);
-}
-
-async function createEmpAcc() {
-  await db.query(``);
-}
+app.get("/", (re, res) => {
+  return res.json("From Server.js...");
+});
 
 app.listen(8081, () => {
   console.log("listening on port 8081...");
