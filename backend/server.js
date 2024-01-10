@@ -1,8 +1,11 @@
 const express = require("express");
 const mysql = require("mysql");
 const cors = require("cors");
-
+const bodyParser = require("body-parser");
 const app = express();
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 app.use(cors());
 app.use(express.json());
 
@@ -63,11 +66,11 @@ app.post("/submitManagerFeedback", (req, res) => {
   const { feedback, employeeId } = req.body;
 
   // Check if required data is provided
-  if (!feedback || !employeeId) {
-    return res
-      .status(400)
-      .json({ message: "Feedback and employee ID are required" });
-  }
+  // if (!feedback || !employeeId) {
+  //   return res
+  //     .status(400)
+  //     .json({ message: "Feedback and employee ID are required" });
+  // }
 
   // Insert the feedback into the database
   const sql =
