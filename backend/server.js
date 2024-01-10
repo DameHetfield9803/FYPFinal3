@@ -31,6 +31,46 @@ async function delEmp(name,id)
     return delEmp();
 }
 
+
+//Accolades (Create new accolates)
+async function postAcco(title,id)
+{
+    await db.query(`CREATE ${title} FROM accolate.id WHERE IS ${id}}`)
+    return postAcco();
+}
+
+//Accolades (Update accoldates)
+async function updateAcco(id, title)
+{
+    await db.query(`UPDATE ${title} FROM accolate.id WHERE IS ${id}}`)
+    return updateAcco();
+
+}
+//Accoldates (Delete accolades)
+async function delAcco(title, id )
+{
+    await db.query(`DELETE ${title} FROM accolate.title WHERE IS ${id}`)
+    return delAcco();
+}
+
+//Accolades (View accolades)
+async function viewAcco(title , id)
+{
+    await db.query(`VIEW ${title} FROM accolate.title WHERE IS ${id}`)
+    return viewAcco();
+}
+
+//Peer Evaulation 
+
+//Self Evaulation 
+
+//Manager Feedback 
+
+//Profile 
+
+//Attendance
+
 app.listen(8081, () => {
     console.log("listening on port 8081...");
 });
+
