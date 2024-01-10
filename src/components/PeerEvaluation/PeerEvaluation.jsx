@@ -33,7 +33,7 @@ export default function PeerEvaluation() {
 
   return (
     <div className="App">
-          <form method='post' action='127.0.0.1:3306'>
+          <form method='post' action=''>
       <div className="container">
         <h1 className="mt-3">Peer Evaluation</h1>
        <b> <p className="mt-3">(Lowest Rating: 1, Neutral : 3, Highest Rating: 5)</p></b>
