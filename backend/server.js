@@ -5,7 +5,7 @@ const bodyParser = require("body-parser");
 const axios = require("axios");
 const app = express();
 
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors());
 app.use(express.json());
@@ -22,7 +22,7 @@ const db = mysql.createConnection({
   database: "mydb",
 });
 
-db.connect((err => {
+db.connect((err) => {
   if (err) throw err;
   console.log('MySQL successfully Connected...');
 }));
@@ -68,8 +68,8 @@ async function submitPeerFeedback(date, desc,peerId, formId, staff_id){
   const res = await db.query(`INSERT INTO EMPLOYEE (date, feedback_text, peer_feedback_id, peer_id, staff_id), ${date}, ${desc}, ${peerId}, ${formId}, ${staff_id}`);
   // res is saying that its inserting into employees using those fields, this is all JQuery.
   let msg = "Error in inserting data into database. \n";
-  if(res.affectedRows){
-      msg = `Successfully added.\n`
+  if (res.affectedRows) {
+    msg = `Successfully added.\n`;
   }
   return {msg};
 
