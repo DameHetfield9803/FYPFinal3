@@ -25,7 +25,7 @@ const db = mysql.createConnection({
 db.connect((err) => {
   if (err) throw err;
   console.log('MySQL successfully Connected...');
-}));
+});
 
 // example of getting something from somewhere taking parameters request and response
 /*app.get('', (req,res) => {
