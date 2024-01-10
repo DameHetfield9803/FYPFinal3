@@ -21,11 +21,45 @@ const db = mysql.createConnection({
   database: "mydb",
 });
 
-// db.connect();
+db.connect((err) => {
+  if (err) throw err;
+  console.log("MySQL Connected");
+});
+
+// example of getting something from somewhere taking parameters request and response
+/*app.get('', (req,res) => {
+    const sql = "SELECT * FROM ";
+    db.query(sql, (err, result) => {
+        if (err) {
+            console.error('Error retrieving data from database:', err);
+            return res.json({ Message: "Error retrieving data from database" });
+        }
+        return res.json(result);
+    });
+});*/
 
 app.get("/", (re, res) => {
   return res.json("From Server.js...");
 });
+
+// Get employee records
+// db.query(`SELECT * FROM employee`, (err, result) => {
+//   if (err) {
+//     return console.log(err);
+//   }
+//   return console.log(result);
+// });
+
+async function submitPeerFeedback(date, desc, peerId, formId, staff_id) {
+  const res = await db.query(
+    `INSERT INTO EMPLOYEE (date, feedback_text, peer_feedback_id, peer_id, staff_id), ${date}, ${desc}, ${peerId}, ${formId}, ${staff_id}`
+  );
+  let msg = "Error in inserting data into database. \n";
+  if (res.affectedRows) {
+    msg = `Successfully added.\n`;
+  }
+  return { msg };
+}
 
 // Manager feedback
 // Route to handle submission of manager feedback
