@@ -18,6 +18,11 @@ const db = mysql.createConnection({
   database: "mydb",
 });
 
+db.connect((err => {
+  if (err) throw err;
+  console.log('MySQL Connected');
+}));
+
 // example of getting something from somewhere taking parameters request and response
 /*app.get('', (req,res) => {
     const sql = "SELECT * FROM ";
@@ -41,6 +46,15 @@ app.get("/", (re, res) => {
 //   }
 //   return console.log(result);
 // });
+
+async function submitPeerFeedback(date, desc,peerId, formId, staff_id){
+  const res = await db.query(`INSERT INTO EMPLOYEE (date, feedback_text, peer_feedback_id, peer_id, staff_id), ${date}, ${desc}, ${peerId}, ${formId}, ${staff_id}`);
+  let msg = "Error in inserting data into database. \n";
+  if(res.affectedRows){
+      msg = `Successfully added.\n`
+  }
+  return {msg};
+}
 
 // Manager feedback
 // Route to handle submission of manager feedback
