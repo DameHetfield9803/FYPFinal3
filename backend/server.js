@@ -4,7 +4,7 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const app = express();
 
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors());
 app.use(express.json());
@@ -21,17 +21,7 @@ const db = mysql.createConnection({
   database: "mydb",
 });
 
-// example of getting something from somewhere taking parameters request and response
-/*app.get('', (req,res) => {
-    const sql = "SELECT * FROM ";
-    db.query(sql, (err, result) => {
-        if (err) {
-            console.error('Error retrieving data from database:', err);
-            return res.json({ Message: "Error retrieving data from database" });
-        }
-        return res.json(result);
-    });
-});*/
+// db.connect();
 
 app.get("/", (re, res) => {
   return res.json("From Server.js...");
