@@ -12,7 +12,7 @@ import ForgetPassword from "./components/ForgetPassword/ForgetPassword";
 import PeerEvaluation from "./components/PeerEvaluation/PeerEvaluation";
 import SelfEvaluation from "./components/SelfEvaluation/SelfEvaluation";
 import Attendance from "./components/Attendance/Attendance";
-import ManagerFeedback from "./components/ManagerFeedback/ManagerFeedback";
+import ManagerFeedback from "./components/ManagerFeedback/ManagerFeedback"; /* <== Test */
 import Accolades from "./components/Accolades/Accolades";
 import AppraisalForm from "./components/AppraisalForm/AppraisalForm";
 import Profile from "./components/Profile/profilesettings";
@@ -63,6 +63,8 @@ function App() {
           <Route exact path="/managerfeedback">
             <ProtectedRoute component={ManagerFeedback} />
           </Route>
+
+          {/**/}
 
           <Route exact path="/appraisalform">
             <ProtectedRoute component={AppraisalForm} />
