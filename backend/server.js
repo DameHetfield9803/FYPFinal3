@@ -2,7 +2,6 @@ const express = require("express");
 const mysql = require("mysql2");
 const cors = require("cors");
 const bodyParser = require("body-parser");
-const axios = require("axios");
 const app = express();
 
 app.use(express.urlencoded({ extended: true }));
@@ -48,7 +47,7 @@ app.get("/departments", function(re, res){
       return res.status(500).json({ error: error.message });
     }
     // returns data as Stringified JSON if no errors are thrown
-    res.json({ departments: JSON.parse(JSON.stringify(results)) });
+    return res.json({ departments: JSON.parse(JSON.stringify(results)) });
   });
 });
 
@@ -60,7 +59,7 @@ app.get("/departments", function(re, res){
 //   return console.log(result);
 // });
 
-app.get(`/`, (req, res) => {
+app.get(`/`, (req,res) => {
   res.json({ message: "Hello World" });
 });
 
