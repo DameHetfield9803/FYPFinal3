@@ -23,22 +23,10 @@ const db = mysql.createConnection({
 
 db.connect((err) => {
   if (err) throw err;
-  console.log('MySQL successfully Connected...');
+  console.log("MySQL successfully Connected...");
 });
 
-// example of getting something from somewhere taking parameters request and response
-/*app.get('', (req,res) => {
-    const sql = "SELECT * FROM ";
-    db.query(sql, (err, result) => {
-        if (err) {
-            console.error('Error retrieving data from database:', err);
-            return res.json({ Message: "Error retrieving data from database" });
-        }
-        return res.json(result);
-    });
-});*/
-
-app.get("/departments", function(re, res){
+app.get("/departments", function (re, res) {
   // querying from mydb.department
   db.query("SELECT * FROM department;", (error, results) => {
     // throws an error if there are errors connecting to either the database or the API
@@ -59,42 +47,50 @@ app.get("/departments", function(re, res){
 //   return console.log(result);
 // });
 
-app.get(`/`, (req,res) => {
+async function getEmployee() {
+  const res = await db.query(`SELECT * FROM employee;`);
+  if (res.affectedRows >= 1) {
+    return console.log("Successfully retrieved from database. \n");
+  } else {
+    return err;
+  }
+}
+
+app.get(`/`, (req, res) => {
   res.json({ message: "Hello World" });
 });
 
-async function submitPeerFeedback(date, desc,peerId, formId, staff_id){
-  const res = await db.query(`INSERT INTO EMPLOYEE (date, feedback_text, peer_feedback_id, peer_id, staff_id), ${date}, ${desc}, ${peerId}, ${formId}, ${staff_id}`);
+async function submitPeerFeedback(date, desc, peerId, formId, staff_id) {
+  const res = await db.query(
+    `INSERT INTO EMPLOYEE (date, feedback_text, peer_feedback_id, peer_id, staff_id), ${date}, ${desc}, ${peerId}, ${formId}, ${staff_id}`
+  );
   // res is saying that its inserting into employees using those fields, this is all JQuery.
   let msg = "Error in inserting data into database. \n";
   if (res.affectedRows) {
     msg = `Successfully added.\n`;
   }
-  return {msg};
+  return { msg };
 
-  app.post()
+  app.post();
 }
 
-async function getPeerFeedback()
-{
+async function getPeerFeedback() {
   const res = await db.query(`SELECT * FROM peerfeedback;`);
-  if(res.affectedRows >=1){
+  if (res.affectedRows >= 1) {
     return console.log("Successfully retrieved from database. \n");
-  }
-  else{
+  } else {
     return err;
   }
 }
 
-app.post('/submitpeerfeedback', async function(req,res,next){
-  try{
+app.post("/submitpeerfeedback", async function (req, res, next) {
+  try {
     res.json();
-  }
-  catch (err){
+  } catch (err) {
     console.error("There may be something wrong with the database or API. \n");
     next(err);
   }
-})
+});
 
 // Manager feedback
 // Route to handle submission of manager feedback
@@ -125,3 +121,4 @@ app.listen(3001, () => {
   console.log("listening on port 3001...");
 });
 
+// Done by Damien, Firdaus, En Quan, and Daniel.
