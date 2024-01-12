@@ -1,97 +1,113 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { auth } from "../../config/firebase";
-import { signOut } from "firebase/auth";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-import "./Attendance.css"; // Import the CSS for your Attendance component
+import React, { useState } from 'react';
+import attendanceData from './AttendanceData.json'; // this is to import the Json file to the attendnace page
+import { auth } from '../../config/firebase';
+import { signOut } from 'firebase/auth';
+import { useHistory } from 'react-router-dom';
+import './Attendance.css'; //not using now 
 
 export default function Attendance() {
   const history = useHistory();
+  const [jsonData] = useState(attendanceData);
+  const [filter, setFilter] = useState('');
 
   const logout = async () => {
     try {
       await signOut(auth);
-      history.push("/");
+      history.push('/');
     } catch (err) {
-      console.log(err);
+      console.error(err);
+      //This is to display an error message to the user if needed
     }
   };
 
-  const noOfWeeks = ["Week 1", "Week 2", "Week 3", "Week 4", "Week 5" , "Week 6"];
+  const getStatus = (adjIn) => {
+    if (!adjIn || adjIn.trim() === '') {
+      // this is to show not present if "Adj in" is blank 
+      return 'Not Present';
+    }
 
-  const myEmployees = [
-    "Alan", "Bob", "Charlie", "David", "Eva", "Frank", "Grace", "Hank", "Ivy",
-    "Jack", "Kelly", "Leo", "Mia", "Nina", "Oscar", "Pam", "Quinn", "Randy",
-    "Sara", "Tom", "Uma", "Victor", "Wendy", "Xander", "Yara", "Zoe"
-  ];
+    const adjInTime = new Date(`2000-01-01T${adjIn}`);
+    const eightAM = new Date(`2000-01-01T08:00:00`);
+
+    if (adjInTime > eightAM) {
+      return 'Late';
+    } else {
+      return 'Present';
+    }
+  };
+
+  const filteredData = jsonData.filter((entry) =>
+    entry.BatchNO.toString().includes(filter)
+  );
 
   return (
     <div>
-      {/* NAVBAR ITEMS */}
-      <div className="topnav">
-        <a href="/Home" className="logo-link">
-          <img src="Assets/TSH.jpg" alt="Logo" width="310px" height="90px" />
-        </a>
-
-        <a href="/Attendance">Attendance</a>
-        <a href="/Accolades">Accolades</a>
-        <a href="/AppraisalForm">AppraisalForm</a>
-
-
-        {/* My Profile link */}
-        <a href="/Profile" className="profile">
-          <img src="Assets/Profile-icon.jpg" alt="Profile Icon" width="30px" height="30px" />
-
-          <span>My Profile</span>
-        </a>
-
+      <div className="container mt-3">
+        <label htmlFor="filterInput" className="form-label">
+          Filter by BatchNO:
+        </label>
+        <input
+          type="text"
+          id="filterInput"
+          className="form-control"
+          placeholder="Enter BatchNO"
+          value={filter}
+          onChange={(e) => setFilter(e.target.value)}
+        />
       </div>
-      {/*END OF NAVBAR ITEMS */}
 
-      <div className="container mt-5">
+      <div className="container mt-3">
         <table className="table table-hover">
           <thead>
             <tr>
-              <th>Full Name</th>
-              <th>Supervisor</th>
-              <th>Email</th>
-              {noOfWeeks.map((week, index) => (
-                <th key={index}>{week}</th>
-              ))}
+              <th>BatchNO</th>
+              <th>DATE</th>
+              <th>DEPT</th>
+              <th>Week Day</th>
+              <th>Shift Code</th>
+              <th>Emp Name</th>
+              <th>Time In</th>
+              <th>Time Out</th>
+              <th>Adj In</th>
+              <th>Adj Out</th>
+              <th>Status</th>
             </tr>
           </thead>
 
           <tbody>
-            {myEmployees.map((employee, empIndex) => (
-              <tr key={empIndex}>
-                <td>{employee}</td>
-                <td>Doe</td>
-                <td>{employee}@example.com</td>
-                {noOfWeeks.map((week, weekIndex) => (
-                  <td key={weekIndex}>
-                    <div className="dropdown">
-                      <div
-                        className="weekly-eval-box alert-success"
-                        type="button"
-                        data-toggle="dropdown"
-                      >
-                        A
-                      </div>
-                      <div className="dropdown-menu p-2">
-                        <p className="ml-2 mt-0 mb-1 liner">
-                          <b>Supervisor's Feedback</b>
-                        </p>
-                        <p className="ml-2">
-                          I believe you can do better by coming to work on time
-                        </p>
-                      </div>
-                    </div>
-                  </td>
-                ))}
+            {filteredData.map((entry, entryIndex) => (
+              <tr key={entryIndex}>
+                <td>{entry.BatchNO}</td>
+                <td>{entry.DATE}</td>
+                <td>{entry.DEPT}</td>
+                <td>{entry['Week Day']}</td>
+                <td>{entry['Shift Code']}</td>
+                <td>{entry['Emp Name']}</td>
+                <td>{entry['Time In']}</td>
+                <td>{entry['Time Out']}</td>
+                <td>{entry['Adj In']}</td>
+                <td>{entry['Adj Out']}</td>
+                <td
+                  style={{
+                    backgroundColor:
+                      getStatus(entry['Adj In']) === 'Not Present'
+                        ? 'red'
+                        : getStatus(entry['Adj In']) === 'Present'
+                        ? 'green'
+                        : 'inherit',
+                  }}
+                >
+                  {getStatus(entry['Adj In'])}
+                </td>
               </tr>
             ))}
           </tbody>
         </table>
+      </div>
+      <div className="container mt-3">
+        <button className="btn btn-primary" onClick={logout}>
+          Logout
+        </button>
       </div>
     </div>
   );

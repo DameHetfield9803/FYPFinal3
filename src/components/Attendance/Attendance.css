@@ -1,9 +1,9 @@
 /* Attendance.css */
 
 /* Your existing styles for body, weekly-eval-box, dropdown-menu, and liner */
-body {
+/* body { */
     /* background-color: rgb(190, 211, 228); */ /* Commented out background color */
-}
+/* } */
 
 .weekly-eval-box {
     width: 20px !important;
