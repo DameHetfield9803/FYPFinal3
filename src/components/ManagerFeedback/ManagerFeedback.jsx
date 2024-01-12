@@ -60,7 +60,7 @@ export default function ManagerFeedback() {
         <form
           name="feedback_form"
           id="feedback_form"
-          method="post"
+          method="get"
           action="/submitManagerFeedback"
         >
           <div className="App">
