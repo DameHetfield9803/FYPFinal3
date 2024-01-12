@@ -1,11 +1,8 @@
 const express = require("express");
 const mysql = require("mysql");
 const cors = require("cors");
-const bodyParser = require("body-parser");
-const app = express();
 
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+const app = express();
 app.use(cors());
 app.use(express.json());
 
@@ -37,18 +34,25 @@ app.get("/", (re, res) => {
   return res.json("From Server.js...");
 });
 
+// Get employee records
+db.query(`SELECT * FROM employee`, (err, result) => {
+  if (err) {
+    return console.log(err);
+  }
+  return console.log(result);
+});
+
 // Manager feedback
 // Route to handle submission of manager feedback
 app.post("/submitManagerFeedback", (req, res) => {
-  console.log("Received feedback:", req.body); // Check if the request body is properly parsed
   const { feedback, employeeId } = req.body;
 
   // Check if required data is provided
-  // if (!feedback || !employeeId) {
-  //   return res
-  //     .status(400)
-  //     .json({ message: "Feedback and employee ID are required" });
-  // }
+  if (!feedback || !employeeId) {
+    return res
+      .status(400)
+      .json({ message: "Feedback and employee ID are required" });
+  }
 
   // Insert the feedback into the database
   const sql =
@@ -62,7 +66,6 @@ app.post("/submitManagerFeedback", (req, res) => {
   });
 });
 
-app.listen(3000, () => {
-  console.log("listening on port 3000...");
+app.listen(8081, () => {
+  console.log("listening on port 8081...");
 });
-

@@ -1,4 +1,8 @@
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom/cjs/react-router-dom.min";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+} from "react-router-dom/cjs/react-router-dom.min";
 import Login from "./components/Login/Login";
 import Forbidden from "./pages/Forbidden";
 import "./style.css";
@@ -24,8 +28,6 @@ function App() {
     <Router>
       <div className="App">
         <Switch>
-
-
           <Route exact path="/">
             <Login />
           </Route>
@@ -51,11 +53,11 @@ function App() {
           </Route>
 
           <Route exact path="/selfevaluation">
-            <ProtectedRoute component={SelfEvaluation}  />
+            <ProtectedRoute component={SelfEvaluation} />
           </Route>
 
           <Route exact path="/attendance">
-            <Attendance component={Attendance}/>
+            <Attendance component={Attendance} />
           </Route>
 
           <Route exact path="/managerfeedback">
@@ -86,18 +88,13 @@ function App() {
             <ProtectedRoute component={Navbar} />
           </Route>
 
-        
-
           <Route exact path="/forbidden">
             <Forbidden />
           </Route>
 
-        
           <Route path="*">
             <NotFound />
           </Route>
-
-
         </Switch>
       </div>
     </Router>
