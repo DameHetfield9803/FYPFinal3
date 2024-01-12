@@ -6,11 +6,13 @@ import { Sections } from "./Sections";
 
 export default function AppraisalForm() {
   return (
+    <div>
+    <Navbar></Navbar>
     <>
       <Sections/>
     </>
     
-
+    </div>
 
 
   

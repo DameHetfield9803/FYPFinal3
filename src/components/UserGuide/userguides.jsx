@@ -45,7 +45,7 @@ export default function UserGuides() {
 
   // Define an array of video options with titles, URLs, and descriptions.
   const videoOptions = [
-    { id: 1, title: '1.) How To Edit User Profile', url: 'https://www.youtube.com/watch?v=9bZkp7q19f0', description: 'Login > Homepage > My Profile > Edit > Save Changes' },
+    { id: 1, title: '1.) How To Edit User Profile', url: 'https://youtu.be/83f4KX3FR7M', description: 'Login > Homepage > My Profile > Edit > Save Changes' },
     { id: 2, title: '2.) How To Provide Peer and Self Evaluation (Employee)', url: 'https://www.youtube.com/watch?v=9bZkp7q19f0', description: 'Login > Homepage > Peer/Self Evaluation > Input Choices "Strongly Agree - Strongly Disagree" > Save Changes' },
     { id: 3, title: '3.) How to Provide Manager Feedback(Employee)', url: 'https://www.youtube.com/watch?v=9bZkp7q19f0', description: 'Login > Homepage > Manager Feedback > Edit > Input Choices "Strongly Agree - Strongly Disagree" > Save Changes' },
     { id: 4, title: '4.) How to add in your Accolades (Employee)', url: 'https://www.youtube.com/watch?v=9bZkp7q19f0', description: 'Login > Homepage > Accolades (In your navigation bar) > Input Items > Submit' },
