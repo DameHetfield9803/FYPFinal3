@@ -4,6 +4,7 @@ import { auth } from '../../config/firebase';
 import { signOut } from 'firebase/auth';
 import { useHistory } from 'react-router-dom';
 import './Attendance.css'; //not using now 
+import Navbar from '../NavBar/NavBar';
 
 export default function Attendance() {
   const history = useHistory();
@@ -42,9 +43,10 @@ export default function Attendance() {
 
   return (
     <div>
+      <Navbar></Navbar>
       <div className="container mt-3">
         <label htmlFor="filterInput" className="form-label">
-          Filter by BatchNO:
+          Filter by BatchNumber:
         </label>
         <input
           type="text"

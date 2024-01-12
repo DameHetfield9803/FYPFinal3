@@ -32,6 +32,8 @@ export default function PeerEvaluation() {
   }
 
   return (
+    <div>
+      <Navbar></Navbar>
     <div className="App">
           <form method='post' action=''>
       <div className="container">
@@ -179,6 +181,6 @@ export default function PeerEvaluation() {
       </div>
       </form>
    </div>
-    
+    </div>
   );
 }
