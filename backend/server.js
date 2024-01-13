@@ -24,91 +24,64 @@ db.connect((err) => {
   console.log("MySQL successfully Connected...");
 });
 
-// app.get("/departments", function (re, res) {
-//   // querying from mydb.department
-//   db.query("SELECT * FROM department;", (error, results) => {
-//     // throws an error if there are errors connecting to either the database or the API
-//     if (error) {
-//       // Handle database errors appropriately
-//       return res.status(500).json({ error: error.message });
-//     }
-//     // returns data as Stringified JSON if no errors are thrown
-//     return res.json({ departments: JSON.parse(JSON.stringify(results)) });
-//   });
-// });
+//------------------------------------------
+//TODO Create employee (DAMIEN)
 
-// async function getEmployee() {
-//   const res = await db.query(`SELECT * FROM employee;`);
-//   if (res.affectedRows >= 1) {
-//     return console.log("Successfully retrieved from database. \n");
-//   } else {
-//     return err;
-//   }
-// }
+//TODO Read employee (EN QUAN)
 
-// app.get(`/`, (req, res) => {
-//   res.json({ message: "Hello World" });
-// });
+//TODO Update employee (DAMIEN)
 
-// async function submitPeerFeedback(date, desc, peerId, formId, staff_id) {
-//   const res = await db.query(
-//     `INSERT INTO EMPLOYEE (date, feedback_text, peer_feedback_id, peer_id, staff_id), ${date}, ${desc}, ${peerId}, ${formId}, ${staff_id}`
-//   );
-//   // res is saying that its inserting into employees using those fields, this is all JQuery.
-//   let msg = "Error in inserting data into database. \n";
-//   if (res.affectedRows) {
-//     msg = `Successfully added.\n`;
-//   }
-//   return { msg };
+//TODO Delete employee (DAMIEN)
 
-//   app.post();
-// }
+//---------------------------------------
+//TODO Create department (EN QUAN)
 
-// async function getPeerFeedback() {
-//   const res = await db.query(`SELECT * FROM peerfeedback;`);
-//   if (res.affectedRows >= 1) {
-//     return console.log("Successfully retrieved from database. \n");
-//   } else {
-//     return err;
-//   }
-// }
+//TODO Read department (DAMIEN)
 
-// app.post("/submitpeerfeedback", async function (req, res, next) {
-//   try {
-//     res.json();
-//   } catch (err) {
-//     console.error("There may be something wrong with the database or API. \n");
-//     next(err);
-//   }
-// });
+//TODO Update department (DAMIEN)
 
-// Manager feedback
-// Route to handle submission of manager feedback
-app.post("/submitmanagerfeedback", (req, res) => {
-  console.log("Feedback received : ", req.body); // Check if the request body is properly parsed
-  const { feedback, employeeId } = req.body;
+//TODO Delete department (EN QUAN)
 
-  // Check if required data is provided
-  // if (!feedback || !employeeId) {
-  //   return res
-  //     .status(400)
-  //     .json({ message: "Feedback and employee ID are required" });
-  // }
+//-------------------(split)-----------------------
+//TODO Create peer feedback
 
-  // Insert the feedback into the database
-  const sql =
-    "INSERT INTO manager_feedback (employee_id, feedback) VALUES (?, ?)";
-  db.query(sql, [employeeId, feedback], (err, result) => {
-    if (err) {
-      console.error("Error submitting manager feedback:", err);
-      return res.status(500).json({ message: "Error submitting feedback" });
-    }
-    return res.status(200).json({ message: "Feedback submitted successfully" });
-  });
-});
+//TODO Read peer feedback
 
-// set port, listen for requests
+//TODO Update peer feedback (DAMIEN)
+
+//TODO Delete peer feedback
+
+//---------------------DANIEL-----------------------
+//TODO Create self feedback (DAMIEN)
+
+//TODO Read self feedback (DANIEL)
+
+//TODO Update self feedback (DAMIEN)
+
+//TODO Delete self feedback (EN QUAN)
+
+//----------------------FIRDAUS----------------------
+//TODO Create manager feedback
+
+//TODO Read manager feedback
+
+//TODO Update manager feedback
+
+//TODO Delete manager feedback
+
+//-----------------------DANIEL-------------------------
+//TODO Create accolades
+
+//TODO Read accolades
+
+//TODO Update accolades
+
+//TODO Delete accolades
+
+//---------------------------END OF CRUD---------------------------
+
 app.listen(3001, () => {
+  // set port, listen for requests
   console.log("listening on port 3001...");
 });
 
