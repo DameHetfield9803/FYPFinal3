@@ -15,7 +15,6 @@ import Profile from "./components/Profile/profilesettings";
 import AppraisalItem from "./components/AppraisalItem/AppraisalItem";
 import ReportForm from "./components/ReportForm/reporterror";
 import EmpTab from "./components/EmployeeTable/Employee";
-import Employee from './components/EmployeeTable/Employee';
 import EmployeeDetails from './components/EmployeeTable/EmployeeDetails';
 import Home from "./components/Home/Home";
 
@@ -72,9 +71,6 @@ function App() {
             <ProtectedRoute component={Profile} />
           </Route>
 
-          <Route exact path="/employee" component={EmpTab} />
-          <Route exact path="/employee/:id" component={EmployeeDetails} />
-
           <Route exact path="/reportform">
             <ProtectedRoute component={ReportForm} />
           </Route>
@@ -82,6 +78,10 @@ function App() {
           <Route exact path="/employee">
             <ProtectedRoute component={EmpTab} />
           </Route>
+
+          <Route exact path="/employee" component={EmpTab} />
+          <Route exact path="/employee/:id" component={EmployeeDetails} />
+
 
           <Route exact path="/userguides">
             <ProtectedRoute component={UserGuide} />
