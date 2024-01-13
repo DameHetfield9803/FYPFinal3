@@ -41,6 +41,7 @@ export default function Attendance() {
     entry.BatchNO.toString().includes(filter)
   );
 
+  
   return (
     <div>
       <Navbar></Navbar>
@@ -68,10 +69,11 @@ export default function Attendance() {
               <th>Week Day</th>
               <th>Shift Code</th>
               <th>Emp Name</th>
-              <th>Time In</th>
-              <th>Time Out</th>
+              {/* <th>Time In</th>
+              <th>Time Out</th> */}
               <th>Adj In</th>
               <th>Adj Out</th>
+              <th>Remarks</th>
               <th>Status</th>
             </tr>
           </thead>
@@ -85,10 +87,11 @@ export default function Attendance() {
                 <td>{entry['Week Day']}</td>
                 <td>{entry['Shift Code']}</td>
                 <td>{entry['Emp Name']}</td>
-                <td>{entry['Time In']}</td>
-                <td>{entry['Time Out']}</td>
+                {/* <td>{entry['Time In']}</td>
+                <td>{entry['Time Out']}</td> */}
                 <td>{entry['Adj In']}</td>
                 <td>{entry['Adj Out']}</td>
+                <td>{entry.Remark}</td>
                 <td
                   style={{
                     backgroundColor:
@@ -97,9 +100,11 @@ export default function Attendance() {
                         : getStatus(entry['Adj In']) === 'Present'
                         ? 'green'
                         : 'inherit',
-                  }}
+                  
+                    }}
                 >
                   {getStatus(entry['Adj In'])}
+                  {/* {getStatus(entry["Adj In"]) */}
                 </td>
               </tr>
             ))}

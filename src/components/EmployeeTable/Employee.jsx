@@ -32,7 +32,7 @@ const EmpTab = () => {
                         <tr>
                             <th>BatchNo</th>
                             <th>EmpName</th>
-                            <th>Department</th>
+                            <th>Dpt</th>
                         </tr>
                     </thead>
                     {/* Table body section */}
