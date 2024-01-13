@@ -16,6 +16,8 @@ import AppraisalItem from "./components/AppraisalItem/AppraisalItem";
 import ReportForm from "./components/ReportForm/reporterror";
 import EmpTab from "./components/EmployeeTable/Employee";
 import EmployeeDetails from './components/EmployeeTable/EmployeeDetails';
+import UserGuide from "./components/UserGuide/userguides";
+import Navbar from "./components/NavBar/NavBar";
 import Home from "./components/Home/Home";
 
 
