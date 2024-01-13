@@ -1,8 +1,4 @@
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-} from "react-router-dom/cjs/react-router-dom.min";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom/cjs/react-router-dom.min";
 import Login from "./components/Login/Login";
 import Forbidden from "./pages/Forbidden";
 import "./style.css";
@@ -19,15 +15,18 @@ import Profile from "./components/Profile/profilesettings";
 import AppraisalItem from "./components/AppraisalItem/AppraisalItem";
 import ReportForm from "./components/ReportForm/reporterror";
 import EmpTab from "./components/EmployeeTable/Employee";
-import UserGuide from "./components/UserGuide/userguides";
-import Navbar from "./components/NavBar/NavBar";
+import EmployeeDetails from './components/EmployeeTable/EmployeeDetails';
 import Home from "./components/Home/Home";
+
+
 
 function App() {
   return (
     <Router>
       <div className="App">
         <Switch>
+
+
           <Route exact path="/">
             <Login />
           </Route>
@@ -80,6 +79,10 @@ function App() {
             <ProtectedRoute component={EmpTab} />
           </Route>
 
+          <Route exact path="/employee" component={EmpTab} />
+          <Route exact path="/employee/:id" component={EmployeeDetails} />
+
+
           <Route exact path="/userguides">
             <ProtectedRoute component={UserGuide} />
           </Route>
@@ -95,6 +98,8 @@ function App() {
           <Route path="*">
             <NotFound />
           </Route>
+
+
         </Switch>
       </div>
     </Router>
