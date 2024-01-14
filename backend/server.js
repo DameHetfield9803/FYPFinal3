@@ -37,11 +37,9 @@ app.post("/employee", (req,res) => {
 //TODO Read employee (EN QUAN)
 app.get("/employee", (req, res) => {
   const q = "SELECT * FROM employee";
-  db.query(q, (err, data) => {
-    if (err) return res.json(err);
-    return res.json(data);
-  });
+  db.query(q, [values]);
 });
+
 //TODO Update employee (DAMIEN)
 // TBC on 15/1/2024
 app.post("/employee", (req,res) =>{
