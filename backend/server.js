@@ -28,7 +28,13 @@ db.connect((err) => {
 //TODO Create employee (DAMIEN)
 
 //TODO Read employee (EN QUAN)
-
+app.get("/employee", (req, res) => {
+  const q = "SELECT * FROM employee";
+  db.query(q, (err, data) => {
+    if (err) return res.json(err);
+    return res.json(data);
+  });
+});
 //TODO Update employee (DAMIEN)
 
 //TODO Delete employee (DAMIEN)
