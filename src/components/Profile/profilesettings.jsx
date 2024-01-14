@@ -1,4 +1,3 @@
-// Import the necessary modules.
 import React, { useState } from "react";
 import "./profilesettings.css";
 import { auth } from "../../config/firebase";
@@ -6,9 +5,7 @@ import { signOut } from "firebase/auth";
 import { useHistory } from "react-router-dom";
 import Navbar from "../NavBar/NavBar";
 
-// Define the functional component ProfileSettings.
 const ProfileSettings = () => {
-  // Default profile information (cannot be changed).
   const defaultProfileInfo = {
     name: "User",
     department: "BMX",
@@ -26,18 +23,17 @@ const ProfileSettings = () => {
     }
   };
 
-  // Default personal information (can be edited).
   const defaultPersonalInfo = {
     phone: "8888 8888",
     email: "usertsh@tsh.com",
   };
 
-  // State variables for editable fields.
   const [phone, setPhone] = useState(defaultPersonalInfo.phone);
   const [email, setEmail] = useState(defaultPersonalInfo.email);
-
-  // State variable to track whether the fields are in edit mode.
   const [isEditing, setIsEditing] = useState(false);
+
+  // State variable for accolades
+  const [accolades, setAccolades] = useState([]);
 
   // Function to handle the submission of edited personal information.
   const handleSubmit = (e) => {
@@ -48,14 +44,15 @@ const ProfileSettings = () => {
     console.log("Edited Email:", email);
   };
 
-  // JSX rendering the component.
+  // Function to handle adding accolades
+  const handleAddAccolade = (newAccolade) => {
+    setAccolades([...accolades, newAccolade]);
+  };
+
   return (
     <div>
-      {/* Navbar Items */}
       <Navbar></Navbar>
-      {/* End of Navbar Items */}
 
-      {/* Profile Settings Section */}
       <div className="profile-settings-container">
         <h1>Profile Settings</h1>
 
@@ -110,38 +107,26 @@ const ProfileSettings = () => {
             )}
             <button
               className="btn btn-link"
-               onClick={() => setIsEditing(!isEditing)}
+              onClick={() => setIsEditing(!isEditing)}
             >
               {isEditing ? "Cancel" : "Edit"}
             </button>
           </p>
-
-   {/* Accoldates */}
-<p> 
-<strong> Accoldates: </strong>
-{isEditing ? (
-              <input
-                type="email"
-                className="form-control"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            ) : (
-              <span>{email}</span>
-            )}
-            <button
-              className="btn btn-link"
-               onClick={() => setIsEditing(!isEditing)}
-            >
-              {isEditing ? "Cancel" : "Edit"}
-            </button>
- 
-
-
-</p>
-
-
         </div>
+
+        {/* Accolades Section */}
+        <div className="mb-3">
+          <p>
+            <strong>Accolades:</strong>
+          </p>
+          {accolades.map((accolade, index) => (
+            <p key={index}>
+              <strong>Title:</strong> {accolade.title}, <strong>Date:</strong>{" "}
+              {accolade.date}
+            </p>
+          ))}
+        </div>
+        {/* End of Accolades Section */}
 
         {/* Form for saving changes. */}
         {isEditing && (
@@ -153,11 +138,8 @@ const ProfileSettings = () => {
         )}
         <button onClick={logout}>LOGOUT</button>
       </div>
-      {/* End of Profile Settings Section */}
-
     </div>
   );
 };
 
-// Export the ProfileSettings component as the default export.
 export default ProfileSettings;
