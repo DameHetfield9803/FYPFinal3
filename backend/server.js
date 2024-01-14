@@ -41,7 +41,14 @@ app.get("/employee", (req, res) => {
 
 //---------------------------------------
 //TODO Create department (EN QUAN)
-
+app.post("/department", (req, res) => {
+  const q = "INSERT INTO department (`department_id`,`name`)VALUES(?)";
+  const values = [req.body.department_id, req.body.name];
+  db.query(q, [values], (err, data) => {
+    if (err) return res.json(err);
+    return res.json("Department has created successfuly ");
+  });
+});
 //TODO Read department (DAMIEN)
 
 //TODO Update department (DAMIEN)
@@ -60,32 +67,33 @@ app.get("/employee", (req, res) => {
 //---------------------DANIEL-----------------------
 //TODO Create self feedback (DAMIEN)
 // Route for creating a self evaluation
-app.post('/self_evaluations', (req, res) => {
+app.post("/self_evaluations", (req, res) => {
   const { date, feedbackText, staffId } = req.body;
 
   // Validate inputs here if necessary
 
-  const sql = 'INSERT INTO self_evaluations (date, feedback_text, staff_id) VALUES (?, ?, ?)';
+  const sql =
+    "INSERT INTO self_evaluations (date, feedback_text, staff_id) VALUES (?, ?, ?)";
   const values = [date, feedbackText, staffId];
 
   db.query(sql, values, (err, result) => {
     if (err) {
       console.error(err);
-      return res.status(500).send('Error creating self evaluation');
+      return res.status(500).send("Error creating self evaluation");
     }
 
-    console.log('Self evaluation created:', result);
-    res.status(201).send('Self evaluation created successfully');
+    console.log("Self evaluation created:", result);
+    res.status(201).send("Self evaluation created successfully");
   });
 });
 //TODO Read self feedback (DANIEL)
-app.get('/self_evaluations', (req, res) => {
-  const sql = 'SELECT * FROM self_evaluations';
+app.get("/self_evaluations", (req, res) => {
+  const sql = "SELECT * FROM self_evaluations";
 
   db.query(sql, (err, results) => {
     if (err) {
       console.error(err);
-      return res.status(500).send('Error fetching self evaluations');
+      return res.status(500).send("Error fetching self evaluations");
     }
 
     res.status(200).json(results);
@@ -93,41 +101,42 @@ app.get('/self_evaluations', (req, res) => {
 });
 //TODO Update self feedback (DAMIEN)
 
-app.put('/self_evaluations/:id', (req, res) => {
+app.put("/self_evaluations/:id", (req, res) => {
   const { date, feedbackText, staffId } = req.body;
   const selfEvaluationId = req.params.id;
 
   // Validate inputs here if necessary
 
-  const sql = 'UPDATE self_evaluations SET date=?, feedback_text=?, staff_id=? WHERE id=?';
+  const sql =
+    "UPDATE self_evaluations SET date=?, feedback_text=?, staff_id=? WHERE id=?";
   const values = [date, feedbackText, staffId, selfEvaluationId];
 
   db.query(sql, values, (err, result) => {
     if (err) {
       console.error(err);
-      return res.status(500).send('Error updating self evaluation');
+      return res.status(500).send("Error updating self evaluation");
     }
 
-    console.log('Self evaluation updated:', result);
-    res.status(200).send('Self evaluation updated successfully');
+    console.log("Self evaluation updated:", result);
+    res.status(200).send("Self evaluation updated successfully");
   });
 });
 //TODO Delete self feedback (EN QUAN)
 
-app.delete('/self_evaluations/:id', (req, res) => {
+app.delete("/self_evaluations/:id", (req, res) => {
   const selfEvaluationId = req.params.id;
 
-  const sql = 'DELETE FROM self_evaluations WHERE id=?';
+  const sql = "DELETE FROM self_evaluations WHERE id=?";
   const values = [selfEvaluationId];
 
   db.query(sql, values, (err, result) => {
     if (err) {
       console.error(err);
-      return res.status(500).send('Error deleting self evaluation');
+      return res.status(500).send("Error deleting self evaluation");
     }
 
-    console.log('Self evaluation deleted:', result);
-    res.status(200).send('Self evaluation deleted successfully');
+    console.log("Self evaluation deleted:", result);
+    res.status(200).send("Self evaluation deleted successfully");
   });
 });
 //----------------------FIRDAUS----------------------
@@ -142,35 +151,36 @@ app.delete('/self_evaluations/:id', (req, res) => {
 //-----------------------DANIEL-------------------------
 //TODO Create accolades
 
-app.post('/accolades', (req, res) => {
+app.post("/accolades", (req, res) => {
   const { staffId, accoladeTitle, completionDate } = req.body;
 
   // Validate inputs here if necessary
 
-  const sql = 'INSERT INTO accolades (staff_id, accolade_title, completion_date) VALUES (?, ?, ?)';
+  const sql =
+    "INSERT INTO accolades (staff_id, accolade_title, completion_date) VALUES (?, ?, ?)";
   const values = [staffId, accoladeTitle, completionDate];
 
   //this one is error handling idk correct or not
   db.query(sql, values, (err, result) => {
     if (err) {
       console.error(err);
-      return res.status(500).send('Error creating accolade');
+      return res.status(500).send("Error creating accolade");
     }
 
-    console.log('Accolade created:', result);
-    res.status(201).send('Accolade created successfully');
+    console.log("Accolade created:", result);
+    res.status(201).send("Accolade created successfully");
   });
 });
 
 //TODO Read accolades
 
-app.get('/accolades', (req, res) => {
-  const sql = 'SELECT * FROM accolades';
+app.get("/accolades", (req, res) => {
+  const sql = "SELECT * FROM accolades";
 
   db.query(sql, (err, results) => {
     if (err) {
       console.error(err);
-      return res.status(500).send('Error fetching accolades');
+      return res.status(500).send("Error fetching accolades");
     }
 
     res.status(200).json(results);
@@ -179,43 +189,43 @@ app.get('/accolades', (req, res) => {
 
 //TODO Update accolades
 
-app.put('/accolades/:id', (req, res) => {
+app.put("/accolades/:id", (req, res) => {
   const { accoladeTitle, completionDate } = req.body;
   const accoladeId = req.params.id;
 
   // Validate inputs here if necessary
 
-  const sql = 'UPDATE accolades SET accolade_title=?, completion_date=? WHERE id=?';
+  const sql =
+    "UPDATE accolades SET accolade_title=?, completion_date=? WHERE id=?";
   const values = [accoladeTitle, completionDate, accoladeId];
 
   db.query(sql, values, (err, result) => {
     if (err) {
       console.error(err);
-      return res.status(500).send('Error updating accolade');
+      return res.status(500).send("Error updating accolade");
     }
 
-    console.log('Accolade updated:', result);
-    res.status(200).send('Accolade updated successfully');
+    console.log("Accolade updated:", result);
+    res.status(200).send("Accolade updated successfully");
   });
 });
 
-
 //TODO Delete accolades
 
-app.delete('/accolades/:id', (req, res) => {
+app.delete("/accolades/:id", (req, res) => {
   const accoladeId = req.params.id;
 
-  const sql = 'DELETE FROM accolades WHERE id=?';
+  const sql = "DELETE FROM accolades WHERE id=?";
   const values = [accoladeId];
 
   db.query(sql, values, (err, result) => {
     if (err) {
       console.error(err);
-      return res.status(500).send('Error deleting accolade');
+      return res.status(500).send("Error deleting accolade");
     }
 
-    console.log('Accolade deleted:', result);
-    res.status(200).send('Accolade deleted successfully');
+    console.log("Accolade deleted:", result);
+    res.status(200).send("Accolade deleted successfully");
   });
 });
 
