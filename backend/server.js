@@ -26,13 +26,19 @@ db.connect((err) => {
 
 //------------------------------------------
 //TODO Create employee (DAMIEN)
-app.post("/employee", (req,res) => {
-  const values = [req.body.staffId, req.body.name, req.body.user, req.body.password, req.body.email];
-  const sql = "INSERT INTO employee () VALUES (?);"; 
-  db.query(sql,values,(err,data)=>{
-    if(err) return res.json(err);
-  })
-})
+app.post("/employee", (req, res) => {
+  const values = [
+    req.body.staffId,
+    req.body.name,
+    req.body.user,
+    req.body.password,
+    req.body.email,
+  ];
+  const sql = "INSERT INTO employee () VALUES (?);";
+  db.query(sql, values, (err, data) => {
+    if (err) return res.json(err);
+  });
+});
 
 //TODO Read employee (EN QUAN)
 app.get("/employee", (req, res) => {
@@ -45,9 +51,9 @@ app.get("/employee", (req, res) => {
 
 //TODO Update employee (DAMIEN)
 // TBC on 15/1/2024
-app.post("/employee", (req,res) =>{
-  const q = "UPDATE employee WHERE "
-})
+app.post("/employee", (req, res) => {
+  const q = "UPDATE employee WHERE ";
+});
 
 //TODO Delete employee (DAMIEN)
 
@@ -66,6 +72,9 @@ app.post("/department", (req, res) => {
 //TODO Update department (DAMIEN)
 
 //TODO Delete department (EN QUAN)
+app.delete("/department", (req, res) => {
+  const q = "DELETE department "; // Continue tomorrow :)
+});
 
 //-------------------(split)-----------------------
 //TODO Create peer feedback
