@@ -26,6 +26,13 @@ db.connect((err) => {
 
 //------------------------------------------
 //TODO Create employee (DAMIEN)
+app.post("/employee", (req,res) => {
+  const values = [req.body.staffId, req.body.name, req.body.user, req.body.password, req.body.email];
+  const sql = "INSERT INTO employee () VALUES (?);"; 
+  db.query(sql,values,(err,data)=>{
+    if(err) return res.json(err);
+  })
+})
 
 //TODO Read employee (EN QUAN)
 app.get("/employee", (req, res) => {
@@ -36,6 +43,10 @@ app.get("/employee", (req, res) => {
   });
 });
 //TODO Update employee (DAMIEN)
+// TBC on 15/1/2024
+app.post("/employee", (req,res) =>{
+  const q = "UPDATE employee WHERE "
+})
 
 //TODO Delete employee (DAMIEN)
 
@@ -46,7 +57,7 @@ app.post("/department", (req, res) => {
   const values = [req.body.department_id, req.body.name];
   db.query(q, [values], (err, data) => {
     if (err) return res.json(err);
-    return res.json("Department has created successfuly ");
+    return res.json("Department has created successfully ");
   });
 });
 //TODO Read department (DAMIEN)
