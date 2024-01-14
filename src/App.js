@@ -1,4 +1,8 @@
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom/cjs/react-router-dom.min";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+} from "react-router-dom/cjs/react-router-dom.min";
 import Login from "./components/Login/Login";
 import Forbidden from "./pages/Forbidden";
 import "./style.css";
@@ -15,20 +19,17 @@ import Profile from "./components/Profile/profilesettings";
 import AppraisalItem from "./components/AppraisalItem/AppraisalItem";
 import ReportForm from "./components/ReportForm/reporterror";
 import EmpTab from "./components/EmployeeTable/Employee";
-import EmployeeDetails from './components/EmployeeTable/EmployeeDetails';
+import EmployeeDetails from "./components/EmployeeTable/EmployeeDetails";
 import UserGuide from "./components/UserGuide/userguides";
 import Navbar from "./components/NavBar/NavBar";
 import Home from "./components/Home/Home";
-
-
+import ReadManagerFeedback from "./components/ManagerFeedback/ReadManagerFeedback";
 
 function App() {
   return (
     <Router>
       <div className="App">
         <Switch>
-
-
           <Route exact path="/">
             <Login />
           </Route>
@@ -65,6 +66,10 @@ function App() {
             <ProtectedRoute component={ManagerFeedback} />
           </Route>
 
+          <Route exact path="/managerfeedback">
+            <ProtectedRoute component={ManagerFeedback} />
+          </Route>
+
           <Route exact path="/appraisalform">
             <ProtectedRoute component={AppraisalForm} />
           </Route>
@@ -84,7 +89,6 @@ function App() {
           <Route exact path="/employee" component={EmpTab} />
           <Route exact path="/employee/:id" component={EmployeeDetails} />
 
-
           <Route exact path="/userguides">
             <ProtectedRoute component={UserGuide} />
           </Route>
@@ -100,8 +104,6 @@ function App() {
           <Route path="*">
             <NotFound />
           </Route>
-
-
         </Switch>
       </div>
     </Router>

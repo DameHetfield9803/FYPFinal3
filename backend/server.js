@@ -164,6 +164,13 @@ app.delete("/self_evaluations/:id", (req, res) => {
 //TODO Create manager feedback
 
 //TODO Read manager feedback
+app.get("/managerfeedback", (req, res) => {
+  const q = "SELECT * FROM manager_feedback";
+  db.query(q, (err, data) => {
+    if (err) return res.json(err);
+    return res.json(data);
+  });
+});
 
 //TODO Update manager feedback
 
