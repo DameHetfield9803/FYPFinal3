@@ -1,61 +1,66 @@
 import React, { useEffect, useState } from "react";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
 import "./Accolades.css";
 import Navbar from "../NavBar/NavBar";
 
+// Accolades Component
 const Accolades = () => {
+  // State to manage the list of accolades inputs
   const [inputList, setInputList] = useState([
     {
-      staffId: "",
-      accoladeTitle: "",
-      completionDate: "",
+      input: "",
+      input_rank: null,
+      dropdown1: "",
+      dropdown2: "",
+      textarea1: "",
       file: null,
-      achievementLevel: "",
     },
   ]);
 
+  // State to manage the disabled state of the "Add choice" button
   const [isDisabled, setIsDisabled] = useState(false);
 
+  // useEffect to update the disabled state based on the last input in the list
   useEffect(() => {
     if (inputList.length > 0) {
       const lastInput = inputList[inputList.length - 1];
       const isLastInputEmpty =
-        lastInput.staffId === "" &&
-        lastInput.accoladeTitle === "" &&
-        lastInput.completionDate === "" &&
-        !lastInput.file &&
-        lastInput.achievementLevel === "";
+        lastInput.input === "" &&
+        lastInput.dropdown1 === "" &&
+        lastInput.textarea1 === "" &&
+        lastInput.dropdown2 === "" &&
+        !lastInput.file;
 
       setIsDisabled(isLastInputEmpty);
     }
   }, [inputList]);
 
+  // Array of allowed file extensions for file input
+  const allowedFileExtensions = ["pdf", "jpg", "jpeg", "png"];
+
+  // Function to handle input changes for various fields in the accolades form
   const handleInputChange = (event, index, field) => {
     const { value, files } = event.target;
     const newInputList = [...inputList];
 
+    // Validate file type if the field is "file"
     if (field === "file" && files && files.length > 0) {
       const fileName = files[0].name;
       const fileExtension = fileName.split(".").pop().toLowerCase();
 
-      const allowedFileExtensions = ["pdf", "jpg", "jpeg", "png"];
-
       if (!allowedFileExtensions.includes(fileExtension)) {
+        // Display an error message or handle the invalid file extension
         console.error("Invalid file extension. Please choose a valid file (PDF, JPG, JPEG).");
         return;
       }
     }
 
-    if (field === "completionDate") {
-      newInputList[index][field] = value; // Assuming you're using a text input for date
-    } else {
-      newInputList[index][field] = field === "file" ? files[0] : value;
-    }
-
+    // Update the input in the list
+    newInputList[index][field] = field === "file" ? files[0] : value;
+    newInputList[index].input_rank = index + 1;
     setInputList(newInputList);
   };
 
+  // Function to remove an item from the input list
   const handleRemoveItem = (index) => {
     if (inputList.length > 1) {
       const newList = [...inputList];
@@ -64,25 +69,34 @@ const Accolades = () => {
     }
   };
 
+  // Function to add a new empty input to the list
   const handleListAdd = () => {
     setInputList([
       ...inputList,
       {
-        staffId: "",
-        accoladeTitle: "",
-        completionDate: "",
+        input: "",
+        input_rank: null,
+        dropdown1: "",
+        dropdown2: "",
+        textarea1: "",
         file: null,
-        achievementLevel: "",
       },
     ]);
   };
 
+  // JSX rendering of the component
   return (
+
     <div>
       <Navbar></Navbar>
-      <div className="topnav"></div>
+      {/* NAVBAR ITEMS */}
+      <div className="topnav">
+        
+      </div>
+      {/*END OF NAVBAR ITEMS */}
+
       <h1>Accolades page</h1>
-      <b> <p className="mt-3">(NATIONAL/ LEVEL 3, GOVERNMENT/ LEVEL 2 , COMMUNITY LEVEL 1 )</p></b>
+
       <div className="App">
         <h1>Input your accolades achievement</h1>
 
@@ -92,34 +106,30 @@ const Accolades = () => {
               <input
                 type="text"
                 className="form-control"
-                placeholder={`Staff ID`}
-                value={input.staffId}
-                onChange={(event) => handleInputChange(event, index, "staffId")}
-              />
-              <input
-                type="text"
-                className="form-control"
-                placeholder={`Accolade Title`}
-                value={input.accoladeTitle}
-                onChange={(event) => handleInputChange(event, index, "accoladeTitle")}
-              />
-              <DatePicker
-                selected={input.completionDate ? new Date(input.completionDate) : null}
-                onChange={(date) =>
-                  handleInputChange(
-                    { target: { value: date }, files: [] },
-                    index,
-                    "completionDate"
-                  )
-                }
-                dateFormat="yyyy-MM-dd"
-                className="form-control"
-                placeholderText="Select Completion Date"
+                placeholder={`Employee Name`}
+                value={input.input}
+                onChange={(event) => handleInputChange(event, index, "input")}
               />
               <select
                 className="form-control"
-                value={input.achievementLevel}
-                onChange={(event) => handleInputChange(event, index, "achievementLevel")}
+                value={input.dropdown1}
+                onChange={(event) => handleInputChange(event, index, "dropdown1")}
+              >
+                <option value="">Select Department</option>
+                <option value="HQ">HQ</option>
+                <option value="MC">MC</option>
+                <option value="BMW">BMW</option>
+              </select>
+              <textarea
+                className="form-control"
+                placeholder={`Description`}
+                value={input.textarea1}
+                onChange={(event) => handleInputChange(event, index, "textarea1")}
+              />
+              <select
+                className="form-control"
+                value={input.dropdown2}
+                onChange={(event) => handleInputChange(event, index, "dropdown2")}
               >
                 <option value="">Select Achievement Level</option>
                 <option value="Level 1">Level 1</option>
@@ -164,6 +174,7 @@ const Accolades = () => {
   );
 };
 
+// Styles
 const btnStyle = {
   marginTop: "1rem",
 };
