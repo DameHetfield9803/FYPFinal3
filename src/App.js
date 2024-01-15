@@ -23,7 +23,6 @@ import EmployeeDetails from "./components/EmployeeTable/EmployeeDetails";
 import UserGuide from "./components/UserGuide/userguides";
 import Navbar from "./components/NavBar/NavBar";
 import Home from "./components/Home/Home";
-import ReadManagerFeedback from "./components/ManagerFeedback/ReadManagerFeedback";
 
 function App() {
   return (
@@ -60,10 +59,6 @@ function App() {
 
           <Route exact path="/attendance">
             <Attendance component={Attendance} />
-          </Route>
-
-          <Route exact path="/managerfeedback">
-            <ProtectedRoute component={ManagerFeedback} />
           </Route>
 
           <Route exact path="/managerfeedback">
