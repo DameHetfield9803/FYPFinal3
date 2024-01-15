@@ -59,9 +59,7 @@ app.get("/employee", (req, res) => {
 
 //TODO Update employee (DAMIEN)
 app.post("/employee", (req, res) => {
-  const values = [
-    req.body.staff_id
-  ];
+  const values = [req.body.staff_id];
   const q = `UPDATE `;
 });
 
@@ -118,30 +116,47 @@ app.post("/peerfeedback", (req, res) => {
 //---------------------DANIEL-----------------------
 //TODO Create self feedback (DAMIEN)
 // Route for creating a self evaluation
-app.post("/selffeedback", (req,res) => {
-  const vals = [req.body.self_feedback_id, req.body.date, req.body.feedback_text, req.body.staff_id]; // retrieve the values from front end
-  db.query("INSERT INTO selffeedback (`self_feedback_id`, `date`, `feedback_text`, `staff_id`) VALUES (?, ?, ?, ?);", vals , (err, data)=> {
-    if(err) return res.json(err); // querying and returning errors if errors exist. 
-    return res.json(data); // returns data if no errors
-  });
+app.post("/selffeedback", (req, res) => {
+  const vals = [
+    req.body.self_feedback_id,
+    req.body.date,
+    req.body.feedback_text,
+    req.body.staff_id,
+  ]; // retrieve the values from front end
+  db.query(
+    "INSERT INTO selffeedback (`self_feedback_id`, `date`, `feedback_text`, `staff_id`) VALUES (?, ?, ?, ?);",
+    vals,
+    (err, data) => {
+      if (err) return res.json(err); // querying and returning errors if errors exist.
+      return res.json(data); // returns data if no errors
+    }
+  );
 });
 //TODO Read self feedback (DANIEL)
-app.get("/selffeedback", (req,res) => {
-  db.query("SELECT * FROM selffeedback;" , (err, data) => {
-    if(err) return res.json(err);
+app.get("/selffeedback", (req, res) => {
+  db.query("SELECT * FROM selffeedback;", (err, data) => {
+    if (err) return res.json(err);
     return res.json(data);
   });
 });
 //TODO Update self feedback (DAMIEN)
 
 app.put("/selffeedback/:id", (req, res) => {
-  const vals = [req.body.feedback_text, req.body.self_feedback_id, req.body.staff_id]; // retrieving from front end
-  db.query("UPDATE selffeedback SET feedback_text = ? WHERE self_feedback_id = ? AND staff_id = ?;", vals ,(err,data) => {
-    if(err) return res.json(err);
-    return res.json(data);
-  });
+  const vals = [
+    req.body.feedback_text,
+    req.body.self_feedback_id,
+    req.body.staff_id,
+  ]; // retrieving from front end
+  db.query(
+    "UPDATE selffeedback SET feedback_text = ? WHERE self_feedback_id = ? AND staff_id = ?;",
+    vals,
+    (err, data) => {
+      if (err) return res.json(err);
+      return res.json(data);
+    }
+  );
 });
-//TODO Delete self feedback (EN QUAN)
+//TODO Delete self feedback
 
 app.delete("/selffeedback/:id", (req, res) => {
   const selfEvaluationId = req.params.id;
@@ -160,7 +175,7 @@ app.delete("/selffeedback/:id", (req, res) => {
   });
 });
 //----------------------FIRDAUS----------------------
-// Create manager feedback
+// Create manager feedback (EN QUAN)
 app.post("/managerfeedback", (req, res) => {
   const { managerFb, date, feedbackText, staffId } = req.body; // Creating the feedback
 
@@ -202,7 +217,7 @@ app.post("/managerfeedback", (req, res) => {
   });
 });
 
-//TODO Read manager feedback
+//TODO Read manager feedback (EN QUAN)
 app.get("/managerfeedback", (req, res) => {
   const q = "SELECT * FROM managerfeedback";
   db.query(q, (err, data) => {
@@ -270,13 +285,14 @@ app.get("/accolate", (req, res) => {
 //TODO Update accolades
 
 app.put("/accolate/:id", (req, res) => {
-  const {staffId,accoladeTitle, completionDate } = req.body;
+  const { staffId, accoladeTitle, completionDate } = req.body;
   const accoladeId = req.params.id;
 
   // Validate inputs here if necessary
 
-  const sql ="UPDATE accolate SET accolade_title=?, completion_date=? WHERE id=?";
-  const values = [accoladeId,staffId,accoladeTitle,completionDate];
+  const sql =
+    "UPDATE accolate SET accolade_title=?, completion_date=? WHERE id=?";
+  const values = [accoladeId, staffId, accoladeTitle, completionDate];
 
   db.query(sql, values, (err, result) => {
     if (err) {
