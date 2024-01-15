@@ -1,5 +1,6 @@
 // modules
 const express = require("express"); // import express
+const axios = require("axios"); // import axios
 const mysql = require("mysql2");
 const cors = require("cors");
 const bodyParser = require("body-parser");
@@ -165,14 +166,16 @@ app.delete("/self_evaluations/:id", (req, res) => {
 app.post("/managerfeedback", (req, res) => {
   const { employeeId, feedback } = req.body; // Creating the feedback
 
-
-  const q = "INSERT INTO manager_feedback (employee_id, feedback) VALUES (?, ?)";
+  const q =
+    "INSERT INTO manager_feedback (employee_id, feedback) VALUES (?, ?)";
   db.query(q, [employeeId, feedback], (err, result) => {
     if (err) return res.json(err);
-    return res.json({ message: "Manager feedback created successfully", result });
+    return res.json({
+      message: "Manager feedback created successfully",
+      result,
+    });
   });
 });
-
 
 //TODO Read manager feedback
 app.get("/managerfeedback", (req, res) => {
@@ -194,10 +197,12 @@ app.put("/managerfeedback/:id", (req, res) => {
     if (result.affectedRows === 0) {
       return res.json({ message: "Manager feedback not found" });
     }
-    return res.json({ message: "Manager feedback updated successfully", result });
+    return res.json({
+      message: "Manager feedback updated successfully",
+      result,
+    });
   });
 });
-
 
 // TODO Delete manager feedback
 app.delete("/managerfeedback/:id", (req, res) => {
@@ -209,7 +214,10 @@ app.delete("/managerfeedback/:id", (req, res) => {
     if (result.affectedRows === 0) {
       return res.json({ message: "Manager feedback not found" });
     }
-    return res.json({ message: "Manager feedback deleted successfully", result });
+    return res.json({
+      message: "Manager feedback deleted successfully",
+      result,
+    });
   });
 });
 
