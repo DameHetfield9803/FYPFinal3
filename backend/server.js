@@ -30,8 +30,8 @@ db.connect((err) => {
 //TODO Create employee (DAMIEN)
 app.post("/employee", (req, res) => {
   const values = [
-    req.body.staffId,
-    req.body.name,
+    req.body.staff_id,
+    req.body.staff_name,
     req.body.username,
     req.body.password,
     req.body.email,
@@ -41,7 +41,7 @@ app.post("/employee", (req, res) => {
     req.body.employee_role,
   ];
   const sql =
-    "INSERT INTO employee(`staff_id`, `staff_name`, `username`, `password`, `email`, `department_id`, `report_to`, `date_joined`, `employee_role`) VALUES ?, ?, ?, ?, ?, ?, ?, ?, ?;";
+    "INSERT INTO employee(`staff_id`, `staff_name`, `username`, `password`, `email`, `department_id`, `report_to`, `date_joined`, `employee_role`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
   db.query(sql, values, (err, result) => {
     if (err) return res.json(err);
     return res.json(result);
