@@ -31,7 +31,7 @@ db.connect((err) => {
 app.post("/employee", (req, res) => {
   const values = [
     req.body.staffId,
-    req.body.staffName,
+    req.body.name,
     req.body.username,
     req.body.password,
     req.body.email,
@@ -40,7 +40,7 @@ app.post("/employee", (req, res) => {
     req.body.date_joined,
     req.body.employee_role
   ];
-  const sql = "INSERT INTO employee(`staff_id`, `staff_name`, `username`, `password`, `email`, `department_id`, `report_to`, `date_joined`, `employee_role`) VALUES (?);";
+  const sql = "INSERT INTO employee(`staff_id`, `staff_name`, `username`, `password`, `email`, `department_id`, `report_to`, `date_joined`, `employee_role`) VALUES ?, ?, ?, ?, ?, ?, ?, ?, ?;";
   db.query(sql, values, (err, result) => {
     if (err) return res.json(err);
     return res.json(result);
