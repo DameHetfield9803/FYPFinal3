@@ -4,6 +4,8 @@ const mysql = require("mysql2");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 
+// axios is in front end, client, not back end. 
+
 const app = express();
 
 app.use(express.urlencoded({ extended: true })); // parse requests of content-type - application/x-www-form-urlencoded
@@ -64,17 +66,17 @@ app.post("/department", (req, res) => {
   const values = [req.body.department_id, req.body.name];
   db.query(q, [values], (err, data) => {
     if (err) return res.json(err);
-    return res.json("Department has created successfully ");
+    return res.json("Department has created successfully;");
   });
 });
 //TODO Read department (DAMIEN)
-app.get("/department", (req,res) => {
+app.get("/department", (req, res) => {
   const q = "SELECT * FROM department;";
-  db.query(q, (err,data) => {
-    if(err) return res.json(err);
-    return res.json("Department showed successfully. \n");
-  })
-})
+  db.query(q, (err, data) => {
+    if (err) return res.json(err);
+    return res.json(data);
+  });
+});
 //TODO Update department (DAMIEN)
 
 app.post("/department", (req, res) => {
@@ -262,18 +264,12 @@ app.post("/accolades", (req, res) => {
 
 //TODO Read accolades
 
-app.get("/accolades", (req, res) => {
-  const sql = "SELECT * FROM accolades";
-
-  db.query(sql, (err, results) => {
-    if (err) {
-      console.error(err);
-      return res.status(500).send("Error fetching accolades");
-    }
-
-    res.status(200).json(results);
-  });
-});
+app.get("/accolate", (req,res) => {
+  db.query("SELECT * FROM accolate;", (err,data) => {
+    if(err) return res.json(err)
+    return res.json(data);
+  })
+})
 
 //TODO Update accolades
 
