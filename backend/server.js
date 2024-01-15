@@ -140,7 +140,7 @@ app.delete("/department", (req, res) => {
 });
 
 //-------------------(split)-----------------------
-//Done Create peer feedback (DANIEL)
+//DONE Create peer feedback (DANIEL)
 app.post("/peerfeedback", (req, res) => {
   const { peer_feedback_id, date, feedback_text, staff_id, peer_id } = req.body; // Creating the feedback
 
@@ -153,7 +153,7 @@ app.post("/peerfeedback", (req, res) => {
   });
 });
 
-//Done Read peer feedback (DANIEL)
+//DONE Read peer feedback (DANIEL)
 app.get("/peerfeedback", (req, res) => {
   const q = "SELECT * FROM peerfeedback";
   db.query(q, (err, data) => {
@@ -234,7 +234,7 @@ app.put("/selffeedback/:id", (req, res) => {
     }
   );
 });
-//Done Delete self feedback (DANIEL)
+//DONE Delete self feedback (DANIEL)
 
 app.delete("/selffeedback", (req, res) => {
   const { self_feedback_id } = req.body;
@@ -317,7 +317,7 @@ app.delete("/managerfeedback", (req, res) => {
 });
 
 //-----------------------DANIEL-------------------------
-//Done Create accolades
+//Done Create accolades (DANIEL)
 app.post("/accolate", (req, res) => {
   const { accolate_id, staff_id, accolate_title, completion_date } = req.body; // Creating the feedback
 
@@ -331,7 +331,7 @@ app.post("/accolate", (req, res) => {
 });
 
 
-//Done Read accolades
+//Done Read accolades (DANIEL)
 
 app.get("/accolate", (req, res) => {
   db.query("SELECT * FROM accolate;", (err, data) => {
@@ -340,30 +340,31 @@ app.get("/accolate", (req, res) => {
   });
 });
 
-//TODO Update accolades
+//DONE Update accolades (DANIEL)
 
-app.put("/accolate/:id", (req, res) => {
-  const { staffId, accoladeTitle, completionDate } = req.body;
-  const accoladeId = req.params.id;
+app.put("/accolate", (req, res) => {
+  const { accolate_id, accolate_title, staff_id, completion_date } = req.body;
 
-  // Validate inputs here if necessary
+  const q = "UPDATE accolate SET accolate_title = ?, staff_id = ?, completion_date = ? WHERE accolate_id = ?";
+  
+  db.query(q, [accolate_title, staff_id, completion_date, accolate_id], (err, result) => {
+    console.log("SQL Query:", q);
+    console.log("SQL Result:", result);
 
-  const sql =
-    "UPDATE accolate SET accolade_title=?, completion_date=? WHERE id=?";
-  const values = [accoladeId, staffId, accoladeTitle, completionDate];
-
-  db.query(sql, values, (err, result) => {
-    if (err) {
-      console.error(err);
-      return res.status(500).send("Error updating accolade");
+    if (err) return res.json(err);
+    if (result.affectedRows > 0) {
+      return res.json({
+        message: "Accolades updated successfully",
+        result,
+      });
+    } else {
+      return res.status(404).json({ message: "Accolades not found" });
     }
-
-    console.log("Accolade updated:", result);
-    res.status(200).send("Accolade updated successfully");
   });
 });
 
-//Done Delete accolades
+
+//Done Delete accolades (DANIEL)
 
 app.delete("/accolate", (req, res) => {
   const { accolate_id } = req.body;
