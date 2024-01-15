@@ -91,7 +91,13 @@ app.delete("/department", (req, res) => {
 //TODO Create peer feedback
 
 //TODO Read peer feedback
-
+app.get("/peerfeedback", (req, res) => {
+  const q = "SELECT * FROM peerfeedback";
+  db.query(q, (err, data) => {
+    if (err) return res.json(err);
+    return res.json(data);
+  });
+});
 //TODO Update peer feedback (DAMIEN)
 
 //TODO Delete peer feedback
@@ -105,7 +111,7 @@ app.post("/self_evaluations", (req, res) => {
   // Validate inputs here if necessary
 
   const sql =
-    "INSERT INTO self_evaluations (date, feedback_text, staff_id) VALUES (?, ?, ?)";
+    "INSERT INTO selffeedback (date, feedback_text, staff_id) VALUES (?, ?, ?)";
   const values = [date, feedbackText, staffId];
 
   db.query(sql, values, (err, result) => {
@@ -119,16 +125,11 @@ app.post("/self_evaluations", (req, res) => {
   });
 });
 //TODO Read self feedback (DANIEL)
-app.get("/self_evaluations", (req, res) => {
-  const sql = "SELECT * FROM self_evaluations";
-
-  db.query(sql, (err, results) => {
-    if (err) {
-      console.error(err);
-      return res.status(500).send("Error fetching self evaluations");
-    }
-
-    res.status(200).json(results);
+app.get("/selffeedback", (req, res) => {
+  const q = "SELECT * FROM selffeedback";
+  db.query(q, (err, data) => {
+    if (err) return res.json(err);
+    return res.json(data);
   });
 });
 //TODO Update self feedback (DAMIEN)
@@ -140,7 +141,7 @@ app.put("/self_evaluations/:id", (req, res) => {
   // Validate inputs here if necessary
 
   const sql =
-    "UPDATE self_evaluations SET date=?, feedback_text=?, staff_id=? WHERE id=?";
+    "UPDATE selffeedback SET date=?, feedback_text=?, staff_id=? WHERE id=?";
   const values = [date, feedbackText, staffId, selfEvaluationId];
 
   db.query(sql, values, (err, result) => {
@@ -155,10 +156,10 @@ app.put("/self_evaluations/:id", (req, res) => {
 });
 //TODO Delete self feedback (EN QUAN)
 
-app.delete("/self_evaluations/:id", (req, res) => {
+app.delete("/self_evaluation/:id", (req, res) => {
   const selfEvaluationId = req.params.id;
 
-  const sql = "DELETE FROM self_evaluations WHERE id=?";
+  const sql = "DELETE FROM selffeedback WHERE id=?";
   const values = [selfEvaluationId];
 
   db.query(sql, values, (err, result) => {
