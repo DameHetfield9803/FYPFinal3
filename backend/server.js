@@ -48,7 +48,7 @@ app.post("/employee", (req, res) => {
   });
 });
 
-//TODO Read employee (EN QUAN)
+//DONE Read employee (EN QUAN)
 app.get("/employee", (req, res) => {
   const q = "SELECT * FROM employee";
   db.query(q, (err, data) => {
@@ -66,7 +66,7 @@ app.post("/employee", (req, res) => {
 //TODO Delete employee (DAMIEN)
 
 //---------------------------------------
-//TODO Create department (EN QUAN)
+//DONE Create department (EN QUAN)
 app.post("/department", (req, res) => {
   const q = "INSERT INTO department (`department_id`,`name`)VALUES(?,?)";
   const values = [req.body.department_id, req.body.name];
@@ -89,7 +89,7 @@ app.post("/department", (req, res) => {
   const q = "UPDATE department_id, name, VALUES (?, ?, ?);";
 });
 
-//TODO Delete department (EN QUAN)
+//DONE Delete department (EN QUAN)
 app.delete("/department", (req, res) => {
   const { department_id } = req.body;
 
@@ -125,7 +125,10 @@ app.post("/peerfeedback", (req, res) => {
   const q = "UPDATE peerfeedback ";
 });
 
-//TODO Delete peer feedback (who tf is doing THIS?)
+//TODO Delete peer feedback (En Quan) ******I DO LATER*****
+// app.delete("/peerfeedback",(req,res) =>{
+//   const
+// })
 
 //---------------------DANIEL-----------------------
 //TODO Create self feedback (DAMIEN)
