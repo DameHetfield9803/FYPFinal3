@@ -192,7 +192,7 @@ app.delete("/selffeedback/:id", (req, res) => {
   });
 });
 //----------------------FIRDAUS----------------------
-// Create manager feedback (EN QUAN)
+// DONE Create manager feedback (EN QUAN)
 app.post("/managerfeedback", (req, res) => {
   const { managerFb, date, feedbackText, staffId } = req.body; // Creating the feedback
 
@@ -220,7 +220,7 @@ app.delete("/managerfeedback/:id", (req, res) => {
       result,
     });
   });
-}); //TODO Create manager feedback
+}); //TODO Update manager feedback
 app.post("/managerfeedback", (req, res) => {
   const { staff_id, feedback_text } = req.body; // Creating the feedback
 
