@@ -250,7 +250,8 @@ app.post("/accolate", (req, res) => {
 //TODO Read accolades
 
 app.get("/accolate", (req,res) => {
-  db.query("SELECT * FROM accolate;", (err,data) => {
+  db.query("SELECT * FROM accolate;", 
+  (err,data) => {
     if(err) return res.json(err)
     return res.json(data);
   })
@@ -259,14 +260,13 @@ app.get("/accolate", (req,res) => {
 //TODO Update accolades
 
 app.put("/accolate/:id", (req, res) => {
-  const { accoladeTitle, completionDate } = req.body;
+  const {staffId,accoladeTitle, completionDate } = req.body;
   const accoladeId = req.params.id;
 
   // Validate inputs here if necessary
 
-  const sql =
-    "UPDATE accolate SET accolade_title=?, completion_date=? WHERE id=?";
-  const values = [accoladeTitle, completionDate, accoladeId];
+  const sql ="UPDATE accolate SET accolade_title=?, completion_date=? WHERE id=?";
+  const values = [accoladeId,staffId,accoladeTitle,completionDate];
 
   db.query(sql, values, (err, result) => {
     if (err) {
