@@ -1,9 +1,10 @@
 // modules
 const express = require("express"); // import express
-const axios = require("axios"); // import axios
 const mysql = require("mysql2");
 const cors = require("cors");
 const bodyParser = require("body-parser");
+
+// axios is in front end, client, not back end. 
 
 const app = express();
 
@@ -65,12 +66,22 @@ app.post("/department", (req, res) => {
   const values = [req.body.department_id, req.body.name];
   db.query(q, [values], (err, data) => {
     if (err) return res.json(err);
-    return res.json("Department has created successfully ");
+    return res.json("Department has created successfully;");
   });
 });
 //TODO Read department (DAMIEN)
-
+app.get("/department", (req, res) => {
+  const q = "SELECT * FROM department;";
+  db.query(q, (err, data) => {
+    if (err) return res.json(err);
+    return res.json(data);
+  });
+});
 //TODO Update department (DAMIEN)
+
+app.post("/department", (req, res) => {
+  const q = "UPDATE department_id, name, VALUES (?, ?, ?);"
+})
 
 //TODO Delete department (EN QUAN)
 app.delete("/department", (req, res) => {
@@ -80,22 +91,31 @@ app.delete("/department", (req, res) => {
 //-------------------(split)-----------------------
 //TODO Create peer feedback
 
-//TODO Read peer feedback
-
+//TODO Read peer feedback (DANIEL)
+app.get("/peerfeedback", (req, res) => {
+  const q = "SELECT * FROM peerfeedback";
+  db.query(q, (err, data) => {
+    if (err) return res.json(err);
+    return res.json(data);
+  });
+});
 //TODO Update peer feedback (DAMIEN)
+
+app.post("/peerfeedback", (req, res) => {
+  const q = "UPDATE peerfeedback "
+})
+
+//I AM GONNA FUCKING KILL MYSELF 
 
 //TODO Delete peer feedback
 
 //---------------------DANIEL-----------------------
 //TODO Create self feedback (DAMIEN)
 // Route for creating a self evaluation
-app.post("/self_evaluations", (req, res) => {
+app.post("/selffeedback", (req, res) => {
   const { date, feedbackText, staffId } = req.body;
-
-  // Validate inputs here if necessary
-
   const sql =
-    "INSERT INTO self_evaluations (date, feedback_text, staff_id) VALUES (?, ?, ?)";
+    "INSERT INTO selffeedback (date, feedback_text, staff_id) VALUES (?, ?, ?)";
   const values = [date, feedbackText, staffId];
 
   db.query(sql, values, (err, result) => {
@@ -109,28 +129,23 @@ app.post("/self_evaluations", (req, res) => {
   });
 });
 //TODO Read self feedback (DANIEL)
-app.get("/self_evaluations", (req, res) => {
-  const sql = "SELECT * FROM self_evaluations";
-
-  db.query(sql, (err, results) => {
-    if (err) {
-      console.error(err);
-      return res.status(500).send("Error fetching self evaluations");
-    }
-
-    res.status(200).json(results);
+app.get("/selffeedback", (req, res) => {
+  const q = "SELECT * FROM selffeedback";
+  db.query(q, (err, data) => {
+    if (err) return res.json(err);
+    return res.json(data);
   });
 });
 //TODO Update self feedback (DAMIEN)
 
-app.put("/self_evaluations/:id", (req, res) => {
+app.put("/selffeedback/:id", (req, res) => {
   const { date, feedbackText, staffId } = req.body;
   const selfEvaluationId = req.params.id;
 
   // Validate inputs here if necessary
 
   const sql =
-    "UPDATE self_evaluations SET date=?, feedback_text=?, staff_id=? WHERE id=?";
+    "UPDATE selffeedback SET date=?, feedback_text=?, staff_id=? WHERE id=?";
   const values = [date, feedbackText, staffId, selfEvaluationId];
 
   db.query(sql, values, (err, result) => {
@@ -145,10 +160,10 @@ app.put("/self_evaluations/:id", (req, res) => {
 });
 //TODO Delete self feedback (EN QUAN)
 
-app.delete("/self_evaluations/:id", (req, res) => {
+app.delete("/selffeedback/:id", (req, res) => {
   const selfEvaluationId = req.params.id;
 
-  const sql = "DELETE FROM self_evaluations WHERE id=?";
+  const sql = "DELETE FROM selffeedback WHERE id=?";
   const values = [selfEvaluationId];
 
   db.query(sql, values, (err, result) => {
@@ -219,18 +234,75 @@ app.delete("/managerfeedback/:id", (req, res) => {
       result,
     });
   });
+});//TODO Create manager feedback
+app.post("/managerfeedback", (req, res) => {
+  const { staff_id, feedback_text } = req.body; // Creating the feedback
+
+  const q =
+    "INSERT INTO manager_feedback (employee_id, feedback) VALUES (?, ?)";
+  db.query(q, [staff_id, feedback_text], (err, result) => {
+    if (err) return res.json(err);
+    return res.json({
+      message: "Manager feedback created successfully",
+      result,
+    });
+  });
+});
+
+//TODO Read manager feedback
+app.get("/managerfeedback", (req, res) => {
+  const q = "SELECT * FROM manager_feedback";
+  db.query(q, (err, data) => {
+    if (err) return res.json(err);
+    return res.json(data);
+  });
+});
+
+// TODO Update manager feedback
+app.put("/managerfeedback/:id", (req, res) => {
+  const manager_feedback_id = req.params.id;
+  const { feedback_text } = req.body; // Updating the feedback
+
+  const q = "UPDATE manager_feedback SET feedback = ? WHERE id = ?";
+  db.query(q, [feedback_text, manager_feedback_id	], (err, result) => {
+    if (err) return res.json(err);
+    if (result.affectedRows === 0) {
+      return res.json({ message: "Manager feedback not found" });
+    }
+    return res.json({
+      message: "Manager feedback updated successfully",
+      result,
+    });
+  });
+});
+
+// TODO Delete manager feedback
+app.delete("/managerfeedback/:id", (req, res) => {
+  const manager_feedback_id = req.params.id; // Deleting the feedback, need to check this again
+
+  const q = "DELETE FROM manager_feedback WHERE id = ?";
+  db.query(q, [manager_feedback_id], (err, result) => {
+    if (err) return res.json(err);
+    if (result.affectedRows === 0) {
+      return res.json({ message: "Manager feedback not found" });
+    }
+    return res.json({
+      message: "Manager feedback deleted successfully",
+      result,
+    });
+  });
 });
 
 //-----------------------DANIEL-------------------------
 //TODO Create accolades
 
-app.post("/accolades", (req, res) => {
+app.post("/accolate", (req, res) => {
   const { staffId, accoladeTitle, completionDate } = req.body;
 
   // Validate inputs here if necessary
 
   const sql =
-    "INSERT INTO accolades (staff_id, accolade_title, completion_date) VALUES (?, ?, ?)";
+    "INSERT INTO accolate (staff_id, accolade_title, completion_date) VALUES (?, ?, ?)";
   const values = [staffId, accoladeTitle, completionDate];
 
   //this one is error handling idk correct or not
@@ -247,29 +319,23 @@ app.post("/accolades", (req, res) => {
 
 //TODO Read accolades
 
-app.get("/accolades", (req, res) => {
-  const sql = "SELECT * FROM accolades";
-
-  db.query(sql, (err, results) => {
-    if (err) {
-      console.error(err);
-      return res.status(500).send("Error fetching accolades");
-    }
-
-    res.status(200).json(results);
-  });
-});
+app.get("/accolate", (req,res) => {
+  db.query("SELECT * FROM accolate;", (err,data) => {
+    if(err) return res.json(err)
+    return res.json(data);
+  })
+})
 
 //TODO Update accolades
 
-app.put("/accolades/:id", (req, res) => {
+app.put("/accolate/:id", (req, res) => {
   const { accoladeTitle, completionDate } = req.body;
   const accoladeId = req.params.id;
 
   // Validate inputs here if necessary
 
   const sql =
-    "UPDATE accolades SET accolade_title=?, completion_date=? WHERE id=?";
+    "UPDATE accolate SET accolade_title=?, completion_date=? WHERE id=?";
   const values = [accoladeTitle, completionDate, accoladeId];
 
   db.query(sql, values, (err, result) => {
@@ -285,10 +351,10 @@ app.put("/accolades/:id", (req, res) => {
 
 //TODO Delete accolades
 
-app.delete("/accolades/:id", (req, res) => {
+app.delete("/accolate/:id", (req, res) => {
   const accoladeId = req.params.id;
 
-  const sql = "DELETE FROM accolades WHERE id=?";
+  const sql = "DELETE FROM accolate WHERE id=?";
   const values = [accoladeId];
 
   db.query(sql, values, (err, result) => {
