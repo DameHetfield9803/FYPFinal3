@@ -54,12 +54,13 @@ db.connect((err) => {
 //---------------------DANIEL-----------------------
 //TODO Create self feedback (DAMIEN)
 // Route for creating a self evaluation
-app.post('/self_evaluations', (req, res) => {
+
+app.post('/SelfEvaluations', (req, res) => {
   const { date, feedbackText, staffId } = req.body;
 
   // Validate inputs here if necessary
 
-  const sql = 'INSERT INTO self_evaluations (date, feedback_text, staff_id) VALUES (?, ?, ?)';
+  const sql = 'INSERT INTO SelfEvauation (date, feedback_text, staff_id) VALUES (?, ?, ?)';
   const values = [date, feedbackText, staffId];
 
   db.query(sql, values, (err, result) => {
@@ -68,13 +69,13 @@ app.post('/self_evaluations', (req, res) => {
       return res.status(500).send('Error creating self evaluation');
     }
 
-    console.log('Self evaluation created:', result);
+    console.log('SelfEvaluation created:', result);
     res.status(201).send('Self evaluation created successfully');
   });
 });
 //TODO Read self feedback (DANIEL)
 app.get('/self_evaluations', (req, res) => {
-  const sql = 'SELECT * FROM self_evaluations';
+  const sql = 'SELECT * FROM SelfEvaluation';
 
   db.query(sql, (err, results) => {
     if (err) {
