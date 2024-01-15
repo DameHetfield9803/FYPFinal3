@@ -113,10 +113,9 @@ app.post("/peerfeedback", (req, res) => {
 //TODO Create self feedback (DAMIEN)
 // Route for creating a self evaluation
 app.post("/selffeedback", (req, res) => {
-  const { date, feedbackText, staffId } = req.body;
-  const sql =
-    "INSERT INTO selffeedback (date, feedback_text, staff_id) VALUES (?, ?, ?)";
-  const values = [date, feedbackText, staffId];
+  const {self_feedback_id, date, feedbackText, staffId} = req.body;
+  const sql = "INSERT INTO selffeedback (self_feedback_id ,date, feedback_text, staff_id) VALUES (?, ?, ?,?)";
+  const values = [self_feedback_id, date, feedbackText, staffId];
 
   db.query(sql, values, (err, result) => {
     if (err) {
