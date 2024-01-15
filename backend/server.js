@@ -202,35 +202,6 @@ app.post("/managerfeedback", (req, res) => {
   });
 });
 
-// TODO Delete manager feedback
-app.delete("/managerfeedback/:id", (req, res) => {
-  const feedbackId = req.params.id; // Deleting the feedback, need to check this again
-
-  const q = "DELETE FROM manager_feedback WHERE id = ?";
-  db.query(q, [feedbackId], (err, result) => {
-    if (err) return res.json(err);
-    if (result.affectedRows === 0) {
-      return res.json({ message: "Manager feedback not found" });
-    }
-    return res.json({
-      message: "Manager feedback deleted successfully",
-      result,
-    });
-  });
-}); //TODO Create manager feedback
-app.post("/managerfeedback", (req, res) => {
-  const { staff_id, feedback_text } = req.body; // Creating the feedback
-
-  const q = "INSERT INTO manager_feedback (staff_id, feedback) VALUES (?, ?)";
-  db.query(q, [staff_id, feedback_text], (err, result) => {
-    if (err) return res.json(err);
-    return res.json({
-      message: "Manager feedback created successfully",
-      result,
-    });
-  });
-});
-
 //TODO Read manager feedback (EN QUAN)
 app.get("/managerfeedback", (req, res) => {
   const q = "SELECT * FROM managerfeedback";
@@ -252,16 +223,25 @@ app.put("/managerfeedback/:id", (req, res) => {
   });
 });
 
-// Delete manager feedback
-app.delete("/managerfeedback/:id", (req, res) => {
-  const managerFeedbackId = req.params.id;
+// Delete manager feedback (FIRDAUS)
+app.delete("/managerfeedback ", (req, res) => {
+  const {managerFeedbackId} = req.body;
 
-  const q = "DELETE FROM managerfeedback WHERE manager_feedback_id=?";
-  db.query(q, [managerFeedbackId], (err, result) => {
-    if (err) return res.json(err);
-    return res.json(result);
+  const q = "DELETE FROM managerfeedback WHERE manager_feedback_id = ?";
+    db.query(q, [managerFeedbackId], (err, data) => {
+    if (err) {
+      console.error(err);
+      res.status(500).json({ message: "Error deleting feedback" });
+    } else {
+      if (data.affectedRows > 0) {
+        res.json({ message: "Feedback deleted successfully" });
+      } else {
+        res.status(404).json({ message: "Feedback not found" });
+      }
+    }
   });
 });
+
 
 //-----------------------DANIEL-------------------------
 //TODO Create accolades
