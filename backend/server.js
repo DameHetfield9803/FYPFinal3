@@ -109,9 +109,20 @@ app.delete("/department", (req, res) => {
 });
 
 //-------------------(split)-----------------------
-//TODO Create peer feedback
+//Done Create peer feedback (DANIEL)
+app.post("/peerfeedback", (req, res) => {
+  const { peer_feedback_id, date, feedback_text, staff_id, peer_id } = req.body; // Creating the feedback
 
-//TODO Read peer feedback (DANIEL)
+  const q =
+    "INSERT INTO peerfeedback (peer_feedback_id, date, feedback_text, staff_id, peer_id) VALUES (?, ?, ?, ?, ?)";
+
+  db.query(q, [peer_feedback_id, date, feedback_text, staff_id, peer_id], (err, result) => {
+    if (err) return res.json(err);
+    return res.json(result);
+  });
+});
+
+//Done Read peer feedback (DANIEL)
 app.get("/peerfeedback", (req, res) => {
   const q = "SELECT * FROM peerfeedback";
   db.query(q, (err, data) => {
@@ -125,13 +136,28 @@ app.post("/peerfeedback", (req, res) => {
   const q = "UPDATE peerfeedback ";
 });
 
-//TODO Delete peer feedback (En Quan) ******I DO LATER*****
-// app.delete("/peerfeedback",(req,res) =>{
-//   const
-// })
+//DONE Delete peer feedback (En Quan)
+app.delete("/peerfeedback", (req, res) => {
+  const { peerFeedbackId } = req.body;
+
+  const q = "DELETE FROM peerfeedback WHERE peer_feedback_id = ?";
+  db.query(q, [peerFeedbackId], (err, data) => {
+    if (err) {
+      console.error(err);
+      res.status(500).json({ message: "Error deleting peer feedback" });
+    } else {
+      if (data.affectedRows > 0) {
+        res.json({ message: "Peer feedback deleted successfully" });
+      } else {
+        res.status(404).json({ message: "Peer feedback not found" });
+      }
+    }
+  });
+});
 
 //---------------------DANIEL-----------------------
-//TODO Create self feedback (DAMIEN)
+//Done Create self feedback (DAMIEN)
+
 // Route for creating a self evaluation
 app.post("/selffeedback", (req, res) => {
   const vals = [
@@ -173,22 +199,23 @@ app.put("/selffeedback/:id", (req, res) => {
     }
   );
 });
-//TODO Delete self feedback
+//Done Delete self feedback (DANIEL)
 
-app.delete("/selffeedback/:id", (req, res) => {
-  const selfEvaluationId = req.params.id;
+app.delete("/selffeedback", (req, res) => {
+  const { self_feedback_id } = req.body;
 
-  const sql = "DELETE FROM selffeedback WHERE id=?";
-  const values = [selfEvaluationId];
-
-  db.query(sql, values, (err, result) => {
+  const q = "DELETE FROM selffeedback WHERE self_feedback_id = ?";
+  db.query(q, [self_feedback_id], (err, data) => {
     if (err) {
       console.error(err);
-      return res.status(500).send("Error deleting self evaluation");
+      res.status(500).json({ message: "Error deleting self-feedback" });
+    } else {
+      if (data.affectedRows > 0) {
+        res.json({ message: "Self-Feedback deleted successfully" });
+      } else {
+        res.status(404).json({ message: "SelfFeedback not found" });
+      }
     }
-
-    console.log("Self evaluation deleted:", result);
-    res.status(200).send("Self evaluation deleted successfully");
   });
 });
 //----------------------FIRDAUS----------------------
@@ -236,11 +263,11 @@ app.get("/managerfeedback", (req, res) => {
 });
 
 // Delete manager feedback (FIRDAUS)
-app.delete("/managerfeedback", (req, res) => {
-  const {Managerfeedbackid} = req.body;
+app.delete("/managerfeedback ", (req, res) => {
+  const { managerFeedbackId } = req.body;
 
   const q = "DELETE FROM managerfeedback WHERE manager_feedback_id = ?";
-    db.query(q, [Managerfeedbackid], (err, data) => {
+  db.query(q, [managerFeedbackId], (err, data) => {
     if (err) {
       console.error(err);
       res.status(500).json({ message: "Error deleting feedback" });
@@ -254,32 +281,22 @@ app.delete("/managerfeedback", (req, res) => {
   });
 });
 
-
 //-----------------------DANIEL-------------------------
-//TODO Create accolades
-
+//Done Create accolades
 app.post("/accolate", (req, res) => {
-  const { staffId, accoladeTitle, completionDate } = req.body;
+  const { accolate_id, staff_id, accolate_title, completion_date } = req.body; // Creating the feedback
 
-  // Validate inputs here if necessary
+  const q =
+    "INSERT INTO accolate (accolate_id, staff_id, accolate_title, completion_date) VALUES (?, ?, ?, ?)";
 
-  const sql =
-    "INSERT INTO accolate (staff_id, accolade_title, completion_date) VALUES (?, ?, ?)";
-  const values = [staffId, accoladeTitle, completionDate];
-
-  //this one is error handling idk correct or not
-  db.query(sql, values, (err, result) => {
-    if (err) {
-      console.error(err);
-      return res.status(500).send("Error creating accolade");
-    }
-
-    console.log("Accolade created:", result);
-    res.status(201).send("Accolade created successfully");
+  db.query(q, [accolate_id, staff_id, accolate_title, completion_date], (err, result) => {
+    if (err) return res.json(err);
+    return res.json(result);
   });
 });
 
-//TODO Read accolades
+
+//Done Read accolades
 
 app.get("/accolate", (req, res) => {
   db.query("SELECT * FROM accolate;", (err, data) => {
@@ -311,22 +328,23 @@ app.put("/accolate/:id", (req, res) => {
   });
 });
 
-//TODO Delete accolades
+//Done Delete accolades
 
-app.delete("/accolate/:id", (req, res) => {
-  const accoladeId = req.params.id;
+app.delete("/accolate", (req, res) => {
+  const { accolate_id } = req.body;
 
-  const sql = "DELETE FROM accolate WHERE id=?";
-  const values = [accoladeId];
-
-  db.query(sql, values, (err, result) => {
+  const q = "DELETE FROM accolate WHERE accolate_id = ?";
+  db.query(q, [accolate_id], (err, data) => {
     if (err) {
       console.error(err);
-      return res.status(500).send("Error deleting accolade");
+      res.status(500).json({ message: "Error deleting accolades" });
+    } else {
+      if (data.affectedRows > 0) {
+        res.json({ message: "accolades deleted successfully" });
+      } else {
+        res.status(404).json({ message: "accolades not found" });
+      }
     }
-
-    console.log("Accolade deleted:", result);
-    res.status(200).send("Accolade deleted successfully");
   });
 });
 
