@@ -16,7 +16,7 @@ export default function Navbar() {
         {/* Navigation Links */}
         <a href="/Attendance">Attendance</a>
         <a href="/Accolades">Accolades</a>
-        <a href="/AppraisalForm">AppraisalForm</a>
+        <a href="/AppraisalForm">Appraisal Form</a>
 
         {/* My Profile link*/}
         <a href="/Profile" className="profile">
