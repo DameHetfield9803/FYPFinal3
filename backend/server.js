@@ -68,11 +68,11 @@ app.post("/employee", (req, res) => {
 //---------------------------------------
 //DONE Create department (EN QUAN)
 app.post("/department", (req, res) => {
+  const { departmentId, departmentName } = req.body;
   const q = "INSERT INTO department (`department_id`,`name`)VALUES(?,?)";
-  const values = [req.body.department_id, req.body.name];
-  db.query(q, [values], (err, data) => {
+  db.query(q, [departmentId, departmentName], (err, data) => {
     if (err) return res.json(err);
-    return res.json("Department has created successfully;");
+    return res.json(data);
   });
 });
 //TODO Read department (DAMIEN)
