@@ -59,6 +59,9 @@ app.get("/employee", (req, res) => {
 
 //TODO Update employee (DAMIEN)
 app.post("/employee", (req, res) => {
+  const values = [
+    req.body.staff_id
+  ];
   const q = `UPDATE `;
 });
 
@@ -110,34 +113,22 @@ app.post("/peerfeedback", (req, res) => {
   const q = "UPDATE peerfeedback ";
 });
 
-//I AM GONNA FUCKING KILL MYSELF
-
-//TODO Delete peer feedback
+//TODO Delete peer feedback (who tf is doing THIS?)
 
 //---------------------DANIEL-----------------------
 //TODO Create self feedback (DAMIEN)
 // Route for creating a self evaluation
-app.post("/selffeedback", (req, res) => {
-  const { self_feedback_id, date, feedbackText, staffId } = req.body;
-  const sql =
-    "INSERT INTO selffeedback (self_feedback_id ,date, feedback_text, staff_id) VALUES (?, ?, ?,?)";
-  const values = [self_feedback_id, date, feedbackText, staffId];
-
-  db.query(sql, values, (err, result) => {
-    if (err) {
-      console.error(err);
-      return res.status(500).send("Error creating self evaluation");
-    }
-
-    console.log("Self evaluation created:", result);
-    res.status(201).send("Self evaluation created successfully");
+app.post("/selffeedback", (req,res) => {
+  const vals = [req.body.self_feedback_id, req.body.date, req.body.feedback_text, req.body.staff_id]; // retrieve the values from front end
+  db.query("INSERT INTO selffeedback (`self_feedback_id`, `date`, `feedback_text`, `staff_id`) VALUES (?, ?, ?, ?);", vals , (err, data)=> {
+    if(err) return res.json(err); // querying and returning errors if errors exist. 
+    return res.json(data); // returns data if no errors
   });
 });
 //TODO Read self feedback (DANIEL)
-app.get("/selffeedback", (req, res) => {
-  const q = "SELECT * FROM selffeedback";
-  db.query(q, (err, data) => {
-    if (err) return res.json(err);
+app.get("/selffeedback", (req,res) => {
+  db.query("SELECT * FROM selffeedback;" , (err, data) => {
+    if(err) return res.json(err);
     return res.json(data);
   });
 });
