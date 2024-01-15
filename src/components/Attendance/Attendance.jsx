@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import attendanceData from './AttendanceData.json'; // this is to import the Json file to the attendnace page
+import attendanceData from './AttendanceData.json';
 import { auth } from '../../config/firebase';
 import { signOut } from 'firebase/auth';
 import { useHistory } from 'react-router-dom';
-import './Attendance.css'; //not using now 
 import Navbar from '../NavBar/NavBar';
+import './Attendance.css';
 
 export default function Attendance() {
   const history = useHistory();
@@ -17,34 +17,35 @@ export default function Attendance() {
       history.push('/');
     } catch (err) {
       console.error(err);
-      //This is to display an error message to the user if needed
+      // Display an error message to the user if needed
     }
   };
 
   const getStatus = (adjIn) => {
     if (!adjIn || adjIn.trim() === '') {
-      // this is to show not present if "Adj in" is blank 
       return 'Not Present';
     }
 
     const adjInTime = new Date(`2000-01-01T${adjIn}`);
     const eightAM = new Date(`2000-01-01T08:00:00`);
 
-    if (adjInTime > eightAM) {
+    if (
+      adjInTime.getHours() > eightAM.getHours() ||
+      (adjInTime.getHours() === eightAM.getHours() && adjInTime.getMinutes() > eightAM.getMinutes())
+    ) {
       return 'Late';
     } else {
       return 'Present';
     }
   };
 
-  const filteredData = jsonData.filter((entry) =>
-    entry.BatchNO.toString().includes(filter)
-  );
+  const filteredData = jsonData
+    .filter((entry) => entry.BatchNO.toString().includes(filter))
+    .filter((entry) => !['Sat', 'Sun'].includes(entry['Week Day']));
 
-  
   return (
     <div>
-      <Navbar></Navbar>
+      <Navbar />
       <div className="container mt-3">
         <label htmlFor="filterInput" className="form-label">
           Filter by BatchNumber:
@@ -69,8 +70,6 @@ export default function Attendance() {
               <th>Week Day</th>
               <th>Shift Code</th>
               <th>Emp Name</th>
-              {/* <th>Time In</th>
-              <th>Time Out</th> */}
               <th>Adj In</th>
               <th>Adj Out</th>
               <th>Remarks</th>
@@ -87,8 +86,6 @@ export default function Attendance() {
                 <td>{entry['Week Day']}</td>
                 <td>{entry['Shift Code']}</td>
                 <td>{entry['Emp Name']}</td>
-                {/* <td>{entry['Time In']}</td>
-                <td>{entry['Time Out']}</td> */}
                 <td>{entry['Adj In']}</td>
                 <td>{entry['Adj Out']}</td>
                 <td>{entry.Remark}</td>
@@ -100,11 +97,9 @@ export default function Attendance() {
                         : getStatus(entry['Adj In']) === 'Present'
                         ? 'green'
                         : 'inherit',
-                  
-                    }}
+                  }}
                 >
                   {getStatus(entry['Adj In'])}
-                  {/* {getStatus(entry["Adj In"]) */}
                 </td>
               </tr>
             ))}
