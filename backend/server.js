@@ -111,7 +111,7 @@ app.delete("/department", (req, res) => {
 //-------------------(split)-----------------------
 //TODO Create peer feedback
 
-//TODO Read peer feedback (DANIEL)
+//Done Read peer feedback (DANIEL)
 app.get("/peerfeedback", (req, res) => {
   const q = "SELECT * FROM peerfeedback";
   db.query(q, (err, data) => {
@@ -146,6 +146,7 @@ app.delete("/peerfeedback", (req, res) => {
 
 //---------------------DANIEL-----------------------
 //TODO Create self feedback (DAMIEN)
+
 // Route for creating a self evaluation
 app.post("/selffeedback", (req, res) => {
   const vals = [
@@ -285,7 +286,7 @@ app.post("/accolate", (req, res) => {
   });
 });
 
-//TODO Read accolades
+//Done Read accolades
 
 app.get("/accolate", (req, res) => {
   db.query("SELECT * FROM accolate;", (err, data) => {
@@ -319,20 +320,21 @@ app.put("/accolate/:id", (req, res) => {
 
 //TODO Delete accolades
 
-app.delete("/accolate/:id", (req, res) => {
-  const accoladeId = req.params.id;
+app.delete("/accolate", (req, res) => {
+  const { accolade_id } = req.body;
 
-  const sql = "DELETE FROM accolate WHERE id=?";
-  const values = [accoladeId];
-
-  db.query(sql, values, (err, result) => {
+  const q = "DELETE FROM accolate WHERE accolade_id = ?";
+  db.query(q, [accolade_id], (err, data) => {
     if (err) {
       console.error(err);
-      return res.status(500).send("Error deleting accolade");
+      res.status(500).json({ message: "Error deleting accolades" });
+    } else {
+      if (data.affectedRows > 0) {
+        res.json({ message: "accolades deleted successfully" });
+      } else {
+        res.status(404).json({ message: "accolades not found" });
+      }
     }
-
-    console.log("Accolade deleted:", result);
-    res.status(200).send("Accolade deleted successfully");
   });
 });
 
