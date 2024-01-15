@@ -197,7 +197,7 @@ app.post("/managerfeedback", (req, res) => {
   const { managerFb, date, feedbackText, staffId } = req.body; // Creating the feedback
 
   const q =
-    "INSERT INTO manager_feedback (manager_feedback_id, date, feedback_text, staff_id) VALUES (?, ?, ?, ?)";
+    "INSERT INTO managerfeedback (manager_feedback_id, date, feedback_text, staff_id) VALUES (?, ?, ?, ?)";
 
   db.query(q, [managerFb, date, feedbackText, staffId], (err, result) => {
     if (err) return res.json(err);
@@ -205,17 +205,24 @@ app.post("/managerfeedback", (req, res) => {
   });
 });
 
-//TODO Update manager feedback
-app.post("/managerfeedback", (req, res) => {
-  const { staff_id, feedback_text } = req.body; // Creating the feedback
+//TODO Update manager feedback (FIRDAUS)
+app.put("/managerfeedback", (req, res) => {
+  const { managerfeedbackid, feedbacktext } = req.body;
 
-  const q = "INSERT INTO manager_feedback (staff_id, feedback) VALUES (?, ?)";
-  db.query(q, [staff_id, feedback_text], (err, result) => {
+  const q = "UPDATE managerfeedback SET feedback_text = ? WHERE manager_feedback_id = ?";
+  db.query(q, [feedbacktext, managerfeedbackid], (err, result) => {
+    console.log("SQL Query:", q);
+    console.log("SQL Result:", result);
+
     if (err) return res.json(err);
-    return res.json({
-      message: "Manager feedback created successfully",
-      result,
-    });
+    if (result.affectedRows > 0) {
+      return res.json({
+        message: "Manager feedback updated successfully",
+        result,
+      });
+    } else {
+      return res.status(404).json({ message: "Manager feedback not found" });
+    }
   });
 });
 
@@ -229,11 +236,11 @@ app.get("/managerfeedback", (req, res) => {
 });
 
 // Delete manager feedback (FIRDAUS)
-app.delete("/managerfeedback ", (req, res) => {
-  const {managerFeedbackId} = req.body;
+app.delete("/managerfeedback", (req, res) => {
+  const {Managerfeedbackid} = req.body;
 
   const q = "DELETE FROM managerfeedback WHERE manager_feedback_id = ?";
-    db.query(q, [managerFeedbackId], (err, data) => {
+    db.query(q, [Managerfeedbackid], (err, data) => {
     if (err) {
       console.error(err);
       res.status(500).json({ message: "Error deleting feedback" });
