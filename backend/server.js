@@ -27,7 +27,7 @@ db.connect((err) => {
 });
 
 //------------------------------------------
-//TODO Create employee (DAMIEN)
+// Create employee (DAMIEN) (done)
 app.post("/employee", (req, res) => {
   const values = [
     req.body.staff_id,
@@ -57,13 +57,35 @@ app.get("/employee", (req, res) => {
   });
 });
 
-//TODO Update employee (DAMIEN)
-app.post("/employee", (req, res) => {
-  const values = [req.body.staff_id];
-  const q = `UPDATE `;
+// Update employee (DAMIEN) (done)
+app.put("/employee", (req, res) => {
+  const vals = [
+    req.body.staff_name,
+    req.body.username,
+    req.body.password,
+    req.body.email,
+    req.body.department_id,
+    req.body.report_to,
+    req.body.date_joined,
+    req.body.employee_role,
+    req.body.staff_id
+  ];
+  const q = `UPDATE employee SET staff_name = ?, username = ?, password = ?, email = ?, department_id = ?, report_to = ?, date_joined = ?, employee_role = ? WHERE staff_id = ?;`;
+  db.query(q, vals , (err, data) => {
+    if(err) return res.json(err);
+    return res.json(data);
+  })
 });
 
-//TODO Delete employee (DAMIEN)
+// Delete employee (DAMIEN) (done)
+app.delete("/employee", (req,res)=> {
+  const vals = [req.body.staff_id];
+  db.query("DELETE FROM `employee` WHERE staff_id = ?;", vals , (err,data)=> {
+    if(err) return res.json(err);
+    return res.json(data);
+  });
+})
+
 
 //---------------------------------------
 //DONE Create department (EN QUAN)
@@ -75,7 +97,7 @@ app.post("/department", (req, res) => {
     return res.json(data);
   });
 });
-//TODO Read department (DAMIEN)
+// Read department (DAMIEN) (done)
 app.get("/department", (req, res) => {
   const q = "SELECT * FROM department;";
   db.query(q, (err, data) => {
@@ -83,10 +105,19 @@ app.get("/department", (req, res) => {
     return res.json(data);
   });
 });
-//TODO Update department (DAMIEN)
+// Update department (DAMIEN) (DONE)
 
-app.post("/department", (req, res) => {
-  const q = "UPDATE department_id, name, VALUES (?, ?, ?);";
+// set endpoints with requests and response
+app.put("/department", (req, res) => 
+{
+  // initialize values and queries 
+  const vals = [req.body.name, req.body.department_id];
+  const q = "UPDATE `department` SET `name` = ? WHERE `department_id` = ? ;";
+  db.query(q, vals , (err, data) => {
+    // returns error if there's an error or returns data if there aren't errors
+    if(err) return res.json(err);
+    return res.json(data);
+  })
 });
 
 //DONE Delete department (EN QUAN)
@@ -130,10 +161,14 @@ app.get("/peerfeedback", (req, res) => {
     return res.json(data);
   });
 });
-//TODO Update peer feedback (DAMIEN)
+// Update peer feedback (DAMIEN) (done)
 
-app.post("/peerfeedback", (req, res) => {
-  const q = "UPDATE peerfeedback ";
+app.put("/peerfeedback", (req, res) => {
+  const vals = [req.body.date, req.body.feedback_text, req.body.peer_id, req.body.staff_id, req.body.peer_feedback_id];
+  db.query("UPDATE `peerfeedback` SET `date` = (?), `feedback_text` = (?),  `peer_id` = (?) , `staff_id` = (?) WHERE `peer_feedback_id` = (?);", vals, (err, data) => {
+    if (err) return res.json(err);
+    return res.json(data);
+  });
 });
 
 //DONE Delete peer feedback (En Quan)
@@ -175,14 +210,14 @@ app.post("/selffeedback", (req, res) => {
     }
   );
 });
-//TODO Read self feedback (DANIEL)
+// Read self feedback (DANIEL) (Done)
 app.get("/selffeedback", (req, res) => {
   db.query("SELECT * FROM selffeedback;", (err, data) => {
     if (err) return res.json(err);
     return res.json(data);
   });
 });
-//TODO Update self feedback (DAMIEN)
+// Update self feedback (DAMIEN) (done)
 
 app.put("/selffeedback/:id", (req, res) => {
   const vals = [
