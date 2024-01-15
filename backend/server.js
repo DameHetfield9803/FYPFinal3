@@ -4,7 +4,7 @@ const mysql = require("mysql2");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 
-// axios is in front end, client, not back end. 
+// axios is in front end, client, not back end.
 
 const app = express();
 
@@ -32,13 +32,19 @@ app.post("/employee", (req, res) => {
   const values = [
     req.body.staffId,
     req.body.name,
-    req.body.user,
+    req.body.username,
     req.body.password,
     req.body.email,
+    req.body.department_id,
+    req.body.report_to,
+    req.body.date_joined,
+    req.body.employee_role,
   ];
-  const sql = "INSERT INTO employee () VALUES (?);";
-  db.query(sql, values, (err, data) => {
+  const sql =
+    "INSERT INTO employee(`staff_id`, `staff_name`, `username`, `password`, `email`, `department_id`, `report_to`, `date_joined`, `employee_role`) VALUES ?, ?, ?, ?, ?, ?, ?, ?, ?;";
+  db.query(sql, values, (err, result) => {
     if (err) return res.json(err);
+    return res.json(result);
   });
 });
 
@@ -52,9 +58,8 @@ app.get("/employee", (req, res) => {
 });
 
 //TODO Update employee (DAMIEN)
-// TBC on 15/1/2024
 app.post("/employee", (req, res) => {
-  const q = "UPDATE employee WHERE ";
+  const q = `UPDATE `;
 });
 
 //TODO Delete employee (DAMIEN)
@@ -80,8 +85,8 @@ app.get("/department", (req, res) => {
 //TODO Update department (DAMIEN)
 
 app.post("/department", (req, res) => {
-  const q = "UPDATE department_id, name, VALUES (?, ?, ?);"
-})
+  const q = "UPDATE department_id, name, VALUES (?, ?, ?);";
+});
 
 //TODO Delete department (EN QUAN)
 app.delete("/department", (req, res) => {
@@ -102,10 +107,10 @@ app.get("/peerfeedback", (req, res) => {
 //TODO Update peer feedback (DAMIEN)
 
 app.post("/peerfeedback", (req, res) => {
-  const q = "UPDATE peerfeedback "
-})
+  const q = "UPDATE peerfeedback ";
+});
 
-//I AM GONNA FUCKING KILL MYSELF 
+//I AM GONNA FUCKING KILL MYSELF
 
 //TODO Delete peer feedback
 
@@ -113,8 +118,9 @@ app.post("/peerfeedback", (req, res) => {
 //TODO Create self feedback (DAMIEN)
 // Route for creating a self evaluation
 app.post("/selffeedback", (req, res) => {
-  const {self_feedback_id, date, feedbackText, staffId} = req.body;
-  const sql = "INSERT INTO selffeedback (self_feedback_id ,date, feedback_text, staff_id) VALUES (?, ?, ?,?)";
+  const { self_feedback_id, date, feedbackText, staffId } = req.body;
+  const sql =
+    "INSERT INTO selffeedback (self_feedback_id ,date, feedback_text, staff_id) VALUES (?, ?, ?,?)";
   const values = [self_feedback_id, date, feedbackText, staffId];
 
   db.query(sql, values, (err, result) => {
@@ -178,15 +184,45 @@ app.delete("/selffeedback/:id", (req, res) => {
 //----------------------FIRDAUS----------------------
 // Create manager feedback
 app.post("/managerfeedback", (req, res) => {
-  const { date, feedback_text, staff_id } = req.body;
+  const { managerFb, date, feedbackText, staffId } = req.body; // Creating the feedback
 
-  const q = "INSERT INTO managerfeedback (date, feedback_text, staff_id) VALUES (?, ?, ?)";
-  db.query(q, [date, feedback_text, staff_id], (err, result) => {
+  const q =
+    "INSERT INTO manager_feedback (manager_feedback_id, date, feedback_text, staff_id) VALUES (?, ?, ?, ?)";
+
+  db.query(q, [managerFb, date, feedbackText, staffId], (err, result) => {
     if (err) return res.json(err);
     return res.json(result);
   });
 });
 
+// TODO Delete manager feedback
+app.delete("/managerfeedback/:id", (req, res) => {
+  const feedbackId = req.params.id; // Deleting the feedback, need to check this again
+
+  const q = "DELETE FROM manager_feedback WHERE id = ?";
+  db.query(q, [feedbackId], (err, result) => {
+    if (err) return res.json(err);
+    if (result.affectedRows === 0) {
+      return res.json({ message: "Manager feedback not found" });
+    }
+    return res.json({
+      message: "Manager feedback deleted successfully",
+      result,
+    });
+  });
+}); //TODO Create manager feedback
+app.post("/managerfeedback", (req, res) => {
+  const { staff_id, feedback_text } = req.body; // Creating the feedback
+
+  const q = "INSERT INTO manager_feedback (staff_id, feedback) VALUES (?, ?)";
+  db.query(q, [staff_id, feedback_text], (err, result) => {
+    if (err) return res.json(err);
+    return res.json({
+      message: "Manager feedback created successfully",
+      result,
+    });
+  });
+});
 
 //TODO Read manager feedback
 app.get("/managerfeedback", (req, res) => {
@@ -197,20 +233,17 @@ app.get("/managerfeedback", (req, res) => {
   });
 });
 
-
-
 // Update manager feedback
 app.put("/managerfeedback/:id", (req, res) => {
-  const managerFeedbackId = req.params.id;
-  const { date, feedback_text, staff_id } = req.body;
-  
-  const q = "UPDATE managerfeedback SET date=?, feedback_text=?, staff_id=? WHERE manager_feedback_id=?";
-  db.query(q, [date, feedback_text, staff_id, managerFeedbackId], (err, result) => {
+  const manager_feedback_id = req.params.id;
+  const { feedback_text } = req.body; // Updating the feedback
+
+  const q = "UPDATE manager_feedback SET feedback = ? WHERE id = ?";
+  db.query(q, [feedback_text, manager_feedback_id], (err, result) => {
     if (err) return res.json(err);
     return res.json(result);
   });
 });
-
 
 // Delete manager feedback
 app.delete("/managerfeedback/:id", (req, res) => {
@@ -249,13 +282,12 @@ app.post("/accolate", (req, res) => {
 
 //TODO Read accolades
 
-app.get("/accolate", (req,res) => {
-  db.query("SELECT * FROM accolate;", 
-  (err,data) => {
-    if(err) return res.json(err)
+app.get("/accolate", (req, res) => {
+  db.query("SELECT * FROM accolate;", (err, data) => {
+    if (err) return res.json(err);
     return res.json(data);
-  })
-})
+  });
+});
 
 //TODO Update accolades
 
