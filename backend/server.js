@@ -162,6 +162,17 @@ app.delete("/self_evaluations/:id", (req, res) => {
 });
 //----------------------FIRDAUS----------------------
 //TODO Create manager feedback
+app.post("/managerfeedback", (req, res) => {
+  const { employeeId, feedback } = req.body; // Creating the feedback
+
+
+  const q = "INSERT INTO manager_feedback (employee_id, feedback) VALUES (?, ?)";
+  db.query(q, [employeeId, feedback], (err, result) => {
+    if (err) return res.json(err);
+    return res.json({ message: "Manager feedback created successfully", result });
+  });
+});
+
 
 //TODO Read manager feedback
 app.get("/managerfeedback", (req, res) => {
@@ -172,9 +183,35 @@ app.get("/managerfeedback", (req, res) => {
   });
 });
 
-//TODO Update manager feedback
+// TODO Update manager feedback
+app.put("/managerfeedback/:id", (req, res) => {
+  const feedbackId = req.params.id;
+  const { feedback } = req.body; // Updating the feedback
 
-//TODO Delete manager feedback
+  const q = "UPDATE manager_feedback SET feedback = ? WHERE id = ?";
+  db.query(q, [feedback, feedbackId], (err, result) => {
+    if (err) return res.json(err);
+    if (result.affectedRows === 0) {
+      return res.json({ message: "Manager feedback not found" });
+    }
+    return res.json({ message: "Manager feedback updated successfully", result });
+  });
+});
+
+
+// TODO Delete manager feedback
+app.delete("/managerfeedback/:id", (req, res) => {
+  const feedbackId = req.params.id; // Deleting the feedback, need to check this again
+
+  const q = "DELETE FROM manager_feedback WHERE id = ?";
+  db.query(q, [feedbackId], (err, result) => {
+    if (err) return res.json(err);
+    if (result.affectedRows === 0) {
+      return res.json({ message: "Manager feedback not found" });
+    }
+    return res.json({ message: "Manager feedback deleted successfully", result });
+  });
+});
 
 //-----------------------DANIEL-------------------------
 //TODO Create accolades
