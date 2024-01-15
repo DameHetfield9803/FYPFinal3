@@ -31,14 +31,19 @@ db.connect((err) => {
 app.post("/employee", (req, res) => {
   const values = [
     req.body.staffId,
-    req.body.name,
-    req.body.user,
+    req.body.staffName,
+    req.body.username,
     req.body.password,
     req.body.email,
+    req.body.department_id,
+    req.body.report_to,
+    req.body.date_joined,
+    req.body.employee_role
   ];
-  const sql = "INSERT INTO employee () VALUES (?);";
-  db.query(sql, values, (err, data) => {
+  const sql = "INSERT INTO employee(`staff_id`, `staff_name`, `username`, `password`, `email`, `department_id`, `report_to`, `date_joined`, `employee_role`) VALUES (?);";
+  db.query(sql, values, (err, result) => {
     if (err) return res.json(err);
+    return res.json(result);
   });
 });
 
@@ -52,9 +57,8 @@ app.get("/employee", (req, res) => {
 });
 
 //TODO Update employee (DAMIEN)
-// TBC on 15/1/2024
 app.post("/employee", (req, res) => {
-  const q = "UPDATE employee WHERE ";
+  const q = `UPDATE `;
 });
 
 //TODO Delete employee (DAMIEN)
