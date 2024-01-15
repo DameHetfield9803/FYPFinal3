@@ -108,7 +108,7 @@ export default function ManagerFeedback() {
                     <td className="td-se-question">
                       <select onChange={(e) => setOptionTwo(e.target.value)}>
                         <option value={""}>Choose option</option>
-                        <option value={"SD"}>1</option>
+                        <option value={1}>1</option>
                         <option value={"D"}>2</option>
                         <option value={"N"}>3</option>
                         <option value={"A"}>4</option>
@@ -125,11 +125,11 @@ export default function ManagerFeedback() {
                     <td className="td-se-question">
                       <select onChange={(e) => setOptionTwo(e.target.value)}>
                         <option value={""}>Choose option</option>
-                        <option value={"SD"}>1</option>
-                        <option value={"D"}>2</option>
-                        <option value={"N"}>3</option>
-                        <option value={"A"}>4</option>
-                        <option value={"SA"}>5</option>
+                        <option value={1}>1</option>
+                        <option value={2}>2</option>
+                        <option value={3}>3</option>
+                        <option value={4}>4</option>
+                        <option value={5}>5</option>
                       </select>
                     </td>
                   </tr>
@@ -145,11 +145,11 @@ export default function ManagerFeedback() {
                     <td className="td-se-question">
                       <select onChange={(e) => setOptionTwo(e.target.value)}>
                         <option value={""}>Choose option</option>
-                        <option value={"SD"}>1</option>
-                        <option value={"D"}>2</option>
-                        <option value={"N"}>3</option>
-                        <option value={"A"}>4</option>
-                        <option value={"SA"}>5</option>
+                        <option value={1}>1</option>
+                        <option value={2}>2</option>
+                        <option value={3}>3</option>
+                        <option value={4}>4</option>
+                        <option value={5}>5</option>
                       </select>
                     </td>
                   </tr>
@@ -182,11 +182,11 @@ export default function ManagerFeedback() {
                     <td className="td-se-question">
                       <select onChange={(e) => setOptionTwo(e.target.value)}>
                         <option value={""}>Choose option</option>
-                        <option value={"SD"}>1</option>
-                        <option value={"D"}>2</option>
-                        <option value={"N"}>3</option>
-                        <option value={"A"}>4</option>
-                        <option value={"SA"}>5</option>
+                        <option value={1}>1</option>
+                        <option value={2}>2</option>
+                        <option value={3}>3</option>
+                        <option value={4}>4</option>
+                        <option value={5}>5</option>
                       </select>
                     </td>
                   </tr>
@@ -198,7 +198,7 @@ export default function ManagerFeedback() {
                     <td className="td-se-question">
                       <select onChange={(e) => setOptionTwo(e.target.value)}>
                         <option value={""}>Choose option</option>
-                        <option value={"SD"}>1</option>
+                        <option value={1}>1</option>
                         <option value={"D"}>2</option>
                         <option value={"N"}>3</option>
                         <option value={"A"}>4</option>
@@ -214,7 +214,7 @@ export default function ManagerFeedback() {
                     <td className="td-se-question">
                       <select onChange={(e) => setOptionTwo(e.target.value)}>
                         <option value={""}>Choose option</option>
-                        <option value={"SD"}>1</option>
+                        <option value={1}>1</option>
                         <option value={"D"}>2</option>
                         <option value={"N"}>3</option>
                         <option value={"A"}>4</option>
@@ -230,7 +230,7 @@ export default function ManagerFeedback() {
                     <td className="td-se-question">
                       <select onChange={(e) => setOptionTwo(e.target.value)}>
                         <option value={""}>Choose option</option>
-                        <option value={"SD"}>1</option>
+                        <option value={1}>1</option>
                         <option value={"D"}>2</option>
                         <option value={"N"}>3</option>
                         <option value={"A"}>4</option>
@@ -247,7 +247,7 @@ export default function ManagerFeedback() {
                     <td className="td-se-question">
                       <select onChange={(e) => setOptionTwo(e.target.value)}>
                         <option value={""}>Choose option</option>
-                        <option value={"SD"}>1</option>
+                        <option value={1}>1</option>
                         <option value={"D"}>2</option>
                         <option value={"N"}>3</option>
                         <option value={"A"}>4</option>
@@ -265,7 +265,7 @@ export default function ManagerFeedback() {
                     <td className="td-se-question">
                       <select onChange={(e) => setOptionTwo(e.target.value)}>
                         <option value={""}>Choose option</option>
-                        <option value={"SD"}>1</option>
+                        <option value={1}>1</option>
                         <option value={"D"}>2</option>
                         <option value={"N"}>3</option>
                         <option value={"A"}>4</option>
@@ -282,7 +282,7 @@ export default function ManagerFeedback() {
                     <td className="td-se-question">
                       <select onChange={(e) => setOptionTwo(e.target.value)}>
                         <option value={""}>Choose option</option>
-                        <option value={"SD"}>1</option>
+                        <option value={1}>1</option>
                         <option value={"D"}>2</option>
                         <option value={"N"}>3</option>
                         <option value={"A"}>4</option>

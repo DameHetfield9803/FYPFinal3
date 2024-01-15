@@ -4,7 +4,7 @@ const mysql = require("mysql2");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 
-// axios is in front end, client, not back end. 
+// axios is in front end, client, not back end.
 
 const app = express();
 
@@ -80,8 +80,8 @@ app.get("/department", (req, res) => {
 //TODO Update department (DAMIEN)
 
 app.post("/department", (req, res) => {
-  const q = "UPDATE department_id, name, VALUES (?, ?, ?);"
-})
+  const q = "UPDATE department_id, name, VALUES (?, ?, ?);";
+});
 
 //TODO Delete department (EN QUAN)
 app.delete("/department", (req, res) => {
@@ -102,10 +102,10 @@ app.get("/peerfeedback", (req, res) => {
 //TODO Update peer feedback (DAMIEN)
 
 app.post("/peerfeedback", (req, res) => {
-  const q = "UPDATE peerfeedback "
-})
+  const q = "UPDATE peerfeedback ";
+});
 
-//I AM GONNA FUCKING KILL MYSELF 
+//I AM GONNA FUCKING KILL MYSELF
 
 //TODO Delete peer feedback
 
@@ -179,11 +179,12 @@ app.delete("/selffeedback/:id", (req, res) => {
 //----------------------FIRDAUS----------------------
 //TODO Create manager feedback
 app.post("/managerfeedback", (req, res) => {
-  const { employeeId, feedback } = req.body; // Creating the feedback
+  const { managerFb, date, feedbackText, staffId } = req.body; // Creating the feedback
 
   const q =
-    "INSERT INTO manager_feedback (employee_id, feedback) VALUES (?, ?)";
-  db.query(q, [employeeId, feedback], (err, result) => {
+    "INSERT INTO manager_feedback (manager_feedback_id, date, feedback_text, staff_id) VALUES (?, ?, ?, ?)";
+
+  db.query(q, [managerFb, date, feedbackText, staffId], (err, result) => {
     if (err) return res.json(err);
     return res.json({
       message: "Manager feedback created successfully",
@@ -234,12 +235,11 @@ app.delete("/managerfeedback/:id", (req, res) => {
       result,
     });
   });
-});//TODO Create manager feedback
+}); //TODO Create manager feedback
 app.post("/managerfeedback", (req, res) => {
   const { staff_id, feedback_text } = req.body; // Creating the feedback
 
-  const q =
-    "INSERT INTO manager_feedback (employee_id, feedback) VALUES (?, ?)";
+  const q = "INSERT INTO manager_feedback (staff_id, feedback) VALUES (?, ?)";
   db.query(q, [staff_id, feedback_text], (err, result) => {
     if (err) return res.json(err);
     return res.json({
@@ -264,7 +264,7 @@ app.put("/managerfeedback/:id", (req, res) => {
   const { feedback_text } = req.body; // Updating the feedback
 
   const q = "UPDATE manager_feedback SET feedback = ? WHERE id = ?";
-  db.query(q, [feedback_text, manager_feedback_id	], (err, result) => {
+  db.query(q, [feedback_text, manager_feedback_id], (err, result) => {
     if (err) return res.json(err);
     if (result.affectedRows === 0) {
       return res.json({ message: "Manager feedback not found" });
@@ -319,12 +319,12 @@ app.post("/accolate", (req, res) => {
 
 //TODO Read accolades
 
-app.get("/accolate", (req,res) => {
-  db.query("SELECT * FROM accolate;", (err,data) => {
-    if(err) return res.json(err)
+app.get("/accolate", (req, res) => {
+  db.query("SELECT * FROM accolate;", (err, data) => {
+    if (err) return res.json(err);
     return res.json(data);
-  })
-})
+  });
+});
 
 //TODO Update accolades
 
