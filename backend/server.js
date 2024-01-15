@@ -125,10 +125,24 @@ app.post("/peerfeedback", (req, res) => {
   const q = "UPDATE peerfeedback ";
 });
 
-//TODO Delete peer feedback (En Quan) ******I DO LATER*****
-// app.delete("/peerfeedback",(req,res) =>{
-//   const
-// })
+//DONE Delete peer feedback (En Quan)
+app.delete("/peerfeedback", (req, res) => {
+  const { peerFeedbackId } = req.body;
+
+  const q = "DELETE FROM peerfeedback WHERE peer_feedback_id = ?";
+  db.query(q, [peerFeedbackId], (err, data) => {
+    if (err) {
+      console.error(err);
+      res.status(500).json({ message: "Error deleting peer feedback" });
+    } else {
+      if (data.affectedRows > 0) {
+        res.json({ message: "Peer feedback deleted successfully" });
+      } else {
+        res.status(404).json({ message: "Peer feedback not found" });
+      }
+    }
+  });
+});
 
 //---------------------DANIEL-----------------------
 //TODO Create self feedback (DAMIEN)
@@ -230,10 +244,10 @@ app.get("/managerfeedback", (req, res) => {
 
 // Delete manager feedback (FIRDAUS)
 app.delete("/managerfeedback ", (req, res) => {
-  const {managerFeedbackId} = req.body;
+  const { managerFeedbackId } = req.body;
 
   const q = "DELETE FROM managerfeedback WHERE manager_feedback_id = ?";
-    db.query(q, [managerFeedbackId], (err, data) => {
+  db.query(q, [managerFeedbackId], (err, data) => {
     if (err) {
       console.error(err);
       res.status(500).json({ message: "Error deleting feedback" });
@@ -246,7 +260,6 @@ app.delete("/managerfeedback ", (req, res) => {
     }
   });
 });
-
 
 //-----------------------DANIEL-------------------------
 //TODO Create accolades

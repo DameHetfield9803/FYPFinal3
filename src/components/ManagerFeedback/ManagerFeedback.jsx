@@ -1,6 +1,6 @@
-//Add manager feedback 
+//Add manager feedback
 import { useState } from "react";
-import axios from 'axios';
+import axios from "axios";
 import "./ManagerFeedback.css";
 
 export default function ManagerFeedback() {
@@ -318,6 +318,7 @@ export default function ManagerFeedback() {
               rows="6"
               name="comments"
               id="feedback_comments"
+              placeholder="type something..."
             ></textarea>
           </div>
           <div className="row"></div>
@@ -332,4 +333,3 @@ export default function ManagerFeedback() {
     </div>
   );
 }
-

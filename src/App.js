@@ -25,7 +25,7 @@ import Navbar from "./components/NavBar/NavBar";
 import Home from "./components/Home/Home";
 
 /*En Quan testing below this line*/
-import "./components/ManagerFeedback/MFtesting";
+import MFtesting from "./components/ManagerFeedback/MFtesting";
 
 function App() {
   return (
