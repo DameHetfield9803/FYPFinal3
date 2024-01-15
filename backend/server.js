@@ -48,7 +48,7 @@ app.post("/employee", (req, res) => {
   });
 });
 
-//TODO Read employee (EN QUAN)
+//DONE Read employee (EN QUAN)
 app.get("/employee", (req, res) => {
   const q = "SELECT * FROM employee";
   db.query(q, (err, data) => {
@@ -66,7 +66,7 @@ app.post("/employee", (req, res) => {
 //TODO Delete employee (DAMIEN)
 
 //---------------------------------------
-//TODO Create department (EN QUAN)
+//DONE Create department (EN QUAN)
 app.post("/department", (req, res) => {
   const q = "INSERT INTO department (`department_id`,`name`)VALUES(?,?)";
   const values = [req.body.department_id, req.body.name];
@@ -89,7 +89,7 @@ app.post("/department", (req, res) => {
   const q = "UPDATE department_id, name, VALUES (?, ?, ?);";
 });
 
-//TODO Delete department (EN QUAN)
+//DONE Delete department (EN QUAN)
 app.delete("/department", (req, res) => {
   const { department_id } = req.body;
 
@@ -125,7 +125,10 @@ app.post("/peerfeedback", (req, res) => {
   const q = "UPDATE peerfeedback ";
 });
 
-//TODO Delete peer feedback (who tf is doing THIS?)
+//TODO Delete peer feedback (En Quan) ******I DO LATER*****
+// app.delete("/peerfeedback",(req,res) =>{
+//   const
+// })
 
 //---------------------DANIEL-----------------------
 //TODO Create self feedback (DAMIEN)
@@ -189,7 +192,7 @@ app.delete("/selffeedback/:id", (req, res) => {
   });
 });
 //----------------------FIRDAUS----------------------
-// Create manager feedback (EN QUAN)
+// DONE Create manager feedback (EN QUAN)
 app.post("/managerfeedback", (req, res) => {
   const { managerFb, date, feedbackText, staffId } = req.body; // Creating the feedback
 
@@ -202,24 +205,26 @@ app.post("/managerfeedback", (req, res) => {
   });
 });
 
-//TODO Read manager feedback (EN QUAN)
+//TODO Update manager feedback
+app.post("/managerfeedback", (req, res) => {
+  const { staff_id, feedback_text } = req.body; // Creating the feedback
+
+  const q = "INSERT INTO manager_feedback (staff_id, feedback) VALUES (?, ?)";
+  db.query(q, [staff_id, feedback_text], (err, result) => {
+    if (err) return res.json(err);
+    return res.json({
+      message: "Manager feedback created successfully",
+      result,
+    });
+  });
+});
+
+//DONE Read manager feedback (EN QUAN)
 app.get("/managerfeedback", (req, res) => {
   const q = "SELECT * FROM managerfeedback";
   db.query(q, (err, data) => {
     if (err) return res.json(err);
     return res.json(data);
-  });
-});
-
-// Update manager feedback
-app.put("/managerfeedback/:id", (req, res) => {
-  const manager_feedback_id = req.params.id;
-  const { feedback_text } = req.body; // Updating the feedback
-
-  const q = "UPDATE manager_feedback SET feedback = ? WHERE id = ?";
-  db.query(q, [feedback_text, manager_feedback_id], (err, result) => {
-    if (err) return res.json(err);
-    return res.json(result);
   });
 });
 
