@@ -135,23 +135,10 @@ app.get("/selffeedback", (req,res) => {
 //TODO Update self feedback (DAMIEN)
 
 app.put("/selffeedback/:id", (req, res) => {
-  const { date, feedbackText, staffId } = req.body;
-  const selfEvaluationId = req.params.id;
-
-  // Validate inputs here if necessary
-
-  const sql =
-    "UPDATE selffeedback SET date=?, feedback_text=?, staff_id=? WHERE id=?";
-  const values = [date, feedbackText, staffId, selfEvaluationId];
-
-  db.query(sql, values, (err, result) => {
-    if (err) {
-      console.error(err);
-      return res.status(500).send("Error updating self evaluation");
-    }
-
-    console.log("Self evaluation updated:", result);
-    res.status(200).send("Self evaluation updated successfully");
+  const vals = [req.body.feedback_text, req.body.self_feedback_id, req.body.staff_id]; // retrieving from front end
+  db.query("UPDATE selffeedback SET feedback_text = ? WHERE self_feedback_id = ? AND staff_id = ?;", vals ,(err,data) => {
+    if(err) return res.json(err);
+    return res.json(data);
   });
 });
 //TODO Delete self feedback (EN QUAN)
