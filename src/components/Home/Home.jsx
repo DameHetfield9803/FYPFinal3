@@ -60,7 +60,7 @@ export default function Home() {
         <br></br>
         <a href="/ManagerFeedback">ManagerFeedback</a>
         <br></br>
-        {/*En Quan test here*/}
+        {/*En Quan test code here*/}
         <a href="/MFtesting">MFtesting</a>
         <br></br>
       </div>
