@@ -205,22 +205,7 @@ app.post("/managerfeedback", (req, res) => {
   });
 });
 
-// TODO Delete manager feedback
-app.delete("/managerfeedback/:id", (req, res) => {
-  const feedbackId = req.params.id; // Deleting the feedback, need to check this again
-
-  const q = "DELETE FROM manager_feedback WHERE id = ?";
-  db.query(q, [feedbackId], (err, result) => {
-    if (err) return res.json(err);
-    if (result.affectedRows === 0) {
-      return res.json({ message: "Manager feedback not found" });
-    }
-    return res.json({
-      message: "Manager feedback deleted successfully",
-      result,
-    });
-  });
-}); //TODO Update manager feedback
+//TODO Update manager feedback
 app.post("/managerfeedback", (req, res) => {
   const { staff_id, feedback_text } = req.body; // Creating the feedback
 
@@ -234,7 +219,7 @@ app.post("/managerfeedback", (req, res) => {
   });
 });
 
-//TODO Read manager feedback (EN QUAN)
+//DONE Read manager feedback (EN QUAN)
 app.get("/managerfeedback", (req, res) => {
   const q = "SELECT * FROM managerfeedback";
   db.query(q, (err, data) => {
@@ -243,28 +228,25 @@ app.get("/managerfeedback", (req, res) => {
   });
 });
 
-// Update manager feedback
-app.put("/managerfeedback/:id", (req, res) => {
-  const manager_feedback_id = req.params.id;
-  const { feedback_text } = req.body; // Updating the feedback
+// Delete manager feedback (FIRDAUS)
+app.delete("/managerfeedback ", (req, res) => {
+  const {managerFeedbackId} = req.body;
 
-  const q = "UPDATE manager_feedback SET feedback = ? WHERE id = ?";
-  db.query(q, [feedback_text, manager_feedback_id], (err, result) => {
-    if (err) return res.json(err);
-    return res.json(result);
+  const q = "DELETE FROM managerfeedback WHERE manager_feedback_id = ?";
+    db.query(q, [managerFeedbackId], (err, data) => {
+    if (err) {
+      console.error(err);
+      res.status(500).json({ message: "Error deleting feedback" });
+    } else {
+      if (data.affectedRows > 0) {
+        res.json({ message: "Feedback deleted successfully" });
+      } else {
+        res.status(404).json({ message: "Feedback not found" });
+      }
+    }
   });
 });
 
-// Delete manager feedback
-app.delete("/managerfeedback/:id", (req, res) => {
-  const managerFeedbackId = req.params.id;
-
-  const q = "DELETE FROM managerfeedback WHERE manager_feedback_id=?";
-  db.query(q, [managerFeedbackId], (err, result) => {
-    if (err) return res.json(err);
-    return res.json(result);
-  });
-});
 
 //-----------------------DANIEL-------------------------
 //TODO Create accolades
