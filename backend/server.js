@@ -68,7 +68,7 @@ app.post("/employee", (req, res) => {
 //---------------------------------------
 //TODO Create department (EN QUAN)
 app.post("/department", (req, res) => {
-  const q = "INSERT INTO department (`department_id`,`name`)VALUES(?)";
+  const q = "INSERT INTO department (`department_id`,`name`)VALUES(?,?)";
   const values = [req.body.department_id, req.body.name];
   db.query(q, [values], (err, data) => {
     if (err) return res.json(err);
@@ -91,7 +91,21 @@ app.post("/department", (req, res) => {
 
 //TODO Delete department (EN QUAN)
 app.delete("/department", (req, res) => {
-  const q = "DELETE department "; // Continue tomorrow :)
+  const { department_id } = req.body;
+
+  const q = "DELETE FROM department WHERE department_id = ?";
+  db.query(q, [department_id], (err, data) => {
+    if (err) {
+      console.error(err);
+      res.status(500).json({ message: "Error deleting department" });
+    } else {
+      if (data.affectedRows > 0) {
+        res.json({ message: "Department deleted successfully" });
+      } else {
+        res.status(404).json({ message: "Department not found" });
+      }
+    }
+  });
 });
 
 //-------------------(split)-----------------------
