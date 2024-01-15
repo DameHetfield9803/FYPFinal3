@@ -69,8 +69,18 @@ app.post("/department", (req, res) => {
   });
 });
 //TODO Read department (DAMIEN)
-
+app.get("/department", (req,res) => {
+  const q = "SELECT * FROM department;";
+  db.query(q, (err,data) => {
+    if(err) return res.json(err);
+    return res.json("Department showed successfully. \n");
+  })
+})
 //TODO Update department (DAMIEN)
+
+app.post("/department", (req, res) => {
+  const q = "UPDATE department_id, name, VALUES (?, ?, ?);"
+})
 
 //TODO Delete department (EN QUAN)
 app.delete("/department", (req, res) => {
