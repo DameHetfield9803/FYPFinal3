@@ -91,7 +91,7 @@ app.delete("/department", (req, res) => {
 //-------------------(split)-----------------------
 //TODO Create peer feedback
 
-//TODO Read peer feedback
+//TODO Read peer feedback (DANIEL)
 app.get("/peerfeedback", (req, res) => {
   const q = "SELECT * FROM peerfeedback";
   db.query(q, (err, data) => {
@@ -112,11 +112,8 @@ app.post("/peerfeedback", (req, res) => {
 //---------------------DANIEL-----------------------
 //TODO Create self feedback (DAMIEN)
 // Route for creating a self evaluation
-app.post("/self_evaluations", (req, res) => {
+app.post("/selffeedback", (req, res) => {
   const { date, feedbackText, staffId } = req.body;
-
-  // Validate inputs here if necessary
-
   const sql =
     "INSERT INTO selffeedback (date, feedback_text, staff_id) VALUES (?, ?, ?)";
   const values = [date, feedbackText, staffId];
@@ -141,7 +138,7 @@ app.get("/selffeedback", (req, res) => {
 });
 //TODO Update self feedback (DAMIEN)
 
-app.put("/self_evaluations/:id", (req, res) => {
+app.put("/selffeedback/:id", (req, res) => {
   const { date, feedbackText, staffId } = req.body;
   const selfEvaluationId = req.params.id;
 
@@ -163,7 +160,7 @@ app.put("/self_evaluations/:id", (req, res) => {
 });
 //TODO Delete self feedback (EN QUAN)
 
-app.delete("/self_evaluation/:id", (req, res) => {
+app.delete("/selffeedback/:id", (req, res) => {
   const selfEvaluationId = req.params.id;
 
   const sql = "DELETE FROM selffeedback WHERE id=?";
@@ -299,13 +296,13 @@ app.delete("/managerfeedback/:id", (req, res) => {
 //-----------------------DANIEL-------------------------
 //TODO Create accolades
 
-app.post("/accolades", (req, res) => {
+app.post("/accolate", (req, res) => {
   const { staffId, accoladeTitle, completionDate } = req.body;
 
   // Validate inputs here if necessary
 
   const sql =
-    "INSERT INTO accolades (staff_id, accolade_title, completion_date) VALUES (?, ?, ?)";
+    "INSERT INTO accolate (staff_id, accolade_title, completion_date) VALUES (?, ?, ?)";
   const values = [staffId, accoladeTitle, completionDate];
 
   //this one is error handling idk correct or not
@@ -331,14 +328,14 @@ app.get("/accolate", (req,res) => {
 
 //TODO Update accolades
 
-app.put("/accolades/:id", (req, res) => {
+app.put("/accolate/:id", (req, res) => {
   const { accoladeTitle, completionDate } = req.body;
   const accoladeId = req.params.id;
 
   // Validate inputs here if necessary
 
   const sql =
-    "UPDATE accolades SET accolade_title=?, completion_date=? WHERE id=?";
+    "UPDATE accolate SET accolade_title=?, completion_date=? WHERE id=?";
   const values = [accoladeTitle, completionDate, accoladeId];
 
   db.query(sql, values, (err, result) => {
@@ -354,10 +351,10 @@ app.put("/accolades/:id", (req, res) => {
 
 //TODO Delete accolades
 
-app.delete("/accolades/:id", (req, res) => {
+app.delete("/accolate/:id", (req, res) => {
   const accoladeId = req.params.id;
 
-  const sql = "DELETE FROM accolades WHERE id=?";
+  const sql = "DELETE FROM accolate WHERE id=?";
   const values = [accoladeId];
 
   db.query(sql, values, (err, result) => {
