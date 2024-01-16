@@ -9,10 +9,9 @@ export default function ManagerFeedback() {
 
     // if all options are chosen and valid
     if (
-      optionOne !== "" &&
-      optionTwo !== "" &&
-      optionThree !== "" &&
-      optionFour !== ""
+      optionOne !== 0 &&
+      optionTwo !== 0 
+
     ) {
       setIsError(false);
       setIsSubmitted(true);
@@ -26,12 +25,25 @@ export default function ManagerFeedback() {
   // gets and sets the fields,
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const [optionOne, setOptionOne] = useState("");
-  const [optionTwo, setOptionTwo] = useState("");
-  const [optionThree, setOptionThree] = useState("");
-  const [optionFour, setOptionFour] = useState("");
+  const [optionOne, setOptionOne] = useState(0);
+  const [optionTwo, setOptionTwo] = useState(0);
 
   const [isError, setIsError] = useState(false);
+
+  const handleChange = async (e) =>{
+
+  }
+
+  const handleClick = async (e)=>{
+    e.preventDefault() 
+    try{
+      await axios.post("http://localhost:3001/managerfeedback")
+    }catch(err){
+
+    }
+  }
+
+  
   return (
     <div>
       {/* NAVBAR ITEMS */}
@@ -61,8 +73,8 @@ export default function ManagerFeedback() {
         <form
           name="feedback_form"
           id="feedback_form"
-          method="get"
-          action="/submitManagerFeedback"
+          method="post"
+          action="http://localhost:3001/managerfeedback"
         >
           <div className="App">
             <div className="container">
@@ -319,12 +331,15 @@ export default function ManagerFeedback() {
               name="comments"
               id="feedback_comments"
               placeholder="type something..."
+              onchange = {handleChange}
             ></textarea>
           </div>
           <div className="row"></div>
           <button
             type="submit"
             className="btn btn-primary d-block mx-auto mt-5"
+            onChange={handleClick}
+
           >
             Submit
           </button>
