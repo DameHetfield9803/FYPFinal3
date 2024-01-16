@@ -24,9 +24,6 @@ import UserGuide from "./components/UserGuide/userguides";
 import Navbar from "./components/NavBar/NavBar";
 import Home from "./components/Home/Home";
 
-/*En Quan testing below this line*/
-import MFtesting from "./components/ManagerFeedback/MFtesting";
-
 function App() {
   return (
     <Router>
@@ -34,11 +31,6 @@ function App() {
         <Switch>
           <Route exact path="/">
             <Login />
-          </Route>
-
-          {/*En Quan testing here*/}
-          <Route exact path="/MFtesting">
-            <ProtectedRoute component={MFtesting} />
           </Route>
 
           <Route exact path="/Home">
