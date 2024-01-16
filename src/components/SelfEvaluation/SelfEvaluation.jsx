@@ -1,5 +1,26 @@
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from 'axios';
 import "./SelfEvaluation.css";
+
+function MyComponent() {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    axios.get('http://localhost:3001/api/data')
+      .then((response) => {
+        setData(response.data);
+      })
+      .catch((error) => {
+        console.error('Error fetching data:', error);
+      });
+  }, []);
+
+
+  return (
+    <div>
+    </div>
+  );
+}
 
 export default function SelfEvaluation() {
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -19,10 +40,12 @@ export default function SelfEvaluation() {
       optionTwo !== "" &&
       optionThree !== "" &&
       optionFour !== "" &&
-      optionFive !== ""
+      optionFive !== "" &&
+      comments !== ""
     ) {
       setIsError(false);
       setIsSubmitted(true);
+      // Here you can send the form data to the server if needed
     } else {
       setIsError(true);
       setIsSubmitted(false);
@@ -125,6 +148,7 @@ export default function SelfEvaluation() {
                   </select>
               </td>
             </tr>
+            
             <tr>
               <td className="td-se-question"> Other Comments:</td>
               <td>
@@ -138,6 +162,7 @@ export default function SelfEvaluation() {
             </tr>
           </tbody>
         </table>
+
         <button
           className="btn btn-primary float-right mt-5"
           onClick={submitForm}

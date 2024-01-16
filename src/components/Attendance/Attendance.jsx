@@ -1,15 +1,19 @@
-import React, { useState } from 'react';
-import attendanceData from './AttendanceData.json';
+import React, { useState, useEffect } from 'react';
 import { auth } from '../../config/firebase';
 import { signOut } from 'firebase/auth';
 import { useHistory } from 'react-router-dom';
 import Navbar from '../NavBar/NavBar';
 import './Attendance.css';
+import attendanceData from './AttendanceData.json';
 
 export default function Attendance() {
   const history = useHistory();
   const [jsonData] = useState(attendanceData);
   const [filter, setFilter] = useState('');
+  const [presentCount, setPresentCount] = useState(0);
+  const [notPresentCount, setNotPresentCount] = useState(0);
+  const [lateCount, setLateCount] = useState(0);
+  const [presentToTotalPercentage, setPresentToTotalPercentage] = useState(0);
 
   const logout = async () => {
     try {
@@ -39,9 +43,29 @@ export default function Attendance() {
     }
   };
 
+  // Declare filteredData here
   const filteredData = jsonData
     .filter((entry) => entry.BatchNO.toString().includes(filter))
     .filter((entry) => !['Sat', 'Sun'].includes(entry['Week Day']));
+
+  useEffect(() => {
+    // Update counts based on filtered data
+    const counts = { Present: 0, 'Not Present': 0, Late: 0 };
+
+    filteredData.forEach((entry) => {
+      const status = getStatus(entry['Adj In']);
+      counts[status]++;
+    });
+
+    setPresentCount(counts.Present);
+    setNotPresentCount(counts['Not Present']);
+    setLateCount(counts.Late);
+
+    // Calculate the new percentage and update the state
+    const totalEntries = counts.Present + counts['Not Present'];
+    const percentage = Math.floor((counts.Present / totalEntries) * 100);
+    setPresentToTotalPercentage(isNaN(percentage) ? 0 : percentage);
+  }, [filter, jsonData, filteredData]);
 
   return (
     <div>
@@ -61,6 +85,11 @@ export default function Attendance() {
       </div>
 
       <div className="container mt-3">
+        <p>Total Present: {presentCount}</p>
+        <p>Total Not Present: {notPresentCount}</p>
+        <p>Total Late: {lateCount}</p>
+        <p>Present to Total Percentage: {presentToTotalPercentage.toFixed(2)}%</p>
+
         <table className="table table-hover">
           <thead>
             <tr>
@@ -106,6 +135,7 @@ export default function Attendance() {
           </tbody>
         </table>
       </div>
+
       <div className="container mt-3">
         <button className="btn btn-primary" onClick={logout}>
           Logout
