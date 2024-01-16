@@ -64,6 +64,7 @@ export default function Home() {
 
       <div className="HR-container">
         <strong>Human Resource</strong>
+        <a href="/MFtesting">MFtesting</a> <br></br>
         <a href="/Attendance">Attendance</a> <br></br>
         <a href="/Accolades">Accolades</a>
         <br></br>

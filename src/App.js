@@ -23,6 +23,8 @@ import EmployeeDetails from "./components/EmployeeTable/EmployeeDetails";
 import UserGuide from "./components/UserGuide/userguides";
 import Navbar from "./components/NavBar/NavBar";
 import Home from "./components/Home/Home";
+// En Quan testing below here
+import MFtesting from "./components/ManagerFeedback/MFtesting";
 
 function App() {
   return (
@@ -35,6 +37,10 @@ function App() {
 
           <Route exact path="/Home">
             <ProtectedRoute component={Home} />
+          </Route>
+
+          <Route exact path="/MFtesting">
+            <ProtectedRoute component={MFtesting} />
           </Route>
 
           <Route exact path="/accolades">
