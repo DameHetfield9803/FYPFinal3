@@ -204,7 +204,7 @@ app.get("/selffeedback", (req, res) => {
     return res.json(data);
   });
 });
-//TODO Update self feedback (DAMIEN)
+//DONE Update self feedback (DAMIEN)
 
 app.put("/selffeedback/:id", (req, res) => {
   const vals = [
