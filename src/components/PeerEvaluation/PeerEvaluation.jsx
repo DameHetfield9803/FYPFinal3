@@ -35,7 +35,7 @@ export default function PeerEvaluation() {
     <div>
       <Navbar></Navbar>
     <div className="App">
-          <form method='post' action=''>
+          <form method='post' action='localhost:3001/peerevaluation'>
       <div className="container">
         <h1 className="mt-3">Peer Evaluation</h1>
        <b> <p className="mt-3">(Lowest Rating: 1, Neutral : 3, Highest Rating: 5)</p></b>
@@ -162,6 +162,8 @@ export default function PeerEvaluation() {
         <button
           className="btn btn-primary float-right mt-5"
           onClick={submitForm}
+          formMethod="post"
+          formAction="localhost:3001/peerevaluation"
         >
           Submit
         </button>
