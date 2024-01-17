@@ -68,24 +68,23 @@ app.put("/employee", (req, res) => {
     req.body.report_to,
     req.body.date_joined,
     req.body.employee_role,
-    req.body.staff_id
+    req.body.staff_id,
   ];
   const q = `UPDATE employee SET staff_name = ?, username = ?, password = ?, email = ?, department_id = ?, report_to = ?, date_joined = ?, employee_role = ? WHERE staff_id = ?;`;
-  db.query(q, vals , (err, data) => {
-    if(err) return res.json(err);
+  db.query(q, vals, (err, data) => {
+    if (err) return res.json(err);
     return res.json(data);
-  })
+  });
 });
 
 // Delete employee (DAMIEN) (done)
-app.delete("/employee", (req,res)=> {
+app.delete("/employee", (req, res) => {
   const vals = [req.body.staff_id];
-  db.query("DELETE FROM `employee` WHERE staff_id = ?;", vals , (err,data)=> {
-    if(err) return res.json(err);
+  db.query("DELETE FROM `employee` WHERE staff_id = ?;", vals, (err, data) => {
+    if (err) return res.json(err);
     return res.json(data);
   });
-})
-
+});
 
 //---------------------------------------
 //DONE Create department (EN QUAN)
@@ -108,16 +107,15 @@ app.get("/department", (req, res) => {
 // Update department (DAMIEN) (DONE)
 
 // set endpoints with requests and response
-app.put("/department", (req, res) => 
-{
-  // initialize values and queries 
+app.put("/department", (req, res) => {
+  // initialize values and queries
   const vals = [req.body.name, req.body.department_id];
   const q = "UPDATE `department` SET `name` = ? WHERE `department_id` = ? ;";
-  db.query(q, vals , (err, data) => {
+  db.query(q, vals, (err, data) => {
     // returns error if there's an error or returns data if there aren't errors
-    if(err) return res.json(err);
+    if (err) return res.json(err);
     return res.json(data);
-  })
+  });
 });
 
 //DONE Delete department (EN QUAN)
@@ -147,10 +145,14 @@ app.post("/peerfeedback", (req, res) => {
   const q =
     "INSERT INTO peerfeedback (peer_feedback_id, date, feedback_text, staff_id, peer_id) VALUES (?, ?, ?, ?, ?)";
 
-  db.query(q, [peer_feedback_id, date, feedback_text, staff_id, peer_id], (err, result) => {
-    if (err) return res.json(err);
-    return res.json(result);
-  });
+  db.query(
+    q,
+    [peer_feedback_id, date, feedback_text, staff_id, peer_id],
+    (err, result) => {
+      if (err) return res.json(err);
+      return res.json(result);
+    }
+  );
 });
 
 //DONE Read peer feedback (DANIEL)
@@ -164,11 +166,21 @@ app.get("/peerfeedback", (req, res) => {
 // Update peer feedback (DAMIEN) (done)
 
 app.put("/peerfeedback", (req, res) => {
-  const vals = [req.body.date, req.body.feedback_text, req.body.peer_id, req.body.staff_id, req.body.peer_feedback_id];
-  db.query("UPDATE `peerfeedback` SET `date` = (?), `feedback_text` = (?),  `peer_id` = (?) , `staff_id` = (?) WHERE `peer_feedback_id` = (?);", vals, (err, data) => {
-    if (err) return res.json(err);
-    return res.json(data);
-  });
+  const vals = [
+    req.body.date,
+    req.body.feedback_text,
+    req.body.peer_id,
+    req.body.staff_id,
+    req.body.peer_feedback_id,
+  ];
+  db.query(
+    "UPDATE `peerfeedback` SET `date` = (?), `feedback_text` = (?),  `peer_id` = (?) , `staff_id` = (?) WHERE `peer_feedback_id` = (?);",
+    vals,
+    (err, data) => {
+      if (err) return res.json(err);
+      return res.json(data);
+    }
+  );
 });
 
 //DONE Delete peer feedback (En Quan)
@@ -259,7 +271,7 @@ app.post("/managerfeedback", (req, res) => {
   const { managerFb, date, feedbackText, staffId } = req.body; // Creating the feedback
 
   const q =
-    "INSERT INTO managerfeedback (manager_feedback_id, date, feedback_text, staff_id) VALUES (?, ?, ?, ?)";
+    "INSERT INTO manager_feedback (manager_feedback_id, date, feedback_text, staff_id) VALUES (?, ?, ?, ?)";
 
   db.query(q, [managerFb, date, feedbackText, staffId], (err, result) => {
     if (err) return res.json(err);
@@ -271,7 +283,8 @@ app.post("/managerfeedback", (req, res) => {
 app.put("/managerfeedback", (req, res) => {
   const { managerfeedbackid, feedbacktext } = req.body;
 
-  const q = "UPDATE managerfeedback SET feedback_text = ? WHERE manager_feedback_id = ?";
+  const q =
+    "UPDATE managerfeedback SET feedback_text = ? WHERE manager_feedback_id = ?";
   db.query(q, [feedbacktext, managerfeedbackid], (err, result) => {
     console.log("SQL Query:", q);
     console.log("SQL Result:", result);
@@ -290,7 +303,7 @@ app.put("/managerfeedback", (req, res) => {
 
 //DONE Read manager feedback (EN QUAN)
 app.get("/managerfeedback", (req, res) => {
-  const q = "SELECT * FROM managerfeedback";
+  const q = "SELECT * FROM manager_feedback";
   db.query(q, (err, data) => {
     if (err) return res.json(err);
     return res.json(data);
@@ -299,10 +312,10 @@ app.get("/managerfeedback", (req, res) => {
 
 //DONE Delete manager feedback (FIRDAUS)
 app.delete("/managerfeedback", (req, res) => {
-  const {Managerfeedbackid} = req.body;
+  const { Managerfeedbackid } = req.body;
 
   const q = "DELETE FROM managerfeedback WHERE manager_feedback_id = ?";
-    db.query(q, [Managerfeedbackid], (err, data) => {
+  db.query(q, [Managerfeedbackid], (err, data) => {
     if (err) {
       console.error(err);
       res.status(500).json({ message: "Error deleting feedback" });
@@ -324,12 +337,15 @@ app.post("/accolate", (req, res) => {
   const q =
     "INSERT INTO accolate (accolate_id, staff_id, accolate_title, completion_date) VALUES (?, ?, ?, ?)";
 
-  db.query(q, [accolate_id, staff_id, accolate_title, completion_date], (err, result) => {
-    if (err) return res.json(err);
-    return res.json(result);
-  });
+  db.query(
+    q,
+    [accolate_id, staff_id, accolate_title, completion_date],
+    (err, result) => {
+      if (err) return res.json(err);
+      return res.json(result);
+    }
+  );
 });
-
 
 //Done Read accolades (DANIEL)
 
@@ -345,24 +361,28 @@ app.get("/accolate", (req, res) => {
 app.put("/accolate", (req, res) => {
   const { accolate_id, accolate_title, staff_id, completion_date } = req.body;
 
-  const q = "UPDATE accolate SET accolate_title = ?, staff_id = ?, completion_date = ? WHERE accolate_id = ?";
-  
-  db.query(q, [accolate_title, staff_id, completion_date, accolate_id], (err, result) => {
-    console.log("SQL Query:", q);
-    console.log("SQL Result:", result);
+  const q =
+    "UPDATE accolate SET accolate_title = ?, staff_id = ?, completion_date = ? WHERE accolate_id = ?";
 
-    if (err) return res.json(err);
-    if (result.affectedRows > 0) {
-      return res.json({
-        message: "Accolades updated successfully",
-        result,
-      });
-    } else {
-      return res.status(404).json({ message: "Accolades not found" });
+  db.query(
+    q,
+    [accolate_title, staff_id, completion_date, accolate_id],
+    (err, result) => {
+      console.log("SQL Query:", q);
+      console.log("SQL Result:", result);
+
+      if (err) return res.json(err);
+      if (result.affectedRows > 0) {
+        return res.json({
+          message: "Accolades updated successfully",
+          result,
+        });
+      } else {
+        return res.status(404).json({ message: "Accolades not found" });
+      }
     }
-  });
+  );
 });
-
 
 //Done Delete accolades (DANIEL)
 
