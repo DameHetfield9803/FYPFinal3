@@ -4,7 +4,7 @@ import axios from 'axios'
 
 const AddMF = () =>{
     const [index , setIndex] = useState[0]
-    const []
+    //const [] = useState[]
 
     const handleClick = async (e)=>{
         e.preventDefault() 

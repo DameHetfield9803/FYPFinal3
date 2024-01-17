@@ -16,10 +16,10 @@ export default function PeerEvaluation() {
   function submitForm() {
     // if all options are chosen and valid
     if (
-      optionOne !== "" &&
-      optionTwo !== "" &&
-      optionThree !== "" &&
-      optionFour !== "" &&
+      optionOne !== 0 &&
+      optionTwo !== 0 &&
+      optionThree !== 0 &&
+      optionFour !== 0 &&
       comments.trim() !== "" // Check if comments are not empty
     ) {
       setIsError(false);
