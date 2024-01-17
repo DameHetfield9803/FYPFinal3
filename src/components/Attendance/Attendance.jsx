@@ -5,6 +5,7 @@ import { useHistory } from 'react-router-dom';
 import Navbar from '../NavBar/NavBar';
 import './Attendance.css';
 import attendanceData from './AttendanceData.json';
+import AttendanceSummary from './Attendancesummary'; // Import the AttendanceSummary component
 
 export default function Attendance() {
   const history = useHistory();
@@ -21,7 +22,7 @@ export default function Attendance() {
       history.push('/');
     } catch (err) {
       console.error(err);
-      // Display an error message to the user if needed
+      // This is to display an error message to the user if needed
     }
   };
 
@@ -134,6 +135,11 @@ export default function Attendance() {
             ))}
           </tbody>
         </table>
+     
+      </div>
+      <div className="container mt-3">
+        {/* Render the AttendanceSummary component passing the attendanceData */}
+        <AttendanceSummary attendanceData={jsonData} />
       </div>
 
       <div className="container mt-3">
