@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import employeeData from './EmployeeData.json';
-
+import './EmployeeDetails.css';
 
 
 const EmployeeDetails = ({ match }) => {
@@ -20,8 +20,8 @@ const EmployeeDetails = ({ match }) => {
     }
 
     return (
-
-        <div>
+    
+        <div className="centrecontainer" >
             <h2>Employee Details</h2>
             <ul>
                 <li>
@@ -39,6 +39,8 @@ const EmployeeDetails = ({ match }) => {
                 {/* Add more details as needed */}
             </ul>
         </div>
+     
+       
     );
 };
 
