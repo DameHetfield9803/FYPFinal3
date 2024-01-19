@@ -5,7 +5,6 @@ import { useHistory } from 'react-router-dom';
 import Navbar from '../NavBar/NavBar';
 import './Attendance.css';
 import attendanceData from './AttendanceData.json';
-// import AttendanceSummary from './Attendancesummary'; 
 
 export default function Attendance() {
   const history = useHistory();
@@ -135,11 +134,9 @@ export default function Attendance() {
             ))}
           </tbody>
         </table>
-     
       </div>
+
       <div className="container mt-3">
-        {/* Render the AttendanceSummary component passing the attendanceData */}
-        {/* <AttendanceSummary attendanceData={jsonData} /> */}
       </div>
 
       <div className="container mt-3">
