@@ -4,11 +4,10 @@ import { signOut } from "firebase/auth";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import Navbar from "../NavBar/NavBar";
 import "./Home.css";
-import axios from 'axios';
+import axios from "axios";
 
 export default function Home() {
   const history = useHistory();
-
 
   return (
     <div>
@@ -57,7 +56,6 @@ export default function Home() {
 
       <div className="HR-container">
         <strong>Human Resource</strong>
-        <a href="/MFtesting">MFtesting</a> <br></br>
         <a href="/Attendance">Attendance</a> <br></br>
         <a href="/Accolades">Accolades</a>
         <br></br>
@@ -78,7 +76,6 @@ export default function Home() {
         <a href="/userguides">UserGuide</a>
         <br></br>
       </div>
-
     </div>
   );
 }
