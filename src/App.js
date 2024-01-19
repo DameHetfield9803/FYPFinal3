@@ -85,7 +85,7 @@ function App() {
 
           <Route exact path= "/Attendancesummary">
             <ProtectedRoute component={AttendanceSummary} />
-          </Route> */}
+          </Route> 
 
           <Route exact path="/employee" component={EmpTab} />
           <Route exact path="/employee/:id" component={EmployeeDetails} />
