@@ -35,13 +35,13 @@ app.post("/employee", (req, res) => {
     req.body.username,
     req.body.password,
     req.body.email,
+    req.body.reporting_to,
     req.body.department_id,
-    req.body.report_to,
     req.body.date_joined,
-    req.body.employee_role,
+    req.body.job_role,
   ];
   const sql =
-    "INSERT INTO employee(`staff_id`, `staff_name`, `username`, `password`, `email`, `department_id`, `report_to`, `date_joined`, `employee_role`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
+    "INSERT INTO employee(`staff_id`, `staff_name`, `username`, `password`, `email`,`reporting_to`, `department_id`, `date_joined`, `job_role`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
   db.query(sql, values, (err, result) => {
     if (err) return res.json(err);
     return res.json(result);
@@ -63,14 +63,14 @@ app.put("/employee", (req, res) => {
     req.body.staff_name,
     req.body.username,
     req.body.password,
+    req.body.reporting_to,
     req.body.email,
     req.body.department_id,
-    req.body.report_to,
     req.body.date_joined,
-    req.body.employee_role,
-    req.body.staff_id,
+    req.body.job_role,
+    req.body.staff_id
   ];
-  const q = `UPDATE employee SET staff_name = ?, username = ?, password = ?, email = ?, department_id = ?, report_to = ?, date_joined = ?, employee_role = ? WHERE staff_id = ?;`;
+  const q = `UPDATE employee SET staff_name = ?, username = ?, password = ?,reporting_to = ?,email = ?, department_id = ?,  date_joined = ?, job_role = ? WHERE staff_id = ?;`;
   db.query(q, vals, (err, data) => {
     if (err) return res.json(err);
     return res.json(data);
@@ -89,13 +89,12 @@ app.delete("/employee", (req, res) => {
 //---------------------------------------
 //DONE Create department (EN QUAN)
 app.post("/department", (req, res) => {
-  const { departmentId, departmentName } = req.body;
-  const q = "INSERT INTO department (`department_id`,`name`)VALUES(?,?)";
-  db.query(q, [departmentId, departmentName], (err, data) => {
-    if (err) return res.json(err);
+  const vals = [req.body.department_id , req.body.name];
+  db.query("INSERT INTO `department`(`department_id`, `name`) VALUES (?,?);", vals , (err, data) => {
+    if(err) return res.json(err);
     return res.json(data);
-  });
-});
+  })
+})
 // Read department (DAMIEN) (done)
 app.get("/department", (req, res) => {
   const q = "SELECT * FROM department;";
@@ -109,7 +108,7 @@ app.get("/department", (req, res) => {
 // set endpoints with requests and response
 app.put("/department", (req, res) => {
   // initialize values and queries
-  const vals = [req.body.name, req.body.department_id];
+  const vals = [req.body.name,req.body.department_id];
   const q = "UPDATE `department` SET `name` = ? WHERE `department_id` = ? ;";
   db.query(q, vals, (err, data) => {
     // returns error if there's an error or returns data if there aren't errors
@@ -140,24 +139,16 @@ app.delete("/department", (req, res) => {
 //-------------------(split)-----------------------
 //DONE Create peer feedback (DANIEL)
 app.post("/peerfeedback", (req, res) => {
-  const { peer_feedback_id, date, feedback_text, staff_id, peer_id } = req.body; // Creating the feedback
-
-  const q =
-    "INSERT INTO peerfeedback (peer_feedback_id, date, feedback_text, staff_id, peer_id) VALUES (?, ?, ?, ?, ?)";
-
-  db.query(
-    q,
-    [peer_feedback_id, date, feedback_text, staff_id, peer_id],
-    (err, result) => {
-      if (err) return res.json(err);
-      return res.json(result);
-    }
-  );
-});
+  const vals = [req.body.peer_feedback_id,req.body.date, req.body.feedback_text, req.body.staff_id, req.body.total_score];
+  db.query("INSERT INTO `peer_feedback`(`peer_feedback_id` , `date`, `feedback_text`, `staff_id`, `total_score`) VALUES (? , ? , ? , ? , ?);", vals, (err, data) => {
+    if(err) return res.json(err);
+    return res.json(data);
+  });
+})
 
 //DONE Read peer feedback (DANIEL)
 app.get("/peerfeedback", (req, res) => {
-  const q = "SELECT * FROM peerfeedback";
+  const q = "SELECT * FROM peer_feedback";
   db.query(q, (err, data) => {
     if (err) return res.json(err);
     return res.json(data);
@@ -174,9 +165,7 @@ app.put("/peerfeedback", (req, res) => {
     req.body.peer_feedback_id,
   ];
   db.query(
-    "UPDATE `peerfeedback` SET `date` = (?), `feedback_text` = (?),  `peer_id` = (?) , `staff_id` = (?) WHERE `peer_feedback_id` = (?);",
-    vals,
-    (err, data) => {
+    "UPDATE `peerfeedback` SET `date` = (?), `feedback_text` = (?),  `peer_id` = (?) , `staff_id` = (?) WHERE `peer_feedback_id` = (?);", vals , (err, data) => {
       if (err) return res.json(err);
       return res.json(data);
     }
