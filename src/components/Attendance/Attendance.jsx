@@ -9,7 +9,7 @@ import attendanceData from './AttendanceData.json';
 export default function Attendance() {
   const history = useHistory();
   const [jsonData] = useState(attendanceData);
-  const [filter, setFilter] = useState('');
+  const [filter, setFilter] = useState(0);
   const [presentCount, setPresentCount] = useState(0);
   const [notPresentCount, setNotPresentCount] = useState(0);
   const [lateCount, setLateCount] = useState(0);
