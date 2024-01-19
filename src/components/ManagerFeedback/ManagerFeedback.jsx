@@ -8,11 +8,7 @@ export default function ManagerFeedback() {
     //setIsSubmitted(true);
 
     // if all options are chosen and valid
-    if (
-      optionOne !== 0 &&
-      optionTwo !== 0 
-
-    ) {
+    if (optionOne !== 0 && optionTwo !== 0) {
       setIsError(false);
       setIsSubmitted(true);
     } else {
@@ -30,20 +26,15 @@ export default function ManagerFeedback() {
 
   const [isError, setIsError] = useState(false);
 
-  const handleChange = async (e) =>{
+  const handleChange = async (e) => {};
 
-  }
+  const handleClick = async (e) => {
+    e.preventDefault();
+    try {
+      await axios.post("http://localhost:3001/managerfeedback");
+    } catch (err) {}
+  };
 
-  const handleClick = async (e)=>{
-    e.preventDefault() 
-    try{
-      await axios.post("http://localhost:3001/managerfeedback")
-    }catch(err){
-
-    }
-  }
-
-  
   return (
     <div>
       {/* NAVBAR ITEMS */}
@@ -331,7 +322,7 @@ export default function ManagerFeedback() {
               name="comments"
               id="feedback_comments"
               placeholder="type something..."
-              onchange = {handleChange}
+              onchange={handleChange}
             ></textarea>
           </div>
           <div className="row"></div>
@@ -339,7 +330,6 @@ export default function ManagerFeedback() {
             type="submit"
             className="btn btn-primary d-block mx-auto mt-5"
             onChange={handleClick}
-
           >
             Submit
           </button>

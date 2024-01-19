@@ -257,12 +257,12 @@ app.delete("/selffeedback", (req, res) => {
 //----------------------FIRDAUS----------------------
 // DONE Create manager feedback (EN QUAN)
 app.post("/managerfeedback", (req, res) => {
-  const { managerFb, date, feedbackText, staffId } = req.body; // Creating the feedback
+  const { manager_feedback_id, date, feedback_text, staff_id } = req.body; // Creating the feedback
 
   const q =
     "INSERT INTO manager_feedback (manager_feedback_id, date, feedback_text, staff_id) VALUES (?, ?, ?, ?)";
 
-  db.query(q, [managerFb, date, feedbackText, staffId], (err, result) => {
+  db.query(q, [manager_feedback_id, date, feedback_text, staff_id], (err, result) => {
     if (err) return res.json(err);
     return res.json(result);
   });
@@ -270,11 +270,11 @@ app.post("/managerfeedback", (req, res) => {
 
 //DONE Update manager feedback (FIRDAUS)
 app.put("/managerfeedback", (req, res) => {
-  const { managerfeedbackid, feedbacktext } = req.body;
+  const { manager_feedback_id, feedback_text } = req.body;
 
   const q =
-    "UPDATE managerfeedback SET feedback_text = ? WHERE manager_feedback_id = ?";
-  db.query(q, [feedbacktext, managerfeedbackid], (err, result) => {
+    "UPDATE manager_feedback SET feedback_text = ? WHERE manager_feedback_id = ?";
+  db.query(q, [feedback_text, manager_feedback_id], (err, result) => {
     console.log("SQL Query:", q);
     console.log("SQL Result:", result);
 
@@ -301,10 +301,10 @@ app.get("/managerfeedback", (req, res) => {
 
 //DONE Delete manager feedback (FIRDAUS)
 app.delete("/managerfeedback", (req, res) => {
-  const { Managerfeedbackid } = req.body;
+  const { manager_feedback_id } = req.body;
 
-  const q = "DELETE FROM managerfeedback WHERE manager_feedback_id = ?";
-  db.query(q, [Managerfeedbackid], (err, data) => {
+  const q = "DELETE FROM manager_feedback WHERE manager_feedback_id = ?";
+  db.query(q, [manager_feedback_id], (err, data) => {
     if (err) {
       console.error(err);
       res.status(500).json({ message: "Error deleting feedback" });
