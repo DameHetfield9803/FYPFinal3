@@ -4,18 +4,11 @@ import { signOut } from "firebase/auth";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import Navbar from "../NavBar/NavBar";
 import "./Home.css";
+import axios from 'axios';
 
 export default function Home() {
   const history = useHistory();
 
-  const logout = async () => {
-    try {
-      await signOut(auth);
-      history.push("/");
-    } catch (err) {
-      console.log(err);
-    }
-  };
 
   return (
     <div>
@@ -86,12 +79,6 @@ export default function Home() {
         <br></br>
       </div>
 
-      <div className="HomepageContents">
-        <h1>Homepage Contents</h1>
-        <button onClick={logout}>LOGOUT</button>
-        <p>Charts (updated monthly)</p>
-      </div>
-      {/*End of Dashboard Contents*/}
     </div>
   );
 }

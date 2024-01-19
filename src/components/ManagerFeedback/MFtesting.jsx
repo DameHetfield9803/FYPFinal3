@@ -2,15 +2,20 @@ import React from "react";
 import { useState } from "react";
 import axios from "axios";
 
-const AddMF = () => {
-  const [index, setIndex] = useState[0];
+const AddMF = () =>{
+    const [index , setIndex] = useState[0]
+    //const [] = useState[]
 
-  const handleClick = async (e) => {
-    e.preventDefault();
-    try {
-      await axios.post("http://localhost:3001/managerfeedback");
-    } catch (err) {}
-  };
+    const handleClick = async (e)=>{
+        e.preventDefault() 
+        try{
+          await axios.post("http://localhost:3001/managerfeedback")
+        }catch(err){
+    
+        }
+      }
+
+      
 
   return (
     <div className="form">

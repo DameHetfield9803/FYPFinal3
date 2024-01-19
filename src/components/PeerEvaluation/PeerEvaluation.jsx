@@ -6,20 +6,20 @@ export default function PeerEvaluation() {
   // gets and sets the fields
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const [optionOne, setOptionOne] = useState("");
-  const [optionTwo, setOptionTwo] = useState("");
-  const [optionThree, setOptionThree] = useState("");
-  const [optionFour, setOptionFour] = useState("");
+  const [optionOne, setOptionOne] = useState(0);
+  const [optionTwo, setOptionTwo] = useState(0);
+  const [optionThree, setOptionThree] = useState(0);
+  const [optionFour, setOptionFour] = useState(0);
   const [comments, setComments] = useState(""); // Added comments state
   const [isError, setIsError] = useState(false);
 
   function submitForm() {
     // if all options are chosen and valid
     if (
-      optionOne !== "" &&
-      optionTwo !== "" &&
-      optionThree !== "" &&
-      optionFour !== "" &&
+      optionOne !== 0 &&
+      optionTwo !== 0 &&
+      optionThree !== 0 &&
+      optionFour !== 0 &&
       comments.trim() !== "" // Check if comments are not empty
     ) {
       setIsError(false);
@@ -35,7 +35,7 @@ export default function PeerEvaluation() {
     <div>
       <Navbar></Navbar>
     <div className="App">
-          <form method='post' action='localhost:3001/peerevaluation'>
+          <form method='post' action='localhost:3001/peerfeedback'>
       <div className="container">
         <h1 className="mt-3">Peer Evaluation</h1>
        <b> <p className="mt-3">(Lowest Rating: 1, Neutral : 3, Highest Rating: 5)</p></b>
@@ -163,7 +163,7 @@ export default function PeerEvaluation() {
           className="btn btn-primary float-right mt-5"
           onClick={submitForm}
           formMethod="post"
-          formAction="localhost:3001/peerevaluation"
+          formAction="localhost:3001/peerfeedback"
         >
           Submit
         </button>

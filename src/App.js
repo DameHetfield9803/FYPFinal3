@@ -23,6 +23,8 @@ import EmployeeDetails from "./components/EmployeeTable/EmployeeDetails";
 import UserGuide from "./components/UserGuide/userguides";
 import Navbar from "./components/NavBar/NavBar";
 import Home from "./components/Home/Home";
+//Daniel testing below here 
+// import AttendanceSummary from "./components/Attendance/Attendancesummary";
 // En Quan testing below here
 import MFtesting from "./components/ManagerFeedback/MFtesting";
 
@@ -87,6 +89,10 @@ function App() {
             <ProtectedRoute component={EmpTab} />
           </Route>
 
+          {/* <Route exact path= "/Attendancesummary">
+            <ProtectedRoute component={AttendanceSummary} />
+          </Route> */}
+          
           <Route exact path="/employee" component={EmpTab} />
           <Route exact path="/employee/:id" component={EmployeeDetails} />
 
