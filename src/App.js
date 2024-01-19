@@ -24,7 +24,7 @@ import UserGuide from "./components/UserGuide/userguides";
 import Navbar from "./components/NavBar/NavBar";
 import Home from "./components/Home/Home";
 //Daniel testing below here
-// import AttendanceSummary from "./components/Attendance/Attendancesummary";
+import AttendanceSummary from "./components/Attendance/Attendancesummary";
 
 function App() {
   return (
