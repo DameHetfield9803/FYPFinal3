@@ -80,20 +80,6 @@ export default function Attendancesummary() {
   return (
     <div>
       <div className="container mt-3">
-        <label htmlFor="filterInput" className="form-label">
-          Filter by BatchNumber:
-        </label>
-        <input
-          type="text"
-          id="filterInput"
-          className="form-control"
-          placeholder="Enter BatchNumber"
-          value={filter}
-          onChange={(e) => setFilter(e.target.value)}
-        />
-      </div>
-
-      <div className="container mt-3">
         <table className="table table-hover">
           <thead>
             <tr>
