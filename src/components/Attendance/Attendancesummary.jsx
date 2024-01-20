@@ -82,8 +82,8 @@ export default function Attendancesummary() {
           <thead>
             <tr>
               <th>BatchNO</th>
-              <th>Emp Name</th> {/* New Column */}
-              <th>Shift Code</th> {/* Corrected Column Name */}
+              <th>Emp Name</th> 
+              <th>Shift Code</th> 
               <th>Present</th>
               <th>Not Present</th>
               <th>Percentage</th>
