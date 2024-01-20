@@ -98,7 +98,7 @@ export default function Attendancesummary() {
               return (
                 <tr key={batchIndex}>
                   <td>{batchNo}</td>
-                  <td>{jsonData.find((entry) => entry.BatchNO === batchNo)['Emp Name']}</td> {/* Emp Name Data */}
+                  <td>{jsonData.find((entry) => entry.BatchNO === batchNo)['Emp Name']}</td> 
                   <td>{jsonData.find((entry) => entry.BatchNO === batchNo)['Shift Code']}</td>
                   <td>{batchEntry.Present}</td>
                   <td>{batchEntry['Not Present']}</td>
