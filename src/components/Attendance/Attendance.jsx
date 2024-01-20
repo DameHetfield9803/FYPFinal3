@@ -5,6 +5,8 @@ import { useHistory } from 'react-router-dom';
 import './Attendance.css';
 import Navbar from '../NavBar/NavBar';
 import attendanceData from './AttendanceData.json';
+import { Link } from 'react-router-dom';
+
 
 
 export default function Attendance() {
@@ -102,6 +104,13 @@ export default function Attendance() {
         <p>Total Not Present: {notPresentCount}</p>
         <p>Total Late: {lateCount}</p>
         <p>Present to Total Percentage: {presentToTotalPercentage.toFixed(2)}%</p>
+
+      <div className="container mt-3">
+        {/* this is to view the attendance summary using the import link component */}
+        <Link to="/Attendancesummary" className="btn btn-secondary">
+          View Attendance Summary
+        </Link>
+      </div>
 
         <table className="table table-hover">
           <thead>

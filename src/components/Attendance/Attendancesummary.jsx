@@ -77,6 +77,7 @@ export default function Attendancesummary() {
   return (
     <div>
       <div className="container mt-3">
+        <h1>Attendance Summary for the Month</h1>
         <table className="table table-hover">
           <thead>
             <tr>
