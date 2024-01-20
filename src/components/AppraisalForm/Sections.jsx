@@ -10,14 +10,14 @@ export function Sections() {
           <h1>(Exempt Staff)- E1 to E5</h1>
         </div>
         <div>
-          <form method="post" action='127.0.0.1:3306'></form> 
+          <form method="post" action='localhost:3001'></form> 
           <fieldset>
             <label for="name">
-              Name of Appraisee
+              Name of Appraisee: 
               <input name="name" id="name" type="text" required></input>
             </label>
             <label for="phone-number">
-              Appraisee's Emp No.
+              Appraisee's Emp No: 
               <input
                 name="phone-number"
                 id="phone-number"
@@ -26,15 +26,15 @@ export function Sections() {
               ></input>
             </label>
             <label for="role">
-              Designation
+              Designation: 
               <input name="role" id="role" type="text" required></input>
             </label>
             <label for="grade">
-              Job Grade
+              Job Grade: 
               <input name="Grade" id="Grade" type="text" required></input>
             </label>
             <label for="department">
-              Department
+              Department:
               <input
                 name="department"
                 id="department"
@@ -43,23 +43,23 @@ export function Sections() {
               ></input>
             </label>
             <label for="Date joined">
-              Date Joined
+              Date Joined:
               <input required></input>
             </label>
             <label for="review period">
-              Appraisal Review Period
+              Appraisal Review Period:
               <input required></input>
             </label>
             <label for="rating">
-              Performance Rating
+              Performance Rating:
               <input required></input>
             </label>
             <label for="conducted-by">
-              Appraisal Conducted By
+              Appraisal Conducted By:
               <input required></input>
             </label>
             <label for="Designation">
-              Designation
+              Designation:
               <input required></input>
             </label>
           </fieldset>

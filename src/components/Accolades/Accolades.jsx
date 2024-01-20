@@ -3,15 +3,15 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "./Accolades.css";
 import Navbar from "../NavBar/NavBar";
-
+import axios from 'axios';
 const Accolades = () => {
   const [inputList, setInputList] = useState([
     {
-      staffId: "",
+      staffId: 0,
       accoladeTitle: "",
       completionDate: "",
       file: null,
-      achievementLevel: "",
+      achievementLevel: 0,
     },
   ]);
 
@@ -68,11 +68,11 @@ const Accolades = () => {
     setInputList([
       ...inputList,
       {
-        staffId: "",
+        staffId: 0,
         accoladeTitle: "",
         completionDate: "",
         file: null,
-        achievementLevel: "",
+        achievementLevel: 0,
       },
     ]);
   };
