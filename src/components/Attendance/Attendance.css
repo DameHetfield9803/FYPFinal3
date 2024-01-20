@@ -1,62 +1,111 @@
 /* Attendance.css */
 
-/* Your existing styles for body, weekly-eval-box, dropdown-menu, and liner */
-/* body { */
-    /* background-color: rgb(190, 211, 228); */ /* Commented out background color */
-/* } */
-
-.weekly-eval-box {
-    width: 20px !important;
-    height: 20px !important;
-    border: 1px solid black !important;
-    padding: 10px 30px 38px 18px !important; /* Adjusted padding */
+/* Reset some styles */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
 }
 
-.dropdown-menu {
-    border-radius: 2px !important;
-    width: 250px;
+/* Container for the entire page */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-.dropdown-menu {
-    margin-top: -10px !important; /* Adjusted margin-top */
-    word-wrap: break-word !important;
-}
-
-.liner {
-    border-bottom: 1px solid #dee2e6 !important;
-}
-
-/* New styles for the topnav */
+/* Styling for the top navigation bar */
 .topnav {
     overflow: hidden;
-    background-color: #ffffff; /* Background color for the top navigation bar */
-    display: flex; /* Use a flex container to align child elements */
-    align-items: center; /* Center-align child elements vertically */
+    background-color: #3498db;
+    display: flex;
+    align-items: center;
 }
 
-/* Style for each link in the top navigation bar */
+/* Styling for the links in the top navigation bar */
 .topnav a {
-    float: left; /* Float the links to the left side */
-    color: #1d1919; /* Text color for the links */
-    text-align: center; /* Center-align the text within the links */
-    padding: 14px 16px; /* Padding around each link */
-    text-decoration: none; /* Remove default underline styling for links */
-    font-size: 17px; /* Font size for the links */
+    float: left;
+    color: #fff;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 16px;
+    transition: background-color 0.3s, color 0.3s;
 }
 
-/* Style for the links when hovered over */
+/* Change link color on hover */
 .topnav a:hover {
-    background-color: #ddd; /* Background color on hover */
-    color: black; /* Text color on hover */
+    background-color: #555;
+    color: white;
 }
 
 /* Style for the active link in the top navigation bar */
 .topnav a.active {
-    background-color: #04AA6D; /* Background color for the active link */
-    color: white; /* Text color for the active link */
+    background-color: #04AA6D;
 }
 
-/* Additional styling for the logo link, adding right margin */
+/* Additional styling for the logo link */
 .logo-link {
-    margin-right: 20px; /* Adjust the margin as needed for the logo link */
+    margin-right: auto; /* Align logo to the left */
+}
+
+/* Styling for the filter dropdown */
+.form-label,
+.form-select {
+    width: 200px;
+    margin-bottom: 10px;
+}
+
+/* Styling for the attendance table */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.table th, .table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.table th {
+    background-color: #f2f2f2;
+}
+
+/* Styling for the status cell */
+.status-cell {
+    text-align: center;
+    font-weight: bold;
+    padding: 8px;
+    border-radius: 4px;
+}
+
+/* Color coding for status */
+.status-cell.Present {
+    background-color: #5cb85c; /* Green for Present */
+    color: #fff;
+}
+
+.status-cell.NotPresent {
+    background-color: #d9534f; /* Red for Not Present */
+    color: #fff;
+}
+
+.status-cell.Late {
+    background-color: #f0ad4e; /* Orange for Late */
+    color: #fff;
+}
+
+/* Styling for the logout button */
+.logout-btn {
+    background-color: #3498db;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.logout-btn:hover {
+    background-color: #555;
 }

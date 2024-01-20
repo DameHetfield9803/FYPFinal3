@@ -7,7 +7,6 @@ import attendanceData from './AttendanceData.json';
 export default function Attendancesummary() {
   const history = useHistory();
   const [jsonData] = useState(attendanceData);
-  const [filter, setFilter] = useState('');
   const [batchData, setBatchData] = useState([]);
   const [uniqueBatchNos, setUniqueBatchNos] = useState([]);
 
@@ -40,16 +39,14 @@ export default function Attendancesummary() {
   };
 
   useEffect(() => {
-    // Calculate counts and percentages for the entire jsonData
+    // Filter out entries for 'Sat' and 'Sun' when importing the JSON data
+    const filteredData = jsonData.filter((entry) => !['Sat', 'Sun'].includes(entry['Week Day']));
+
+    // Calculate counts and percentages for the entire filteredData
     const countsForAll = { Present: 0, 'Not Present': 0, Late: 0 };
     const batchDataForAll = [];
 
-    jsonData.forEach((entry) => {
-      // Skip entries for 'Sat' and 'Sun'
-      if (['Sat', 'Sun'].includes(entry['Week Day'])) {
-        return;
-      }
-
+    filteredData.forEach((entry) => {
       const status = getStatus(entry['Adj In']);
       countsForAll[status]++;
 
@@ -84,6 +81,8 @@ export default function Attendancesummary() {
           <thead>
             <tr>
               <th>BatchNO</th>
+              <th>Emp Name</th> {/* New Column */}
+              <th>Shift Code</th> {/* Corrected Column Name */}
               <th>Present</th>
               <th>Not Present</th>
               <th>Percentage</th>
@@ -93,13 +92,16 @@ export default function Attendancesummary() {
           <tbody>
             {uniqueBatchNos.map((batchNo, batchIndex) => {
               const batchEntry = batchData.find((entry) => entry.BatchNO === batchNo);
+              const percentage = Math.floor((batchEntry.Present / (batchEntry.Present + batchEntry['Not Present'])) * 100);
 
               return (
                 <tr key={batchIndex}>
                   <td>{batchNo}</td>
+                  <td>{jsonData.find((entry) => entry.BatchNO === batchNo)['Emp Name']}</td> {/* Emp Name Data */}
+                  <td>{jsonData.find((entry) => entry.BatchNO === batchNo)['Shift Code']}</td>
                   <td>{batchEntry.Present}</td>
                   <td>{batchEntry['Not Present']}</td>
-                  <td>{Math.floor((batchEntry.Present / (batchEntry.Present + batchEntry['Not Present'])) * 100)}%</td>
+                  <td style={{ backgroundColor: percentage < 50 ? 'red' : 'inherit' }}>{percentage}%</td>
                 </tr>
               );
             })}
@@ -108,6 +110,9 @@ export default function Attendancesummary() {
       </div>
 
       <div className="container mt-3">
+        <button className="btn btn-primary" onClick={logout}>
+          Logout
+        </button>
       </div>
     </div>
   );

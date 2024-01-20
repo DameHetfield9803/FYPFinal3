@@ -2,14 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { auth } from '../../config/firebase';
 import { signOut } from 'firebase/auth';
 import { useHistory } from 'react-router-dom';
-import Navbar from '../NavBar/NavBar';
 import './Attendance.css';
+import Navbar from '../NavBar/NavBar';
 import attendanceData from './AttendanceData.json';
+
 
 export default function Attendance() {
   const history = useHistory();
   const [jsonData] = useState(attendanceData);
-  const [filter, setFilter] = useState(0);
+  const [batchOptions, setBatchOptions] = useState([]);
+  const [selectedBatch, setSelectedBatch] = useState('');
   const [presentCount, setPresentCount] = useState(0);
   const [notPresentCount, setNotPresentCount] = useState(0);
   const [lateCount, setLateCount] = useState(0);
@@ -43,10 +45,16 @@ export default function Attendance() {
     }
   };
 
-  // Declare filteredData here
+  // Declare filteredData here (i change it to dropdown function too)
   const filteredData = jsonData
-    .filter((entry) => entry.BatchNO.toString().includes(filter))
+    .filter((entry) => (selectedBatch ? entry.BatchNO.toString() === selectedBatch : true))
     .filter((entry) => !['Sat', 'Sun'].includes(entry['Week Day']));
+
+  // Fetch distinct BatchNO values
+  useEffect(() => {
+    const distinctBatches = [...new Set(jsonData.map((entry) => entry.BatchNO))];
+    setBatchOptions(distinctBatches);
+  }, [jsonData]);
 
   useEffect(() => {
     // Update counts based on filtered data
@@ -61,27 +69,32 @@ export default function Attendance() {
     setNotPresentCount(counts['Not Present']);
     setLateCount(counts.Late);
 
-    // Calculate the new percentage and update the state
+    // Calculate the new percentage and update the state changed the percentage to floor method which is to round down
     const totalEntries = counts.Present + counts['Not Present'];
     const percentage = Math.floor((counts.Present / totalEntries) * 100);
     setPresentToTotalPercentage(isNaN(percentage) ? 0 : percentage);
-  }, [filter, jsonData, filteredData]);
+  }, [selectedBatch, jsonData, filteredData]);
 
   return (
     <div>
       <Navbar />
       <div className="container mt-3">
-        <label htmlFor="filterInput" className="form-label">
-          Filter by BatchNumber:
+        <label htmlFor="batchSelect" className="form-label">
+          Select BatchNO:
         </label>
-        <input
-          type="text"
-          id="filterInput"
-          className="form-control"
-          placeholder="Enter BatchNO"
-          value={filter}
-          onChange={(e) => setFilter(e.target.value)}
-        />
+        <select
+          id="batchSelect"
+          className="form-select"
+          value={selectedBatch}
+          onChange={(e) => setSelectedBatch(e.target.value)}
+        >
+          <option value="">All BatchNo</option>
+          {batchOptions.map((batch) => (
+            <option key={batch} value={batch}>
+              {batch}
+            </option>
+          ))}
+        </select>
       </div>
 
       <div className="container mt-3">
