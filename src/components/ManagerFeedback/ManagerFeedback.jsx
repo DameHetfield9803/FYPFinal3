@@ -1,66 +1,51 @@
 import { useState } from "react";
-import axios from "axios";
+import NavBar from "./NavBar.jsx";
 import "./ManagerFeedback.css";
-import { NavBar } from "./NavHeader.jsx";
 
 export default function ManagerFeedback() {
   // Hooks
+  // gets and sets the fields
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [optionOne, setOptionOne] = useState(0);
-  const [optionTwo, setOptionTwo] = useState(0);
-  const [feedbackComments, setFeedbackComments] = useState("");
-  const [isError, setIsError] = useState(false);
+  const [op1, setOp1] = useState(0);
+  const [op2, setOp2] = useState(0);
+  const [op3, setOp3] = useState(0);
+  const [op4, setOp4] = useState(0);
+  const [op5, setOp5] = useState(0);
+  const [op6, setOp6] = useState(0);
+  const [op7, setOp7] = useState(0);
+  const [op8, setOp8] = useState(0);
+  const [op9, setOp9] = useState(0);
+  const [op10, setOp10] = useState(0);
+  const [op11, setOp11] = useState(0);
+  const [op12, setOp12] = useState(0);
+  const [comments, setComments] = useState("");
 
   // Helper Functions
-  // const handleOptionOneChange = (e) => {
-  //   setOptionOne(e.target.value);
-  // };
-
-  // const handleOptionTwoChange = (e) => {
-  //   setOptionTwo(e.target.value);
-  // };
-
-  // const handleCommentsChange = (e) => {
-  //   setFeedbackComments(e.target.value);
-  // };
-
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-
-  // Validate if options are chosen
-  //   if (optionOne !== 0 && optionTwo !== 0 && feedbackComments.trim() !== "") {
-  //     try {
-  //       await axios.post("http://localhost:3001/managerfeedback", {
-  //         optionOne,
-  //         optionTwo,
-  //         feedbackComments,
-  //       });
-  //       setIsError(false);
-  //       setIsSubmitted(true);
-  //     } catch (err) {
-  //       console.error("Error submitting feedback:", err);
-  //       setIsError(true);
-  //       setIsSubmitted(false);
-  //     }
-  //   } else {
-  //     // If some options are not chosen or comments are empty
-  //     setIsError(true);
-  //     setIsSubmitted(false);
-  //   }
-  // };
-
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const form = {
+      op1,
+      op2,
+      op3,
+      op4,
+      op5,
+      op6,
+      op7,
+      op8,
+      op9,
+      op10,
+      op11,
+      op12,
+      comments,
+    };
+  };
   // Return JSX
   return (
     <>
       <NavBar />
 
       <div className="mb-4 small">
-        <form
-          name="feedback_form"
-          id="feedback_form"
-          method="post"
-          action="http://localhost:3001/managerfeedback"
-        >
+        <form name="feedback_form" id="feedback_form" onSubmit={handleSubmit}>
           <div className="App">
             <div className="container">
               <h1 className="mt-3">Manager Evaluation To Employees</h1>
@@ -86,7 +71,10 @@ export default function ManagerFeedback() {
                       areas , performance standards and responsibilities
                     </td>
                     <td>
-                      <select onChange={(e) => setOptionOne(e.target.value)}>
+                      <select
+                        value={op1}
+                        onChange={(e) => setOp1(e.target.value)}
+                      >
                         <option value={0}>Choose option</option>
                         <option value={1}>1</option>
                         <option value={2}>2</option>
@@ -103,7 +91,10 @@ export default function ManagerFeedback() {
                       details,Complete and Timely
                     </td>
                     <td className="td-se-question">
-                      <select onChange={(e) => setOptionTwo(e.target.value)}>
+                      <select
+                        value={op2}
+                        onChange={(e) => setOp2(e.target.value)}
+                      >
                         <option value={0}>Choose option</option>
                         <option value={1}>1</option>
                         <option value={2}>2</option>
@@ -120,7 +111,10 @@ export default function ManagerFeedback() {
                       the deadline
                     </td>
                     <td className="td-se-question">
-                      <select onChange={(e) => setOptionTwo(e.target.value)}>
+                      <select
+                        value={op3}
+                        onChange={(e) => setOp3(e.target.value)}
+                      >
                         <option value={0}>Choose option</option>
                         <option value={1}>1</option>
                         <option value={2}>2</option>
@@ -140,7 +134,10 @@ export default function ManagerFeedback() {
                       and background.{" "}
                     </td>
                     <td className="td-se-question">
-                      <select onChange={(e) => setOptionTwo(e.target.value)}>
+                      <select
+                        value={op4}
+                        onChange={(e) => setOp4(e.target.value)}
+                      >
                         <option value={0}>Choose option</option>
                         <option value={1}>1</option>
                         <option value={2}>2</option>
@@ -159,7 +156,10 @@ export default function ManagerFeedback() {
                       responsibilities.{" "}
                     </td>
                     <td className="td-se-question">
-                      <select onChange={(e) => setOptionTwo(e.target.value)}>
+                      <select
+                        value={op5}
+                        onChange={(e) => setOp5(e.target.value)}
+                      >
                         <option value={0}>Choose option</option>
                         <option value={1}>1</option>
                         <option value={2}>2</option>
@@ -177,7 +177,10 @@ export default function ManagerFeedback() {
                       constructive suggestions.{" "}
                     </td>
                     <td className="td-se-question">
-                      <select onChange={(e) => setOptionTwo(e.target.value)}>
+                      <select
+                        value={op6}
+                        onChange={(e) => setOp6(e.target.value)}
+                      >
                         <option value={0}>Choose option</option>
                         <option value={1}>1</option>
                         <option value={2}>2</option>
@@ -193,7 +196,10 @@ export default function ManagerFeedback() {
                       greater responsibilities beyond his/her basic job{" "}
                     </td>
                     <td className="td-se-question">
-                      <select onChange={(e) => setOptionTwo(e.target.value)}>
+                      <select
+                        value={op7}
+                        onChange={(e) => setOp7(e.target.value)}
+                      >
                         <option value={0}>Choose option</option>
                         <option value={1}>1</option>
                         <option value={2}>2</option>
@@ -209,7 +215,10 @@ export default function ManagerFeedback() {
                       decision
                     </td>
                     <td className="td-se-question">
-                      <select onChange={(e) => setOptionTwo(e.target.value)}>
+                      <select
+                        value={op8}
+                        onChange={(e) => setOp8(e.target.value)}
+                      >
                         <option value={0}>Choose option</option>
                         <option value={1}>1</option>
                         <option value={2}>2</option>
@@ -225,7 +234,10 @@ export default function ManagerFeedback() {
                       and productive under pressure{" "}
                     </td>
                     <td className="td-se-question">
-                      <select onChange={(e) => setOptionTwo(e.target.value)}>
+                      <select
+                        value={op9}
+                        onChange={(e) => setOp9(e.target.value)}
+                      >
                         <option value={0}>Choose option</option>
                         <option value={1}>1</option>
                         <option value={2}>2</option>
@@ -242,7 +254,10 @@ export default function ManagerFeedback() {
                       interacting with different people.{" "}
                     </td>
                     <td className="td-se-question">
-                      <select onChange={(e) => setOptionTwo(e.target.value)}>
+                      <select
+                        value={op10}
+                        onChange={(e) => setOp10(e.target.value)}
+                      >
                         <option value={0}>Choose option</option>
                         <option value={1}>1</option>
                         <option value={2}>2</option>
@@ -260,7 +275,10 @@ export default function ManagerFeedback() {
                       opportunities.
                     </td>
                     <td className="td-se-question">
-                      <select onChange={(e) => setOptionTwo(e.target.value)}>
+                      <select
+                        value={op11}
+                        onChange={(e) => setOp11(e.target.value)}
+                      >
                         <option value={0}>Choose option</option>
                         <option value={1}>1</option>
                         <option value={2}>2</option>
@@ -277,7 +295,10 @@ export default function ManagerFeedback() {
                       achieving departmental/company goals{" "}
                     </td>
                     <td className="td-se-question">
-                      <select onChange={(e) => setOptionTwo(e.target.value)}>
+                      <select
+                        value={op12}
+                        onChange={(e) => setOp12(e.target.value)}
+                      >
                         <option value={0}>Choose option</option>
                         <option value={1}>1</option>
                         <option value={2}>2</option>
@@ -289,19 +310,6 @@ export default function ManagerFeedback() {
                   </tr>
                 </tbody>
               </table>
-
-              {isSubmitted && (
-                <div className="alert alert-success mt-3">
-                  <strong>Success!</strong>
-                </div>
-              )}
-
-              {isError && (
-                <div className="alert alert-danger mt-3">
-                  <strong>Error! </strong>
-                  Please complete all the fields before submitting.
-                </div>
-              )}
             </div>
           </div>
 
@@ -310,12 +318,13 @@ export default function ManagerFeedback() {
               <h5>Supervisor Feedback to Employees:</h5>
             </label>
             <textarea
-              class="form-control"
-              required
+              className="comments"
+              id="comments"
               rows="6"
-              name="comments"
-              id="feedback_comments"
               placeholder="type something..."
+              value={comments}
+              onChange={(e) => setComments(e.target.value)}
+              required
             ></textarea>
           </div>
           <div className="row"></div>
