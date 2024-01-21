@@ -1,28 +1,33 @@
-export default function NavBar() {
+import { Link } from "react-router-dom";
+import React from "react";
+
+export default function Navbar() {
   return (
-    <>
-      {/* NAVBAR ITEMS */}
+    <div>
+      {/* Navbar Items */}
       <div className="topnav">
-        <a href="/Home" className="logo-link">
-          <img src="Assets/TSH.jpg" alt="Logo" width="310px" height="80px" />
-        </a>
-        <a href="/Attendance">Attendance</a>
-        <a href="/Accolades">Accolades</a>
-        <a href="/AppraisalForm">AppraisalForm</a>
+        {/* Logo */}
+        <Link to="/Home" className="logo-link">
+          <img src="Assets/TSH.jpg" alt="Logo" width="310px" height="90px" />
+        </Link>
+
+        {/* Navigation Links */}
+        <Link to="/Attendance">Attendance</Link>
+        <Link to="/Accolades">Accolades</Link>
+        <Link to="/AppraisalForm">Appraisal Form</Link>
 
         {/* My Profile link*/}
-        <a href="/Profile" className="profile">
+        <Link to="/Profile" className="profile">
           <img
             src="Assets/Profile-icon.jpg"
             alt="Profile Icon"
             width="30px"
             height="30px"
           />
-
           <span>My Profile</span>
-        </a>
+        </Link>
       </div>
-      {/*END OF NAVBAR ITEMS */}
-    </>
+      {/* End of Navbar Items */}
+    </div>
   );
 }
