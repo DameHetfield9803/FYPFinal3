@@ -5,7 +5,7 @@ import "./ManagerFeedback.css";
 export default function ManagerFeedback() {
   // Hooks
   // gets and sets the fields
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSent, setIsSent] = useState(false);
   const [op1, setOp1] = useState(0);
   const [op2, setOp2] = useState(0);
   const [op3, setOp3] = useState(0);
@@ -38,7 +38,16 @@ export default function ManagerFeedback() {
       op12,
       comments,
     };
+
+    fetch("http://localhost:3001/managerfeedback", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(form),
+    }).then(() => {
+      console.log("new form added");
+    });
   };
+
   // Return JSX
   return (
     <>
