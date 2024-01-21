@@ -65,10 +65,6 @@ export default function Attendancesummary() {
       batchEntry[status]++;
     });
 
-    // You can use these counts to display the overall counts and percentages in the table
-    const totalEntriesForAll = countsForAll.Present + countsForAll['Not Present'];
-    const percentageForAll = totalEntriesForAll === 0 ? 0 : Math.floor((countsForAll.Present / totalEntriesForAll) * 100);
-
     // Use these counts and percentages in your table
     setBatchData(batchDataForAll);
     setUniqueBatchNos(Array.from(new Set(batchDataForAll.map((entry) => entry.BatchNO))));
