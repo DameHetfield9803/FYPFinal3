@@ -1,11 +1,11 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import NavBar from "./NavBar.jsx";
 import "./ManagerFeedback.css";
+import axios from "axios";
 
 export default function ManagerFeedback() {
   // Hooks
-  // gets and sets the fields
   const [isSent, setIsSent] = useState(false);
   const [op1, setOp1] = useState(0);
   const [op2, setOp2] = useState(0);
@@ -20,6 +20,12 @@ export default function ManagerFeedback() {
   const [op11, setOp11] = useState(0);
   const [op12, setOp12] = useState(0);
   const [comments, setComments] = useState("");
+
+  useEffect(() => {
+    axios.get("http://localhost:3001/managerfeedback/").then((response) => {
+      console.log(response.data);
+    });
+  }, []);
 
   // Helper Functions
   const handleSubmit = (e) => {
@@ -39,14 +45,6 @@ export default function ManagerFeedback() {
       op12,
       comments,
     };
-
-    fetch("http://localhost:3001/managerfeedback", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(form),
-    }).then(() => {
-      console.log("new form added");
-    });
   };
 
   // Return JSX
