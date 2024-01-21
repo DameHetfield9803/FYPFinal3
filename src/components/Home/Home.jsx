@@ -4,7 +4,6 @@ import { signOut } from "firebase/auth";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import Navbar from "../NavBar/NavBar";
 import "./Home.css";
-import axios from "axios";
 
 export default function Home() {
   const history = useHistory();
