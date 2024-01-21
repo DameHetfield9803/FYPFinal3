@@ -3,11 +3,11 @@ import { useState, useEffect } from "react";
 import NavBar from "./NavBar.jsx";
 import "./ManagerFeedback.css";
 import axios from "axios";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+// import { Formik, Form, Field, ErrorMessage } from "formik";
 
 export default function ManagerFeedback() {
   // Hooks
-  const [isSent, setIsSent] = useState(false);
+  // const [isSent, setIsSent] = useState(false);
   const [op1, setOp1] = useState(0);
   const [op2, setOp2] = useState(0);
   const [op3, setOp3] = useState(0);
@@ -21,12 +21,6 @@ export default function ManagerFeedback() {
   const [op11, setOp11] = useState(0);
   const [op12, setOp12] = useState(0);
   const [comments, setComments] = useState("");
-
-  useEffect(() => {
-    axios.get("http://localhost:3001/managerfeedback/").then((response) => {
-      console.log(response.data);
-    });
-  }, []);
 
   // Helper Functions
   const handleSubmit = (e) => {
@@ -46,6 +40,10 @@ export default function ManagerFeedback() {
       op12,
       comments,
     };
+
+    axios.post("http://localhost:3001/managerfeedback/").then((response) => {
+      console.log(response.data);
+    });
   };
 
   // Return JSX
