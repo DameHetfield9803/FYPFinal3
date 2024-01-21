@@ -13,7 +13,7 @@ export default function Home() {
     <div>
       {/*Start of Dashboard Contents*/}
       <div>
-        <Navbar> </Navbar>
+        <Navbar />
         <div className="central-font">
           <h1>Homepage Quick Access</h1>
         </div>
