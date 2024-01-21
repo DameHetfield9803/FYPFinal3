@@ -301,7 +301,7 @@ export default function ManagerFeedback() {
                     <td className="td-se-question">
                       <b>Drive & Determination</b> eg: Act with drive,
                       confidence and personal commitment in setting and
-                      achieving departmental/company goals{" "}
+                      achieving departmental/company goals.
                     </td>
                     <td className="td-se-question">
                       <select
@@ -322,12 +322,12 @@ export default function ManagerFeedback() {
             </div>
           </div>
 
-          <div className="mb-4">
+          <div className="mb-4 text-center align-items-center flex">
             <label className="form-label" for="feedback_comments">
               <h5>Supervisor Feedback to Employees:</h5>
             </label>
             <textarea
-              className="comments"
+              className="comments text-center"
               id="comments"
               rows="6"
               placeholder="type something..."
