@@ -1,63 +1,116 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { auth } from '../../config/firebase';
+import { signOut } from 'firebase/auth';
+import { useHistory } from 'react-router-dom';
+import attendanceData from './AttendanceData.json';
 
-const AttendanceSummary = ({ attendanceData }) => {
-  // Function to calculate summary for a specific BatchNo
-  const calculateBatchSummary = (batchNo) => {
-    const batchData = attendanceData.filter((entry) => entry.BatchNO === batchNo);
+export default function Attendancesummary() {
+  const history = useHistory();
+  const [jsonData] = useState(attendanceData);
+  const [batchData, setBatchData] = useState([]);
+  const [uniqueBatchNos, setUniqueBatchNos] = useState([]);
 
-    // Calculate summary for the batch
-    let totalPresent = 0;
-    let totalNotPresent = 0;
-    let totalLate = 0;
+  const logout = async () => {
+    try {
+      await signOut(auth);
+      history.push('/');
+    } catch (err) {
+      console.error(err);
+      // Display an error message to the user if needed
+    }
+  };
 
-    batchData.forEach((entry) => {
-      const adjIn = entry['Adj In'];
-      if (!adjIn || adjIn.trim() === '') {
-        totalNotPresent++;
-      } else {
-        const adjInTime = new Date(`2000-01-01T${adjIn}`);
-        const eightAM = new Date(`2000-01-01T08:00:00`);
+  const getStatus = (adjIn) => {
+    if (!adjIn || adjIn.trim() === '') {
+      return 'Not Present';
+    }
 
-        if (
-          adjInTime.getHours() > eightAM.getHours() ||
-          (adjInTime.getHours() === eightAM.getHours() && adjInTime.getMinutes() > eightAM.getMinutes())
-        ) {
-          totalLate++;
-        } else {
-          totalPresent++;
-        }
+    const adjInTime = new Date(`2000-01-01T${adjIn}`);
+    const eightAM = new Date(`2000-01-01T08:00:00`);
+
+    if (
+      adjInTime.getHours() > eightAM.getHours() ||
+      (adjInTime.getHours() === eightAM.getHours() && adjInTime.getMinutes() > eightAM.getMinutes())
+    ) {
+      return 'Late';
+    } else {
+      return 'Present';
+    }
+  };
+
+  useEffect(() => {
+    // Filter out entries for 'Sat' and 'Sun' when importing the JSON data
+    const filteredData = jsonData.filter((entry) => !['Sat', 'Sun'].includes(entry['Week Day']));
+
+    // Calculate counts and percentages for the entire filteredData
+    const countsForAll = { Present: 0, 'Not Present': 0, Late: 0 };
+    const batchDataForAll = [];
+
+    filteredData.forEach((entry) => {
+      const status = getStatus(entry['Adj In']);
+      countsForAll[status]++;
+
+      const index = batchDataForAll.findIndex((batch) => batch.BatchNO === entry.BatchNO);
+
+      if (index === -1) {
+        batchDataForAll.push({
+          BatchNO: entry.BatchNO,
+          Present: 0,
+          'Not Present': 0,
+          Late: 0,
+        });
       }
+
+      const batchEntry = batchDataForAll.find((batch) => batch.BatchNO === entry.BatchNO);
+      batchEntry[status]++;
     });
 
-    const totalEntries = totalPresent + totalNotPresent;
-    const percentage = (totalPresent / totalEntries) * 100 || 0;
-
-    return {
-      totalPresent,
-      totalNotPresent,
-      totalLate,
-      percentage,
-    };
-  };
+    // Use these counts and percentages in your table
+    setBatchData(batchDataForAll);
+    setUniqueBatchNos(Array.from(new Set(batchDataForAll.map((entry) => entry.BatchNO))));
+  }, [jsonData]);
 
   return (
     <div>
-      {/* Iterate through unique BatchNo values */}
-      {[...new Set(attendanceData.map((entry) => entry.BatchNO))].map((batchNo) => {
-        const batchSummary = calculateBatchSummary(batchNo);
+      <div className="container mt-3">
+        <h1>Attendance Summary for the Month</h1>
+        <table className="table table-hover">
+          <thead>
+            <tr>
+              <th>BatchNO</th>
+              <th>Emp Name</th> 
+              <th>Shift Code</th> 
+              <th>Present</th>
+              <th>Not Present</th>
+              <th>Percentage</th>
+            </tr>
+          </thead>
 
-        return (
-          <div key={batchNo}>
-            <h2>BatchNo: {batchNo}</h2>
-            <p>Total Present: {batchSummary.totalPresent}</p>
-            <p>Total Not Present: {batchSummary.totalNotPresent}</p>
-            <p>Total Late: {batchSummary.totalLate}</p>
-            <p>Present to Total Percentage: {batchSummary.percentage.toFixed(2)}%</p>
-          </div>
-        );
-      })}
+          <tbody>
+            {uniqueBatchNos.map((batchNo, batchIndex) => {
+              const batchEntry = batchData.find((entry) => entry.BatchNO === batchNo);
+              const percentage = Math.floor((batchEntry.Present / (batchEntry.Present + batchEntry['Not Present'])) * 100);
+
+              return (
+                <tr key={batchIndex}>
+                  <td>{batchNo}</td>
+                  <td>{jsonData.find((entry) => entry.BatchNO === batchNo)['Emp Name']}</td> 
+                  <td>{jsonData.find((entry) => entry.BatchNO === batchNo)['Shift Code']}</td>
+                  <td>{batchEntry.Present}</td>
+                  <td>{batchEntry['Not Present']}</td>
+                  <td style={{ backgroundColor: percentage < 50 ? 'red' : 'inherit' }}>{percentage}%</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+
+      <div className="container mt-3">
+        <button className="btn btn-primary" onClick={logout}>
+          Logout
+        </button>
+      </div>
     </div>
   );
-};
-
-export default AttendanceSummary;
+}

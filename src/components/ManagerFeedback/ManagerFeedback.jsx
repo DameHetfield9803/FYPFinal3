@@ -1,64 +1,58 @@
-//Add manager feedback
 import { useState } from "react";
 import axios from "axios";
 import "./ManagerFeedback.css";
+import { NavBar } from "./NavHeader.jsx";
 
 export default function ManagerFeedback() {
-  function submitForm() {
-    //setIsSubmitted(true);
-
-    // if all options are chosen and valid
-    if (optionOne !== 0 && optionTwo !== 0) {
-      setIsError(false);
-      setIsSubmitted(true);
-    } else {
-      // if some options are not chosen
-      setIsError(true);
-      setIsSubmitted(false);
-    }
-  }
-
-  // gets and sets the fields,
+  // Hooks
   const [isSubmitted, setIsSubmitted] = useState(false);
-
   const [optionOne, setOptionOne] = useState(0);
   const [optionTwo, setOptionTwo] = useState(0);
-
+  const [feedbackComments, setFeedbackComments] = useState("");
   const [isError, setIsError] = useState(false);
 
-  const handleChange = async (e) => {};
+  // Helper Functions
+  // const handleOptionOneChange = (e) => {
+  //   setOptionOne(e.target.value);
+  // };
 
-  const handleClick = async (e) => {
-    e.preventDefault();
-    try {
-      await axios.post("http://localhost:3001/managerfeedback");
-    } catch (err) {}
-  };
+  // const handleOptionTwoChange = (e) => {
+  //   setOptionTwo(e.target.value);
+  // };
 
+  // const handleCommentsChange = (e) => {
+  //   setFeedbackComments(e.target.value);
+  // };
+
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+
+  // Validate if options are chosen
+  //   if (optionOne !== 0 && optionTwo !== 0 && feedbackComments.trim() !== "") {
+  //     try {
+  //       await axios.post("http://localhost:3001/managerfeedback", {
+  //         optionOne,
+  //         optionTwo,
+  //         feedbackComments,
+  //       });
+  //       setIsError(false);
+  //       setIsSubmitted(true);
+  //     } catch (err) {
+  //       console.error("Error submitting feedback:", err);
+  //       setIsError(true);
+  //       setIsSubmitted(false);
+  //     }
+  //   } else {
+  //     // If some options are not chosen or comments are empty
+  //     setIsError(true);
+  //     setIsSubmitted(false);
+  //   }
+  // };
+
+  // Return JSX
   return (
-    <div>
-      {/* NAVBAR ITEMS */}
-      <div className="topnav">
-        <a href="/Home" className="logo-link">
-          <img src="Assets/TSH.jpg" alt="Logo" width="310px" height="80px" />
-        </a>
-        <a href="/Attendance">Attendance</a>
-        <a href="/Accolades">Accolades</a>
-        <a href="/AppraisalForm">AppraisalForm</a>
-
-        {/* My Profile link*/}
-        <a href="/Profile" className="profile">
-          <img
-            src="Assets/Profile-icon.jpg"
-            alt="Profile Icon"
-            width="30px"
-            height="30px"
-          />
-
-          <span>My Profile</span>
-        </a>
-      </div>
-      {/*END OF NAVBAR ITEMS */}
+    <>
+      <NavBar />
 
       <div className="mb-4 small">
         <form
@@ -322,19 +316,17 @@ export default function ManagerFeedback() {
               name="comments"
               id="feedback_comments"
               placeholder="type something..."
-              onchange={handleChange}
             ></textarea>
           </div>
           <div className="row"></div>
           <button
             type="submit"
             className="btn btn-primary d-block mx-auto mt-5"
-            onChange={handleClick}
           >
             Submit
           </button>
         </form>
       </div>
-    </div>
+    </>
   );
 }
