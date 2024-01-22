@@ -25,7 +25,7 @@ import Navbar from "./components/NavBar/NavBar";
 import Home from "./components/Home/Home";
 import AttendanceSummary from "./components/Attendance/Attendancesummary";
 
-function App() {
+export default function App() {
   return (
     <Router>
       <div className="App">
@@ -82,9 +82,9 @@ function App() {
             <ProtectedRoute component={EmpTab} />
           </Route>
 
-          <Route exact path= "/Attendancesummary">
+          <Route exact path="/Attendancesummary">
             <ProtectedRoute component={AttendanceSummary} />
-          </Route> 
+          </Route>
 
           <Route exact path="/employee" component={EmpTab} />
           <Route exact path="/employee/:id" component={EmployeeDetails} />
@@ -109,5 +109,3 @@ function App() {
     </Router>
   );
 }
-
-export default App;
