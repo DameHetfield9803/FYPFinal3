@@ -25,6 +25,7 @@ import Navbar from "./components/NavBar/NavBar";
 import Home from "./components/Home/Home";
 import AttendanceSummary from "./components/Attendance/Attendancesummary";
 // import AttendanceAdd from "./components/Attendance/AttendanceAdd";
+import EmailAuto from "./components/Email/EmailAuto";
 
 export default function App() {
   return (
@@ -100,6 +101,10 @@ export default function App() {
 
           <Route exact path="/Navbar">
             <ProtectedRoute component={Navbar} />
+          </Route>
+
+          <Route exact path="/Email">
+            <ProtectedRoute component={EmailAuto} />
           </Route>
 
           <Route exact path="/forbidden">
