@@ -1,12 +1,11 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import NavBar from "./NavBar.jsx";
 import "./ManagerFeedback.css";
 import axios from "axios";
-// import { Formik, Form, Field, ErrorMessage } from "formik";
 
 export default function ManagerFeedback() {
-  // Hooks
+  // React hooks
   // const [isSent, setIsSent] = useState(false);
   const [op1, setOp1] = useState(0);
   const [op2, setOp2] = useState(0);
@@ -21,6 +20,28 @@ export default function ManagerFeedback() {
   const [op11, setOp11] = useState(0);
   const [op12, setOp12] = useState(0);
   const [comments, setComments] = useState("");
+  const [staffId, setStaffId] = useState(null);
+  const [date, setDate] = useState("");
+
+  const displayInfo = () => {
+    return console.log(
+      staffId +
+        date +
+        op1 +
+        op2 +
+        op3 +
+        op4 +
+        op5 +
+        op6 +
+        op7 +
+        op8 +
+        op9 +
+        op10 +
+        op11 +
+        op12 +
+        comments
+    );
+  };
 
   // Helper Functions
   const handleSubmit = (e) => {
@@ -56,16 +77,35 @@ export default function ManagerFeedback() {
           <div className="App">
             <div className="container">
               <h1 className="mt-3">Manager Evaluation To Employees</h1>
-
               <b>
                 {" "}
                 <p className="mt-3">
                   (Lowest Rating: 1, Neutral : 3, Highest Rating: 5)
                 </p>
               </b>
+              {/* Include staff_id and submission_date here */}
+              <label htmlFor="staffId">Staff ID:</label>
+              <input
+                placeholder="Ex: 1"
+                type="number"
+                id="staffId"
+                value={staffId}
+                onChange={(e) => setStaffId(e.target.value)}
+                required
+              />
+              <br></br>
+              <label htmlFor="date">Date:</label>
+              <input
+                type="text"
+                id="date"
+                value={date}
+                onChange={(e) => setDate(e.target.value)}
+                placeholder="Format: (YYYY/MM/DD)"
+                required
+              />
 
+              {/* End here */}
               <h2 className="mt-3">Work Performance</h2>
-
               <table className="table table-striped mt-3">
                 <tbody>
                   <tr>
@@ -325,10 +365,10 @@ export default function ManagerFeedback() {
               <h5>Supervisor Feedback to Employees:</h5>
             </label>
             <textarea
-              className="comments text-center"
+              className="comments"
               id="comments"
               rows="6"
-              placeholder="type something..."
+              placeholder="Type in here..."
               value={comments}
               onChange={(e) => setComments(e.target.value)}
               required
@@ -338,6 +378,7 @@ export default function ManagerFeedback() {
           <button
             type="submit"
             className="btn btn-primary d-block mx-auto mt-5"
+            onClick={displayInfo}
           >
             Submit
           </button>
