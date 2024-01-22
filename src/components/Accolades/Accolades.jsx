@@ -82,7 +82,7 @@ const Accolades = () => {
       <Navbar></Navbar>
       <div className="topnav"></div>
       <h1>Accolades page</h1>
-      <b> <p className="mt-3">(NATIONAL/ LEVEL 3, GOVERNMENT/ LEVEL 2 , COMMUNITY LEVEL 1 )</p></b>
+      <b> <p className="mt-3 text-center">(NATIONAL/ LEVEL 3, GOVERNMENT/ LEVEL 2 , COMMUNITY LEVEL 1 )</p></b>
       <div className="App">
         <h1>Input your accolades achievement</h1>
 

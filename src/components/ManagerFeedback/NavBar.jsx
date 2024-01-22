@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import React from "react";
-import "./NavBar.css";
 
 export default function Navbar() {
   return (
@@ -8,17 +7,17 @@ export default function Navbar() {
       {/* Navbar Items */}
       <div className="topnav">
         {/* Logo */}
-        <Link to="/Home" className="logo-link">
+        <Link to="/home" className="logo-link">
           <img src="Assets/TSH.jpg" alt="Logo" width="310px" height="90px" />
         </Link>
 
         {/* Navigation Links */}
-        <Link to="/Attendance">Attendance</Link>
-        <Link to="/Accolades">Accolades</Link>
-        <Link to="/AppraisalForm">Appraisal Form</Link>
+        <Link to="/attendance">Attendance</Link>
+        <Link to="/accolades">Accolades</Link>
+        <Link to="/appraisalForm">Appraisal Form</Link>
 
         {/* My Profile link*/}
-        <Link to="/Profile" className="profile">
+        <Link to="/profile" className="profile">
           <img
             src="Assets/Profile-icon.jpg"
             alt="Profile Icon"

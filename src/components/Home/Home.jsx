@@ -1,10 +1,10 @@
+import { Link } from "react-router-dom";
 import React from "react";
 import { auth } from "../../config/firebase";
 import { signOut } from "firebase/auth";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import Navbar from "../NavBar/NavBar";
 import "./Home.css";
-import axios from "axios";
 
 export default function Home() {
   const history = useHistory();
@@ -13,67 +13,67 @@ export default function Home() {
     <div>
       {/*Start of Dashboard Contents*/}
       <div>
-        <Navbar> </Navbar>
+        <Navbar />
         <div className="central-font">
           <h1>Homepage Quick Access</h1>
         </div>
         <div className="general-container">
           <strong>Employee</strong>
-          <a href="/Attendance">Attendance</a> <br></br>
-          <a href="/Accolades">Accolades</a>
+          <Link to="/Attendance">Attendance</Link> <br></br>
+          <Link to="/Accolades">Accolades</Link>
           <br></br>
-          <a href="/PeerEvaluation">PeerEvaluation</a>
+          <Link to="/PeerEvaluation">PeerEvaluation</Link>
           <br></br>
-          <a href="/SelfEvaluation">SelfEvaluation</a>
+          <Link to="/SelfEvaluation">SelfEvaluation</Link>
           <br></br>
-          <a href="/ManagerFeedback">ManagerFeedback</a>
+          <Link to="/ManagerFeedback">ManagerFeedback</Link>
           <br></br>
-          <a href="/ReportForm">ReportForm</a>
+          <Link to="/ReportForm">ReportForm</Link>
           <br></br>
-          <a href="/userguides">UserGuide</a>
+          <Link to="/userguides">UserGuide</Link>
           <br></br>
         </div>
       </div>
 
       <div className="manager-container text-xl">
         <strong>Manager</strong>
-        <a href="/Attendance">Attendance</a> <br></br>
-        <a href="/AppraisalForm">AppraisalForm</a>
+        <Link to="/Attendance">Attendance</Link> <br></br>
+        <Link to="/AppraisalForm">AppraisalForm</Link>
         <br></br>
-        <a href="/Employee">Employee Table</a>
+        <Link to="/Employee">Employee Table</Link>
         <br></br>
-        <a href="/PeerEvaluation">PeerEvaluation</a>
+        <Link to="/PeerEvaluation">PeerEvaluation</Link>
         <br></br>
-        <a href="/SelfEvaluation">SelfEvaluation</a>
+        <Link to="/SelfEvaluation">SelfEvaluation</Link>
         <br></br>
-        <a href="/ReportForm">ReportForm</a>
+        <Link to="/ReportForm">ReportForm</Link>
         <br></br>
-        <a href="/userguides">UserGuide</a>
+        <Link to="/userguides">UserGuide</Link>
         <br></br>
-        <a href="/ManagerFeedback">ManagerFeedback</a>
+        <Link to="/ManagerFeedback">ManagerFeedback</Link>
         <br></br>
       </div>
 
       <div className="HR-container">
         <strong>Human Resource</strong>
-        <a href="/Attendance">Attendance</a> <br></br>
-        <a href="/Accolades">Accolades</a>
+        <Link to="/Attendance">Attendance</Link> <br></br>
+        <Link to="/Accolades">Accolades</Link>
         <br></br>
-        <a href="/AppraisalForm">AppraisalForm</a>
+        <Link to="/AppraisalForm">AppraisalForm</Link>
         <br></br>
-        <a href="/AppraisalItem">AppraisalItem</a>
+        <Link to="/AppraisalItem">AppraisalItem</Link>
         <br></br>
-        <a href="/Employee">Employee</a>
+        <Link to="/Employee">Employee</Link>
         <br></br>
-        <a href="/PeerEvaluation">PeerEvaluation</a>
+        <Link to="/PeerEvaluation">PeerEvaluation</Link>
         <br></br>
-        <a href="/SelfEvaluation">SelfEvaluation</a>
+        <Link to="/SelfEvaluation">SelfEvaluation</Link>
         <br></br>
-        <a href="/ReportForm">ReportForm</a>
+        <Link to="/ReportForm">ReportForm</Link>
         <br></br>
-        <a href="/ManagerFeedback">ManagerFeedback</a>
+        <Link to="/ManagerFeedback">ManagerFeedback</Link>
         <br></br>
-        <a href="/userguides">UserGuide</a>
+        <Link to="/userguides">UserGuide</Link>
         <br></br>
       </div>
     </div>
