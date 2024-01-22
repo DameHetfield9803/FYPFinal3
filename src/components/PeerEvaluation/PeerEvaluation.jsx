@@ -4,9 +4,7 @@ import Navbar from "../NavBar/NavBar";
 import axios from "axios";
 
 export default function PeerEvaluation() {
-  // gets and sets the fields
-  // const [isSubmitted, setIsSubmitted] = useState(false);
-
+  //hooks
   const [staffId, setStaffId] = useState(null);
   const [date, setDate] = useState("");
   const [op1, setOp1] = useState(0);
@@ -18,7 +16,9 @@ export default function PeerEvaluation() {
   const [op7, setOp7] = useState(0);
   const [feedback_text, setFeedbackText] = useState("");
   // const [isError, setIsError] = useState(false);
+  // const [isSubmitted, setIsSubmitted] = useState(false);
 
+  // functions
   // form validation
   // const submitForm =() => {
   //   // if all options are chosen and valid
