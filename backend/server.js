@@ -1,10 +1,8 @@
 // modules
-const express = require("express"); // import express
+const express = require("express");
 const mysql = require("mysql2");
 const cors = require("cors");
 const bodyParser = require("body-parser");
-
-// axios is in front end, client, not back end.
 
 const app = express();
 
