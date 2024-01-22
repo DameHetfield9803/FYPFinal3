@@ -68,7 +68,7 @@ app.put("/employee", (req, res) => {
     req.body.department_id,
     req.body.date_joined,
     req.body.job_role,
-    req.body.staff_id
+    req.body.staff_id,
   ];
   const q = `UPDATE employee SET staff_name = ?, username = ?, password = ?,reporting_to = ?,email = ?, department_id = ?,  date_joined = ?, job_role = ? WHERE staff_id = ?;`;
   db.query(q, vals, (err, data) => {
@@ -89,12 +89,16 @@ app.delete("/employee", (req, res) => {
 //---------------------------------------
 //DONE Create department (EN QUAN)
 app.post("/department", (req, res) => {
-  const vals = [req.body.department_id , req.body.name];
-  db.query("INSERT INTO `department`(`department_id`, `name`) VALUES (?,?);", vals , (err, data) => {
-    if(err) return res.json(err);
-    return res.json(data);
-  })
-})
+  const vals = [req.body.department_id, req.body.name];
+  db.query(
+    "INSERT INTO `department`(`department_id`, `name`) VALUES (?,?);",
+    vals,
+    (err, data) => {
+      if (err) return res.json(err);
+      return res.json(data);
+    }
+  );
+});
 // Read department (DAMIEN) (done)
 app.get("/department", (req, res) => {
   const q = "SELECT * FROM department;";
@@ -108,12 +112,16 @@ app.get("/department", (req, res) => {
 // set endpoints with requests and response
 app.put("/department", (req, res) => {
   // initialize values and queries
-  const vals = [req.body.name,req.body.department_id];
-  db.query("UPDATE `department` SET `name` = ? WHERE `department_id` = ? ;", vals, (err, data) => {
-    // returns error if there's an error or returns data if there aren't errors
-    if (err) return res.json(err);
-    return res.json(data);
-  });
+  const vals = [req.body.name, req.body.department_id];
+  db.query(
+    "UPDATE `department` SET `name` = ? WHERE `department_id` = ? ;",
+    vals,
+    (err, data) => {
+      // returns error if there's an error or returns data if there aren't errors
+      if (err) return res.json(err);
+      return res.json(data);
+    }
+  );
 });
 
 //DONE Delete department (EN QUAN)
@@ -135,24 +143,37 @@ app.put("/department", (req, res) => {
 //   });
 // });
 
-app.delete("/department", (req,res) => {
+app.delete("/department", (req, res) => {
   const val = [req.body.department_id];
-  db.query("DELETE FROM `department` WHERE department_id = ?;", val, (err,data)=> {
-    if(err) return res.json(err);
-    return res.json(data);
-  });
-
-})
+  db.query(
+    "DELETE FROM `department` WHERE department_id = ?;",
+    val,
+    (err, data) => {
+      if (err) return res.json(err);
+      return res.json(data);
+    }
+  );
+});
 
 //-------------------(split)-----------------------
 //DONE Create peer feedback (DANIEL)
 app.post("/peerfeedback", (req, res) => {
-  const vals = [req.body.peer_feedback_id,req.body.date, req.body.feedback_text, req.body.staff_id, req.body.total_score];
-  db.query("INSERT INTO `peer_feedback`(`peer_feedback_id` , `date`, `feedback_text`, `staff_id`, `total_score`) VALUES (? , ? , ? , ? , ?);", vals, (err, data) => {
-    if(err) return res.json(err);
-    return res.json(data);
-  });
-})
+  const vals = [
+    req.body.peer_feedback_id,
+    req.body.date,
+    req.body.feedback_text,
+    req.body.staff_id,
+    req.body.total_score,
+  ];
+  db.query(
+    "INSERT INTO `peer_feedback`(`peer_feedback_id` , `date`, `feedback_text`, `staff_id`, `total_score`) VALUES (? , ? , ? , ? , ?);",
+    vals,
+    (err, data) => {
+      if (err) return res.json(err);
+      return res.json(data);
+    }
+  );
+});
 
 //DONE Read peer feedback (DANIEL)
 app.get("/peerfeedback", (req, res) => {
@@ -169,10 +190,12 @@ app.put("/peerfeedback", (req, res) => {
     req.body.date,
     req.body.feedback_text,
     req.body.staff_id,
-    req.body.peer_feedback_id
+    req.body.peer_feedback_id,
   ];
   db.query(
-    "UPDATE `peerfeedback` SET `date` = (?), `feedback_text` = (?), `staff_id` = (?) WHERE `peer_feedback_id` = (?);", vals , (err, data) => {
+    "UPDATE `peerfeedback` SET `date` = (?), `feedback_text` = (?), `staff_id` = (?) WHERE `peer_feedback_id` = (?);",
+    vals,
+    (err, data) => {
       if (err) return res.json(err);
       return res.json(data);
     }
@@ -182,10 +205,14 @@ app.put("/peerfeedback", (req, res) => {
 //DONE Delete peer feedback (En Quan)
 app.delete("/peerfeedback", (req, res) => {
   const val = [req.body.peer_feedback_id];
-  db.query("DELETE FROM `peer_feedback` WHERE peer_feedback_id = ?;", val, (err,data) => {
-    if(err) return res.json(err);
-    return res.json(data);
-  }); 
+  db.query(
+    "DELETE FROM `peer_feedback` WHERE peer_feedback_id = ?;",
+    val,
+    (err, data) => {
+      if (err) return res.json(err);
+      return res.json(data);
+    }
+  );
 });
 
 //---------------------DANIEL-----------------------
@@ -234,21 +261,48 @@ app.put("/selffeedback", (req, res) => {
 });
 //DONE Delete self feedback (DANIEL)
 
-app.delete("/selffeedback", (req, res) => { // deleting from feedback, requests and response functions
+app.delete("/selffeedback", (req, res) => {
+  // deleting from feedback, requests and response functions
   const val = [req.body.self_feedback_id]; // initializing parameters
-  db.query("DELETE FROM `self_feedback` WHERE self_feedback_id = ?;", val , (err,data) => { // querying with value and returns
-    if(err) return res.json(err); // return values
-    return res.json(data);
-  });
+  db.query(
+    "DELETE FROM `self_feedback` WHERE self_feedback_id = ?;",
+    val,
+    (err, data) => {
+      // querying with value and returns
+      if (err) return res.json(err); // return values
+      return res.json(data);
+    }
+  );
 });
-//----------------------FIRDAUS----------------------
+//----------------------FIRDAUS-----------------------------------
 // DONE Create manager feedback (EN QUAN)
-app.post("/managerfeedback", (req, res) => {
-  const vals = [req.body.manager_feedback_id, req.body.date, req.body.feedback_text, req.body.staff_id, req.body.total_score];
-  db.query("INSERT INTO `manager_feedback`(manager_feedback_id, date, feedback_text, staff_id, total_score) VALUES(? , ? , ? , ?, ?);",vals, (err,data)=> {
-    if(err) return res.json(err);
-    return res.json(data);
-  });
+app.post("/createmanagerfeedback", (req, res) => {
+  const vals = [
+    // req.body.manager_feedback_id, //<== May not need this
+    req.body.feedback_text,
+    req.body.staff_id,
+    req.body.op1,
+    req.body.op2,
+    req.body.op3,
+    req.body.op4,
+    req.body.op5,
+    req.body.op6,
+    req.body.op7,
+    req.body.op8,
+    req.body.op9,
+    req.body.op10,
+    req.body.op11,
+    req.body.op12,
+    req.body.date,
+  ];
+  db.query(
+    "INSERT INTO `manager_feedback`(`feedback_text`, `staff_id`, `op1`,`op2`,`op3`,`op4`,`op5`,`op6`,`op7`,`op8`,`op9`,`op10`,`op11`,`op12`,`date`) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);",
+    vals,
+    (err, data) => {
+      if (err) return res.json(err);
+      return res.json(data);
+    }
+  );
 });
 
 //DONE Update manager feedback (FIRDAUS)
@@ -283,22 +337,37 @@ app.get("/managerfeedback", (req, res) => {
 });
 
 //DONE Delete manager feedback (FIRDAUS)
-app.delete("/managerfeedback", (req, res) => { //initalizing endpoint, request, and response
+app.delete("/managerfeedback", (req, res) => {
+  //initalizing endpoint, request, and response
   const val = [req.body.manager_feedback_id]; // retrieving  manager_feedback_id from database
-  db.query("DELETE FROM manager_feedback WHERE manager_feedback_id = ?", val, (err,data) => { // query and returns
-    if(err) return res.json(err); // return values
-    return res.json(data);
-  });
+  db.query(
+    "DELETE FROM manager_feedback WHERE manager_feedback_id = ?",
+    val,
+    (err, data) => {
+      // query and returns
+      if (err) return res.json(err); // return values
+      return res.json(data);
+    }
+  );
 });
 
 //-----------------------DANIEL-------------------------
 //Done Create accolades (DANIEL)
 app.post("/accolade", (req, res) => {
-  const val = [req.body.accolade_id, req.body.accolade_title, req.body.completion_date, req.body.staff_id];
-  db.query("INSERT INTO `accolade`(accolade_id, accolade_title, completion_date, staff_id) VALUES(?,?,?,?);", val , (err,data)=>{
-    if(err) return res.json(err);
-    return res.json(data);
-  })
+  const val = [
+    req.body.accolade_id,
+    req.body.accolade_title,
+    req.body.completion_date,
+    req.body.staff_id,
+  ];
+  db.query(
+    "INSERT INTO `accolade`(accolade_id, accolade_title, completion_date, staff_id) VALUES(?,?,?,?);",
+    val,
+    (err, data) => {
+      if (err) return res.json(err);
+      return res.json(data);
+    }
+  );
 });
 
 //Done Read accolades (DANIEL)
@@ -313,22 +382,34 @@ app.get("/accolade", (req, res) => {
 //DONE Update accolades (DANIEL)
 
 app.put("/accolade", (req, res) => {
-  const vals = [req.body.accolade_title, req.body.completion_date, req.body.staff_id, req.body.accolade_id];
-  db.query("UPDATE `accolade` SET accolade_title = ? , completion_date = ? , staff_id = ? WHERE accolade_id = ?;", vals , (err,data) => {
-    if(err) return res.json(err);
-    return res.json(data);
-  });
+  const vals = [
+    req.body.accolade_title,
+    req.body.completion_date,
+    req.body.staff_id,
+    req.body.accolade_id,
+  ];
+  db.query(
+    "UPDATE `accolade` SET accolade_title = ? , completion_date = ? , staff_id = ? WHERE accolade_id = ?;",
+    vals,
+    (err, data) => {
+      if (err) return res.json(err);
+      return res.json(data);
+    }
+  );
 });
 
 //Done Delete accolades (DANIEL)
 
 app.delete("/accolade", (req, res) => {
   const val = [req.body.accolade_id];
-  db.query("DELETE FROM `accolade` WHERE accolade_id = ?; ", val ,(err,data) => 
-  {
-    if(err) return res.json(err)
-    return res.json(data);
-  });
+  db.query(
+    "DELETE FROM `accolade` WHERE accolade_id = ?; ",
+    val,
+    (err, data) => {
+      if (err) return res.json(err);
+      return res.json(data);
+    }
+  );
 });
 
 //---------------------------END OF CRUD---------------------------

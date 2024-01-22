@@ -6,7 +6,8 @@ import axios from "axios";
 
 export default function ManagerFeedback() {
   // React hooks
-  // const [isSent, setIsSent] = useState(false);
+  const [staffId, setStaffId] = useState(null);
+  const [date, setDate] = useState("");
   const [op1, setOp1] = useState(0);
   const [op2, setOp2] = useState(0);
   const [op3, setOp3] = useState(0);
@@ -19,52 +20,32 @@ export default function ManagerFeedback() {
   const [op10, setOp10] = useState(0);
   const [op11, setOp11] = useState(0);
   const [op12, setOp12] = useState(0);
-  const [comments, setComments] = useState("");
-  const [staffId, setStaffId] = useState(null);
-  const [date, setDate] = useState("");
-
-  const displayInfo = () => {
-    return console.log(
-      staffId +
-        date +
-        op1 +
-        op2 +
-        op3 +
-        op4 +
-        op5 +
-        op6 +
-        op7 +
-        op8 +
-        op9 +
-        op10 +
-        op11 +
-        op12 +
-        comments
-    );
-  };
+  const [feedback_text, setFeedbackText] = useState("");
 
   // Helper Functions
-  const handleSubmit = (e) => {
+  const handleClick = (e) => {
     e.preventDefault();
-    const form = {
-      op1,
-      op2,
-      op3,
-      op4,
-      op5,
-      op6,
-      op7,
-      op8,
-      op9,
-      op10,
-      op11,
-      op12,
-      comments,
-    };
-
-    axios.post("http://localhost:3001/managerfeedback/").then((response) => {
-      console.log(response.data);
-    });
+    axios
+      .post("http://localhost:3001/createmanagerfeedback/", {
+        feedback_text: feedback_text,
+        staff_id: staffId,
+        op1: op1,
+        op2: op2,
+        op3: op3,
+        op4: op4,
+        op5: op5,
+        op6: op6,
+        op7: op7,
+        op8: op8,
+        op9: op9,
+        op10: op10,
+        op11: op11,
+        op12: op12,
+        date: date,
+      })
+      .then(() => {
+        console.log("Success");
+      });
   };
 
   // Return JSX
@@ -73,7 +54,7 @@ export default function ManagerFeedback() {
       <NavBar />
 
       <div className="mb-4 small">
-        <form name="feedback_form" id="feedback_form" onSubmit={handleSubmit}>
+        <form name="feedback_form" id="feedback_form">
           <div className="App">
             <div className="container">
               <h1 className="mt-3">Manager Evaluation To Employees</h1>
@@ -369,8 +350,8 @@ export default function ManagerFeedback() {
               id="comments"
               rows="6"
               placeholder="Type in here..."
-              value={comments}
-              onChange={(e) => setComments(e.target.value)}
+              value={feedback_text}
+              onChange={(e) => setFeedbackText(e.target.value)}
               required
             ></textarea>
           </div>
@@ -378,7 +359,7 @@ export default function ManagerFeedback() {
           <button
             type="submit"
             className="btn btn-primary d-block mx-auto mt-5"
-            onClick={displayInfo}
+            onClick={handleClick}
           >
             Submit
           </button>
