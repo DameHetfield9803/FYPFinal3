@@ -24,7 +24,7 @@ import UserGuide from "./components/UserGuide/userguides";
 import Navbar from "./components/NavBar/NavBar";
 import Home from "./components/Home/Home";
 import AttendanceSummary from "./components/Attendance/Attendancesummary";
-import AttendanceAdd from "./components/Attendance/AttendanceAdd";
+// import AttendanceAdd from "./components/Attendance/AttendanceAdd";
 
 export default function App() {
   return (
@@ -86,10 +86,10 @@ export default function App() {
           <Route exact path="/Attendancesummary">
             <ProtectedRoute component={AttendanceSummary} />
           </Route>
-
+{/* 
           <Route exact path="/AttendanceAdd">
             <ProtectedRoute component={AttendanceAdd} />
-          </Route>
+          </Route> */}
 
           <Route exact path="/employee" component={EmpTab} />
           <Route exact path="/employee/:id" component={EmployeeDetails} />
