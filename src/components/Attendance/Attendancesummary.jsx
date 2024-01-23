@@ -79,9 +79,9 @@ export default function Attendancesummary() {
             <tr>
               <th>BatchNO</th>
               <th>Emp Name</th> 
-              <th>Shift Code</th> 
               <th>Present</th>
               <th>Not Present</th>
+              <th>Late</th>
               <th>Percentage</th>
             </tr>
           </thead>
@@ -89,15 +89,17 @@ export default function Attendancesummary() {
           <tbody>
             {uniqueBatchNos.map((batchNo, batchIndex) => {
               const batchEntry = batchData.find((entry) => entry.BatchNO === batchNo);
-              const percentage = Math.floor((batchEntry.Present / (batchEntry.Present + batchEntry['Not Present'])) * 100);
-
+              const rawdata = batchEntry.Present / (batchEntry.Present + batchEntry['Not Present'] + batchEntry.Late);
+              const percentage = Math.floor(rawdata * 100);
+              
+              
               return (
                 <tr key={batchIndex}>
                   <td>{batchNo}</td>
                   <td>{jsonData.find((entry) => entry.BatchNO === batchNo)['Emp Name']}</td> 
-                  <td>{jsonData.find((entry) => entry.BatchNO === batchNo)['Shift Code']}</td>
                   <td>{batchEntry.Present}</td>
                   <td>{batchEntry['Not Present']}</td>
+                  <td>{batchEntry.Late}</td>
                   <td style={{ backgroundColor: percentage < 50 ? 'red' : 'inherit' }}>{percentage}%</td>
                 </tr>
               );
