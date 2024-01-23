@@ -218,6 +218,10 @@ export default function SelfEvaluation() {
                   onChange={(e) => setFeedbackText(e.target.value)}
                   required
                 />
+
+                {formErrors.feedback_text && (
+                  <p className="error">{formErrors.feedback_text}</p>
+                )}
               </td>
             </tr>
           </tbody>
