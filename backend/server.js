@@ -420,6 +420,37 @@ app.delete("/accolade", (req, res) => {
   );
 });
 
+// CRUD employee.job_role
+
+app.get("/getempjobrole", (req,res) => {
+  db.query("SELECT * FROM ;");
+}); // TODO Firdaus
+
+app.post("/createempjobrole", (req,res) => {
+  const vals = [];
+  db.query("INSERT INTO WHERE ;", vals,(err,data) => {
+    if(err) return res.json(err);
+    return res.json(data);
+  });
+}) // TODO Daniel
+
+app.put("/updateemployeejobrole", (req,res) => {
+  const vals = [];
+  db.query("SET VALUES WHERE;", vals, (err,data){
+    if(err) return res.json(err);
+    return res.json(data);
+  });
+}) // TODO Firdaus
+
+
+app.delete("/deleteemployeejobrole", (req,res) => {
+  const vals = []; 
+  db.query("DELETE FROM WHERE ;", vals, (err,data) => {
+    if(err) return res.json(err);
+    return res.json(data);
+  });
+}) // TODO Daniel
+
 //---------------------------END OF CRUD---------------------------
 
 app.listen(3001, () => {
