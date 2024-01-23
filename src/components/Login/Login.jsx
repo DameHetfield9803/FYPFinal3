@@ -3,7 +3,6 @@ import { auth } from "../../config/firebase";
 import { onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-
 export default function Login() {
 
     const [email, setEmail] = useState("");

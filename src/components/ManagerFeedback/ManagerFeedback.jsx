@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import NavBar from "./NavBar.jsx";
+import NavBar from "../NavBar/NavBar";
 import "./ManagerFeedback.css";
 import axios from "axios";
 
@@ -22,30 +22,77 @@ export default function ManagerFeedback() {
   const [op12, setOp12] = useState(0);
   const [feedback_text, setFeedbackText] = useState("");
 
+  // validation state
+  const [formErrors, setFormErrors] = useState({});
+
   // Helper Functions
+  const validateForm = () => {
+    const errors = {};
+
+    // Validate staffId
+    if (!staffId || isNaN(staffId) || parseInt(staffId) <= 0) {
+      errors.staffId = "Staff ID is required and must be a positive integer";
+    }
+
+    // Validate date format
+    const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
+    if (!date.match(dateRegex)) {
+      errors.date = "Date should be in the format YYYY-MM-DD";
+    }
+
+    // Validate options
+    const options = [
+      op1,
+      op2,
+      op3,
+      op4,
+      op5,
+      op6,
+      op7,
+      op8,
+      op9,
+      op10,
+      op11,
+      op12,
+    ];
+    if (options.some((option) => option === 0)) {
+      errors.options = "Please select a value for all options";
+    }
+
+    // Validate feedback_text
+    if (!feedback_text.trim()) {
+      errors.feedback_text = "Feedback is required";
+    }
+
+    setFormErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
+
   const handleClick = (e) => {
     e.preventDefault();
-    axios
-      .post("http://localhost:3001/createmanagerfeedback/", {
-        feedback_text: feedback_text,
-        staff_id: staffId,
-        op1: op1,
-        op2: op2,
-        op3: op3,
-        op4: op4,
-        op5: op5,
-        op6: op6,
-        op7: op7,
-        op8: op8,
-        op9: op9,
-        op10: op10,
-        op11: op11,
-        op12: op12,
-        date: date,
-      })
-      .then(() => {
-        console.log("Success");
-      });
+    if (validateForm()) {
+      axios
+        .post("http://localhost:3001/createmanagerfeedback/", {
+          feedback_text: feedback_text,
+          staff_id: staffId,
+          op1: op1,
+          op2: op2,
+          op3: op3,
+          op4: op4,
+          op5: op5,
+          op6: op6,
+          op7: op7,
+          op8: op8,
+          op9: op9,
+          op10: op10,
+          op11: op11,
+          op12: op12,
+          date: date,
+        })
+        .then(() => {
+          console.log("Success");
+        });
+    }
   };
 
   // Return JSX
@@ -74,6 +121,9 @@ export default function ManagerFeedback() {
                 onChange={(e) => setStaffId(e.target.value)}
                 required
               />
+              {formErrors.staffId && (
+                <p className="error">{formErrors.staffId}</p>
+              )}
               <br></br>
               <label htmlFor="date">Date:</label>
               <input
@@ -84,6 +134,7 @@ export default function ManagerFeedback() {
                 placeholder="Format: (YYYY/MM/DD)"
                 required
               />
+              {formErrors.date && <p className="error">{formErrors.date}</p>}
 
               {/* End here */}
               <h2 className="mt-3">Work Performance</h2>
@@ -175,6 +226,9 @@ export default function ManagerFeedback() {
                       </select>
                     </td>
                   </tr>
+                  {formErrors.options && (
+                    <p className="error">{formErrors.options}</p>
+                  )}
                   <h2 className="mt-3">Work Attitude</h2>
                   <tr>
                     <td className="td-se-question">
@@ -336,6 +390,9 @@ export default function ManagerFeedback() {
                       </select>
                     </td>
                   </tr>
+                  {formErrors.options && (
+                    <p className="error">{formErrors.options}</p>
+                  )}
                 </tbody>
               </table>
             </div>
@@ -347,13 +404,14 @@ export default function ManagerFeedback() {
             </label>
             <textarea
               className="comments"
-              id="comments"
-              rows="6"
               placeholder="Type in here..."
               value={feedback_text}
               onChange={(e) => setFeedbackText(e.target.value)}
               required
             ></textarea>
+            {formErrors.feedback_text && (
+              <p className="error">{formErrors.feedback_text}</p>
+            )}
           </div>
           <div className="row"></div>
           <button

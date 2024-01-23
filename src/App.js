@@ -3,6 +3,7 @@ import {
   Route,
   Switch,
 } from "react-router-dom/cjs/react-router-dom.min";
+import { useState } from "react";
 import Login from "./components/Login/Login";
 import Forbidden from "./pages/Forbidden";
 import "./style.css";
@@ -24,8 +25,11 @@ import UserGuide from "./components/UserGuide/userguides";
 import Navbar from "./components/NavBar/NavBar";
 import Home from "./components/Home/Home";
 import AttendanceSummary from "./components/Attendance/Attendancesummary";
-import AttendanceAdd from "./components/Attendance/AttendanceAdd";
+// import AttendanceAdd from "./components/Attendance/AttendanceAdd";
+import EmailAuto from "./components/Email/EmailAuto";
 
+import axios from "axios";
+// TODO
 export default function App() {
   return (
     <Router>
@@ -100,6 +104,10 @@ export default function App() {
 
           <Route exact path="/Navbar">
             <ProtectedRoute component={Navbar} />
+          </Route>
+
+          <Route exact path="/Email">
+            <ProtectedRoute component={EmailAuto} />
           </Route>
 
           <Route exact path="/forbidden">
