@@ -19,61 +19,61 @@ export default function Home() {
         </div>
         <div className="general-container">
           <strong>Employee</strong>
-          <Link to="/Attendance">Attendance</Link> <br></br>
-          <Link to="/Accolades">Accolades</Link>
+          <a href="/Attendance">Attendance</a> <br></br>
+          <a href="/Accolades">Accolades</a>
           <br></br>
-          <Link to="/PeerEvaluation">PeerEvaluation</Link>
+          <a href="/PeerEvaluation">PeerEvaluation</a>
           <br></br>
-          <Link to="/SelfEvaluation">SelfEvaluation</Link>
+          <a href="/SelfEvaluation">SelfEvaluation</a>
           <br></br>
-          <Link to="/ManagerFeedback">ManagerFeedback</Link>
+          <a href="/ManagerFeedback">ManagerFeedback</a>
           <br></br>
-          <Link to="/ReportForm">ReportForm</Link>
+          <a href="/ReportForm">ReportForm</a>
           <br></br>
-          <Link to="/userguides">UserGuide</Link>
+          <a href="/userguides">UserGuide</a>
           <br></br>
         </div>
       </div>
 
       <div className="manager-container text-xl">
         <strong>Manager</strong>
-        <Link to="/Attendance">Attendance</Link> <br></br>
-        <Link to="/AppraisalForm">AppraisalForm</Link>
+        <a href="/Attendance">Attendance</a> <br></br>
+        <a href="/AppraisalForm">AppraisalForm</a>
         <br></br>
-        <Link to="/Employee">Employee Table</Link>
+        <a href="/Employee">Employee Table</a>
         <br></br>
-        <Link to="/PeerEvaluation">PeerEvaluation</Link>
+        <a href="/PeerEvaluation">PeerEvaluation</a>
         <br></br>
-        <Link to="/SelfEvaluation">SelfEvaluation</Link>
+        <a href="/SelfEvaluation">SelfEvaluation</a>
         <br></br>
-        <Link to="/ReportForm">ReportForm</Link>
+        <a href="/ReportForm">ReportForm</a>
         <br></br>
-        <Link to="/userguides">UserGuide</Link>
+        <a href="/userguides">UserGuide</a>
         <br></br>
-        <Link to="/ManagerFeedback">ManagerFeedback</Link>
+        <a href="/ManagerFeedback">ManagerFeedback</a>
         <br></br>
       </div>
 
       <div className="HR-container">
         <strong>Human Resource</strong>
-        <Link to="/Attendance">Attendance</Link> <br></br>
-        <Link to="/Accolades">Accolades</Link>
+        <a href="/Attendance">Attendance</a> <br></br>
+        <a href="/Accolades">Accolades</a>
         <br></br>
-        <Link to="/AppraisalForm">AppraisalForm</Link>
+        <a href="/AppraisalForm">AppraisalForm</a>
         <br></br>
-        <Link to="/AppraisalItem">AppraisalItem</Link>
+        <a href="/AppraisalItem">AppraisalItem</a>
         <br></br>
-        <Link to="/Employee">Employee</Link>
+        <a href="/Employee">Employee</a>
         <br></br>
-        <Link to="/PeerEvaluation">PeerEvaluation</Link>
+        <a href="/PeerEvaluation">PeerEvaluation</a>
         <br></br>
-        <Link to="/SelfEvaluation">SelfEvaluation</Link>
+        <a href="/SelfEvaluation">SelfEvaluation</a>
         <br></br>
-        <Link to="/ReportForm">ReportForm</Link>
+        <a href="/ReportForm">ReportForm</a>
         <br></br>
-        <Link to="/ManagerFeedback">ManagerFeedback</Link>
+        <a href="/ManagerFeedback">ManagerFeedback</a>
         <br></br>
-        <Link to="/userguides">UserGuide</Link>
+        <a href="/userguides">UserGuide</a>
         <br></br>
       </div>
     </div>
