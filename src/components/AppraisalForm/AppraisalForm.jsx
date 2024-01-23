@@ -1,22 +1,13 @@
 import Navbar from "../NavBar/NavBar";
-import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
 import "./AppraisalForm.css";
-import { Sections } from "./Sections";
 
 export default function AppraisalForm() {
   return (
     <div>
-    <Navbar></Navbar>
-    <>
-      <Sections/>
-    </>
-    
+      <Navbar></Navbar>
+      <>
+        <h1>test</h1>
+      </>
     </div>
-
-
-  
-    )
-  
+  );
 }
-
