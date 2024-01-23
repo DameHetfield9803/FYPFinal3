@@ -65,7 +65,11 @@ export default function PeerEvaluation() {
           op7: op7,
         })
         .then(() => {
-          console.log("Success");
+          console.log("Successfully added to database!");
+          window.alert("Successfully Added!");
+        })
+        .catch((error) => {
+          console.error("Error: ", error);
         });
     }
   };
