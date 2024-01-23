@@ -25,11 +25,9 @@ import UserGuide from "./components/UserGuide/userguides";
 import Navbar from "./components/NavBar/NavBar";
 import Home from "./components/Home/Home";
 import AttendanceSummary from "./components/Attendance/Attendancesummary";
-// import AttendanceAdd from "./components/Attendance/AttendanceAdd";
 import EmailAuto from "./components/Email/EmailAuto";
-
 import axios from "axios";
-// TODO
+
 export default function App() {
   return (
     <Router>
@@ -90,10 +88,6 @@ export default function App() {
           <Route exact path="/Attendancesummary">
             <ProtectedRoute component={AttendanceSummary} />
           </Route>
-{/* 
-          <Route exact path="/AttendanceAdd">
-            <ProtectedRoute component={AttendanceAdd} />
-          </Route> */}
 
           <Route exact path="/employee" component={EmpTab} />
           <Route exact path="/employee/:id" component={EmployeeDetails} />

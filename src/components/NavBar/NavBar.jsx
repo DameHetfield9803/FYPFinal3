@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import React from "react";
 import "./NavBar.css";
 
@@ -8,17 +7,17 @@ export default function Navbar() {
       {/* Navbar Items */}
       <div className="topnav">
         {/* Logo */}
-        <Link to="/Home" className="logo-link">
+        <a href="/Home" className="logo-link">
           <img src="Assets/TSH.jpg" alt="Logo" width="310px" height="90px" />
-        </Link>
+        </a>
 
         {/* Navigation Links */}
-        <Link to="/Attendance">Attendance</Link>
-        <Link to="/Accolades">Accolades</Link>
-        <Link to="/AppraisalForm">Appraisal Form</Link>
+        <a href="/Attendance">Attendance</a>
+        <a href="/Accolades">Accolades</a>
+        <a href="/AppraisalForm">Appraisal Form</a>
 
         {/* My Profile link*/}
-        <Link to="/Profile" className="profile">
+        <a href="/Profile" className="profile">
           <img
             src="Assets/Profile-icon.jpg"
             alt="Profile Icon"
@@ -26,7 +25,7 @@ export default function Navbar() {
             height="30px"
           />
           <span>My Profile</span>
-        </Link>
+        </a>
       </div>
       {/* End of Navbar Items */}
     </div>

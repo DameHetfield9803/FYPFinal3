@@ -15,51 +15,63 @@ export default function PeerEvaluation() {
   const [op6, setOp6] = useState(0);
   const [op7, setOp7] = useState(0);
   const [feedback_text, setFeedbackText] = useState("");
-  // const [isError, setIsError] = useState(false);
-  // const [isSubmitted, setIsSubmitted] = useState(false);
 
-  // functions
-  // form validation
-  // const submitForm =() => {
-  //   // if all options are chosen and valid
-  //   if (
-  //     op1 !== 0 &&
-  //     op2 !== 0 &&
-  //     op3 !== 0 &&
-  //     op4 !== 0 &&
-  //     op5 !== 0 &&
-  //     op6 !== 0 &&
-  //     op7 !== 0 &&
+  // validation state
+  const [formErrors, setFormErrors] = useState({});
 
-  //     comments.trim() !== "" // Check if comments are not empty
-  //   ) {
-  //     setIsError(false);
-  //     setIsSubmitted(true);
-  //   } else {
-  //     // if some options are not chosen or comments are empty
-  //     setIsError(true);
-  //     setIsSubmitted(false);
-  //   }
-  // }
+  const validateForm = () => {
+    const errors = {};
+
+    // Validate staffId
+    if (!staffId || isNaN(staffId) || parseInt(staffId) <= 0) {
+      errors.staffId = "Staff ID is required and must be a positive integer";
+    }
+
+    // Validate date format
+    const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
+    if (!date.match(dateRegex)) {
+      errors.date = "Date should be in the format YYYY-MM-DD";
+    }
+
+    // Validate options
+    const options = [op1, op2, op3, op4, op5, op6, op7];
+    if (options.some((option) => option === 0)) {
+      errors.options = "Please select a value for all options";
+    }
+
+    // Validate feedback_text
+    if (!feedback_text.trim()) {
+      errors.feedback_text = "Feedback is required";
+    }
+
+    setFormErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
 
   const handleClick = (e) => {
     e.preventDefault();
-    axios
-      .post("http://localhost:3001/createpeerfeedback/", {
-        feedback_text: feedback_text,
-        date: date,
-        staff_id: staffId,
-        op1: op1,
-        op2: op2,
-        op3: op3,
-        op4: op4,
-        op5: op5,
-        op6: op6,
-        op7: op7,
-      })
-      .then(() => {
-        console.log("Success");
-      });
+    if (validateForm()) {
+      axios
+        .post("http://localhost:3001/createpeerfeedback/", {
+          feedback_text: feedback_text,
+          date: date,
+          staff_id: staffId,
+          op1: op1,
+          op2: op2,
+          op3: op3,
+          op4: op4,
+          op5: op5,
+          op6: op6,
+          op7: op7,
+        })
+        .then(() => {
+          console.log("Successfully added to database!");
+          window.alert("Successfully Added!");
+        })
+        .catch((error) => {
+          console.error("Error: ", error);
+        });
+    }
   };
 
   return (
@@ -86,6 +98,9 @@ export default function PeerEvaluation() {
               onChange={(e) => setStaffId(e.target.value)}
               required
             />
+            {formErrors.staffId && (
+              <p className="error">{formErrors.staffId}</p>
+            )}
             <br></br>
             <label htmlFor="date">Date:</label>
             <input
@@ -96,6 +111,7 @@ export default function PeerEvaluation() {
               placeholder="Format: (YYYY/MM/DD)"
               required
             />
+            {formErrors.date && <p className="error">{formErrors.date}</p>}
 
             {/* End here */}
             <table className="table table-striped mt-3">
@@ -228,7 +244,9 @@ export default function PeerEvaluation() {
                     </select>
                   </td>
                 </tr>
-
+                {formErrors.options && (
+                  <p className="error">{formErrors.options}</p>
+                )}
                 <tr>
                   <td className="td-se-question"> Other Comments:</td>
                   <td>
@@ -237,7 +255,11 @@ export default function PeerEvaluation() {
                       cols="50"
                       value={feedback_text}
                       onChange={(e) => setFeedbackText(e.target.value)}
+                      required
                     />
+                    {formErrors.feedback_text && (
+                      <p className="error">{formErrors.feedback_text}</p>
+                    )}
                   </td>
                 </tr>
               </tbody>
@@ -249,19 +271,6 @@ export default function PeerEvaluation() {
             >
               Submit
             </button>
-
-            {/* {isSubmitted && (
-              <div className="alert alert-success mt-3">
-                <strong>Success!</strong>
-              </div>
-            )}
-
-            {isError && (
-              <div className="alert alert-danger mt-3">
-                <strong>Error! </strong>Please complete all the fields before
-                submitting.
-              </div>
-            )} */}
           </div>
         </form>
       </div>
