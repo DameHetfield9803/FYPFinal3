@@ -14,48 +14,63 @@ export default function SelfEvaluation() {
   const [op5, setOp5] = useState(0);
   const [op6, setOp6] = useState(0);
   const [feedback_text, setFeedbackText] = useState("");
-  // const [isError, setIsError] = useState(false);
-  // const [isSubmitted, setIsSubmitted] = useState(false);
 
-  // Form validation
-  // function submitForm() {
-  //   setIsSubmitted(true);
-
-  //   if (
-  //     optionOne !== "" &&
-  //     optionTwo !== "" &&
-  //     optionThree !== "" &&
-  //     optionFour !== "" &&
-  //     optionFive !== "" &&
-  //     comments !== ""
-  //   ) {
-  //     setIsError(false);
-  //     setIsSubmitted(true);
-  //     // Here you can send the form data to the server if needed
-  //   } else {
-  //     setIsError(true);
-  //     setIsSubmitted(false);
-  //   }
-  // }
+  //validation state
+  const [formErrors, setFormErrors] = useState({});
+  const [showOptionsError, setShowOptionsError] = useState(false);
 
   // Helper Functions
+  const validateForm = () => {
+    const errors = {};
+
+    // Validate staffId
+    if (!staffId || isNaN(staffId) || parseInt(staffId) <= 0) {
+      errors.staffId = "Staff ID is required and must be a positive integer";
+    }
+
+    // Validate date format
+    const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
+    if (!date.match(dateRegex)) {
+      errors.date = "Date should be in the format YYYY-MM-DD";
+    }
+
+    // Validate options
+    const options = [op1, op2, op3, op4, op5, op6];
+    if (options.some((option) => option === 0)) {
+      errors.options = "Please select a value for all options";
+      setShowOptionsError(true);
+    } else {
+      setShowOptionsError(false);
+    }
+
+    // Validate feedback_text
+    if (!feedback_text.trim()) {
+      errors.feedback_text = "Feedback is required";
+    }
+
+    setFormErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
+
   const handleClick = (e) => {
     e.preventDefault();
-    axios
-      .post("http://localhost:3001/createselffeedback/", {
-        feedback_text: feedback_text,
-        date: date,
-        staff_id: staffId,
-        op1: op1,
-        op2: op2,
-        op3: op3,
-        op4: op4,
-        op5: op5,
-        op6: op6,
-      })
-      .then(() => {
-        console.log("Success");
-      });
+    if (validateForm()) {
+      axios
+        .post("http://localhost:3001/createselffeedback/", {
+          feedback_text: feedback_text,
+          date: date,
+          staff_id: staffId,
+          op1: op1,
+          op2: op2,
+          op3: op3,
+          op4: op4,
+          op5: op5,
+          op6: op6,
+        })
+        .then(() => {
+          console.log("Success");
+        });
+    }
   };
 
   return (
@@ -78,6 +93,7 @@ export default function SelfEvaluation() {
             onChange={(e) => setStaffId(e.target.value)}
             required
           />
+          {formErrors.staffId && <p className="error">{formErrors.staffId}</p>}
           <br></br>
           <label htmlFor="date">Date:</label>
           <input
@@ -88,8 +104,10 @@ export default function SelfEvaluation() {
             placeholder="Format: (YYYY/MM/DD)"
             required
           />
-          {/* End here */}
+          {formErrors.date && <p className="error">{formErrors.date}</p>}
         </b>
+        {/* End here */}
+
         <table className="table table-striped mt-3">
           <tbody>
             <tr>
@@ -184,6 +202,12 @@ export default function SelfEvaluation() {
               </td>
             </tr>
 
+            {showOptionsError && (
+              <div className="error">
+                <p className="error">Please select a value for all options</p>
+              </div>
+            )}
+
             <tr>
               <td className="td-se-question"> Other Comments:</td>
               <td>
@@ -205,16 +229,6 @@ export default function SelfEvaluation() {
         >
           Submit
         </button>
-        {/* {isSubmitted && (
-          <div className="alert alert-success mt-3">
-            <strong>Success!</strong>
-          </div>
-        )}
-        {isError && (
-          <div className="alert alert-danger mt-3">
-            <strong>Error! </strong>Please complete all the fields
-          </div>
-        )} */}
       </div>
     </div>
   );
