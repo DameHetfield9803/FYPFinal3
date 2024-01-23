@@ -28,6 +28,31 @@ import AttendanceSummary from "./components/Attendance/Attendancesummary";
 import EmailAuto from "./components/Email/EmailAuto";
 import axios from "axios";
 
+async function getRole() {
+  const role = await axios
+    .get("http://localhost:3001/getemprole")
+    .catch((err) => {
+      // y'all try testing this out
+      return err.json();
+    })
+    .then((res) => {
+      return res.data;
+    });
+  // for y'all to implement
+  switch (role) {
+    case "admin":
+      return "admin";
+    case "manager":
+      return "manager";
+    case "employee":
+      return "employee";
+    case "hr":
+      return "hr";
+    default:
+      return <Forbidden />;
+  }
+}
+
 export default function App() {
   return (
     <Router>
@@ -116,5 +141,3 @@ export default function App() {
     </Router>
   );
 }
-
-
