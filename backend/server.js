@@ -422,8 +422,12 @@ app.delete("/accolade", (req, res) => {
 
 // CRUD employee.job_role
 
+// TODO Firdaus DONE, need to check
 app.get("/getempjobrole", (req, res) => {
-  db.query("SELECT * FROM ;");
+  db.query("SELECT * FROM employee  ;", (err, data) => {
+    if (err) return res.json(err);
+    return res.json(data);
+  });
 }); // TODO Firdaus
 
 app.post("/createempjobrole", (req, res) => {
