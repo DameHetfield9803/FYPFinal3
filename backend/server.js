@@ -222,15 +222,20 @@ app.delete("/peerfeedback", (req, res) => {
 //Done Create self feedback (DAMIEN)
 
 // Route for creating a self evaluation
-app.post("/selffeedback", (req, res) => {
+app.post("/createselffeedback", (req, res) => {
   const vals = [
-    req.body.self_feedback_id,
     req.body.date,
     req.body.feedback_text,
     req.body.staff_id,
+    req.body.op1,
+    req.body.op2,
+    req.body.op3,
+    req.body.op4,
+    req.body.op5,
+    req.body.op6,
   ]; // retrieve the values from front end
   db.query(
-    "INSERT INTO self_feedback (`self_feedback_id`, `date`, `feedback_text`, `staff_id`) VALUES (?, ?, ?, ?);",
+    "INSERT INTO self_feedback ( `date`, `feedback_text`, `staff_id`,`op1`,`op2`,`op3`,`op4`,`op5`,`op6`) VALUES (?, ?, ?, ?,?,?,?,?,?);",
     vals,
     (err, data) => {
       if (err) return res.json(err); // querying and returning errors if errors exist.
