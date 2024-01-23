@@ -3,6 +3,7 @@ import { useState } from "react";
 import NavBar from "../NavBar/NavBar";
 import "./ManagerFeedback.css";
 import axios from "axios";
+import moment from "moment";
 
 export default function ManagerFeedback() {
   // React hooks
@@ -34,10 +35,27 @@ export default function ManagerFeedback() {
       errors.staffId = "Staff ID is required and must be a positive integer";
     }
 
-    // Validate date format
-    const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
+    // Validate date format and number of days && months
+    const dateRegex = /^\d{4}\/\d{2}\/\d{2}$/;
     if (!date.match(dateRegex)) {
-      errors.date = "Date should be in the format YYYY-MM-DD";
+      errors.date = "Date should be in the format YYYY/MM/DD";
+    } else {
+      const isValidDate = moment(date, "YYYY/MM/DD", true).isValid();
+
+      if (!isValidDate) {
+        errors.date = "Invalid date";
+      } else {
+        const day = moment(date, "YYYY/MM/DD").date();
+        const month = moment(date, "YYYY/MM/DD").month() + 1; // months are 0-indexed
+
+        if (day < 1 || day > 31) {
+          errors.date = "Day should be between 1 and 31";
+        }
+
+        if (month < 1 || month > 12) {
+          errors.date = "Month should be between 1 and 12";
+        }
+      }
     }
 
     // Validate options
