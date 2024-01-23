@@ -422,26 +422,24 @@ app.delete("/accolade", (req, res) => {
 
 // CRUD employee.job_role
 
-app.get("/getempjobrole", (req,res) => {
-  db.query("SELECT job_role FROM employee;",(err, data) => {
-    if(err) return res.json(err);
+app.get("/getempjobrole", (req, res) => {
+  db.query("SELECT job_role FROM employee;", (err, data) => {
+    if (err) return res.json(err);
     return res.json(data);
   });
 }); // DONE by Firdaus
 
-app.put("/updateemployeejobrole", (req,res) => {
-  const vals = [
-    req.body.job_role,
-    req.body.staff_id
-  ];
-  db.query("UPDATE employee SET job_role = ? WHERE staff_id = ?;", vals, (err,data) => {
-    if(err) return res.json(err);
-    return res.json(data);
-  });
-}) // DONE by Daniel 
-
-
-
+app.put("/updateempjobrole", (req, res) => {
+  const vals = [req.body.job_role, req.body.staff_id];
+  db.query(
+    "UPDATE employee SET job_role = ? WHERE staff_id = ?;",
+    vals,
+    (err, data) => {
+      if (err) return res.json(err);
+      return res.json(data);
+    }
+  );
+}); // DONE by Daniel
 
 //---------------------------END OF CRUD---------------------------
 
