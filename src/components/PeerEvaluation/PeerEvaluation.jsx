@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./PeerEvaluation.css";
 import Navbar from "../NavBar/NavBar";
 import axios from "axios";
@@ -19,6 +19,17 @@ export default function PeerEvaluation() {
 
   // validation state
   const [formErrors, setFormErrors] = useState({});
+  const [validStaffIds, setValidStaffIds] = useState([]);
+
+  // check if staffid is in database, do a get
+  useEffect(() => {
+    axios.get("http://localhost:3001/peerfeedback").then((response) => {
+      const feedbackData = response.data;
+      // Extract staff IDs from feedbackData and set them in your state
+      const ids = feedbackData.map((feedback) => feedback.staff_id);
+      setValidStaffIds(ids);
+    });
+  }, []);
 
   const validateForm = () => {
     const errors = {};
@@ -26,6 +37,8 @@ export default function PeerEvaluation() {
     // Validate staffId
     if (!staffId || isNaN(staffId) || parseInt(staffId) <= 0) {
       errors.staffId = "Staff ID is required and must be a positive integer";
+    } else if (!validStaffIds.includes(parseInt(staffId))) {
+      errors.staffId = "Staff ID not found in the database";
     }
 
     // Validate date format and number of days && months

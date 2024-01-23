@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import NavBar from "../NavBar/NavBar";
 import "./ManagerFeedback.css";
 import axios from "axios";
@@ -25,6 +25,17 @@ export default function ManagerFeedback() {
 
   // validation state
   const [formErrors, setFormErrors] = useState({});
+  const [validStaffIds, setValidStaffIds] = useState([]);
+
+  // check if staffid is in database, do a get
+  useEffect(() => {
+    axios.get("http://localhost:3001/managerfeedback").then((response) => {
+      const feedbackData = response.data;
+      // Extract staff IDs from feedbackData and set them in your state
+      const ids = feedbackData.map((feedback) => feedback.staff_id);
+      setValidStaffIds(ids);
+    });
+  }, []);
 
   // Helper Functions
   const validateForm = () => {
@@ -33,6 +44,8 @@ export default function ManagerFeedback() {
     // Validate staffId
     if (!staffId || isNaN(staffId) || parseInt(staffId) <= 0) {
       errors.staffId = "Staff ID is required and must be a positive integer";
+    } else if (!validStaffIds.includes(parseInt(staffId))) {
+      errors.staffId = "Staff ID not found in the database";
     }
 
     // Validate date format and number of days && months
