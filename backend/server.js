@@ -441,8 +441,6 @@ app.put("/updateemployeejobrole", (req,res) => {
 }) // DONE by Daniel 
 
 
-
-
 //---------------------------END OF CRUD---------------------------
 
 app.listen(3001, () => {
