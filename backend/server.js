@@ -108,7 +108,7 @@ app.get("/department", (req, res) => {
 // Update department (DAMIEN) (DONE)
 
 // set endpoints with requests and response
-app.put("/department", (req, res) => {
+app.put("/login", (req, res) => {
   // initialize values and queries
   const vals = [req.body.name, req.body.department_id];
   db.query(
@@ -426,11 +426,11 @@ app.delete("/deleteaccolade", (req, res) => {
 // CRUD employee.job_role
 
 app.get("/getempjobrole", (req, res) => {
-  db.query("SELECT job_role FROM employee;", (err, data) => {
+  db.query("SELECT job_role FROM employee ;", (err, data) => {
     if (err) return res.json(err);
     return res.json(data);
   });
-}); // DONE by Firdaus
+}); // Done Firdaus
 
 app.put("/updateempjobrole", (req, res) => {
   const vals = [req.body.job_role, req.body.staff_id];
@@ -443,6 +443,41 @@ app.put("/updateempjobrole", (req, res) => {
     }
   );
 }); // DONE by Daniel
+
+// validating employee credentials
+app.post("/login", (req,res)=>{
+  const vals = [req.body.email, req.body.password]
+  db.query("SELECT email, password FROM employee;", vals , (err,data) => {
+    if(err) return res.json(err);
+    return res.json(data); 
+  });
+})
+
+// update employee email
+app.put("/updateuseremail", (req,res) => {
+  const validateEmail = (email) => {
+    return String(email)
+      .toLowerCase()
+      .match(
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      );
+  };
+    const vals = [req.body.email , req.body.staff_id];
+    if(validateEmail(email)){
+      db.query("UPDATE email = ? FROM employee WHERE staff_id = ?;", vals , (err,data) => {
+          if(err) return res.json(err);
+          return res.json(data);
+        }
+        );
+    }
+    else{
+      return "Email format invalid. Please enter a valid email";
+    }
+})
+
+//get employee credentials
+app.get()
+
 
 //---------------------------END OF CRUD---------------------------
 

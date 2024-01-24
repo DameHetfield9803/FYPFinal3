@@ -5,7 +5,7 @@ import "./EmailAuto.css"; // Import styles for the EmailAuto component
 import Navbar from "../NavBar/NavBar"; // Import Navbar component
 
 // Define the EmailAuto functional component
-export default function EmailAuto() {
+export default function EmailAutomate() {
   // Define state variables using the useState hook
   const [name, setName] = useState(""); // State variable for storing the name input
   const [email, setEmail] = useState(""); // State variable for storing the email input
@@ -22,8 +22,8 @@ export default function EmailAuto() {
     e.preventDefault(); // Prevent the default form submission behavior
 
     // Set up service and template IDs for sending the email
-    const serviceId = "service_scvu0r8"; // Replace with your actual service ID
-    const templateId = "template_lrrv8zp"; // Replace with your actual template ID
+    const serviceId = "service_1gsafi3"; // Replace with your actual service ID
+    const templateId = "template_nvf1lql"; // Replace with your actual template ID
 
     try {
       setLoading(true); // Set loading state to true during the email sending process
@@ -51,6 +51,8 @@ export default function EmailAuto() {
   return (
     <div>
       <Navbar /> {/* Render the Navbar component */}
+      <h1>Send an email warning to an employee</h1>
+      
       <section className="email-auto-section">
         <aside className="email-auto-aside"></aside>
         {/* Render a form with input fields for name and email */}
@@ -61,7 +63,7 @@ export default function EmailAuto() {
             <input
               type="text"
               id="name"
-              placeholder="Enter your name"
+              placeholder="Enter Employees Name"
               value={name}
               onChange={(e) => setName(e.target.value)} // Update 'name' state on input change
             />
@@ -72,14 +74,14 @@ export default function EmailAuto() {
             <input
               type="email"
               id="email"
-              placeholder="Enter your email"
+              placeholder="Enter Employees Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)} // Update 'email' state on input change
             />
           </div>
           {/* Submit button for the form, disabled during the loading state */}
           <button className="email-auto-btn" disabled={loading}>
-            Subscribe
+            Send Email Alert
           </button>
         </form>
       </section>

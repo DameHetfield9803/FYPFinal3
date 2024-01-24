@@ -1,14 +1,9 @@
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-} from "react-router-dom/cjs/react-router-dom.min";
-import { useState } from "react";
+import React from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Login from "./components/Login/Login";
 import Forbidden from "./pages/Forbidden";
 import "./style.css";
 import NotFound from "./pages/NotFound";
-import ProtectedRoute from "./components/auth/ProtectedRoute";
 import ForgetPassword from "./components/ForgetPassword/ForgetPassword";
 import PeerEvaluation from "./components/PeerEvaluation/PeerEvaluation";
 import SelfEvaluation from "./components/SelfEvaluation/SelfEvaluation";
@@ -20,40 +15,14 @@ import Profile from "./components/Profile/profilesettings";
 import AppraisalItem from "./components/AppraisalItem/AppraisalItem";
 import ReportForm from "./components/ReportForm/reporterror";
 import EmpTab from "./components/EmployeeTable/Employee";
-import EmployeeDetails from "./components/EmployeeTable/EmployeeDetails";
 import UserGuide from "./components/UserGuide/userguides";
 import Navbar from "./components/NavBar/NavBar";
+import EmployeeDetails from './components/EmployeeTable/EmployeeDetails';
 import Home from "./components/Home/Home";
 import AttendanceSummary from "./components/Attendance/Attendancesummary";
-import EmailAuto from "./components/Email/EmailAuto";
-import axios from "axios";
+import EmailAutomate from "./components/Email/EmailAutomate";
 
-async function getRole() {
-  const role = await axios
-    .get("http://localhost:3001/getemprole")
-    .catch((err) => {
-      // y'all try testing this out
-      return err.json();
-    })
-    .then((res) => {
-      return res.data;
-    });
-  // for y'all to implement
-  switch (role) {
-    case "admin":
-      return "admin";
-    case "manager":
-      return "manager";
-    case "employee":
-      return "employee";
-    case "hr":
-      return "hr";
-    default:
-      return <Forbidden />;
-  }
-}
-
-export default function App() {
+function App() {
   return (
     <Router>
       <div className="App">
@@ -63,11 +32,11 @@ export default function App() {
           </Route>
 
           <Route exact path="/Home">
-            <ProtectedRoute component={Home} />
+            <Home />
           </Route>
 
           <Route exact path="/accolades">
-            <ProtectedRoute component={Accolades} />
+            <Accolades />
           </Route>
 
           <Route exact path="/forgetpassword">
@@ -75,69 +44,67 @@ export default function App() {
           </Route>
 
           <Route exact path="/appraisalitem">
-            <ProtectedRoute component={AppraisalItem} />
+            <AppraisalItem />
           </Route>
 
           <Route exact path="/peerevaluation">
-            <ProtectedRoute component={PeerEvaluation} />
+            <PeerEvaluation />
           </Route>
 
           <Route exact path="/selfevaluation">
-            <ProtectedRoute component={SelfEvaluation} />
+            <SelfEvaluation />
           </Route>
 
           <Route exact path="/attendance">
-            <Attendance component={Attendance} />
+            <Attendance />
           </Route>
 
           <Route exact path="/managerfeedback">
-            <ProtectedRoute component={ManagerFeedback} />
+            <ManagerFeedback />
           </Route>
 
           <Route exact path="/appraisalform">
-            <ProtectedRoute component={AppraisalForm} />
+            <AppraisalForm />
           </Route>
 
           <Route exact path="/profile">
-            <ProtectedRoute component={Profile} />
+            <Profile />
           </Route>
 
           <Route exact path="/reportform">
-            <ProtectedRoute component={ReportForm} />
-          </Route>
-
-          <Route exact path="/employee">
-            <ProtectedRoute component={EmpTab} />
+            <ReportForm />
           </Route>
 
           <Route exact path="/Attendancesummary">
-            <ProtectedRoute component={AttendanceSummary} />
-          </Route>
+          <AttendanceSummary/>
+        </Route>
 
-          <Route exact path="/employee" component={EmpTab} />
-          <Route exact path="/employee/:id" component={EmployeeDetails} />
+        <Route exact path="/employee" component={EmpTab} />
+        <Route exact path="/employee/:id" component={EmployeeDetails} />
 
-          <Route exact path="/userguides">
-            <ProtectedRoute component={UserGuide} />
-          </Route>
+        <Route exact path="/userguides">
+          <UserGuide />
+        </Route>
 
-          <Route exact path="/Navbar">
-            <ProtectedRoute component={Navbar} />
-          </Route>
+        <Route exact path="/Email">
+          <EmailAutomate />
+        </Route>
+        
+        <Route exact path="/Navbar">
+          <Navbar />
+        </Route>
 
-          <Route exact path="/Email">
-            <ProtectedRoute component={EmailAuto} />
-          </Route>
+        <Route exact path="/forbidden">
+          <Forbidden />
+        </Route>
 
-          <Route exact path="/forbidden">
-            <Forbidden />
-          </Route>
-
-          <Route path="*">
-            <NotFound />
-          </Route>
-        </Switch>
-      </div>
-    </Router>
+        <Route path="*">
+          <NotFound />
+        </Route>
+      </Switch>
+    </div>
+    </Router >
   );
 }
+
+export default App;
