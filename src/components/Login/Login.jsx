@@ -23,23 +23,17 @@ export default function Login() {
 
     const history = useHistory();
 
-    async function loginAction(){
-        let credentials= await axios.post("http://localhost:3001/login")
-        .then(function(response){
-            if(!validateEmail(response.email) === "" && response.email === credentials.email && response.password === credentials.password){
-                return console.log("Login successful.\n");
-
-            }
-            else{
-                return console.log("Login is invalid. Please try entering your credentials again. \n");
-            }
-        })
+    async function handleSubmit(event){
+        event.preventDefault();
+        axios.post("http://localhost:3001/login", {email, password})
+        .then(res => console.log(res))
+        history.push("/home")
     }
-    
 
     return (
         <>
             <div className="container mt-5">
+                <form onSubmit={handleSubmit}>
                 <img src="/Assets/TSH.jpg" width="310px" height="90px" href="/" alt="TSH-Logo"/>
                 <br />
                 <h1 className="mb-2">Login</h1>
@@ -52,7 +46,7 @@ export default function Login() {
                     onChange={(e) => setPassword(e.target.value)}
                 />
                 <button className="btn btn-primary" style={{ marginRight: "10px" }}
-                    onClick={loginAction}
+                    onClick={handleSubmit}
                 >Submit</button>
                 <Link to="/forgetpassword">
                     Forget password
@@ -63,6 +57,7 @@ export default function Login() {
                         {errorMsg}
                     </div>
                 }
+                </form>
             </div >
         </>
     );
