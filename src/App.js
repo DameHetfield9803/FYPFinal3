@@ -29,7 +29,7 @@ import axios from "axios";
 
 async function getRole() {
   const role = await axios
-    .get("http://localhost:3001/getemprole")
+    .get("http://localhost:3001/getempjobrole")
     .catch((err) => {
       // y'all try testing this out
       return err.json();
@@ -37,19 +37,6 @@ async function getRole() {
     .then((res) => {
       return res.data;
     });
-  // for y'all to implement
-  switch (role) {
-    case "admin":
-      return console.log("admin");
-    case "manager":
-      return console.log("manager");
-    case "employee":
-      return console.log("employee");
-    case "hr":
-      return console.log("hr");
-    default:
-      return <Forbidden />;
-  }
 }
 
 export default function App() {
@@ -57,6 +44,9 @@ export default function App() {
     <Router>
       <div className="App">
         <Switch>
+          getRole(){
+
+          }
           <Route exact path="/">
             <Login />
           </Route>
