@@ -5,10 +5,89 @@ import { signOut } from "firebase/auth";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import Navbar from "../NavBar/NavBar";
 import "./Home.css";
+import Forbidden from "../.././pages/Forbidden";
+import axios from "axios";
+
+function getRole(){
+  axios.get("http://localhost:3001/getempjobrole").then(function(response){
+    console.log(response);
+  })
+}
 
 export default function Home() {
   const history = useHistory();
-
+  const role = getRole()
+  if(role === "employee"){
+    return(
+      <div>
+          <a href="/Attendance">Attendance</a> <br></br>
+          <a href="/Accolades">Accolades</a>
+          <br></br>
+          <a href="/PeerEvaluation">PeerEvaluation</a>
+          <br></br>
+          <a href="/SelfEvaluation">SelfEvaluation</a>
+          <br></br>
+          <a href="/ManagerFeedback">ManagerFeedback</a>
+          <br></br>
+          <a href="/ReportForm">ReportForm</a>
+          <br></br>
+          <a href="/userguides">UserGuide</a>
+      </div>
+    )
+  }
+  else if (role === "manager"){
+    return(
+      <div>
+        <strong>Manager</strong>
+        <a href="/Attendance">Attendance</a> <br></br>
+        <a href="/AppraisalForm">AppraisalForm</a>
+        <br></br>
+        <a href="/Employee">Employee Table</a>
+        <br></br>
+        <a href="/PeerEvaluation">PeerEvaluation</a>
+        <br></br>
+        <a href="/SelfEvaluation">SelfEvaluation</a>
+        <br></br>
+        <a href="/ReportForm">ReportForm</a>
+        <br></br>
+        <a href="/userguides">UserGuide</a>
+        <br></br>
+        <a href="/ManagerFeedback">ManagerFeedback</a>
+        <br></br>
+      </div>
+    )
+  }
+  else if(role === "admin" && role === "human resource"){
+    <div className="HR-container">
+    <strong>Human Resource</strong>
+    <a href="/Attendance">Attendance</a> <br></br>
+    <a href="/Accolades">Accolades</a>
+    <br></br>
+    <a href="/AppraisalForm">AppraisalForm</a>
+    <br></br>
+    <a href="/AppraisalItem">AppraisalItem</a>
+    <br></br>
+    <a href="/Employee">Employee</a>
+    <br></br>
+    <a href="/PeerEvaluation">PeerEvaluation</a>
+    <br></br>
+    <a href="/SelfEvaluation">SelfEvaluation</a>
+    <br></br>
+    <a href="/ReportForm">ReportForm</a>
+    <br></br>
+    <a href="/ManagerFeedback">ManagerFeedback</a>
+    <br></br>
+    <a href="/userguides">UserGuide</a>
+    <br></br>
+  </div>
+  }
+  else{
+    return (
+      <div>
+        <Forbidden/>
+      </div>
+    )
+  }
   return (
     <div>
       {/*Start of Dashboard Contents*/}
