@@ -170,6 +170,9 @@ app.post("/createpeerfeedback", (req, res) => {
   ];
   db.query(
     "INSERT INTO `peer_feedback`(`feedback_text`, `date`, `staff_id`, `op1`,`op2`,`op3`,`op4`,`op5`,`op6`,`op7`) VALUES (? , ? , ? , ? , ?,?,?,?,?,?);",
+    // Feedback the user needs to know who to evaluate.etc
+    // staff id change to whoever the user is evaluating, who evaluate who
+    // add a new field for evaluator and evaluatee
     vals,
     (err, data) => {
       if (err) return res.json(err);
@@ -181,6 +184,7 @@ app.post("/createpeerfeedback", (req, res) => {
 //DONE Read peer feedback (DANIEL)
 app.get("/peerfeedback", (req, res) => {
   const q = "SELECT * FROM peer_feedback";
+  // Create a seperate .get for manager,hr and admin
   db.query(q, (err, data) => {
     if (err) return res.json(err);
     return res.json(data);
@@ -246,6 +250,7 @@ app.post("/createselffeedback", (req, res) => {
 // Read self feedback (DANIEL) (Done)
 app.get("/selffeedback", (req, res) => {
   db.query("SELECT * FROM self_feedback;", (err, data) => {
+    //Create a seperate endpoint for manager/hr and employee, sort based on roles
     if (err) return res.json(err);
     return res.json(data);
   });
@@ -260,6 +265,7 @@ app.put("/selffeedback", (req, res) => {
   ]; // retrieving from front end
   db.query(
     "UPDATE self_feedback SET feedback_text = ? WHERE self_feedback_id = ? AND staff_id = ?;",
+    //Remove staff id
     vals,
     (err, data) => {
       if (err) return res.json(err);
