@@ -439,7 +439,7 @@ app.post("/createempjobrole", (req,res) => {
 
 app.put("/updateemployeejobrole", (req,res) => {
   const vals = [];
-  db.query("SET VALUES WHERE;", vals, (err,data){
+  db.query("SET VALUES WHERE;", vals, (err,data) =>{
     if(err) return res.json(err);
     return res.json(data);
   });
