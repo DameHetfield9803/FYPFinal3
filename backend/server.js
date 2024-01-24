@@ -423,20 +423,23 @@ app.delete("/accolade", (req, res) => {
 // CRUD employee.job_role
 
 app.get("/getempjobrole", (req,res) => {
-  db.query("SELECT * FROM employee.job_role ;",(err, data) => {
+  db.query("SELECT job_role FROM employee; ;",(err, data) => {
     if(err) return res.json(err);
     return res.json(data);
   });
 }); // TODO Firdaus
 
-app.put("/updateemployeejobrole", (req,res) => {
-  const vals = [];
-  db.query("SET VALUES WHERE;", vals, (err,data) =>{
-    if(err) return res.json(err);
-    return res.json(data);
-  });
-}) // TODO Firdaus
-
+app.put("/updateempjobrole", (req, res) => {
+  const vals = [req.body.job_role, req.body.staff_id];
+  db.query(
+    "UPDATE employee SET job_role = ? WHERE staff_id = ?;",
+    vals,
+    (err, data) => {
+      if (err) return res.json(err);
+      return res.json(data);
+    }
+  );
+}); // DONE by Daniel
 //---------------------------END OF CRUD---------------------------
 
 app.listen(3001, () => {
