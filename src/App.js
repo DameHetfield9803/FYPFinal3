@@ -3,7 +3,6 @@ import {
   Route,
   Switch,
 } from "react-router-dom/cjs/react-router-dom.min";
-import { useState } from "react";
 import Login from "./components/Login/Login";
 import Forbidden from "./pages/Forbidden";
 import "./style.css";
@@ -41,13 +40,13 @@ async function getRole() {
   // for y'all to implement
   switch (role) {
     case "admin":
-      return "admin";
+      return console.log("admin");
     case "manager":
-      return "manager";
+      return console.log("manager");
     case "employee":
-      return "employee";
+      return console.log("employee");
     case "hr":
-      return "hr";
+      return console.log("hr");
     default:
       return <Forbidden />;
   }
