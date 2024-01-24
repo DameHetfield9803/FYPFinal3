@@ -21,6 +21,7 @@ import EmployeeDetails from './components/EmployeeTable/EmployeeDetails';
 import Home from "./components/Home/Home";
 import AttendanceSummary from "./components/Attendance/Attendancesummary";
 import EmailAutomate from "./components/Email/EmailAutomate";
+import ViewAccolades from "./components/Accolades/ViewAccolades";
 
 function App() {
   return (
@@ -37,6 +38,10 @@ function App() {
 
           <Route exact path="/accolades">
             <Accolades />
+          </Route>
+
+          <Route exact path="/viewaccolades">
+            <ViewAccolades />
           </Route>
 
           <Route exact path="/forgetpassword">

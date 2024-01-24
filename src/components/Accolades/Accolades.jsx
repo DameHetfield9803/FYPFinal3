@@ -3,6 +3,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "./Accolades.css";
 import Navbar from "../NavBar/NavBar";
+import ViewAccolades from "../Accolades/ViewAccolades";
 import axios from 'axios';
 
 const Accolades = () => {
@@ -22,11 +23,11 @@ const Accolades = () => {
     if (inputList.length > 0) {
       const lastInput = inputList[inputList.length - 1];
       const isLastInputEmpty =
-        lastInput.staffId === "" &&
+        lastInput.staffId === 0 &&
         lastInput.accoladeTitle === "" &&
         lastInput.completionDate === "" &&
         !lastInput.file &&
-        lastInput.achievementLevel === "";
+        lastInput.achievementLevel === 0;
 
       setIsDisabled(isLastInputEmpty);
     }
@@ -78,6 +79,17 @@ const Accolades = () => {
     ]);
   };
 
+  const handleSubmitAccolade = () => {
+    axios.post('/api/submitAccolades', { accolades: inputList })
+      .then(response => {
+        console.log('Accolades submitted successfully');
+        // Optionally, you can reset the form or perform other actions upon successful submission
+      })
+      .catch(error => {
+        console.error('Error submitting accolades:', error);
+      });
+  };
+
   return (
     <div>
       <Navbar></Navbar>
@@ -86,46 +98,45 @@ const Accolades = () => {
       <b> <p className="mt-3 text-center">(NATIONAL-LEVEL 3, GOVERNMENT-LEVEL 2 , COMMUNITY-LEVEL 1 )</p></b>
       <div className="App">
         <h1>Input your accolades achievement</h1>
-
         {inputList.length > 0 ? (
           inputList.map((input, index) => (
             <div key={index} className="input-group" style={inputStyles}>
               <input
-                type="text"
+                type="number"
                 className="form-control"
-                placeholder={`Staff ID`}
+                placeholder="Staff ID"
                 value={input.staffId}
                 onChange={(event) => handleInputChange(event, index, "staffId")}
               />
               <input
                 type="text"
                 className="form-control"
-                placeholder={`Accolade Title`}
+                placeholder="Accolade Title"
                 value={input.accoladeTitle}
                 onChange={(event) => handleInputChange(event, index, "accoladeTitle")}
               />
-              <DatePicker
-                selected={input.completionDate ? new Date(input.completionDate) : null}
-                onChange={(date) =>
-                  handleInputChange(
-                    { target: { value: date }, files: [] },
-                    index,
-                    "completionDate"
-                  )
-                }
-                dateFormat="yyyy-MM-dd"
-                className="form-control"
-                placeholderText="Select Completion Date"
-              />
+            <DatePicker
+  selected={input.completionDate ? new Date(input.completionDate) : null}
+  onChange={(date) =>
+    handleInputChange(
+      { target: { value: date.toISOString() }, files: [] },
+      index,
+      "completionDate"
+    )
+  }
+  dateFormat="yyyy-MM-dd"
+  className="form-control"
+  placeholderText="Select Completion Date"
+/>
               <select
                 className="form-control"
                 value={input.achievementLevel}
                 onChange={(event) => handleInputChange(event, index, "achievementLevel")}
               >
-                <option value="">Select Achievement Level</option>
-                <option value="Level 1">Level 1</option>
-                <option value="Level 2">Level 2</option>
-                <option value="Level 3">Level 3</option>
+                <option value={0}>Select Achievement Level</option>
+                <option value={1}>Level 1</option>
+                <option value={2}>Level 2</option>
+                <option value={3}>Level 3</option>
               </select>
               <div className="custom-file">
                 <input
@@ -155,11 +166,13 @@ const Accolades = () => {
         <button
           className="btn btn-primary"
           style={btnStyle}
-          onClick={handleListAdd}
+          onClick={handleSubmitAccolade}
           disabled={isDisabled}
         >
-          Add choice
+          Submit Accolades
         </button>
+
+        <ViewAccolades accolades={inputList} />
       </div>
     </div>
   );

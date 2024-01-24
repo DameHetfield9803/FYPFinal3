@@ -1,44 +1,31 @@
 import { Link } from "react-router-dom";
-import { auth } from "../../config/firebase";
-import { onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
-import { useEffect, useState } from "react";
+import axios from "axios";
+import { useState } from "react";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+
+
+//validating credentials by retrieving from database
 export default function Login() {
 
-    const [email, setEmail] = useState("");
+    const [email, setEmail] = useState(""); // set and submit email
 
-    const [password, setPassword] = useState("");
+    const [password, setPassword] = useState(""); //set and submit password
 
-    const [errorMsg, setErrorMsg] = useState("");
+    const [errorMsg, setErrorMsg] = useState(""); // set and show errormsg
 
-    const history = useHistory();
+    const history = useHistory(); // based on login, if successful
 
-    function loginAction() {
-        signInWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                const user = userCredential.user;
-                if (user) {
-                    history.push("/home")
-                }
-            })
-            .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                setErrorMsg("Error! Failed to authenticate credentials. ");
-            });
+    async function handleSubmit(event){
+        event.preventDefault();
+        axios.post("http://localhost:3001/login", {email, password})
+        .then(res => console.log(res))
+        history.push("/home")
     }
-
-    useEffect(() => {
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                history.push("/home")
-            }
-        });
-    }, []);
 
     return (
         <>
             <div className="container mt-5">
+                <form onSubmit={handleSubmit}>
                 <img src="/Assets/TSH.jpg" width="310px" height="90px" href="/" alt="TSH-Logo"/>
                 <br />
                 <h1 className="mb-2">Login</h1>
@@ -51,7 +38,7 @@ export default function Login() {
                     onChange={(e) => setPassword(e.target.value)}
                 />
                 <button className="btn btn-primary" style={{ marginRight: "10px" }}
-                    onClick={loginAction}
+                    onClick={handleSubmit}
                 >Submit</button>
                 <Link to="/forgetpassword">
                     Forget password
@@ -62,6 +49,7 @@ export default function Login() {
                         {errorMsg}
                     </div>
                 }
+                </form>
             </div >
         </>
     );
