@@ -7,21 +7,13 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 //validating credentials by retrieving from database
 export default function Login() {
 
-    const validateEmail = (email) => {
-        return String(email)
-          .toLowerCase()
-          .match(
-            /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-          );
-      };
+    const [email, setEmail] = useState(""); // set and submit email
 
-    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState(""); //set and submit password
 
-    const [password, setPassword] = useState("");
+    const [errorMsg, setErrorMsg] = useState(""); // set and show errormsg
 
-    const [errorMsg, setErrorMsg] = useState("");
-
-    const history = useHistory();
+    const history = useHistory(); // based on login, if successful
 
     async function handleSubmit(event){
         event.preventDefault();

@@ -455,24 +455,10 @@ app.post("/login", (req,res)=>{
 
 // update employee email
 app.put("/updateuseremail", (req,res) => {
-  const validateEmail = (email) => {
-    return String(email)
-      .toLowerCase()
-      .match(
-        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-      );
-  };
-    const vals = [req.body.email , req.body.staff_id];
-    if(validateEmail(email)){
-      db.query("UPDATE email = ? FROM employee WHERE staff_id = ?;", vals , (err,data) => {
-          if(err) return res.json(err);
-          return res.json(data);
-        }
-        );
-    }
-    else{
-      return "Email format invalid. Please enter a valid email";
-    }
+  const vals = [req.body.email , req.body.staff_id];
+  db.query("UPDATE employee SET email =? WHERE staff_id=?;", vals, (err,data) => {
+
+  })
 })
 
 //get employee credentials
