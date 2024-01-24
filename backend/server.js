@@ -361,15 +361,16 @@ app.delete("/managerfeedback", (req, res) => {
 
 //-----------------------DANIEL-------------------------
 //Done Create accolades (DANIEL)
-app.post("/accolade", (req, res) => {
+app.post("/addaccolade", (req, res) => {
   const val = [
-    req.body.accolade_id,
     req.body.accolade_title,
     req.body.completion_date,
+    req.body.file,
+    req.body.achievement_level,
     req.body.staff_id,
   ];
   db.query(
-    "INSERT INTO `accolade`(accolade_id, accolade_title, completion_date, staff_id) VALUES(?,?,?,?);",
+    "INSERT INTO `accolade`(accolade_title, completion_date,file,achievement_level,staff_id) VALUES(?,?,?,?,?);",
     val,
     (err, data) => {
       if (err) return res.json(err);
@@ -380,7 +381,7 @@ app.post("/accolade", (req, res) => {
 
 //Done Read accolades (DANIEL)
 
-app.get("/accolade", (req, res) => {
+app.get("/getaccolade", (req, res) => {
   db.query("SELECT * FROM accolade;", (err, data) => {
     if (err) return res.json(err);
     return res.json(data);
@@ -389,15 +390,17 @@ app.get("/accolade", (req, res) => {
 
 //DONE Update accolades (DANIEL)
 
-app.put("/accolade", (req, res) => {
+app.put("/updateaccolade", (req, res) => {
   const vals = [
     req.body.accolade_title,
     req.body.completion_date,
+    req.body.file,
+    req.body.achievement_level,
     req.body.staff_id,
     req.body.accolade_id,
   ];
   db.query(
-    "UPDATE `accolade` SET accolade_title = ? , completion_date = ? , staff_id = ? WHERE accolade_id = ?;",
+    "UPDATE `accolade` SET accolade_title = ? , completion_date = ? , file = ?,achievement_level = ?, staff_id = ? WHERE accolade_id = ?;",
     vals,
     (err, data) => {
       if (err) return res.json(err);
@@ -408,7 +411,7 @@ app.put("/accolade", (req, res) => {
 
 //Done Delete accolades (DANIEL)
 
-app.delete("/accolade", (req, res) => {
+app.delete("/deleteaccolade", (req, res) => {
   const val = [req.body.accolade_id];
   db.query(
     "DELETE FROM `accolade` WHERE accolade_id = ?; ",

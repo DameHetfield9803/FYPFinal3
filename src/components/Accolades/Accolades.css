@@ -1,19 +1,9 @@
-/* === Variable Declarations === */
-:root {
-  --primary-color: #db1e1e;
-  --link-color: #371c6b;
-  --hover-bg-color: #ddd;
-  --hover-text-color: black;
-  --active-bg-color: #04AA6D;
-  --active-text-color: rgb(17, 3, 3);
-}
-
 /* === Top Navigation Styles === */
 
 /* Style for the top navigation bar */
 .topnav {
   overflow: hidden;
-  background-color: var(--primary-color);
+  background-color: #db1e1e; /* Replace with your desired color */
   display: flex;
   align-items: center;
 }
@@ -21,7 +11,7 @@
 /* Style for each link in the top navigation bar */
 .topnav a {
   float: left;
-  color: var(--link-color);
+  color: #371c6b; /* Replace with your desired color */
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
@@ -30,14 +20,14 @@
 
 /* Style for the links when hovered over */
 .topnav a:hover {
-  background-color: var(--hover-bg-color);
-  color: var(--hover-text-color);
+  background-color: #ddd; /* Replace with your desired color */
+  color: black;
 }
 
 /* Style for the active link in the top navigation bar */
 .topnav a.active {
-  background-color: var(--active-bg-color);
-  color: var(--active-text-color);
+  background-color: #04AA6D; /* Replace with your desired color */
+  color: rgb(17, 3, 3);
 }
 
 /* Additional styling for the logo link, adding right margin */
@@ -49,5 +39,4 @@
 
 @media screen and (max-width: 600px) {
   /* Add styles for smaller screens */
-  
 }
