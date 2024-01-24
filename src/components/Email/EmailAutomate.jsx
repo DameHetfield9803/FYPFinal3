@@ -51,6 +51,8 @@ export default function EmailAutomate() {
   return (
     <div>
       <Navbar /> {/* Render the Navbar component */}
+      <h1>Send an email warning to an employee</h1>
+      
       <section className="email-auto-section">
         <aside className="email-auto-aside"></aside>
         {/* Render a form with input fields for name and email */}
@@ -61,7 +63,7 @@ export default function EmailAutomate() {
             <input
               type="text"
               id="name"
-              placeholder="Enter your name"
+              placeholder="Enter Employees Name"
               value={name}
               onChange={(e) => setName(e.target.value)} // Update 'name' state on input change
             />
@@ -72,7 +74,7 @@ export default function EmailAutomate() {
             <input
               type="email"
               id="email"
-              placeholder="Enter your email"
+              placeholder="Enter Employees Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)} // Update 'email' state on input change
             />
