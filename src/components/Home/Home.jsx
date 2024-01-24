@@ -9,7 +9,7 @@ import Forbidden from "../.././pages/Forbidden";
 import axios from "axios";
 
 function loginAction(){
-  axios.post("http://localhost:3001/getempjobrole").then(function(response){
+  axios.get("http://localhost:3001/getempjobrole").then(function(response){
     console.log(response);
   })
 }

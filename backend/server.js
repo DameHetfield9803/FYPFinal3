@@ -447,7 +447,7 @@ app.put("/updateempjobrole", (req, res) => {
 // validating employee credentials
 app.post("/login", (req,res)=>{
   const vals = [req.body.email, req.body.password]
-  db.query("SELECT email, password FROM employee;", vals , (err,data) => {
+  db.query("SELECT email, password FROM employee WHERE email = ? AND password =?;", vals , (err,data) => {
     if(err) return res.json(err);
     return res.json(data); 
   });
@@ -476,7 +476,7 @@ app.put("/updateuseremail", (req,res) => {
 })
 
 //get employee credentials
-app.get()
+//app.get()
 
 
 //---------------------------END OF CRUD---------------------------
