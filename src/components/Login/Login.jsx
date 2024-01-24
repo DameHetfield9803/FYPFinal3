@@ -1,9 +1,19 @@
 import { Link } from "react-router-dom";
-import { auth } from "../../config/firebase";
-import { onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
+import axios from "axios";
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+
+
+//validating credentials by retrieving from database
 export default function Login() {
+
+    const validateEmail = (email) => {
+        return String(email)
+          .toLowerCase()
+          .match(
+            /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+          );
+      };
 
     const [email, setEmail] = useState("");
 
@@ -13,28 +23,19 @@ export default function Login() {
 
     const history = useHistory();
 
-    function loginAction() {
-        signInWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                const user = userCredential.user;
-                if (user) {
-                    history.push("/home")
-                }
-            })
-            .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                setErrorMsg("Error! Failed to authenticate credentials. ");
-            });
-    }
+    async function loginAction(){
+        let credentials= await axios.post("http://localhost:3001/login")
+        .then(function(response){
+            if(!validateEmail(response.email) === "" && response.email === credentials.email && response.password === credentials.password){
+                return console.log("Login successful.\n");
 
-    useEffect(() => {
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                history.push("/home")
             }
-        });
-    }, []);
+            else{
+                return console.log("Login is invalid. Please try entering your credentials again. \n");
+            }
+        })
+    }
+    
 
     return (
         <>
