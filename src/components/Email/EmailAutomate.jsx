@@ -5,7 +5,7 @@ import "./EmailAuto.css"; // Import styles for the EmailAuto component
 import Navbar from "../NavBar/NavBar"; // Import Navbar component
 
 // Define the EmailAuto functional component
-export default function EmailAuto() {
+export default function EmailAutomate() {
   // Define state variables using the useState hook
   const [name, setName] = useState(""); // State variable for storing the name input
   const [email, setEmail] = useState(""); // State variable for storing the email input

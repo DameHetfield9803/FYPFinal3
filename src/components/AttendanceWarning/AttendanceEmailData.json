@@ -1,0 +1,80 @@
+[
+    {
+        "EmpName": "SSG1",
+        "Email": "SSG1tsh@gmail.com",
+        "Department": "MC",
+        "AttendancePercentage": 95
+    },
+    {
+        "EmpName": "CN2",
+        "Email": "CN2tsh@gmail.com",
+        "Department": "HQ",
+        "AttendancePercentage": 100
+    },
+    {
+        "EmpName": "NBM",
+        "Email": "NBMtsh@gmail.com",
+        "Department": "MC",
+        "AttendancePercentage": 95
+    },
+    {
+        "EmpName": "TBI",
+        "Email": "TBItsh@gmail.com",
+        "Department": "BMW",
+        "AttendancePercentage": 90
+    },
+    {
+        "EmpName": "MAA",
+        "Email": "MAAtsh@gmail.com",
+        "Department": "HQ",
+        "AttendancePercentage": 86
+    },
+    {
+        "EmpName": "NSBT",
+        "Email": "NSBTtsh@gmail.com",
+        "Department": "HQ",
+        "AttendancePercentage": 68
+    },
+    {
+        "EmpName": "MAABMS",
+        "Email": "firzamin21035358@gmail.com",
+        "Department": "MC",
+        "AttendancePercentage": 95
+    },
+    {
+        "EmpName": "NTT",
+        "Email": "NTTtsh@gmail.com",
+        "Department": "MC",
+        "AttendancePercentage": 95
+    },
+    {
+        "EmpName": "SAFGBA",
+        "Email": "SAFGBAtsh@gmail.com",
+        "Department": "BMW",
+        "AttendancePercentage": 77
+    },
+    {
+        "EmpName": "MSBO",
+        "Email": "MSBOtsh@gmail.com",
+        "Department": "MC",
+        "AttendancePercentage": 0
+    },
+    {
+        "EmpName": "KCS",
+        "Email": "KCStsh@gmail.com",
+        "Department": "MC",
+        "AttendancePercentage": 95
+    },
+    {
+        "EmpName": "IT2",
+        "Email": "IT2tsh@gmail.com",
+        "Department": "HQ",
+        "AttendancePercentage": 95
+    },
+    {
+        "EmpName": "SBS2",
+        "Email": "SBS2tsh@gmail.com",
+        "Department": "",
+        "AttendancePercentage": 77
+    }
+]
