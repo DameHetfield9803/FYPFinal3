@@ -23,7 +23,7 @@ export default function EmailAutomate() {
 
     // Set up service and template IDs for sending the email
     const serviceId = "service_1gsafi3"; // Replace with your actual service ID
-    const templateId = "template_lrrv8zf"; // Replace with your actual template ID
+    const templateId = "template_nvf1lql"; // Replace with your actual template ID
 
     try {
       setLoading(true); // Set loading state to true during the email sending process
