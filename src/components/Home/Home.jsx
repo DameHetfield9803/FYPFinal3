@@ -8,8 +8,8 @@ import "./Home.css";
 import Forbidden from "../.././pages/Forbidden";
 import axios from "axios";
 
-function loginAction(){
-  axios.get("http://localhost:3001/getempjobrole").then(function(response){
+async function loginAction(){
+  await axios.get("http://localhost:3001/getempjobrole").then(function(response){
     console.log(response);
   })
 }
@@ -17,7 +17,7 @@ function loginAction(){
 export default function Home() {
   const history = useHistory();
   const role = loginAction()
-  if(loginAction === "employee"){
+  if(loginAction.job_role === "employee"){
     return(
       <div>
           <a href="/Attendance">Attendance</a> <br></br>
@@ -35,7 +35,7 @@ export default function Home() {
       </div>
     )
   }
-  else if (loginAction === "manager"){
+  else if (loginAction.job_role === "manager"){
     return(
       <div>
         <strong>Manager</strong>
@@ -57,7 +57,7 @@ export default function Home() {
       </div>
     )
   }
-  else if(loginAction === "admin" && loginAction === "human resource"){
+  else if(loginAction.job_role === "admin" && loginAction.job_role === "human resource"){
     <div className="HR-container">
     <strong>Human Resource</strong>
     <a href="/Attendance">Attendance</a> <br></br>
