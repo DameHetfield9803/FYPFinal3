@@ -39,14 +39,121 @@ async function getRole() {
     });
 }
 
+function showReturns(){
+  if(getRole === "admin" || getRole === "human resource"){
+    return(
+      <div>
+        <Switch>
+          <Route exact path="/">
+            <Login />
+          </Route>
+
+          <Route exact path="/Home">
+            <ProtectedRoute component={Home} />
+          </Route>
+
+          <Route exact path="/accolades">
+            <ProtectedRoute component={Accolades} />
+          </Route>
+
+          <Route exact path="/forgetpassword">
+            <ForgetPassword />
+          </Route>
+
+          <Route exact path="/appraisalitem">
+            <ProtectedRoute component={AppraisalItem} />
+          </Route>
+
+          <Route exact path="/peerevaluation">
+            <ProtectedRoute component={PeerEvaluation} />
+          </Route>
+
+          <Route exact path="/selfevaluation">
+            <ProtectedRoute component={SelfEvaluation} />
+          </Route>
+
+          <Route exact path="/attendance">
+            <Attendance component={Attendance} />
+          </Route>
+
+          <Route exact path="/managerfeedback">
+            <ProtectedRoute component={ManagerFeedback} />
+          </Route>
+
+          <Route exact path="/appraisalform">
+            <ProtectedRoute component={AppraisalForm} />
+          </Route>
+
+          <Route exact path="/profile">
+            <ProtectedRoute component={Profile} />
+          </Route>
+
+          <Route exact path="/reportform">
+            <ProtectedRoute component={ReportForm} />
+          </Route>
+
+          <Route exact path="/employee">
+            <ProtectedRoute component={EmpTab} />
+          </Route>
+
+          <Route exact path="/Attendancesummary">
+            <ProtectedRoute component={AttendanceSummary} />
+          </Route>
+
+          <Route exact path="/employee" component={EmpTab} />
+          <Route exact path="/employee/:id" component={EmployeeDetails} />
+
+          <Route exact path="/userguides">
+            <ProtectedRoute component={UserGuide} />
+          </Route>
+
+          <Route exact path="/Navbar">
+            <ProtectedRoute component={Navbar} />
+          </Route>
+
+          <Route exact path="/Email">
+            <ProtectedRoute component={EmailAutomate} />
+          </Route>
+
+          <Route exact path="/forbidden">
+            <Forbidden />
+          </Route>
+
+          <Route path="*">
+            <NotFound />
+          </Route>
+        </Switch>
+      </div>
+    )
+  }
+  else if (getRole === "manager"){
+    return(
+      <div>
+
+      </div>
+    )
+  }
+  else if(getRole === "employee"){
+    return (
+      <div>
+
+      </div>
+    )
+  }
+  else{
+    return(
+      <div>
+        <Forbidden/>
+      </div>
+    )
+  }
+}
+
 export default function App() {
   return (
     <Router>
       <div className="App">
         <Switch>
-          getRole(){
-
-          }
           <Route exact path="/">
             <Login />
           </Route>
