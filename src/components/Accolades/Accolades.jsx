@@ -3,7 +3,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "./Accolades.css";
 import Navbar from "../NavBar/NavBar";
-import axios from 'axios';
+// import axios from 'axios';
 
 const Accolades = () => {
   const [inputList, setInputList] = useState([
@@ -78,6 +78,7 @@ const Accolades = () => {
     ]);
   };
 
+  
   return (
     <div>
       <Navbar></Navbar>
@@ -86,21 +87,21 @@ const Accolades = () => {
       <b> <p className="mt-3 text-center">(NATIONAL-LEVEL 3, GOVERNMENT-LEVEL 2 , COMMUNITY-LEVEL 1 )</p></b>
       <div className="App">
         <h1>Input your accolades achievement</h1>
-
         {inputList.length > 0 ? (
           inputList.map((input, index) => (
-            <div key={index} className="input-group" style={inputStyles}>
+           
+           <div key={index} className="input-group" style={inputStyles}>
               <input
-                type="text"
+                type="number"
                 className="form-control"
-                placeholder={`Staff ID`}
+                placeholder="Staff ID"
                 value={input.staffId}
                 onChange={(event) => handleInputChange(event, index, "staffId")}
               />
               <input
                 type="text"
                 className="form-control"
-                placeholder={`Accolade Title`}
+                placeholder="Accolade Title"
                 value={input.accoladeTitle}
                 onChange={(event) => handleInputChange(event, index, "accoladeTitle")}
               />
