@@ -22,8 +22,8 @@ export default function EmailAuto() {
     e.preventDefault(); // Prevent the default form submission behavior
 
     // Set up service and template IDs for sending the email
-    const serviceId = "service_scvu0r8"; // Replace with your actual service ID
-    const templateId = "template_lrrv8zp"; // Replace with your actual template ID
+    const serviceId = "service_1gsafi3"; // Replace with your actual service ID
+    const templateId = "template_lrrv8zf"; // Replace with your actual template ID
 
     try {
       setLoading(true); // Set loading state to true during the email sending process
@@ -79,7 +79,7 @@ export default function EmailAuto() {
           </div>
           {/* Submit button for the form, disabled during the loading state */}
           <button className="email-auto-btn" disabled={loading}>
-            Subscribe
+            Send Email Alert
           </button>
         </form>
       </section>
