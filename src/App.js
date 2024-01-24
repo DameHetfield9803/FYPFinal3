@@ -25,7 +25,7 @@ import UserGuide from "./components/UserGuide/userguides";
 import Navbar from "./components/NavBar/NavBar";
 import Home from "./components/Home/Home";
 import AttendanceSummary from "./components/Attendance/Attendancesummary";
-import EmailAuto from "./components/Email/EmailAuto";
+import EmailAutomate from "./components/Email/EmailAutomate";
 import axios from "axios";
 
 async function getRole() {
@@ -126,7 +126,7 @@ export default function App() {
           </Route>
 
           <Route exact path="/Email">
-            <ProtectedRoute component={EmailAuto} />
+            <ProtectedRoute component={EmailAutomate} />
           </Route>
 
           <Route exact path="/forbidden">
