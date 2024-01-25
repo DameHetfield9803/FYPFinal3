@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import NavBar from "../NavBar/NavBar";
 import Navbar from "../NavBar/NavBar";
+import { Link, useHistory } from "react-router-dom";
 
 const ManagerFeedbackList = () => {
   const [feedbackList, setFeedbackList] = useState([]);
+  const history = useHistory(); // Get access to the history object
 
   useEffect(() => {
     // Fetch feedback data from the server
@@ -14,8 +15,8 @@ const ManagerFeedbackList = () => {
   }, []);
 
   const handleUpdate = (id) => {
-    // Handle update logic, navigate to the update page or modal
-    console.log("Update feedback with id:", id);
+    // Redirect to the update page for the selected feedback ID
+    history.push(`/updatefeedback/${id}`);
   };
 
   const handleDelete = (id) => {
@@ -58,6 +59,8 @@ const ManagerFeedbackList = () => {
           </tbody>
         </table>
       </div>
+      <a href="/ManagerFeedback"> Add New Manager Feedback for an employee</a>
+        <br></br>
     </div>
   );
 };

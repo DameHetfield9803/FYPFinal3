@@ -6,11 +6,9 @@ import axios from "axios";
 import moment from "moment";
 import { useHistory } from "react-router-dom";
 
-
 export default function ManagerFeedback() {
   // React hooks
   const [staffId, setStaffId] = useState(null);
-  const [date, setDate] = useState("");
   const [op1, setOp1] = useState(0);
   const [op2, setOp2] = useState(0);
   const [op3, setOp3] = useState(0);
@@ -52,29 +50,6 @@ export default function ManagerFeedback() {
       errors.staffId = "Staff ID not found in the database";
     }
 
-    // Validate date format and number of days && months
-    const dateRegex = /^\d{4}\/\d{2}\/\d{2}$/;
-    if (!date.match(dateRegex)) {
-      errors.date = "Date should be in the format YYYY/MM/DD";
-    } else {
-      const isValidDate = moment(date, "YYYY/MM/DD", true).isValid();
-
-      if (!isValidDate) {
-        errors.date = "Invalid date";
-      } else {
-        const day = moment(date, "YYYY/MM/DD").date();
-        const month = moment(date, "YYYY/MM/DD").month() + 1; // months are 0-indexed
-
-        if (day < 1 || day > 31) {
-          errors.date = "Day should be between 1 and 31";
-        }
-
-        if (month < 1 || month > 12) {
-          errors.date = "Month should be between 1 and 12";
-        }
-      }
-    }
-
     // Validate options
     const options = [
       op1,
@@ -105,6 +80,10 @@ export default function ManagerFeedback() {
 
   const handleClick = (e) => {
     e.preventDefault();
+
+    // Set the date to today's date
+    const today = moment().format("YYYY/MM/DD");
+
     if (validateForm()) {
       axios
         .post("http://localhost:3001/createmanagerfeedback/", {
@@ -122,13 +101,12 @@ export default function ManagerFeedback() {
           op10: op10,
           op11: op11,
           op12: op12,
-          date: date,
+          date: today, // Set the date to today's date
         })
         .then(() => {
           console.log("Successfully added to database!");
           window.alert("Successfully Added!");
           history.push("/feedbacklist");
-
         })
         .catch((error) => {
           console.error("Error: ", error);
@@ -166,17 +144,7 @@ export default function ManagerFeedback() {
                 <p className="error">{formErrors.staffId}</p>
               )}
               <br></br>
-              <label htmlFor="date">Date:</label>
-              <input
-                type="text"
-                id="date"
-                value={date}
-                onChange={(e) => setDate(e.target.value)}
-                placeholder="Format: (YYYY/MM/DD)"
-                required
-              />
-              {formErrors.date && <p className="error">{formErrors.date}</p>}
-
+         
               {/* End here */}
               <h2 className="mt-3">Work Performance</h2>
               <table className="table table-striped mt-3">
