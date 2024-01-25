@@ -447,10 +447,14 @@ app.delete("/deleteaccolade", (req, res) => {
 // CRUD employee.job_role
 
 app.get(`/getempjobrole/:id`, (req, res) => {
-  const val =req.params.id;
+  const val = req.params.id;
   db.query("SELECT job_role FROM employee WHERE staff_id = ?;",val, (err, data) => {
     if (err) return res.json(err);
-    return res.json(data);
+    if (data.length === 0) {
+      return res.status(404).json({ error: "Job role not found" });
+    }
+    const jobRole = data[0].job_role; // Assuming the job role is in the first element of the array
+    return res.json({ job_Role: jobRole });
   });
 }); // Done Firdaus
 
