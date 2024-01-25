@@ -365,6 +365,21 @@ app.delete("/managerfeedback", (req, res) => {
   );
 });
 
+// UPDATED Delete manager feedback (FIRDAUS) TESTING VIEWFEEDBACKLIST
+app.delete("/managerfeedback/:id", (req, res) => {
+  const feedbackId = req.params.id; // Retrieve feedback ID from URL parameters
+
+  db.query(
+    "DELETE FROM manager_feedback WHERE manager_feedback_id = ?",
+    [feedbackId],
+    (err, data) => {
+      if (err) return res.json(err);
+      return res.json(data);
+    }
+  );
+});
+
+
 //-----------------------DANIEL-------------------------
 //Done Create accolades (DANIEL)
 app.post("/addaccolade", (req, res) => {

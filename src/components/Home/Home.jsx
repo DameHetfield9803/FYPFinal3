@@ -54,6 +54,8 @@ export default function Home() {
         <br></br>
         <a href="/ManagerFeedback">ManagerFeedback</a>
         <br></br>
+        <a href="/feedbacklist">ViewManagerFeedbackList</a>
+        <br></br>
       </div>
     )
   }
