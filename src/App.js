@@ -22,7 +22,7 @@ import Home from "./components/Home/Home";
 import AttendanceSummary from "./components/Attendance/Attendancesummary";
 import EmailAutomate from "./components/Email/EmailAutomate";
 import ViewAccolades from "./components/Accolades/ViewAccolades";
-
+import adminHome from "./admin/adminHome";
 function App() {
   return (
     <Router>
@@ -32,8 +32,12 @@ function App() {
             <Login />
           </Route>
 
-          <Route exact path="/Home">
+          <Route exact path="/home/:id">
             <Home />
+          </Route>
+
+          <Route exact path = "/admin">
+            <adminHome />
           </Route>
 
           <Route exact path="/accolades">
