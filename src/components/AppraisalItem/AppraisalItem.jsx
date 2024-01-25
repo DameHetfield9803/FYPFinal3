@@ -26,7 +26,12 @@ export default function AppraisalItem(){
             <h1>Appraisal Item</h1>
             <body>
                 <form>
-                    
+                    <table>
+                        <tr>
+                            <th>Rating</th>
+                            <th>Comments</th>
+                        </tr>
+                    </table>
                 </form>
             </body>
         </div>

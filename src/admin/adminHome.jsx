@@ -1,9 +1,12 @@
 import { Link } from "react-router-dom";
 import "./adminHome.css";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { useParams } from "react-router-dom/cjs/react-router-dom.min";
+import axios from "axios";
 export default function adminHome(){
+    const {id} = useParams();
+    const {data: staff_id} = axios.get(`http://localhost:3001/getempjobrole?staff_id=${id}`) 
     return(
-        
         <div className="admin-container">
             <h1><strong>System Admin Page</strong></h1>
             <Link to="/appraisalitem">Appraisal Item</Link>

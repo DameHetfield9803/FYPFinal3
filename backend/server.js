@@ -446,14 +446,15 @@ app.delete("/deleteaccolade", (req, res) => {
 
 // CRUD employee.job_role
 
-app.get("/getempjobrole", (req, res) => {
-  db.query("SELECT job_role FROM employee ;", (err, data) => {
+app.get(`/getempjobrole/:id`, (req, res) => {
+  const val =req.params.id;
+  db.query("SELECT job_role FROM employee WHERE staff_id = ?;",val, (err, data) => {
     if (err) return res.json(err);
     return res.json(data);
   });
 }); // Done Firdaus
 
-app.put("/updateempjobrole", (req, res) => {
+app.put(`/updateempjobrole`, (req, res) => {
   const vals = [req.body.job_role, req.body.staff_id];
   db.query(
     "UPDATE employee SET job_role = ? WHERE staff_id = ?;",
@@ -478,12 +479,19 @@ app.post("/login", (req,res)=>{
 app.put("/updateuseremail", (req,res) => {
   const vals = [req.body.email , req.body.staff_id];
   db.query("UPDATE employee SET email =? WHERE staff_id=?;", vals, (err,data) => {
-
+    if(err) return res.json(err);
+    return res.json(data)
   })
 })
 
-//get employee credentials
-//app.get()
+//get employee staff id
+app.get("/getstaffid", (req,res) => {
+  const vals = [req.body.staff_id];
+  db.query("SELECT staff_id FROM employee WHERE ", (err,data) => {
+    if(err) return res.json(err)
+    return res.json(data)
+  });
+});
 
 
 //---------------------------END OF CRUD---------------------------
