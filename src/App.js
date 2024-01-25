@@ -23,9 +23,8 @@ import AttendanceSummary from "./components/Attendance/Attendancesummary";
 import EmailAutomate from "./components/Email/EmailAutomate";
 import ViewAccolades from "./components/Accolades/ViewAccolades";
 import ViewFeedbackList from "./components/ManagerFeedback/ManagerFeedbackList";
-
-export default function App() {
 import adminHome from "./admin/adminHome";
+export default function App() {
 function App() {
   return (
     <Router>
@@ -35,8 +34,9 @@ function App() {
             <Login />
           </Route>
 
-          <Route exact path="/Home">
+          <Route exact path="/home">
             <ProtectedRoute component={Home} />
+            </Route>
           <Route exact path="/home/:id">
             <Home />
           </Route>
@@ -132,5 +132,4 @@ function App() {
     </Router>
   );
 }
-
-
+}
