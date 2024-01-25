@@ -23,6 +23,7 @@ import AttendanceSummary from "./components/Attendance/Attendancesummary";
 import EmailAutomate from "./components/Email/EmailAutomate";
 import ViewAccolades from "./components/Accolades/ViewAccolades";
 //import AddAccolade from "./components/Accolades/AddAccolade";
+import ViewFeedbackList from "./components/ManagerFeedback/ManagerFeedbackList";
 
 export default function App() {
   return (
@@ -98,6 +99,10 @@ export default function App() {
 
           <Route exact path="/Email">
             <EmailAutomate />
+          </Route>
+
+          <Route exact path="/feedbacklist">
+              <ViewFeedbackList/>
           </Route>
 
           <Route exact path="/Navbar">

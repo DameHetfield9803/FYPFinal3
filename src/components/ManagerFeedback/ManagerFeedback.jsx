@@ -4,6 +4,8 @@ import NavBar from "../NavBar/NavBar";
 import "./ManagerFeedback.css";
 import axios from "axios";
 import moment from "moment";
+import { useHistory } from "react-router-dom";
+
 
 export default function ManagerFeedback() {
   // React hooks
@@ -36,6 +38,8 @@ export default function ManagerFeedback() {
       setValidStaffIds(ids);
     });
   }, []);
+
+  const history = useHistory();
 
   // Helper Functions
   const validateForm = () => {
@@ -123,6 +127,8 @@ export default function ManagerFeedback() {
         .then(() => {
           console.log("Successfully added to database!");
           window.alert("Successfully Added!");
+          history.push("/feedbacklist");
+
         })
         .catch((error) => {
           console.error("Error: ", error);
