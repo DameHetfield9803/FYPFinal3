@@ -469,9 +469,13 @@ app.put(`/updateempjobrole`, (req, res) => {
 // validating employee credentials
 app.post("/login", (req,res)=>{
   const vals = [req.body.email, req.body.password]
-  db.query("SELECT email, password FROM employee WHERE email = ? AND password =?;", vals , (err,data) => {
+  db.query("SELECT staff_id, email, password FROM employee WHERE email = ? AND password =?;", vals , (err,data) => {
     if(err) return res.json(err);
-    return res.json(data); 
+    if (data.length === 0) {
+      return res.status(401).json({ error: "Invalid email or password." });
+    }
+    const users = data.map(user => ({ staff_id: user.staff_id, email: user.email, password: user.password }));
+    return res.json(users); // Returning an array of users
   });
 })
 
