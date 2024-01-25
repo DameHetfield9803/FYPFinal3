@@ -22,10 +22,9 @@ import Home from "./components/Home/Home";
 import AttendanceSummary from "./components/Attendance/Attendancesummary";
 import EmailAutomate from "./components/Email/EmailAutomate";
 import ViewAccolades from "./components/Accolades/ViewAccolades";
-import ViewFeedbackList from "./components/ManagerFeedback/ManagerFeedbackList";
-import adminHome from "./admin/adminHome";
+//import AddAccolade from "./components/Accolades/AddAccolade";
+
 export default function App() {
-function App() {
   return (
     <Router>
       <div className="App">
@@ -34,90 +33,75 @@ function App() {
             <Login />
           </Route>
 
-          <Route exact path="/home">
-            <ProtectedRoute component={Home} />
-            </Route>
-          <Route exact path="/home/:id">
+          <Route exact path="/Home">
             <Home />
           </Route>
 
-          <Route exact path = "/admin">
-            <adminHome />
+          <Route exact path="/accolades">
+            <Accolades />
           </Route>
 
-          <Route exact path="/accolades">
-            <ProtectedRoute component={Accolades} />
+          <Route exact path="/viewaccolades">
+            <ViewAccolades />
           </Route>
+
+          {/*<Route exact path="/addaccolades">
+            <AddAccolade />
+          </Route>*/}
 
           <Route exact path="/forgetpassword">
             <ForgetPassword />
           </Route>
 
           <Route exact path="/appraisalitem">
-            <ProtectedRoute component={AppraisalItem} />
+            <AppraisalItem />
           </Route>
 
           <Route exact path="/peerevaluation">
-            <ProtectedRoute component={PeerEvaluation} />
+            <PeerEvaluation />
           </Route>
 
           <Route exact path="/selfevaluation">
-            <ProtectedRoute component={SelfEvaluation} />
+            <SelfEvaluation />
           </Route>
 
           <Route exact path="/attendance">
-            <Attendance component={Attendance} />
+            <Attendance />
           </Route>
 
           <Route exact path="/managerfeedback">
-            <ProtectedRoute component={ManagerFeedback} />
+            <ManagerFeedback />
           </Route>
 
           <Route exact path="/appraisalform">
-            <ProtectedRoute component={AppraisalForm} />
+            <AppraisalForm />
           </Route>
 
           <Route exact path="/profile">
-            <ProtectedRoute component={Profile} />
+            <Profile />
           </Route>
 
           <Route exact path="/reportform">
-            <ProtectedRoute component={ReportForm} />
-          </Route>
-
-          <Route exact path="/employee">
-            <ProtectedRoute component={EmpTab} />
+            <ReportForm />
           </Route>
 
           <Route exact path="/Attendancesummary">
-            <ProtectedRoute component={AttendanceSummary} />
+            <AttendanceSummary />
           </Route>
-          {
-            <Route exact path="/AttendanceAdd">
-              <ProtectedRoute component={AttendanceAdd} />
-            </Route>}
 
           <Route exact path="/employee" component={EmpTab} />
           <Route exact path="/employee/:id" component={EmployeeDetails} />
 
           <Route exact path="/userguides">
-            <ProtectedRoute component={UserGuide} />
-          </Route>
-
-          <Route exact path="/Navbar">
-            <ProtectedRoute component={Navbar} />
+            <UserGuide />
           </Route>
 
           <Route exact path="/Email">
-            <ProtectedRoute component={EmailAutomate} />
+            <EmailAutomate />
           </Route>
 
-          <route exact path="/feedbacklist">
-            <ProtectedRoute component={ViewFeedbackList} />
-          </route>
-
-          <Route exact path="/viewaccolades">
-            <ProtectedRoute component={ViewAccolades} />
+          <Route exact path="/Navbar">
+            <Navbar />
           </Route>
 
           <Route exact path="/forbidden">
@@ -129,7 +113,7 @@ function App() {
           </Route>
         </Switch>
       </div>
-    </Router>
+    </Router >
   );
 }
-}
+
