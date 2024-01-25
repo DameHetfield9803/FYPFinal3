@@ -292,7 +292,7 @@ app.delete("/selffeedback", (req, res) => {
 // DONE Create manager feedback (EN QUAN)
 app.post("/createmanagerfeedback", (req, res) => {
   const vals = [
-    // req.body.manager_feedback_id, //<== May not need this
+    req.body.manager_feedback_id, //<== May not need this
     req.body.feedback_text,
     req.body.staff_id,
     req.body.op1,
