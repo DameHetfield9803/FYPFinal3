@@ -9,7 +9,6 @@ import PeerEvaluation from "./components/PeerEvaluation/PeerEvaluation";
 import SelfEvaluation from "./components/SelfEvaluation/SelfEvaluation";
 import Attendance from "./components/Attendance/Attendance";
 import ManagerFeedback from "./components/ManagerFeedback/ManagerFeedback";
-import Accolades from "./components/Accolades/Accolades";
 import AppraisalForm from "./components/AppraisalForm/AppraisalForm";
 import Profile from "./components/Profile/profilesettings";
 import AppraisalItem from "./components/AppraisalItem/AppraisalItem";
@@ -26,7 +25,6 @@ import ViewFeedbackList from "./components/ManagerFeedback/ManagerFeedbackList";
 import UpdateFeedback from "./components/ManagerFeedback/UpdateManagerFeedback";
 import ManagerFeedbackSuccess from "./components/ManagerFeedback/ManagerFeedbackSuccess";
 import PeerFeedbackList from "./components/PeerEvaluation/PeerEvalList";
-import ViewAccolades from "./components/Accolades/ViewAccolades";
 import AddAccolade from "./components/Accolades/AddAccolade"; 
 import EmployeeNavBar from "./components/NavBar/EmployeeNavBar";
 
@@ -41,10 +39,6 @@ export default function App() {
 
           <Route exact path="/Home">
             <Home />
-          </Route>
-
-          <Route exact path="/accolades">
-            <Accolades />
           </Route>
 
           <Route exact path="/viewaccolades">
