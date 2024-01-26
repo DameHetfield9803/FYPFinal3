@@ -28,7 +28,6 @@ import PeerFeedbackList from "./components/PeerEvaluation/PeerEvalList";
 import AddAccolade from "./components/Accolades/AddAccolade"; 
 import EmployeeNavBar from "./components/NavBar/EmployeeNavBar";
 import AccoladeSuccess from "./components/Accolades/AccoladeSuccess";
-import adminHome from "./admin/adminHome";
 export default function App() {
   return (
     <Router>

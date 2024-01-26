@@ -73,7 +73,7 @@ export default function Home() {
       return (
         history.push("/adminhome")
       );
-    case "human_resource":
+    case "human resource":
       return (
         <div className="HR-container">
           <strong>Human Resource</strong>
