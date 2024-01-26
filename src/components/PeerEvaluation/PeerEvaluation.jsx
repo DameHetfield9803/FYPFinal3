@@ -79,9 +79,14 @@ export default function PeerEvaluation() {
     return Object.keys(errors).length === 0;
   };
 
+  const calTotalScore = () => {
+    return op1 + op2 + op3 + op4 + op5 + op6 + op7;
+  };
+
   const handleClick = (e) => {
     e.preventDefault();
     if (validateForm()) {
+      const totalScore = calTotalScore();
       axios
         .post("http://localhost:3001/createpeerfeedback/", {
           feedback_text: feedback_text,
@@ -94,6 +99,7 @@ export default function PeerEvaluation() {
           op5: op5,
           op6: op6,
           op7: op7,
+          score: totalScore,
         })
         .then(() => {
           console.log("Successfully added to database!");
