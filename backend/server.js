@@ -158,7 +158,6 @@ app.delete("/department", (req, res) => {
 app.post("/createpeerfeedback", (req, res) => {
   const vals = [
     req.body.feedback_text,
-    req.body.date,
     req.body.staff_id,
     req.body.op1,
     req.body.op2,
@@ -168,8 +167,19 @@ app.post("/createpeerfeedback", (req, res) => {
     req.body.op6,
     req.body.op7,
   ];
+
+  const totalScore =
+    parseInt(req.body.op1) +
+    parseInt(req.body.op2) +
+    parseInt(req.body.op3) +
+    parseInt(req.body.op4) +
+    parseInt(req.body.op5) +
+    parseInt(req.body.op6) +
+    parseInt(req.body.op7);
+
+  vals.push(totalScore); // Add totalScore to the values array
   db.query(
-    "INSERT INTO `peer_feedback`(`feedback_text`, `date`, `staff_id`, `op1`,`op2`,`op3`,`op4`,`op5`,`op6`,`op7`) VALUES (? , ? , ? , ? , ?,?,?,?,?,?);",
+    "INSERT INTO `peer_feedback`(`feedback_text`, `staff_id`, `op1`,`op2`,`op3`,`op4`,`op5`,`op6`,`op7`,`score`) VALUES (?,?,?,?,?,?,?,?,?,?);",
     // Feedback the user needs to know who to evaluate.etc
     // staff id change to whoever the user is evaluating, who evaluate who
     // add a new field for evaluator and evaluatee
@@ -316,10 +326,25 @@ app.post("/createmanagerfeedback", (req, res) => {
     req.body.op10,
     req.body.op11,
     req.body.op12,
-    req.body.date,
   ];
+
+  // Calculate the total score
+  const totalScore =
+    parseInt(req.body.op1) +
+    parseInt(req.body.op2) +
+    parseInt(req.body.op3) +
+    parseInt(req.body.op4) +
+    parseInt(req.body.op5) +
+    parseInt(req.body.op6) +
+    parseInt(req.body.op7) +
+    parseInt(req.body.op8) +
+    parseInt(req.body.op9) +
+    parseInt(req.body.op10) +
+    parseInt(req.body.op11) +
+    parseInt(req.body.op12) +
+    vals.push(totalScore); // Add totalScore to the values array
   db.query(
-    "INSERT INTO `manager_feedback`(`feedback_text`, `staff_id`, `op1`,`op2`,`op3`,`op4`,`op5`,`op6`,`op7`,`op8`,`op9`,`op10`,`op11`,`op12`,`date`) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);",
+    "INSERT INTO `manager_feedback`(`feedback_text`, `staff_id`, `op1`,`op2`,`op3`,`op4`,`op5`,`op6`,`op7`,`op8`,`op9`,`op10`,`op11`,`op12`,`score`) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);",
     vals,
     (err, data) => {
       if (err) return res.json(err);
@@ -360,7 +385,7 @@ app.get("/managerfeedback", (req, res) => {
 });
 
 //DONE Delete manager feedback (FIRDAUS)
-app.delete("/managerfeedback", (req, res) => {
+app.delete("/deletemanagerfeedback", (req, res) => {
   //initalizing endpoint, request, and response
   const val = [req.body.manager_feedback_id]; // retrieving  manager_feedback_id from database
   db.query(

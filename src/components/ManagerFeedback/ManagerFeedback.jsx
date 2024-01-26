@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import NavBar from "../NavBar/NavBar";
 import "./ManagerFeedback.css";
 import axios from "axios";
-import moment from "moment";
 import { useHistory } from "react-router-dom";
 
 export default function ManagerFeedback() {
@@ -77,14 +76,17 @@ export default function ManagerFeedback() {
     setFormErrors(errors);
     return Object.keys(errors).length === 0;
   };
-
+  // calculate score
+  const calTotalScore = () => {
+    return (
+      op1 + op2 + op3 + op4 + op5 + op6 + op7 + op8 + op9 + op10 + op11 + op12
+    );
+  };
   const handleClick = (e) => {
     e.preventDefault();
 
-    // Set the date to today's date
-    const today = moment().format("YYYY/MM/DD");
-
     if (validateForm()) {
+      const totalScore = calTotalScore;
       axios
         .post("http://localhost:3001/createmanagerfeedback/", {
           feedback_text: feedback_text,
@@ -101,7 +103,7 @@ export default function ManagerFeedback() {
           op10: op10,
           op11: op11,
           op12: op12,
-          date: today, // Set the date to today's date
+          score: totalScore,
         })
         .then(() => {
           console.log("Successfully added to database!");
@@ -144,7 +146,7 @@ export default function ManagerFeedback() {
                 <p className="error">{formErrors.staffId}</p>
               )}
               <br></br>
-         
+
               {/* End here */}
               <h2 className="mt-3">Work Performance</h2>
               <table className="table table-striped mt-3">
