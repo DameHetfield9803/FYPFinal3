@@ -32,9 +32,6 @@ const ProfileSettings = () => {
   const [email, setEmail] = useState(defaultPersonalInfo.email);
   const [isEditing, setIsEditing] = useState(false);
 
-  // State variable for accolades
-  const [accolades, setAccolades] = useState([]);
-
   // Function to handle the submission of edited personal information.
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -44,10 +41,7 @@ const ProfileSettings = () => {
     console.log("Edited Email:", email);
   };
 
-  // Function to handle adding accolades
-  const handleAddAccolade = (newAccolade) => {
-    setAccolades([...accolades, newAccolade]);
-  };
+ 
 
   return (
     <div>
@@ -113,21 +107,7 @@ const ProfileSettings = () => {
             </button>
           </p>
         </div>
-
-        {/* Accolades Section */}
-        <div className="mb-3">
-          <p>
-            <strong>Accolades:</strong>
-          </p>
-          {accolades.map((accolade, index) => (
-            <p key={index}>
-              <strong>Title:</strong> {accolade.title}, <strong>Date:</strong>{" "}
-              {accolade.date}
-            </p>
-          ))}
-        </div>
-        {/* End of Accolades Section */}
-
+        
         {/* Form for saving changes. */}
         {isEditing && (
           <form onSubmit={handleSubmit}>

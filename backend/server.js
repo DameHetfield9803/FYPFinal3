@@ -1,8 +1,9 @@
 // modules
-const express = require("express");
-const mysql = require("mysql2");
-const cors = require("cors");
-const bodyParser = require("body-parser");
+const express = require('express');
+const mysql = require('mysql2');
+const cors = require('cors');
+const bodyParser = require('body-parser');
+
 
 const app = express();
 
@@ -365,12 +366,11 @@ app.post("/addaccolade", (req, res) => {
   const val = [
     req.body.accolade_title,
     req.body.completion_date,
-    req.body.file,
     req.body.achievement_level,
     req.body.staff_id,
   ];
   db.query(
-    "INSERT INTO `accolade`(accolade_title, completion_date,file,achievement_level,staff_id) VALUES(?,?,?,?,?);",
+    "INSERT INTO `accolade`(accolade_title, completion_date,achievement_level,staff_id) VALUES(?,?,?,?);",
     val,
     (err, data) => {
       if (err) return res.json(err);
@@ -390,35 +390,46 @@ app.get("/getaccolade", (req, res) => {
 
 //DONE Update accolades (DANIEL)
 
-app.put("/updateaccolade", (req, res) => {
-  const vals = [
-    req.body.accolade_title,
-    req.body.completion_date,
-    req.body.file,
-    req.body.achievement_level,
-    req.body.staff_id,
-    req.body.accolade_id,
-  ];
+app.put("/updateaccolade/:id", (req, res) => {
+  const { accolade_title, completion_date, achievement_level, staff_id } = req.body;
+  const accolade_id = req.params.id;
+
   db.query(
-    "UPDATE `accolade` SET accolade_title = ? , completion_date = ? , file = ?,achievement_level = ?, staff_id = ? WHERE accolade_id = ?;",
-    vals,
+    "UPDATE `accolade` SET accolade_title = ?, completion_date = ?, achievement_level = ?, staff_id = ? WHERE accolade_id = ?",
+    [accolade_title, completion_date, achievement_level, staff_id, accolade_id],
     (err, data) => {
-      if (err) return res.json(err);
-      return res.json(data);
+      if (err) {
+        console.error("Error updating accolade:", err);
+        return res.status(500).json({ error: "Internal server error" });
+      }
+      return res.json({ message: "Accolade updated successfully" });
     }
   );
 });
 
 //Done Delete accolades (DANIEL)
-
 app.delete("/deleteaccolade", (req, res) => {
-  const val = [req.body.accolade_id];
+  const accoladeId = req.body.accolade_id;
+
+  if (!accoladeId) {
+    return res.status(400).json({ error: "Accolade ID is required" });
+  }
+
+  const val = [accoladeId];
   db.query(
-    "DELETE FROM `accolade` WHERE accolade_id = ?; ",
+    "DELETE FROM `accolade` WHERE accolade_id = ?",
     val,
-    (err, data) => {
-      if (err) return res.json(err);
-      return res.json(data);
+    (err, result) => {
+      if (err) {
+        console.error("Error deleting accolade:", err);
+        return res.status(500).json({ error: "Internal server error" });
+      }
+      
+      if (result.affectedRows === 0) {
+        return res.status(404).json({ error: "Accolade not found" });
+      }
+
+      return res.json({ message: "Accolade deleted successfully" });
     }
   );
 });

@@ -9,7 +9,6 @@ import PeerEvaluation from "./components/PeerEvaluation/PeerEvaluation";
 import SelfEvaluation from "./components/SelfEvaluation/SelfEvaluation";
 import Attendance from "./components/Attendance/Attendance";
 import ManagerFeedback from "./components/ManagerFeedback/ManagerFeedback";
-import Accolades from "./components/Accolades/Accolades";
 import AppraisalForm from "./components/AppraisalForm/AppraisalForm";
 import Profile from "./components/Profile/profilesettings";
 import AppraisalItem from "./components/AppraisalItem/AppraisalItem";
@@ -22,6 +21,9 @@ import Home from "./components/Home/Home";
 import AttendanceSummary from "./components/Attendance/Attendancesummary";
 import EmailAutomate from "./components/Email/EmailAutomate";
 import ViewAccolades from "./components/Accolades/ViewAccolades";
+import AddAccolade from "./components/Accolades/AddAccolade"; 
+import EmployeeNavBar from "./components/NavBar/EmployeeNavBar";
+
 
 function App() {
   return (
@@ -36,13 +38,18 @@ function App() {
             <Home />
           </Route>
 
-          <Route exact path="/accolades">
-            <Accolades />
-          </Route>
-
           <Route exact path="/viewaccolades">
             <ViewAccolades />
           </Route>
+
+          <Route exact path="/addaccolades">
+            <AddAccolade />
+          </Route>
+          
+          <Route exact path="/EmpNavBar">
+            <EmployeeNavBar />
+          </Route>
+
 
           <Route exact path="/forgetpassword">
             <ForgetPassword />
