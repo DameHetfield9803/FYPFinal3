@@ -24,6 +24,7 @@ export default function adminHome(){
             <br/>
             <Link to="/userguides">UserGuide</Link>
             <br/>
+            <Link to ="/"></Link>
         </div>
     );
 }

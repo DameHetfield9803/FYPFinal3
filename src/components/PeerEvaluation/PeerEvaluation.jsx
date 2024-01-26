@@ -34,9 +34,9 @@ export default function PeerEvaluation() {
 
     // Validate staffId
     if (!staffId || isNaN(staffId) || parseInt(staffId) <= 0) {
-      errors.staffId = "Staff ID is required and must be a positive integer";
+      errors.staff_Id = "Staff ID is required and must be a positive integer";
     } else if (!validStaffIds.includes(parseInt(staffId))) {
-      errors.staffId = "Staff ID not found in the database";
+      errors.staff_Id = "Staff ID not found in the database";
     }
 
     // Validate options
@@ -100,11 +100,11 @@ export default function PeerEvaluation() {
             </b>
 
             {/* Include staff_id and submission_date here */}
-            <label htmlFor="staffId">Staff ID:</label>
+            <label htmlFor="staff_id">Staff ID:</label>
             <input
               placeholder="Ex: 1"
               type="number"
-              id="staffId"
+              id="staff_id"
               value={staffId}
               onChange={(e) => setStaffId(e.target.value)}
               required
