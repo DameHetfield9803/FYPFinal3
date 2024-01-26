@@ -27,6 +27,7 @@ import ManagerFeedbackSuccess from "./components/ManagerFeedback/ManagerFeedback
 import PeerFeedbackList from "./components/PeerEvaluation/PeerEvalList";
 import AddAccolade from "./components/Accolades/AddAccolade"; 
 import EmployeeNavBar from "./components/NavBar/EmployeeNavBar";
+import AccoladeSuccess from "./components/Accolades/AccoladeSuccess";
 
 export default function App() {
   return (
@@ -47,6 +48,10 @@ export default function App() {
 
           <Route exact path="/addaccolades">
             <AddAccolade />
+          </Route>
+
+          <Route exact path="/AccoladeSuccess">
+            <AccoladeSuccess />
           </Route>
 
           <Route exact path="/forgetpassword">
