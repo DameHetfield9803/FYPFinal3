@@ -106,7 +106,7 @@ export default function ManagerFeedback() {
         .then(() => {
           console.log("Successfully added to database!");
           window.alert("Successfully Added!");
-          history.push("/feedbacklist");
+          history.push("/managersuccess");
         })
         .catch((error) => {
           console.error("Error: ", error);

@@ -25,6 +25,7 @@ import ViewAccolades from "./components/Accolades/ViewAccolades";
 //import AddAccolade from "./components/Accolades/AddAccolade";
 import ViewFeedbackList from "./components/ManagerFeedback/ManagerFeedbackList";
 import UpdateFeedback from "./components/ManagerFeedback/UpdateManagerFeedback";
+import ManagerFeedbackSuccess from "./components/ManagerFeedback/ManagerFeedbackSuccess";
 
 export default function App() {
   return (
@@ -102,12 +103,17 @@ export default function App() {
             <EmailAutomate />
           </Route>
 
-          <Router>
-            <Switch>
-              <Route path="/feedbacklist" component={ViewFeedbackList} />
-              <Route path="/updatefeedback/:id" component={UpdateFeedback} />
-            </Switch>
-          </Router>
+          <Route exact path="/feedbacklist">
+            <ViewFeedbackList />
+          </Route>
+
+          <Route exact path="/updatefeedback/:id">
+            <UpdateFeedback/>
+          </Route>
+
+          <Route exact path="/managersuccess">
+            <ManagerFeedbackSuccess />
+          </Route>
 
           <Route exact path="/Navbar">
             <Navbar />
