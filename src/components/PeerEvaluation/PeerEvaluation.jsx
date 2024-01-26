@@ -2,12 +2,10 @@ import { useState, useEffect } from "react";
 import "./PeerEvaluation.css";
 import Navbar from "../NavBar/NavBar";
 import axios from "axios";
-import moment from "moment";
 
 export default function PeerEvaluation() {
   //hooks
   const [staffId, setStaffId] = useState(null);
-  const [date, setDate] = useState("");
   const [op1, setOp1] = useState(0);
   const [op2, setOp2] = useState(0);
   const [op3, setOp3] = useState(0);
@@ -41,29 +39,6 @@ export default function PeerEvaluation() {
       errors.staffId = "Staff ID not found in the database";
     }
 
-    // Validate date format and number of days && months
-    const dateRegex = /^\d{4}\/\d{2}\/\d{2}$/;
-    if (!date.match(dateRegex)) {
-      errors.date = "Date should be in the format YYYY/MM/DD";
-    } else {
-      const isValidDate = moment(date, "YYYY/MM/DD", true).isValid();
-
-      if (!isValidDate) {
-        errors.date = "Invalid date";
-      } else {
-        const day = moment(date, "YYYY/MM/DD").date();
-        const month = moment(date, "YYYY/MM/DD").month() + 1; // months are 0-indexed
-
-        if (day < 1 || day > 31) {
-          errors.date = "Day should be between 1 and 31";
-        }
-
-        if (month < 1 || month > 12) {
-          errors.date = "Month should be between 1 and 12";
-        }
-      }
-    }
-
     // Validate options
     const options = [op1, op2, op3, op4, op5, op6, op7];
     if (options.some((option) => option === 0)) {
@@ -79,13 +54,17 @@ export default function PeerEvaluation() {
     return Object.keys(errors).length === 0;
   };
 
+  const calTotalScore = () => {
+    return op1 + op2 + op3 + op4 + op5 + op6 + op7;
+  };
+
   const handleClick = (e) => {
     e.preventDefault();
     if (validateForm()) {
+      const totalScore = calTotalScore();
       axios
         .post("http://localhost:3001/createpeerfeedback/", {
           feedback_text: feedback_text,
-          date: date,
           staff_id: staffId,
           op1: op1,
           op2: op2,
@@ -94,6 +73,7 @@ export default function PeerEvaluation() {
           op5: op5,
           op6: op6,
           op7: op7,
+          score: totalScore,
         })
         .then(() => {
           console.log("Successfully added to database!");
@@ -133,16 +113,6 @@ export default function PeerEvaluation() {
               <p className="error">{formErrors.staffId}</p>
             )}
             <br></br>
-            <label htmlFor="date">Date:</label>
-            <input
-              type="text"
-              id="date"
-              value={date}
-              onChange={(e) => setDate(e.target.value)}
-              placeholder="Format: (YYYY/MM/DD)"
-              required
-            />
-            {formErrors.date && <p className="error">{formErrors.date}</p>}
 
             {/* End here */}
             <table className="table table-striped mt-3">

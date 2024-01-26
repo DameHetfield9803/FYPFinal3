@@ -1,9 +1,8 @@
 // modules
-const express = require('express');
-const mysql = require('mysql2');
-const cors = require('cors');
-const bodyParser = require('body-parser');
-
+const express = require("express");
+const mysql = require("mysql2");
+const cors = require("cors");
+const bodyParser = require("body-parser");
 
 const app = express();
 
@@ -159,7 +158,6 @@ app.delete("/department", (req, res) => {
 app.post("/createpeerfeedback", (req, res) => {
   const vals = [
     req.body.feedback_text,
-    req.body.date,
     req.body.staff_id,
     req.body.op1,
     req.body.op2,
@@ -169,8 +167,19 @@ app.post("/createpeerfeedback", (req, res) => {
     req.body.op6,
     req.body.op7,
   ];
+
+  const totalScore =
+    parseInt(req.body.op1) +
+    parseInt(req.body.op2) +
+    parseInt(req.body.op3) +
+    parseInt(req.body.op4) +
+    parseInt(req.body.op5) +
+    parseInt(req.body.op6) +
+    parseInt(req.body.op7);
+
+  vals.push(totalScore); // Add totalScore to the values array
   db.query(
-    "INSERT INTO `peer_feedback`(`feedback_text`, `date`, `staff_id`, `op1`,`op2`,`op3`,`op4`,`op5`,`op6`,`op7`) VALUES (? , ? , ? , ? , ?,?,?,?,?,?);",
+    "INSERT INTO `peer_feedback`(`feedback_text`, `staff_id`, `op1`,`op2`,`op3`,`op4`,`op5`,`op6`,`op7`,`score`) VALUES (?,?,?,?,?,?,?,?,?,?);",
     // Feedback the user needs to know who to evaluate.etc
     // staff id change to whoever the user is evaluating, who evaluate who
     // add a new field for evaluator and evaluatee
@@ -229,7 +238,6 @@ app.delete("/peerfeedback", (req, res) => {
 // Route for creating a self evaluation
 app.post("/createselffeedback", (req, res) => {
   const vals = [
-    req.body.date,
     req.body.feedback_text,
     req.body.staff_id,
     req.body.op1,
@@ -238,9 +246,19 @@ app.post("/createselffeedback", (req, res) => {
     req.body.op4,
     req.body.op5,
     req.body.op6,
-  ]; // retrieve the values from front end
+  ];
+  // Calculate the total score
+  const totalScore =
+    parseInt(req.body.op1) +
+    parseInt(req.body.op2) +
+    parseInt(req.body.op3) +
+    parseInt(req.body.op4) +
+    parseInt(req.body.op5) +
+    parseInt(req.body.op6);
+
+  vals.push(totalScore); // Add totalScore to the values array
   db.query(
-    "INSERT INTO self_feedback ( `date`, `feedback_text`, `staff_id`,`op1`,`op2`,`op3`,`op4`,`op5`,`op6`) VALUES (?, ?, ?, ?,?,?,?,?,?);",
+    "INSERT INTO self_feedback (  `feedback_text`, `staff_id`,`op1`,`op2`,`op3`,`op4`,`op5`,`op6`,`score`) VALUES ( ?, ?, ?,?,?,?,?,?,?);",
     vals,
     (err, data) => {
       if (err) return res.json(err); // querying and returning errors if errors exist.
@@ -308,10 +326,25 @@ app.post("/createmanagerfeedback", (req, res) => {
     req.body.op10,
     req.body.op11,
     req.body.op12,
-    req.body.date,
   ];
+
+  // Calculate the total score
+  const totalScore =
+    parseInt(req.body.op1) +
+    parseInt(req.body.op2) +
+    parseInt(req.body.op3) +
+    parseInt(req.body.op4) +
+    parseInt(req.body.op5) +
+    parseInt(req.body.op6) +
+    parseInt(req.body.op7) +
+    parseInt(req.body.op8) +
+    parseInt(req.body.op9) +
+    parseInt(req.body.op10) +
+    parseInt(req.body.op11) +
+    parseInt(req.body.op12) +
+    vals.push(totalScore); // Add totalScore to the values array
   db.query(
-    "INSERT INTO `manager_feedback`(`feedback_text`, `staff_id`, `op1`,`op2`,`op3`,`op4`,`op5`,`op6`,`op7`,`op8`,`op9`,`op10`,`op11`,`op12`,`date`) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);",
+    "INSERT INTO `manager_feedback`(`feedback_text`, `staff_id`, `op1`,`op2`,`op3`,`op4`,`op5`,`op6`,`op7`,`op8`,`op9`,`op10`,`op11`,`op12`,`score`) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);",
     vals,
     (err, data) => {
       if (err) return res.json(err);
@@ -352,7 +385,7 @@ app.get("/managerfeedback", (req, res) => {
 });
 
 //DONE Delete manager feedback (FIRDAUS)
-app.delete("/managerfeedback", (req, res) => {
+app.delete("/deletemanagerfeedback", (req, res) => {
   //initalizing endpoint, request, and response
   const val = [req.body.manager_feedback_id]; // retrieving  manager_feedback_id from database
   db.query(
@@ -379,7 +412,6 @@ app.delete("/managerfeedback/:id", (req, res) => {
     }
   );
 });
-
 
 //-----------------------DANIEL-------------------------
 //Done Create accolades (DANIEL)
@@ -412,7 +444,8 @@ app.get("/getaccolade", (req, res) => {
 //DONE Update accolades (DANIEL)
 
 app.put("/updateaccolade/:id", (req, res) => {
-  const { accolade_title, completion_date, achievement_level, staff_id } = req.body;
+  const { accolade_title, completion_date, achievement_level, staff_id } =
+    req.body;
   const accolade_id = req.params.id;
 
   db.query(
@@ -445,7 +478,7 @@ app.delete("/deleteaccolade", (req, res) => {
         console.error("Error deleting accolade:", err);
         return res.status(500).json({ error: "Internal server error" });
       }
-      
+
       if (result.affectedRows === 0) {
         return res.status(404).json({ error: "Accolade not found" });
       }
@@ -459,14 +492,18 @@ app.delete("/deleteaccolade", (req, res) => {
 
 app.get(`/getempjobrole/:id`, (req, res) => {
   const val = req.params.id;
-  db.query("SELECT job_role FROM employee WHERE staff_id = ?;",val, (err, data) => {
-    if (err) return res.json(err);
-    if (data.length === 0) {
-      return res.status(404).json({ error: "Job role not found" });
+  db.query(
+    "SELECT job_role FROM employee WHERE staff_id = ?;",
+    val,
+    (err, data) => {
+      if (err) return res.json(err);
+      if (data.length === 0) {
+        return res.status(404).json({ error: "Job role not found" });
+      }
+      const jobRole = data[0].job_role; // Assuming the job role is in the first element of the array
+      return res.json({ job_Role: jobRole });
     }
-    const jobRole = data[0].job_role; // Assuming the job role is in the first element of the array
-    return res.json({ job_Role: jobRole });
-  });
+  );
 }); // Done Firdaus
 
 app.put(`/updateempjobrole`, (req, res) => {
@@ -482,36 +519,47 @@ app.put(`/updateempjobrole`, (req, res) => {
 }); // DONE by Daniel
 
 // validating employee credentials
-app.post("/login", (req,res)=>{
-  const vals = [req.body.email, req.body.password]
-  db.query("SELECT staff_id, email, password FROM employee WHERE email = ? AND password =?;", vals , (err,data) => {
-    if(err) return res.json(err);
-    if (data.length === 0) {
-      return res.status(401).json({ error: "Invalid email or password." });
+app.post("/login", (req, res) => {
+  const vals = [req.body.email, req.body.password];
+  db.query(
+    "SELECT staff_id, email, password FROM employee WHERE email = ? AND password =?;",
+    vals,
+    (err, data) => {
+      if (err) return res.json(err);
+      if (data.length === 0) {
+        return res.status(401).json({ error: "Invalid email or password." });
+      }
+      const users = data.map((user) => ({
+        staff_id: user.staff_id,
+        email: user.email,
+        password: user.password,
+      }));
+      return res.json(users); // Returning an array of users
     }
-    const users = data.map(user => ({ staff_id: user.staff_id, email: user.email, password: user.password }));
-    return res.json(users); // Returning an array of users
-  });
-})
-
-// update employee email
-app.put("/updateuseremail", (req,res) => {
-  const vals = [req.body.email , req.body.staff_id];
-  db.query("UPDATE employee SET email =? WHERE staff_id=?;", vals, (err,data) => {
-    if(err) return res.json(err);
-    return res.json(data)
-  })
-})
-
-//get employee staff id
-app.get("/getstaffid", (req,res) => {
-  const vals = [req.body.staff_id];
-  db.query("SELECT staff_id FROM employee WHERE ", (err,data) => {
-    if(err) return res.json(err)
-    return res.json(data)
-  });
+  );
 });
 
+// update employee email
+app.put("/updateuseremail", (req, res) => {
+  const vals = [req.body.email, req.body.staff_id];
+  db.query(
+    "UPDATE employee SET email =? WHERE staff_id=?;",
+    vals,
+    (err, data) => {
+      if (err) return res.json(err);
+      return res.json(data);
+    }
+  );
+});
+
+//get employee staff id
+app.get("/getstaffid", (req, res) => {
+  const vals = [req.body.staff_id];
+  db.query("SELECT staff_id FROM employee WHERE ", (err, data) => {
+    if (err) return res.json(err);
+    return res.json(data);
+  });
+});
 
 //---------------------------END OF CRUD---------------------------
 
