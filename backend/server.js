@@ -311,7 +311,6 @@ app.delete("/selffeedback", (req, res) => {
 // DONE Create manager feedback (EN QUAN)
 app.post("/createmanagerfeedback", (req, res) => {
   const vals = [
-    //req.body.manager_feedback_id, //<== May not need this
     req.body.feedback_text,
     req.body.staff_id,
     req.body.op1,
@@ -341,8 +340,9 @@ app.post("/createmanagerfeedback", (req, res) => {
     parseInt(req.body.op9) +
     parseInt(req.body.op10) +
     parseInt(req.body.op11) +
-    parseInt(req.body.op12) +
-    vals.push(totalScore); // Add totalScore to the values array
+    parseInt(req.body.op12);
+
+  vals.push(totalScore); // Add totalScore to the values array
   db.query(
     "INSERT INTO `manager_feedback`(`feedback_text`, `staff_id`, `op1`,`op2`,`op3`,`op4`,`op5`,`op6`,`op7`,`op8`,`op9`,`op10`,`op11`,`op12`,`score`) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);",
     vals,

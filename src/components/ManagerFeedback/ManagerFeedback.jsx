@@ -25,6 +25,7 @@ export default function ManagerFeedback() {
   // validation state
   const [formErrors, setFormErrors] = useState({});
   const [validStaffIds, setValidStaffIds] = useState([]);
+  const [isStaffIdValid, setIsStaffIdValid] = useState(true);
 
   // check if staffid is in database, do a get
   useEffect(() => {
@@ -43,10 +44,18 @@ export default function ManagerFeedback() {
     const errors = {};
 
     // Validate staffId
-    if (!staffId || isNaN(staffId) || parseInt(staffId) <= 0) {
+    if (
+      staffId === null ||
+      isNaN(parseInt(staffId)) ||
+      parseInt(staffId) <= 0
+    ) {
       errors.staffId = "Staff ID is required and must be a positive integer";
+      setIsStaffIdValid(false);
     } else if (!validStaffIds.includes(parseInt(staffId))) {
       errors.staffId = "Staff ID not found in the database";
+      setIsStaffIdValid(false);
+    } else {
+      setIsStaffIdValid(true);
     }
 
     // Validate options
@@ -86,7 +95,7 @@ export default function ManagerFeedback() {
     e.preventDefault();
 
     if (validateForm()) {
-      const totalScore = calTotalScore;
+      const totalScore = calTotalScore();
       axios
         .post("http://localhost:3001/createmanagerfeedback/", {
           feedback_text: feedback_text,

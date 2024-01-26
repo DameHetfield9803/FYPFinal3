@@ -25,7 +25,9 @@ const ManagerFeedbackList = () => {
       console.log("Feedback deleted successfully!");
       // Update local state after deletion
       setFeedbackList((prevFeedbackList) =>
-        prevFeedbackList.filter((feedback) => feedback.manager_feedback_id !== id)
+        prevFeedbackList.filter(
+          (feedback) => feedback.manager_feedback_id !== id
+        )
       );
     });
   };
@@ -51,8 +53,16 @@ const ManagerFeedbackList = () => {
                 <td>{feedback.date}</td>
                 <td>{feedback.feedback_text}</td>
                 <td>
-                  <button onClick={() => handleUpdate(feedback.manager_feedback_id)}>Update</button>
-                  <button onClick={() => handleDelete(feedback.manager_feedback_id)}>Delete</button>
+                  <button
+                    onClick={() => handleUpdate(feedback.manager_feedback_id)}
+                  >
+                    Update
+                  </button>
+                  <button
+                    onClick={() => handleDelete(feedback.manager_feedback_id)}
+                  >
+                    Delete
+                  </button>
                 </td>
               </tr>
             ))}
@@ -60,7 +70,7 @@ const ManagerFeedbackList = () => {
         </table>
       </div>
       <a href="/ManagerFeedback"> Add New Manager Feedback for an employee</a>
-        <br></br>
+      <br></br>
     </div>
   );
 };
