@@ -14,13 +14,32 @@
     text-align: center;
     margin-left: 28rem;
 }
-.comments{
-    row-gap: 4;
-    columns: 50;
-    
+.comments {
+    width: 100%;
+    height: 150px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 10px;
+    resize: vertical; /* Allow vertical resizing of the textarea */
+  }
 
-}
 
+  .comments:focus {
+    outline: none;
+    border-color: #007bff; /* Change border color when focused */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Add a subtle box shadow when focused */
+  }
+  
+  .error {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+  }
 
-/*rows="4"
-                  cols="50"*/
+  .form-label {
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+  }
