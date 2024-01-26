@@ -171,6 +171,9 @@ app.post("/createpeerfeedback", (req, res) => {
   ];
   db.query(
     "INSERT INTO `peer_feedback`(`feedback_text`, `date`, `staff_id`, `op1`,`op2`,`op3`,`op4`,`op5`,`op6`,`op7`) VALUES (? , ? , ? , ? , ?,?,?,?,?,?);",
+    // Feedback the user needs to know who to evaluate.etc
+    // staff id change to whoever the user is evaluating, who evaluate who
+    // add a new field for evaluator and evaluatee
     vals,
     (err, data) => {
       if (err) return res.json(err);
@@ -182,6 +185,7 @@ app.post("/createpeerfeedback", (req, res) => {
 //DONE Read peer feedback (DANIEL)
 app.get("/peerfeedback", (req, res) => {
   const q = "SELECT * FROM peer_feedback";
+  // Create a seperate .get for manager,hr and admin
   db.query(q, (err, data) => {
     if (err) return res.json(err);
     return res.json(data);
@@ -247,6 +251,7 @@ app.post("/createselffeedback", (req, res) => {
 // Read self feedback (DANIEL) (Done)
 app.get("/selffeedback", (req, res) => {
   db.query("SELECT * FROM self_feedback;", (err, data) => {
+    //Create a seperate endpoint for manager/hr and employee, sort based on roles
     if (err) return res.json(err);
     return res.json(data);
   });
@@ -261,6 +266,7 @@ app.put("/selffeedback", (req, res) => {
   ]; // retrieving from front end
   db.query(
     "UPDATE self_feedback SET feedback_text = ? WHERE self_feedback_id = ? AND staff_id = ?;",
+    //Remove staff id
     vals,
     (err, data) => {
       if (err) return res.json(err);
@@ -287,7 +293,7 @@ app.delete("/selffeedback", (req, res) => {
 // DONE Create manager feedback (EN QUAN)
 app.post("/createmanagerfeedback", (req, res) => {
   const vals = [
-    // req.body.manager_feedback_id, //<== May not need this
+    //req.body.manager_feedback_id, //<== May not need this
     req.body.feedback_text,
     req.body.staff_id,
     req.body.op1,
@@ -359,6 +365,21 @@ app.delete("/managerfeedback", (req, res) => {
     }
   );
 });
+
+// UPDATED Delete manager feedback (FIRDAUS) TESTING VIEWFEEDBACKLIST
+app.delete("/managerfeedback/:id", (req, res) => {
+  const feedbackId = req.params.id; // Retrieve feedback ID from URL parameters
+
+  db.query(
+    "DELETE FROM manager_feedback WHERE manager_feedback_id = ?",
+    [feedbackId],
+    (err, data) => {
+      if (err) return res.json(err);
+      return res.json(data);
+    }
+  );
+});
+
 
 //-----------------------DANIEL-------------------------
 //Done Create accolades (DANIEL)
@@ -436,14 +457,19 @@ app.delete("/deleteaccolade", (req, res) => {
 
 // CRUD employee.job_role
 
-app.get("/getempjobrole", (req, res) => {
-  db.query("SELECT job_role FROM employee ;", (err, data) => {
+app.get(`/getempjobrole/:id`, (req, res) => {
+  const val = req.params.id;
+  db.query("SELECT job_role FROM employee WHERE staff_id = ?;",val, (err, data) => {
     if (err) return res.json(err);
-    return res.json(data);
+    if (data.length === 0) {
+      return res.status(404).json({ error: "Job role not found" });
+    }
+    const jobRole = data[0].job_role; // Assuming the job role is in the first element of the array
+    return res.json({ job_Role: jobRole });
   });
 }); // Done Firdaus
 
-app.put("/updateempjobrole", (req, res) => {
+app.put(`/updateempjobrole`, (req, res) => {
   const vals = [req.body.job_role, req.body.staff_id];
   db.query(
     "UPDATE employee SET job_role = ? WHERE staff_id = ?;",
@@ -458,36 +484,33 @@ app.put("/updateempjobrole", (req, res) => {
 // validating employee credentials
 app.post("/login", (req,res)=>{
   const vals = [req.body.email, req.body.password]
-  db.query("SELECT email, password FROM employee WHERE email = ? AND password =?;", vals , (err,data) => {
+  db.query("SELECT staff_id, email, password FROM employee WHERE email = ? AND password =?;", vals , (err,data) => {
     if(err) return res.json(err);
-    return res.json(data); 
+    if (data.length === 0) {
+      return res.status(401).json({ error: "Invalid email or password." });
+    }
+    const users = data.map(user => ({ staff_id: user.staff_id, email: user.email, password: user.password }));
+    return res.json(users); // Returning an array of users
   });
 })
 
 // update employee email
 app.put("/updateuseremail", (req,res) => {
-  const validateEmail = (email) => {
-    return String(email)
-      .toLowerCase()
-      .match(
-        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-      );
-  };
-    const vals = [req.body.email , req.body.staff_id];
-    if(validateEmail(email)){
-      db.query("UPDATE email = ? FROM employee WHERE staff_id = ?;", vals , (err,data) => {
-          if(err) return res.json(err);
-          return res.json(data);
-        }
-        );
-    }
-    else{
-      return "Email format invalid. Please enter a valid email";
-    }
+  const vals = [req.body.email , req.body.staff_id];
+  db.query("UPDATE employee SET email =? WHERE staff_id=?;", vals, (err,data) => {
+    if(err) return res.json(err);
+    return res.json(data)
+  })
 })
 
-//get employee credentials
-//app.get()
+//get employee staff id
+app.get("/getstaffid", (req,res) => {
+  const vals = [req.body.staff_id];
+  db.query("SELECT staff_id FROM employee WHERE ", (err,data) => {
+    if(err) return res.json(err)
+    return res.json(data)
+  });
+});
 
 
 //---------------------------END OF CRUD---------------------------

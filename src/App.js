@@ -21,11 +21,18 @@ import Home from "./components/Home/Home";
 import AttendanceSummary from "./components/Attendance/Attendancesummary";
 import EmailAutomate from "./components/Email/EmailAutomate";
 import ViewAccolades from "./components/Accolades/ViewAccolades";
+<<<<<<< HEAD
 import AddAccolade from "./components/Accolades/AddAccolade"; 
 import EmployeeNavBar from "./components/NavBar/EmployeeNavBar";
 
+=======
+//import AddAccolade from "./components/Accolades/AddAccolade";
+import ViewFeedbackList from "./components/ManagerFeedback/ManagerFeedbackList";
+import UpdateFeedback from "./components/ManagerFeedback/UpdateManagerFeedback";
+import ManagerFeedbackSuccess from "./components/ManagerFeedback/ManagerFeedbackSuccess";
+>>>>>>> 8c517c9ba88fae03664af8b4fe39e77fd2230307
 
-function App() {
+export default function App() {
   return (
     <Router>
       <div className="App">
@@ -42,6 +49,7 @@ function App() {
             <ViewAccolades />
           </Route>
 
+<<<<<<< HEAD
           <Route exact path="/addaccolades">
             <AddAccolade />
           </Route>
@@ -50,6 +58,11 @@ function App() {
             <EmployeeNavBar />
           </Route>
 
+=======
+          {/*<Route exact path="/addaccolades">
+            <AddAccolade />
+          </Route>*/}
+>>>>>>> 8c517c9ba88fae03664af8b4fe39e77fd2230307
 
           <Route exact path="/forgetpassword">
             <ForgetPassword />
@@ -88,35 +101,46 @@ function App() {
           </Route>
 
           <Route exact path="/Attendancesummary">
-          <AttendanceSummary/>
-        </Route>
+            <AttendanceSummary />
+          </Route>
 
-        <Route exact path="/employee" component={EmpTab} />
-        <Route exact path="/employee/:id" component={EmployeeDetails} />
+          <Route exact path="/employee" component={EmpTab} />
+          <Route exact path="/employee/:id" component={EmployeeDetails} />
 
-        <Route exact path="/userguides">
-          <UserGuide />
-        </Route>
+          <Route exact path="/userguides">
+            <UserGuide />
+          </Route>
 
-        <Route exact path="/Email">
-          <EmailAutomate />
-        </Route>
-        
-        <Route exact path="/Navbar">
-          <Navbar />
-        </Route>
+          <Route exact path="/Email">
+            <EmailAutomate />
+          </Route>
 
-        <Route exact path="/forbidden">
-          <Forbidden />
-        </Route>
+          <Route exact path="/feedbacklist">
+            <ViewFeedbackList />
+          </Route>
 
-        <Route path="*">
-          <NotFound />
-        </Route>
-      </Switch>
-    </div>
+          <Route exact path="/updatefeedback/:id">
+            <UpdateFeedback/>
+          </Route>
+
+          <Route exact path="/managersuccess">
+            <ManagerFeedbackSuccess />
+          </Route>
+
+          <Route exact path="/Navbar">
+            <Navbar />
+          </Route>
+
+          <Route exact path="/forbidden">
+            <Forbidden />
+          </Route>
+
+          <Route path="*">
+            <NotFound />
+          </Route>
+        </Switch>
+      </div>
     </Router >
   );
 }
 
-export default App;
