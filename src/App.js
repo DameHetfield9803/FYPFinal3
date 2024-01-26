@@ -30,7 +30,8 @@ import EmployeeNavBar from "./components/NavBar/EmployeeNavBar";
 import ViewFeedbackList from "./components/ManagerFeedback/ManagerFeedbackList";
 import UpdateFeedback from "./components/ManagerFeedback/UpdateManagerFeedback";
 import ManagerFeedbackSuccess from "./components/ManagerFeedback/ManagerFeedbackSuccess";
->>>>>>> 8c517c9ba88fae03664af8b4fe39e77fd2230307
+import PeerFeedbackList from "./components/PeerEvaluation/PeerEvalList";
+
 
 export default function App() {
   return (
@@ -125,6 +126,10 @@ export default function App() {
 
           <Route exact path="/managersuccess">
             <ManagerFeedbackSuccess />
+          </Route>
+          
+          <Route exact path="/peerevaluationlist">
+            <PeerFeedbackList />
           </Route>
 
           <Route exact path="/Navbar">
