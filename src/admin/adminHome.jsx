@@ -9,26 +9,26 @@ export default function adminHome(){
     return(
         <div className="admin-container">
             <h1><strong>System Admin Page</strong></h1>
-            <Link to="/appraisalitem">Appraisal Item</Link>
-            <Link to="/Attendance">Attendance</Link> <br></br>
+            <Link to="/appraisalitem">Appraisal Item</Link> <br/>
+            <Link to="/Attendance">Attendance</Link> <br/>
             <Link to="/Accolades">Accolades</Link>
-            <br></br>
+            <br/>
             <Link to="/AppraisalForm">AppraisalForm</Link>
-            <br></br>
+            <br/>
             <Link to="/AppraisalItem">AppraisalItem</Link>
-            <br></br>
+            <br/>
             <Link to="/Employee">Employee</Link>
-            <br></br>
+            <br/>
             <Link to="/PeerEvaluation">PeerEvaluation</Link>
-            <br></br>
+            <br/>
             <Link to="/SelfEvaluation">SelfEvaluation</Link>
-            <br></br>
+            <br/>
             <Link to="/ReportForm">ReportForm</Link>
-            <br></br>
+            <br/>
             <Link to="/ManagerFeedback">ManagerFeedback</Link>
-            <br></br>
+            <br/>
             <Link to="/userguides">UserGuide</Link>
-            <br></br>
+            <br/>
         </div>
     );
 }
