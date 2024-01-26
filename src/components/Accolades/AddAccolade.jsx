@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import "./AddAccolade.css";
 import Navbar from '../NavBar/NavBar';
+import { useHistory } from "react-router-dom";
 
 const AddAccolade = () => {
   const [accoladeData, setAccoladeData] = useState({
@@ -22,6 +23,8 @@ const AddAccolade = () => {
       [name]: value,
     }));
   };
+
+  const history = useHistory();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -46,9 +49,7 @@ const AddAccolade = () => {
       });
       setVerificationMessage("Accolade added successfully!");
       // Clear verification message after 3 seconds
-      setTimeout(() => {
-        setVerificationMessage("");
-      }, 3000);
+        history.push("/accoladesuccess");
     } catch (error) {
       console.error("Error adding accolade:", error);
       // Handle error, show error message, etc.
