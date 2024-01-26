@@ -28,7 +28,7 @@ import PeerFeedbackList from "./components/PeerEvaluation/PeerEvalList";
 import AddAccolade from "./components/Accolades/AddAccolade"; 
 import EmployeeNavBar from "./components/NavBar/EmployeeNavBar";
 import AccoladeSuccess from "./components/Accolades/AccoladeSuccess";
-
+import adminHome from "./admin/adminHome";
 export default function App() {
   return (
     <Router>
@@ -38,8 +38,12 @@ export default function App() {
             <Login />
           </Route>
 
-          <Route exact path="/Home">
+          <Route exact path="/home/:id">
             <Home />
+          </Route>
+
+          <Route exact path ="/adminhome">
+            <adminHome/>
           </Route>
 
           <Route exact path="/viewaccolades">
