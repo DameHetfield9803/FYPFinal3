@@ -1,6 +1,5 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import NavBar from "../NavBar/NavBar";
 import "./ManagerFeedback.css";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
