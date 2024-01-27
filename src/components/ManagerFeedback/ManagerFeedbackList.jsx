@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Navbar from "../NavBar/NavBar";
-import { Link, useHistory } from "react-router-dom";
+import {useHistory } from "react-router-dom";
 import ManagerNavbar from "../NavBar/ManagerNavBar";
 
 const ManagerFeedbackList = () => {

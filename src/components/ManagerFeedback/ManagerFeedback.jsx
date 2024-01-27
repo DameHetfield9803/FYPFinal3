@@ -1,6 +1,5 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import NavBar from "../NavBar/NavBar";
 import "./ManagerFeedback.css";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
@@ -116,8 +115,6 @@ export default function ManagerFeedback() {
           score: totalScore,
         })
         .then(() => {
-          console.log("Successfully added to database!");
-          window.alert("Successfully Added!");
           history.push("/managersuccess");
         })
         .catch((error) => {
