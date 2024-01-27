@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useHistory, useParams } from "react-router-dom";
-export default function DeleteEmployees() {
-  const [employees, setEmployees] = useState([]);
-  const history = useHistory();
+import { useParams } from "react-router-dom/cjs/react-router-dom.min";
+export default function UpdateEmployee() {
   const { id } = useParams();
+  const [employees, setEmployees] = useState([]);
 
+  // Define fetchEmployees function
   const fetchEmployees = async () => {
     try {
       const response = await axios.get("http://localhost:3001/getemployee");
@@ -16,29 +16,43 @@ export default function DeleteEmployees() {
   };
 
   useEffect(() => {
+    // Call fetchEmployees() when component mounts
     fetchEmployees();
   }, []);
 
-  const handleDelete = async (staffId) => {
+  const handleUpdateJobRole = async (staffId, newJobRole) => {
     try {
-      // Prompt for confirmation before deletion
-      const confirmed = window.confirm("Are you sure you want to delete this employee?");
-      if (!confirmed) return; // If not confirmed, do nothing
-
-      await axios.delete("http://localhost:3001/deleteemployee", { data: { staff_id: staffId } });
-      
-      // Redirect to /adminhome/:id on successful deletion
-      history.push(`/adminhome/${id}/viewemployee`);
+      await axios.put("http://localhost:3001/updateempjobrole", { job_role: newJobRole, staff_id: staffId });
+      // Fetch updated employee list after updating job role
+      fetchEmployees();
     } catch (error) {
-      console.error("Error deleting employee: ", error);
-      // Display error message if deletion fails
-      alert("Failed to delete employee. Please try again later.");
+      console.error("Error updating job role: ", error);
+    }
+  };
+
+  const handleUpdateDepartment = async (staffId, newDepartmentId) => {
+    try {
+      await axios.put("http://localhost:3001/updateempdepartment", { department_id: newDepartmentId, staff_id: staffId });
+      // Fetch updated employee list after updating department
+      fetchEmployees();
+    } catch (error) {
+      console.error("Error updating department: ", error);
+    }
+  };
+
+  const handleUpdateReportingTo = async (staffId, newReportingTo) => {
+    try {
+      await axios.put("http://localhost:3001/updateempreportingto", { reporting_to: newReportingTo, staff_id: staffId });
+      // Fetch updated employee list after updating reporting manager
+      fetchEmployees();
+    } catch (error) {
+      console.error("Error updating reporting manager: ", error);
     }
   };
 
   return (
     <div className="container text-center">
-                <nav className="navbar navbar-expand-lg navbar-light bg-light">
+          <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <a className="navbar-brand" href={`/adminhome/${id}`}>Home</a>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
@@ -61,13 +75,15 @@ export default function DeleteEmployees() {
                 </ul>
             </div>
         </nav>
-      <h1>Delete Employee</h1>
-      <br/>
-      <table>
+      <h1>Update Employee</h1>
+      <table className="ml-auto mr-auto ">
         <thead>
           <tr>
             <th>Staff ID</th>
             <th>Name</th>
+            <th>Department</th>
+            <th>Job Role</th>
+            <th>Reporting To</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -75,9 +91,14 @@ export default function DeleteEmployees() {
           {employees.map((employee) => (
             <tr key={employee.staff_id}>
               <td>{employee.staff_id}</td>
-              <td>{employee.staff_name}</td>
+              <td>{employee.name}</td>
+              <td>{employee.name}</td> {/* Display department name instead of ID */}
+              <td>{employee.job_role}</td> {/* Display job role */}
+              <td>{employee.reporting_to}</td>
               <td>
-                <button onClick={() => handleDelete(employee.staff_id)}>Delete</button>
+                <button onClick={() => handleUpdateJobRole(employee.staff_id, "New Job Role")}>Update Job Role</button>
+                <button onClick={() => handleUpdateDepartment(employee.staff_id, "New Department ID")}>Update Department</button>
+                <button onClick={() => handleUpdateReportingTo(employee.staff_id, "New Reporting To ID")}>Update Reporting To</button>
               </td>
             </tr>
           ))}
