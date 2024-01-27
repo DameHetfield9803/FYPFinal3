@@ -26,20 +26,18 @@ db.connect((err) => {
 
 //------------------------------------------
 // Create employee (DAMIEN) (done)
-app.post("/employee", (req, res) => {
+app.post("/createemployee", (req, res) => {
   const values = [
-    req.body.staff_id,
     req.body.staff_name,
     req.body.username,
     req.body.password,
     req.body.email,
     req.body.reporting_to,
     req.body.department_id,
-    req.body.date_joined,
     req.body.job_role,
   ];
   const sql =
-    "INSERT INTO employee(`staff_id`, `staff_name`, `username`, `password`, `email`,`reporting_to`, `department_id`, `date_joined`, `job_role`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
+    "INSERT INTO employee(`staff_name`, `username`, `password`, `email`,`reporting_to`, `department_id`,`job_role`) VALUES (?, ?, ?, ?, ?, ?, ?);";
   db.query(sql, values, (err, result) => {
     if (err) return res.json(err);
     return res.json(result);
@@ -47,7 +45,7 @@ app.post("/employee", (req, res) => {
 });
 
 //DONE Read employee (EN QUAN)
-app.get("/employee", (req, res) => {
+app.get("/getemployee", (req, res) => {
   const q = "SELECT * FROM employee";
   db.query(q, (err, data) => {
     if (err) return res.json(err);
@@ -56,7 +54,7 @@ app.get("/employee", (req, res) => {
 });
 
 // Update employee (DAMIEN) (done)
-app.put("/employee", (req, res) => {
+app.put("/updateemployee", (req, res) => {
   const vals = [
     req.body.staff_name,
     req.body.username,
@@ -75,8 +73,15 @@ app.put("/employee", (req, res) => {
   });
 });
 
+app.get("/getstaffname", (req,res) => {
+  db.query("SELECT staff_name FROM employee;", (err,data) => {
+    if(err) return res.json(err)
+    return res.json(data)
+  })
+})
+
 // Delete employee (DAMIEN) (done)
-app.delete("/employee", (req, res) => {
+app.delete("/deleteemployee", (req, res) => {
   const vals = [req.body.staff_id];
   db.query("DELETE FROM `employee` WHERE staff_id = ?;", vals, (err, data) => {
     if (err) return res.json(err);
@@ -98,7 +103,7 @@ app.post("/department", (req, res) => {
   );
 });
 // Read department (DAMIEN) (done)
-app.get("/department", (req, res) => {
+app.get("/getdepartment", (req, res) => {
   const q = "SELECT * FROM department;";
   db.query(q, (err, data) => {
     if (err) return res.json(err);
@@ -153,8 +158,7 @@ app.delete("/department", (req, res) => {
   );
 });
 
-//-------------------(split)-----------------------
-//DONE Create peer feedback (DANIEL)
+//DONE Create peer feedback (EN QUAN)
 app.post("/createpeerfeedback", (req, res) => {
   const vals = [
     req.body.feedback_text,
@@ -232,10 +236,7 @@ app.delete("/peerfeedback", (req, res) => {
   );
 });
 
-//---------------------DANIEL-----------------------
-//Done Create self feedback (DAMIEN)
-
-// Route for creating a self evaluation
+//Done Create self feedback (EN QUAN)
 app.post("/createselffeedback", (req, res) => {
   const vals = [
     req.body.feedback_text,
@@ -307,11 +308,9 @@ app.delete("/selffeedback", (req, res) => {
     }
   );
 });
-//----------------------FIRDAUS-----------------------------------
 // DONE Create manager feedback (EN QUAN)
 app.post("/createmanagerfeedback", (req, res) => {
   const vals = [
-    //req.body.manager_feedback_id, //<== May not need this
     req.body.feedback_text,
     req.body.staff_id,
     req.body.op1,
@@ -341,8 +340,9 @@ app.post("/createmanagerfeedback", (req, res) => {
     parseInt(req.body.op9) +
     parseInt(req.body.op10) +
     parseInt(req.body.op11) +
-    parseInt(req.body.op12) +
-    vals.push(totalScore); // Add totalScore to the values array
+    parseInt(req.body.op12);
+
+  vals.push(totalScore); // Add totalScore to the values array
   db.query(
     "INSERT INTO `manager_feedback`(`feedback_text`, `staff_id`, `op1`,`op2`,`op3`,`op4`,`op5`,`op6`,`op7`,`op8`,`op9`,`op10`,`op11`,`op12`,`score`) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);",
     vals,
@@ -490,8 +490,15 @@ app.delete("/deleteaccolade", (req, res) => {
 
 // CRUD employee.job_role
 
+app.get("/getjobroles", (req,res) => {
+  db.query("SELECT DISTINCT job_role FROM employee;" , (err,data)=> {
+    if(err) return res.json(err)
+    return res.json(data)
+  })
+})
+
 app.get(`/getempjobrole/:id`, (req, res) => {
-  const val = req.params.id;
+  const val = [req.params.id];
   db.query(
     "SELECT job_role FROM employee WHERE staff_id = ?;",
     val,
@@ -501,7 +508,7 @@ app.get(`/getempjobrole/:id`, (req, res) => {
         return res.status(404).json({ error: "Job role not found" });
       }
       const jobRole = data[0].job_role; // Assuming the job role is in the first element of the array
-      return res.json({ job_Role: jobRole });
+      return res.json({ job_role: jobRole });
     }
   );
 }); // Done Firdaus
@@ -543,7 +550,7 @@ app.post("/login", (req, res) => {
 app.put("/updateuseremail", (req, res) => {
   const vals = [req.body.email, req.body.staff_id];
   db.query(
-    "UPDATE employee SET email =? WHERE staff_id=?;",
+    "UPDATE employee SET email = ? WHERE staff_id=?;",
     vals,
     (err, data) => {
       if (err) return res.json(err);
@@ -552,44 +559,6 @@ app.put("/updateuseremail", (req, res) => {
   );
 });
 
-//get employee staff id
-app.get("/getstaffid", (req, res) => {
-  const vals = [req.body.staff_id];
-  db.query("SELECT staff_id FROM employee WHERE ", (err, data) => {
-    if (err) return res.json(err);
-    return res.json(data);
-  });
-});
-
-
-//AddAttendancetodatabase
-
-app.post('/addattendancesummary', (req, res) => {
-  const attendanceSummaryData = req.body;
-
-  const sql = 'INSERT INTO attendance_summary (BatchNO, EmpName, Month, Year, Present, NotPresent, Late, Percentage) VALUES ?';
-
-  const values = attendanceSummaryData.map((entry) => [
-    entry.BatchNo,
-    entry['Emp Name'],
-    entry.Month,
-    entry.Year,
-    entry.Present,
-    entry['Not Present'],
-    entry.Late,
-    entry.Percentage,
-  ]);
-
-  db.query(sql, [values], (err, result) => {
-    if (err) {
-      console.error('Error adding attendance summary:', err);
-      res.status(500).json({ error: 'Failed to add attendance summary to database' });
-    } else {
-      console.log('Attendance summary added successfully');
-      res.status(200).json({ message: 'Attendance summary added successfully' });
-    }
-  });
-});
 //---------------------------END OF CRUD---------------------------
 
 app.listen(3001, () => {

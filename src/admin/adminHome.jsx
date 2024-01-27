@@ -1,34 +1,43 @@
-import { Link } from "react-router-dom";
 import "./adminHome.css";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import axios from "axios";
-export default function adminHome(){
-    const {id} = useParams();
-    const {data: staff_id} = axios.get(`http://localhost:3001/getempjobrole?staff_id=${id}`) 
+import { useParams } from "react-router-dom/cjs/react-router-dom.min";
+import { useEffect , useState } from "react";
+export default function AdminHome(){ 
+    const { id } = useParams();
+    const [job_role, setJob_Role] = useState("");
+    useEffect(() => {
+      async function fetchJob_Role() {
+        try {
+          const response = await axios.get(`http://localhost:3001/getempjobrole/${id}`);
+          setJob_Role(response.data.job_role);
+        } catch (error) {
+          console.error("Error fetching job role:", error);
+        }
+      }
+      fetchJob_Role();
+    }, [id]);
     return(
-        <div className="admin-container">
-            <h1><strong>System Admin Page</strong></h1>
-            <Link to="/appraisalitem">Appraisal Item</Link>
-            <Link to="/Attendance">Attendance</Link> <br></br>
-            <Link to="/Accolades">Accolades</Link>
-            <br></br>
-            <Link to="/AppraisalForm">AppraisalForm</Link>
-            <br></br>
-            <Link to="/AppraisalItem">AppraisalItem</Link>
-            <br></br>
-            <Link to="/Employee">Employee</Link>
-            <br></br>
-            <Link to="/PeerEvaluation">PeerEvaluation</Link>
-            <br></br>
-            <Link to="/SelfEvaluation">SelfEvaluation</Link>
-            <br></br>
-            <Link to="/ReportForm">ReportForm</Link>
-            <br></br>
-            <Link to="/ManagerFeedback">ManagerFeedback</Link>
-            <br></br>
-            <Link to="/userguides">UserGuide</Link>
-            <br></br>
-        </div>
+        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+            <a className="navbar-brand" href={`/adminhome/${id}`}>Home</a>
+            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span className="navbar-toggler-icon"></span>
+            </button>
+
+            <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul className="navbar-nav mr-auto">
+                    <li className="nav-item dropdown">
+                        <a className="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Employee section
+                        </a>
+                        <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a className="dropdown-item" href={`/adminhome/${id}/createemployee`}>Create Employee</a>
+                            <a className="dropdown-item" href=""></a>
+                            <a className="dropdown-item" href=""></a>
+                            <a className="dropdown-item" href="/">Logout</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
     );
 }
