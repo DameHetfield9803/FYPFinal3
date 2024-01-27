@@ -1,31 +1,32 @@
+import { Link } from "react-router-dom";
 import React from "react";
-import "./NavBar.css";
+import "./HRNavBar.css";
 
-export default function Navbar() {
+export default function HRNavbar() {
   return (
     <div>
       {/* Navbar Items */}
       <div className="topnav">
         {/* Logo */}
-        <a href="/Home" className="logo-link">
-          <img src="Assets/TSH.jpg" alt="Logo" width="310px" height="90px" />
-        </a>
+        <Link to="/Home/1" className="logo-link">
+          <img src="/Assets/TSH.jpg" alt="Logo" width="310px" height="90px" />
+        </Link>
 
         {/* Navigation Links */}
-        <a href="/Attendance">Attendance</a>
-        <a href="/Accolades">Accolades</a>
-        <a href="/AppraisalForm">Appraisal Form</a>
+        <Link to="/Attendance">Attendance</Link>
+        <Link to="/viewAccolades">Accolades</Link>
+        <Link to="/AppraisalForm">Appraisal Form</Link>
 
         {/* My Profile link*/}
-        <a href="/Profile" className="profile">
+        <Link to="/Profile" className="profile">
           <img
-            src="Assets/Profile-icon.jpg"
+            src="/Assets/Profile-icon.jpg"
             alt="Profile Icon"
             width="30px"
             height="30px"
           />
           <span>My Profile</span>
-        </a>
+        </Link>
       </div>
       {/* End of Navbar Items */}
     </div>
