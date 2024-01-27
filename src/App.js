@@ -28,6 +28,11 @@ import PeerFeedbackList from "./components/PeerEvaluation/PeerEvalList";
 import AddAccolade from "./components/Accolades/AddAccolade"; 
 import EmployeeNavBar from "./components/NavBar/EmployeeNavBar";
 import AccoladeSuccess from "./components/Accolades/AccoladeSuccess";
+import PeerEvaluationSuccess from "./components/PeerEvaluation/PeerEvaluationSuccess";
+import SelfEvaluationSuccess from "./components/SelfEvaluation/SelfEvaluationSuccess";
+import SelfEvalList from "./components/SelfEvaluation/SelfEvalList";
+import ManagerNavbar from "./components/NavBar/ManagerNavBar";
+
 export default function App() {
   return (
     <Router>
@@ -124,12 +129,28 @@ export default function App() {
             <PeerFeedbackList />
           </Route>
 
+          <Route exact path="/peerevaluationsuccess">
+            <PeerEvaluationSuccess/>
+          </Route>
+
+          <Route exact path="/selfevaluationsuccess">
+            <SelfEvaluationSuccess/>
+          </Route>
+
+          <Route exact path="/selfevaluationlist">
+            <SelfEvalList/>
+          </Route>
+
           <Route exact path="/Navbar">
             <Navbar />
           </Route>
 
           <Route exact path="/EmpNavBar">
             <EmployeeNavBar />
+          </Route>
+
+          <Route exact path="/managernavbar">
+            <ManagerNavbar />
           </Route>
 
           <Route exact path="/forbidden">
