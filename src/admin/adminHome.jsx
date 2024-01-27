@@ -31,7 +31,7 @@ export default function AdminHome(){
                         </a>
                         <div className="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a className="dropdown-item" href={`/adminhome/${id}/createemployee`}>Create Employee</a>
-                            <a className="dropdown-item" href=""></a>
+                            <a className="dropdown-item" href={`/adminhome/${id}/viewemployee`}>View Employees</a>
                             <a className="dropdown-item" href=""></a>
                             <a className="dropdown-item" href="/">Logout</a>
                         </div>
