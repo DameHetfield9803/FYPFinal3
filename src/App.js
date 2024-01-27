@@ -30,6 +30,7 @@ import EmployeeNavBar from "./components/NavBar/EmployeeNavBar";
 import AccoladeSuccess from "./components/Accolades/AccoladeSuccess";
 import PeerEvaluationSuccess from "./components/PeerEvaluation/PeerEvaluationSuccess";
 import SelfEvaluationSuccess from "./components/SelfEvaluation/SelfEvaluationSuccess";
+import SelfEvalList from "./components/SelfEvaluation/SelfEvalList";
 
 export default function App() {
   return (
@@ -135,6 +136,9 @@ export default function App() {
             <SelfEvaluationSuccess/>
           </Route>
 
+          <Route exact path="/selfevaluationlist">
+            <SelfEvalList/>
+          </Route>
 
           <Route exact path="/Navbar">
             <Navbar />
