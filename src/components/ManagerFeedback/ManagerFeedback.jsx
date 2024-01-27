@@ -116,8 +116,6 @@ export default function ManagerFeedback() {
           score: totalScore,
         })
         .then(() => {
-          console.log("Successfully added to database!");
-          window.alert("Successfully Added!");
           history.push("/managersuccess");
         })
         .catch((error) => {
