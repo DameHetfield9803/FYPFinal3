@@ -29,6 +29,7 @@ import AddAccolade from "./components/Accolades/AddAccolade";
 import EmployeeNavBar from "./components/NavBar/EmployeeNavBar";
 import AccoladeSuccess from "./components/Accolades/AccoladeSuccess";
 import PeerEvaluationSuccess from "./components/PeerEvaluation/PeerEvaluationSuccess";
+import SelfEvaluationSuccess from "./components/SelfEvaluation/SelfEvaluationSuccess";
 
 export default function App() {
   return (
@@ -130,6 +131,9 @@ export default function App() {
             <PeerEvaluationSuccess/>
           </Route>
 
+          <Route exact path="/selfevaluationsuccess">
+            <SelfEvaluationSuccess/>
+          </Route>
 
 
           <Route exact path="/Navbar">
