@@ -561,6 +561,35 @@ app.get("/getstaffid", (req, res) => {
   });
 });
 
+
+//AddAttendancetodatabase
+
+app.post('/addattendancesummary', (req, res) => {
+  const attendanceSummaryData = req.body;
+
+  const sql = 'INSERT INTO attendance_summary (BatchNO, EmpName, Month, Year, Present, NotPresent, Late, Percentage) VALUES ?';
+
+  const values = attendanceSummaryData.map((entry) => [
+    entry.BatchNo,
+    entry['Emp Name'],
+    entry.Month,
+    entry.Year,
+    entry.Present,
+    entry['Not Present'],
+    entry.Late,
+    entry.Percentage,
+  ]);
+
+  db.query(sql, [values], (err, result) => {
+    if (err) {
+      console.error('Error adding attendance summary:', err);
+      res.status(500).json({ error: 'Failed to add attendance summary to database' });
+    } else {
+      console.log('Attendance summary added successfully');
+      res.status(200).json({ message: 'Attendance summary added successfully' });
+    }
+  });
+});
 //---------------------------END OF CRUD---------------------------
 
 app.listen(3001, () => {
