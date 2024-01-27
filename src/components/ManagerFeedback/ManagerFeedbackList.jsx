@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Navbar from "../NavBar/NavBar";
 import { Link, useHistory } from "react-router-dom";
+import ManagerNavbar from "../NavBar/ManagerNavBar";
 
 const ManagerFeedbackList = () => {
   const [feedbackList, setFeedbackList] = useState([]);
@@ -34,7 +35,7 @@ const ManagerFeedbackList = () => {
 
   return (
     <div>
-      <Navbar />
+      <ManagerNavbar />
       <div>
         <h2>Feedback List</h2>
         <table className="table table-striped">

@@ -4,6 +4,7 @@ import NavBar from "../NavBar/NavBar";
 import "./ManagerFeedback.css";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
+import ManagerNavbar from "../NavBar/ManagerNavBar";
 
 export default function ManagerFeedback() {
   // React hooks
@@ -128,7 +129,7 @@ export default function ManagerFeedback() {
   // Return JSX
   return (
     <>
-      <NavBar />
+      <ManagerNavbar />
 
       <div className="mb-4 small">
         <form name="feedback_form" id="feedback_form">
