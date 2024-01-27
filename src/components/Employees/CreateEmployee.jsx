@@ -1,21 +1,24 @@
 import axios from "axios";
 import { useEffect , useState } from "react";
+import { useHistory, useParams } from "react-router-dom/cjs/react-router-dom.min";
 export default function CreateEmployee(){
-        const[department_name, setdepartment_name] = useState("");
-        useEffect(() => {
-            async function getdepartment() {
-                axios.get("http://localhost:3001/getdepartment").then((response) =>{
-                    setdepartment_name(response.data);
-                })
-            }
-            getdepartment();
-          }, [department_name]);
-        const [staff_name, setstaff_name] = useState("");
-        useEffect(() => {
-        async function getstaffname(){
-            axios.get("http://localhost:3001/getstaffname").then((response) => {
+    const { id } = useParams();
+    let history = useHistory();
+    const[department_name, setdepartment_name] = useState("");
+    useEffect(() => {
+        async function getdepartment() {
+            axios.get("http://localhost:3001/getdepartment").then((response) =>{
+                setdepartment_name(response.data);
+            })
+        }
+        getdepartment();
+        }, [department_name]);
+    const [staff_name, setstaff_name] = useState("");
+    useEffect(() => {
+    async function getstaffname(){
+        axios.get("http://localhost:3001/getstaffname").then((response) => {
                 setstaff_name(response.data);
-         })   
+            })   
         }
         getstaffname();
     }, [staff_name])
@@ -29,9 +32,15 @@ export default function CreateEmployee(){
         }
         getjobrole();
     }, [job_role])
+    function HandSub(){
+        const handleSubmit = (event) =>{
+            event.preventDefault();
+            history.push(`/adminhome/${id}`);
+        }
+    }
     return(
         <div className="container">
-            <form method="post" action="http://localhost:3001/createemployee">
+            <form method="post" action="http://localhost:3001/createemployee" onCLick={HandSub}>
                 <h1>Employee creation</h1>
                 <br/>
                 <label htmlFor="staff_name">Staff Name: </label>
@@ -77,7 +86,7 @@ export default function CreateEmployee(){
                     }) : ""}
                 </select>
                 <br/>
-                <button type="submit" value="Submit">Submit</button>
+                <button type="submit">Submit</button>
             </form>
         </div>
     );
