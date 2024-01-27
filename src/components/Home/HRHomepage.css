@@ -1,37 +1,36 @@
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 0;
-  }
-  
-  .HR-container {
-    max-width: 600px;
-    margin: 50px auto;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  h1 {
-    text-align: center;
-    color: #333;
-  }
-  
-  a {
-    display: block;
-    margin-bottom: 10px;
-    padding: 10px;
-    text-decoration: none;
-    color: #007bff;
-    border: 1px solid #007bff;
-    border-radius: 5px;
-    transition: background-color 0.3s, color 0.3s;
-  }
-  
-  a:hover {
-    background-color: #007bff;
-    color: #fff;
-  }
-  
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+}
+
+.HR-homepage-container {
+  max-width: 600px;
+  margin: 50px auto;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.HR-homepage-h1 {
+  text-align: center;
+  color: #333;
+}
+
+.HR-homepage-link {
+  display: block;
+  margin-bottom: 10px;
+  padding: 10px;
+  text-decoration: none;
+  color: #007bff;
+  border: 1px solid #007bff;
+  border-radius: 5px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.HR-homepage-link:hover {
+  background-color: #007bff;
+  color: #fff;
+}
