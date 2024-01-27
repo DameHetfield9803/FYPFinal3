@@ -153,8 +153,7 @@ app.delete("/department", (req, res) => {
   );
 });
 
-//-------------------(split)-----------------------
-//DONE Create peer feedback (DANIEL)
+//DONE Create peer feedback (EN QUAN)
 app.post("/createpeerfeedback", (req, res) => {
   const vals = [
     req.body.feedback_text,
@@ -232,10 +231,7 @@ app.delete("/peerfeedback", (req, res) => {
   );
 });
 
-//---------------------DANIEL-----------------------
-//Done Create self feedback (DAMIEN)
-
-// Route for creating a self evaluation
+//Done Create self feedback (EN QUAN)
 app.post("/createselffeedback", (req, res) => {
   const vals = [
     req.body.feedback_text,
@@ -307,7 +303,6 @@ app.delete("/selffeedback", (req, res) => {
     }
   );
 });
-//----------------------FIRDAUS-----------------------------------
 // DONE Create manager feedback (EN QUAN)
 app.post("/createmanagerfeedback", (req, res) => {
   const vals = [
