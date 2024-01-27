@@ -7,7 +7,7 @@ export default function ManagerNavbar() {
       {/* Navbar Items */}
       <div className="topnav">
         {/* Logo */}
-        <a href="/Home/1" className="logo-link">
+        <a href="/Home/2" className="logo-link">
           <img src="Assets/TSH.jpg" alt="Logo" width="310px" height="90px" />
         </a>
 
