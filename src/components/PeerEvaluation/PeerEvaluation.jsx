@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import "./PeerEvaluation.css";
 import Navbar from "../NavBar/NavBar";
 import axios from "axios";
+import { useHistory } from "react-router-dom";
 
 export default function PeerEvaluation() {
   //hooks
@@ -28,6 +29,8 @@ export default function PeerEvaluation() {
       setValidStaffIds(ids);
     });
   }, []);
+
+  const history = useHistory();
 
   const validateForm = () => {
     const errors = {};
@@ -76,8 +79,7 @@ export default function PeerEvaluation() {
           score: totalScore,
         })
         .then(() => {
-          console.log("Successfully added to database!");
-          window.alert("Successfully Added!");
+          history.push("/peerevaluationsuccess");
         })
         .catch((error) => {
           console.error("Error: ", error);

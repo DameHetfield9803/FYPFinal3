@@ -85,9 +85,7 @@ export default function SelfEvaluation() {
         })
 
         .then(() => {
-          console.log("Successfully added to database!");
-          window.alert("Successfully Added!");
-          history.push("/selfevaluationlist");
+          history.push("/selfevaluationsuccess");
         })
         .catch((error) => {
           console.error("Error: ", error);
