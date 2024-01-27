@@ -1,18 +1,12 @@
 // import { Link } from "react-router-dom";
 import HRNavbar from "../NavBar/HRNavBar";
 import HRHomepage from "./HRHomepage";
-// import React from "react";
-// // import { auth } from "../../config/firebase";
-// // import { signOut } from "firebase/auth";
-// import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import Navbar from "../NavBar/NavBar";
 import "./Home.css";
 import Forbidden from "../.././pages/Forbidden";
 import axios from "axios";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-import adminHome from "../../admin/adminHome";
 export default function Home() {
   const { id } = useParams();
   const [job_role, setJob_Role] = useState("");
@@ -74,7 +68,7 @@ export default function Home() {
         </div>
       );
     case "admin":
-      return history.push("/adminhome");
+      return history.push(`/adminhome/${id}`);
     case "human resource":
       return (
         <>

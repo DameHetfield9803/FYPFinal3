@@ -32,7 +32,8 @@ import PeerEvaluationSuccess from "./components/PeerEvaluation/PeerEvaluationSuc
 import SelfEvaluationSuccess from "./components/SelfEvaluation/SelfEvaluationSuccess";
 import SelfEvalList from "./components/SelfEvaluation/SelfEvalList";
 import ManagerNavbar from "./components/NavBar/ManagerNavBar";
-
+import AdminHome from "./admin/adminHome";
+import CreateEmployee from "../src/components/Employees/CreateEmployee";
 export default function App() {
   return (
     <Router>
@@ -46,8 +47,12 @@ export default function App() {
             <Home />
           </Route>
 
-          <Route exact path ="/adminhome">
-            <adminHome/>
+          <Route exact path ="/adminhome/:id">
+            <AdminHome/>
+          </Route>
+
+          <Route exact path = "/adminhome/:id/createemployee">
+            <CreateEmployee/>
           </Route>
 
           <Route exact path="/viewaccolades">

@@ -26,20 +26,18 @@ db.connect((err) => {
 
 //------------------------------------------
 // Create employee (DAMIEN) (done)
-app.post("/employee", (req, res) => {
+app.post("/createemployee", (req, res) => {
   const values = [
-    req.body.staff_id,
     req.body.staff_name,
     req.body.username,
     req.body.password,
     req.body.email,
     req.body.reporting_to,
     req.body.department_id,
-    req.body.date_joined,
     req.body.job_role,
   ];
   const sql =
-    "INSERT INTO employee(`staff_id`, `staff_name`, `username`, `password`, `email`,`reporting_to`, `department_id`, `date_joined`, `job_role`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
+    "INSERT INTO employee(`staff_name`, `username`, `password`, `email`,`reporting_to`, `department_id`,`job_role`) VALUES (?, ?, ?, ?, ?, ?, ?);";
   db.query(sql, values, (err, result) => {
     if (err) return res.json(err);
     return res.json(result);
@@ -47,7 +45,7 @@ app.post("/employee", (req, res) => {
 });
 
 //DONE Read employee (EN QUAN)
-app.get("/employee", (req, res) => {
+app.get("/getemployee", (req, res) => {
   const q = "SELECT * FROM employee";
   db.query(q, (err, data) => {
     if (err) return res.json(err);
@@ -56,7 +54,7 @@ app.get("/employee", (req, res) => {
 });
 
 // Update employee (DAMIEN) (done)
-app.put("/employee", (req, res) => {
+app.put("/updateemployee", (req, res) => {
   const vals = [
     req.body.staff_name,
     req.body.username,
@@ -75,8 +73,15 @@ app.put("/employee", (req, res) => {
   });
 });
 
+app.get("/getstaffname", (req,res) => {
+  db.query("SELECT staff_name FROM employee;", (err,data) => {
+    if(err) return res.json(err)
+    return res.json(data)
+  })
+})
+
 // Delete employee (DAMIEN) (done)
-app.delete("/employee", (req, res) => {
+app.delete("/deleteemployee", (req, res) => {
   const vals = [req.body.staff_id];
   db.query("DELETE FROM `employee` WHERE staff_id = ?;", vals, (err, data) => {
     if (err) return res.json(err);
@@ -98,7 +103,7 @@ app.post("/department", (req, res) => {
   );
 });
 // Read department (DAMIEN) (done)
-app.get("/department", (req, res) => {
+app.get("/getdepartment", (req, res) => {
   const q = "SELECT * FROM department;";
   db.query(q, (err, data) => {
     if (err) return res.json(err);
@@ -489,6 +494,13 @@ app.delete("/deleteaccolade", (req, res) => {
 });
 
 // CRUD employee.job_role
+
+app.get("/getjobroles", (req,res) => {
+  db.query("SELECT DISTINCT job_role FROM employee;" , (err,data)=> {
+    if(err) return res.json(err)
+    return res.json(data)
+  })
+})
 
 app.get(`/getempjobrole/:id`, (req, res) => {
   const val = [req.params.id];
