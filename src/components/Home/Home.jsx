@@ -2,6 +2,7 @@
 
 //EMPLOYEE IMPORTS
 
+import EmployeeNavBar from "../NavBar/EmployeeNavBar";
 //MANAGER IMPORTS
 import ManagerNavbar from "../NavBar/ManagerNavBar";
 
@@ -41,7 +42,11 @@ export default function Home() {
     case "employee":
       return (
         <div>
-          <a href="/Attendance">Attendance</a> <br></br>
+          <div className="EmployeeContainer" >
+
+          <EmployeeNavBar></EmployeeNavBar>
+          <a href="/Attendance">Attendance</a> 
+          <br></br>
           <a href="/Accolades">Accolades</a>
           <br></br>
           <a href="/PeerEvaluation">PeerEvaluation</a>
@@ -53,6 +58,7 @@ export default function Home() {
           <a href="/ReportForm">ReportForm</a>
           <br></br>
           <a href="/userguides">UserGuide</a>
+        </div>
         </div>
       );
     case "manager":
