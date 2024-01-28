@@ -37,23 +37,25 @@ app.get("/getstaffids", (req, res) => {
   });
 });
 
-// Get manager feedback by id
-app.get("/managerfeedback/:id", (req, res) => {
-  const managerFeedbackId = req.params.id;
+// Get scores
+app.get("/managerfeedback/score/:staffId", (req, res) => {
+  const staffId = req.params.staffId;
 
-  const sql = "SELECT staff_id FROM manager_feedback WHERE staff_id = ?";
-  db.query(sql, [managerFeedbackId], (err, data) => {
+  const sql = "SELECT score FROM manager_feedback WHERE staff_id = ?";
+  db.query(sql, [staffId], (err, data) => {
     if (err) {
-      console.error("Error fetching manager feedback:", err);
+      console.error("Error fetching manager feedback score:", err);
       return res.status(500).json({ error: "Internal server error" });
     }
 
     if (data.length === 0) {
-      return res.status(404).json({ error: "Manager feedback not found" });
+      return res
+        .status(404)
+        .json({ error: "Manager feedback not found for the given staff_id" });
     }
 
-    const staffId = data[0].staff_id; // Assuming staff_id is in the first row
-    return res.json({ staffId });
+    const managerFeedbackScore = data[0].score; // Assuming score is in the first row
+    return res.json({ managerFeedbackScore });
   });
 });
 
