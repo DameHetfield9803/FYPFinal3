@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useHistory, useParams } from "react-router-dom"; // Import useHistory and useParams hooks
 
 export default function UpdateEmployee() {
   const [employees, setEmployees] = useState([]);
-  const history = useHistory(); // Initialize useHistory
-  const { id } = useParams(); // Get id from route parameters
+  const [jobRoles, setJobRoles] = useState([]); // Change state variable name to jobRoles
+  const [selectedJobRole, setSelectedJobRole] = useState("");
+  const [selectedDepartment, setSelectedDepartment] = useState("");
+  const [selectedReportingTo, setSelectedReportingTo] = useState("");
 
-  // Define fetchEmployees function
   const fetchEmployees = async () => {
     try {
       const response = await axios.get("http://localhost:3001/getemployee");
@@ -18,8 +18,20 @@ export default function UpdateEmployee() {
   };
 
   useEffect(() => {
-    // Call fetchEmployees() when component mounts
     fetchEmployees();
+  }, []);
+
+  const fetchJobRoles = async () => {
+    try {
+      const response = await axios.get("http://localhost:3001/getjobroles");
+      setJobRoles(response.data); // Set jobRoles state with fetched data
+    } catch (error) {
+      console.error("Error fetching job roles: ", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchJobRoles();
   }, []);
 
   const handleUpdateJobRole = async (staffId, newJobRole) => {
@@ -28,44 +40,36 @@ export default function UpdateEmployee() {
         job_role: newJobRole,
         staff_id: staffId
       });
-      // Redirect or update state after successful update
+      alert("Job role updated successfully.");
     } catch (error) {
       console.error("Error updating job role: ", error);
+      alert("Failed to update job role.");
     }
   };
 
   const handleUpdateDepartment = async (staffId, newDepartmentId) => {
     try {
-      // Redirect to UpdateEmployeeDepartment component without changing any values
-      history.push(`/adminhome/${id}/updateemployee/updateemployeedepartment`);
+      await axios.put(`http://localhost:3001/updateempdepartment`, {
+        department_id: newDepartmentId,
+        staff_id: staffId
+      });
+      alert("Department updated successfully.");
     } catch (error) {
       console.error("Error updating department: ", error);
+      alert("Failed to update department.");
     }
   };
 
-  const handleReportingTo = async (staffId) => {
+  const handleReportingTo = async (staffId, newReportingTo) => {
     try {
-      // Redirect to UpdateEmployeeReportingTo component without changing any values
-      history.push(`/adminhome/${id}/updateemployee/updateemployeereportingto`);
+      await axios.put(`http://localhost:3001/updateempreportingto`, {
+        reporting_to: newReportingTo,
+        staff_id: staffId
+      });
+      alert("Reporting to updated successfully.");
     } catch (error) {
       console.error("Error updating reporting to: ", error);
-    }
-  };
-
-  // Empty function to handle button click without triggering functionality
-  const handleEmptyClick = () => {};
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const selectedStaffId = employees.find(emp => emp.staff_id === id)?.staff_id;
-      if (!selectedStaffId) {
-        console.error("Employee not found.");
-        return;
-      }
-      // Perform any necessary actions on form submission
-    } catch (error) {
-      console.error("Error submitting form: ", error);
+      alert("Failed to update reporting to.");
     }
   };
 
@@ -87,14 +91,46 @@ export default function UpdateEmployee() {
           {employees.map((employee) => (
             <tr key={employee.staff_id}>
               <td>{employee.staff_id}</td>
-              <td>{employee.name}</td>
-              <td>{employee.name}</td> {/* Display department name instead of ID */}
-              <td>{employee.job_role}</td> {/* Display job role */}
+              <td>{employee.staff_name}</td>
+              <td>{employee.department_id}</td>
+              <td>{employee.job_role}</td>
               <td>{employee.reporting_to}</td>
               <td>
-                <button onClick={() => handleUpdateJobRole(employee.staff_id, "New Job Role")}>Update Job Role</button>
-                <button onClick={() => handleUpdateDepartment(employee.staff_id, "New Department ID")}>Update Department</button>
-                <button onClick={() => handleReportingTo(employee.staff_id)}>Update Reporting To</button>
+                <select onChange={(e) => setSelectedJobRole(e.target.value)}>
+                  {/* Use jobRoles state for job role dropdown */}
+                  {jobRoles.map((role) => (
+                    <option key={role.job_role_id} value={role.job_role}>
+                      {role.job_role}
+                    </option>
+                  ))}
+                </select>
+                <button onClick={() => handleUpdateJobRole(employee.staff_id, selectedJobRole)}>
+                  Update Job Role
+                </button>
+              </td>
+              <td>
+                <select onChange={(e) => setSelectedDepartment(e.target.value)}>
+                  {employees.map((emp) => (
+                    <option key={emp.staff_id} value={emp.department_id}>
+                      {emp.department_id}
+                    </option>
+                  ))}
+                </select>
+                <button onClick={() => handleUpdateDepartment(employee.staff_id, selectedDepartment)}>
+                  Update Department
+                </button>
+              </td>
+              <td>
+                <select onChange={(e) => setSelectedReportingTo(e.target.value)}>
+                  {employees.map((emp) => (
+                    <option key={emp.staff_id} value={emp.staff_id}>
+                      {emp.staff_name}
+                    </option>
+                  ))}
+                </select>
+                <button onClick={() => handleUpdateJobRole(employee.staff_id, employee.job_role)}>
+                  Update Job Role
+                </button>
               </td>
             </tr>
           ))}

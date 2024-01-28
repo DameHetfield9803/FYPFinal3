@@ -1,52 +1,57 @@
 /* EmailAuto.css */
+
+/* Container for the email auto section */
 .email-auto-section {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0; /* Remove default margin to ensure full width */
-  }
-  
-  .email-auto-form {
-    background-color: #8287ce;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    height: 60vh;
-    width: 300px;
-  }
-  
-  /* Other styles remain the same */
-  
-  .email-auto-form-group {
-    margin-bottom: 15px;
-  }
-  
-  .email-auto-form label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-  }
-  
-  .email-auto-form input {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  .email-auto-btn {
-    background-color: #4caf50;
-    color: #fff;
-    padding: 10px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    width: 100%;
-  }
-  
-  .email-auto-btn:disabled {
-    background-color: #ddd;
-    cursor: not-allowed;
-  }
- 
+  display: flex; /* Use flexbox for layout */
+  justify-content: center; /* Center content horizontally */
+  align-items: center; /* Center content vertically */
+  height: 100vh; /* Set the height to 100% of the viewport height */
+  margin: 0; /* Remove default margin to ensure full width */
+}
+
+/* Form container within the email auto section */
+.email-auto-form {
+  background-color: #8287ce; /* Set background color */
+  padding: 20px; /* Add padding inside the form container */
+  border-radius: 8px; /* Rounded corners for the form container */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
+  height: 60vh; /* Set the height of the form container to 60% of the viewport height */
+  width: 300px; /* Set the width of the form container */
+}
+
+/* Form group within the form container */
+.email-auto-form-group {
+  margin-bottom: 15px; /* Add bottom margin for spacing between form groups */
+}
+
+/* Label styles within the form */
+.email-auto-form label {
+  display: block; /* Display labels as block elements */
+  margin-bottom: 5px; /* Add bottom margin for spacing */
+  font-weight: bold; /* Set font weight to bold */
+}
+
+/* Input styles within the form */
+.email-auto-form input {
+  width: 100%; /* Make the input element take up 100% of the container width */
+  padding: 8px; /* Add padding inside the input element */
+  border: 1px solid #ccc; /* Set border color and width */
+  border-radius: 4px; /* Rounded corners for the input element */
+}
+
+/* Button styles for the form submit button */
+.email-auto-btn {
+  background-color: #4caf50; /* Set background color for the button */
+  color: #fff; /* Set text color to white */
+  padding: 10px; /* Add padding inside the button */
+  border: none; /* Remove border */
+  border-radius: 4px; /* Rounded corners for the button */
+  cursor: pointer; /* Set cursor to pointer for interaction */
+  width: 100%; /* Make the button take up 100% of the container width */
+}
+
+/* Disabled state styles for the form submit button */
+.email-auto-btn:disabled {
+  background-color: #ddd; /* Set background color for the disabled state */
+  cursor: not-allowed; /* Set cursor to not-allowed for disabled state */
+}
