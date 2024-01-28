@@ -5,6 +5,7 @@ import axios from "axios";
 const AppraisalForm = () => {
   const [staffIds, setStaffIds] = useState([]);
   const [selectedStaffId, setSelectedStaffId] = useState("");
+  const [managerFeedbackScore, setManagerFeedbackScore] = useState(null);
 
   useEffect(() => {
     // Fetch staff IDs from the server using Axios
@@ -17,6 +18,20 @@ const AppraisalForm = () => {
         console.error("Error fetching staff IDs:", error);
       });
   }, []);
+
+  // Inside your React component (AppraisalForm.jsx)
+  useEffect(() => {
+    // Assuming selectedStaffId is the currently selected staff_id
+    axios
+      .get(`http://localhost:3001/managerfeedback/score/${selectedStaffId}`)
+      .then((response) => {
+        const feedbackScore = response.data.managerFeedbackScore;
+        setManagerFeedbackScore(feedbackScore);
+      })
+      .catch((error) => {
+        console.error("Error fetching manager feedback score:", error);
+      });
+  }, [selectedStaffId]); // Trigger the effect when selectedStaffId changes
 
   // return jsx
   return (
@@ -36,6 +51,11 @@ const AppraisalForm = () => {
           </option>
         ))}
       </select>
+
+      {/* Display Manager Feedback Score */}
+      {managerFeedbackScore !== null && (
+        <p>Manager Feedback Score: {managerFeedbackScore}</p>
+      )}
     </>
   );
 };
