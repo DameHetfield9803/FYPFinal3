@@ -37,7 +37,7 @@ import CreateEmployee from "../src/components/Employees/CreateEmployee";
 import ViewEmployee from "./components/Employees/ViewEmployees";
 import UpdateEmployee from "./components/Employees/UpdateEmployee";
 import DeleteEmployee from "./components/Employees/DeleteEmployees";
-//import UpdateEmployeeJobRole from ""
+import UpdateEmployeeJobRole from "./components/Employees/UpdateEmployeeJobRole"
 export default function App() {
   return (
     <Router>
@@ -65,6 +65,10 @@ export default function App() {
 
           <Route exact path="/adminhome/:id/updateemployee">
             <UpdateEmployee/>
+          </Route>
+          
+          <Route exact path="/adminhome/:id/updateemployee/updateemployeejobrole">
+            <UpdateEmployeeJobRole/>
           </Route>
 
           <Route exact path="/adminhome/:id/deleteemployee">

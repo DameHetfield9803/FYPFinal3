@@ -490,6 +490,14 @@ app.delete("/deleteaccolade", (req, res) => {
 
 // CRUD employee.job_role
 
+app.get("/getempcurrentjob/:id", (req,res) => {
+  const val = [req.body.staff_id]
+  db.query("SELECT job_role WHERE staff_id =?;", val , (err,data) => {
+    if(err) return res.json(err)
+    return res.json(data);
+  })
+})
+
 app.get("/getjobroles", (req,res) => {
   db.query("SELECT DISTINCT job_role FROM employee;" , (err,data)=> {
     if(err) return res.json(err)
