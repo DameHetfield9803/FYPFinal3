@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
+import Navbar from "../NavBar/HR Navbar/HRNavBar";
 import axios from "axios";
 
 const AppraisalForm = () => {
   const [staffIds, setStaffIds] = useState([]);
-  const [selectedStaffId, setSelectedStaffId] = useState(null);
+  const [selectedStaffId, setSelectedStaffId] = useState("");
 
   useEffect(() => {
     // Fetch staff IDs from the server using Axios
@@ -17,8 +18,10 @@ const AppraisalForm = () => {
       });
   }, []);
 
+  // return jsx
   return (
     <>
+      <Navbar />
       <h1>Performance Appraisal Form</h1>
       {/* Dropdown for Staff ID */}
       <label>Select Staff ID:</label>

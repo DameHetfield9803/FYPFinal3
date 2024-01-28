@@ -24,7 +24,7 @@ db.connect((err) => {
   console.log("MySQL successfully Connected...");
 });
 
-// Get staffid
+// Get staff ids
 app.get("/getstaffids", (req, res) => {
   const q = "SELECT staff_id FROM employee";
   db.query(q, (err, data) => {
@@ -34,6 +34,26 @@ app.get("/getstaffids", (req, res) => {
     }
     // Send staff IDs as JSON response within an object
     return res.json({ staffIds: data.map((row) => row.staff_id) });
+  });
+});
+
+// Get manager feedback by id
+app.get("/managerfeedback/:id", (req, res) => {
+  const managerFeedbackId = req.params.id;
+
+  const sql = "SELECT staff_id FROM manager_feedback WHERE staff_id = ?";
+  db.query(sql, [managerFeedbackId], (err, data) => {
+    if (err) {
+      console.error("Error fetching manager feedback:", err);
+      return res.status(500).json({ error: "Internal server error" });
+    }
+
+    if (data.length === 0) {
+      return res.status(404).json({ error: "Manager feedback not found" });
+    }
+
+    const staffId = data[0].staff_id; // Assuming staff_id is in the first row
+    return res.json({ staffId });
   });
 });
 
