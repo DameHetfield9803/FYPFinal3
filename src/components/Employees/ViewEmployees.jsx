@@ -32,7 +32,7 @@ export default function ViewEmployees() {
   const handleUpdate = (employeeId) => {
     try {
       // Redirect to UpdateEmployee component with the employeeId as parameter
-      history.push(`/updateemployee/${employeeId}`);
+      history.push(`/adminhome/${id}/updateemployee`);
     } catch (error) {
       console.error("Error redirecting to UpdateEmployee component: ", error);
     }
@@ -56,7 +56,7 @@ export default function ViewEmployees() {
           </thead>
           <tbody>
             {employees.map((employee) => (
-              <tr key={employee.id}>
+              <tr key={employee.staff_id}>
                 <td>{employee.staff_name}</td>
                 <td>{employee.reporting_to}</td>
                 <td>{employee.email}</td>
@@ -64,13 +64,13 @@ export default function ViewEmployees() {
                 <td className="mr-4">{employee.job_role} </td>
                 <td className="ml-4">
                   <button
-                    onClick={() => handleUpdate(employee.id)}
+                    onClick={() => handleUpdate(employee.staff_id)}
                     style={{ fontSize: "12px", padding: "5px 10px" }}
                   >
                     Update
                   </button>
                   <button
-                    onClick={() => handleDelete(employee.id)}
+                    onClick={() => handleDelete(employee.staff_id)}
                     style={{ fontSize: "12px", padding: "5px 10px" }}
                   >
                     Delete

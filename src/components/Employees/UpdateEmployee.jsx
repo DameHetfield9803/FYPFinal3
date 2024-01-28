@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useHistory, useParams } from "react-router-dom"; // Import useHistory and useParams hooks
 
 export default function UpdateEmployee() {
   const [employees, setEmployees] = useState([]);
+  const history = useHistory(); // Initialize useHistory
+  const { id } = useParams(); // Get id from route parameters
 
   // Define fetchEmployees function
   const fetchEmployees = async () => {
@@ -21,9 +24,11 @@ export default function UpdateEmployee() {
 
   const handleUpdateJobRole = async (staffId, newJobRole) => {
     try {
-      await axios.put("http://localhost:3001/updateempjobrole", { job_role: newJobRole, staff_id: staffId });
-      // Fetch updated employee list after updating job role
-      fetchEmployees();
+      await axios.put(`http://localhost:3001/updateempjobrole`, {
+        job_role: newJobRole,
+        staff_id: staffId
+      });
+      // Redirect or update state after successful update
     } catch (error) {
       console.error("Error updating job role: ", error);
     }
@@ -31,11 +36,36 @@ export default function UpdateEmployee() {
 
   const handleUpdateDepartment = async (staffId, newDepartmentId) => {
     try {
-      await axios.put("http://localhost:3001/updateempdepartment", { department_id: newDepartmentId, staff_id: staffId });
-      // Fetch updated employee list after updating department
-      fetchEmployees();
+      // Redirect to UpdateEmployeeDepartment component without changing any values
+      history.push(`/adminhome/${id}/updateemployee/updateemployeedepartment`);
     } catch (error) {
       console.error("Error updating department: ", error);
+    }
+  };
+
+  const handleReportingTo = async (staffId) => {
+    try {
+      // Redirect to UpdateEmployeeReportingTo component without changing any values
+      history.push(`/adminhome/${id}/updateemployee/updateemployeereportingto`);
+    } catch (error) {
+      console.error("Error updating reporting to: ", error);
+    }
+  };
+
+  // Empty function to handle button click without triggering functionality
+  const handleEmptyClick = () => {};
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const selectedStaffId = employees.find(emp => emp.staff_id === id)?.staff_id;
+      if (!selectedStaffId) {
+        console.error("Employee not found.");
+        return;
+      }
+      // Perform any necessary actions on form submission
+    } catch (error) {
+      console.error("Error submitting form: ", error);
     }
   };
 
@@ -64,6 +94,7 @@ export default function UpdateEmployee() {
               <td>
                 <button onClick={() => handleUpdateJobRole(employee.staff_id, "New Job Role")}>Update Job Role</button>
                 <button onClick={() => handleUpdateDepartment(employee.staff_id, "New Department ID")}>Update Department</button>
+                <button onClick={() => handleReportingTo(employee.staff_id)}>Update Reporting To</button>
               </td>
             </tr>
           ))}
