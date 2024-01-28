@@ -71,6 +71,8 @@ export default function Home() {
             <br></br>
             <a href="/Employee">Employee Table</a>
             <br></br>
+            <a href="/Email">Send Email Warning</a>
+            <br></br>
             <a href="/PeerEvaluation">PeerEvaluation</a>
             <br></br>
             <a href="/SelfEvaluation">SelfEvaluation</a>
