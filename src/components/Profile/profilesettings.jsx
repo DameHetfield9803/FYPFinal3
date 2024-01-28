@@ -6,6 +6,7 @@ import { useHistory } from "react-router-dom";
 import Navbar from "../NavBar/NavBar";
 
 const ProfileSettings = () => {
+  // Default profile information
   const defaultProfileInfo = {
     name: "User",
     department: "BMX",
@@ -14,6 +15,7 @@ const ProfileSettings = () => {
 
   const history = useHistory();
 
+  // Function to handle user logout
   const logout = async () => {
     try {
       await signOut(auth);
@@ -23,11 +25,13 @@ const ProfileSettings = () => {
     }
   };
 
+  // Default personal information
   const defaultPersonalInfo = {
     phone: "8888 8888",
     email: "usertsh@tsh.com",
   };
 
+  // State variables for editable personal information
   const [phone, setPhone] = useState(defaultPersonalInfo.phone);
   const [email, setEmail] = useState(defaultPersonalInfo.email);
   const [isEditing, setIsEditing] = useState(false);
@@ -41,10 +45,9 @@ const ProfileSettings = () => {
     console.log("Edited Email:", email);
   };
 
- 
-
   return (
     <div>
+      {/* Render the custom Navbar component. */}
       <Navbar></Navbar>
 
       <div className="profile-settings-container">
@@ -116,6 +119,8 @@ const ProfileSettings = () => {
             </button>
           </form>
         )}
+
+        {/* Button for user logout */}
         <button onClick={logout}>LOGOUT</button>
       </div>
     </div>

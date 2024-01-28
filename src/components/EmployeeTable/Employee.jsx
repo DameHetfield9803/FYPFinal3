@@ -11,6 +11,7 @@ export default function Employee() {
   const [jsonData] = useState(employeeData);
   const [filter, setFilter] = useState('');
 
+  // Function to handle user logout
   const logout = async () => {
     try {
       await signOut(auth);
@@ -20,8 +21,7 @@ export default function Employee() {
     }
   };
 
-
-
+  // Filter the employee data based on the filter input
   const filteredData = jsonData.filter((entry) => {
     const filterLowerCase = filter.toLowerCase();
 
@@ -42,9 +42,11 @@ export default function Employee() {
 
   return (
     <div>
+      {/* Render the custom Navbar component. */}
       <Navbar />
 
       <div className="container mt-3">
+        {/* Input for filtering employees */}
         <label htmlFor="filterInput" className="form-label">
           Filter by Department, Employee Name, or Batch Number:
         </label>
@@ -59,6 +61,7 @@ export default function Employee() {
       </div>
 
       <div className="container mt-3">
+        {/* Table displaying employee data */}
         <table className="table table-hover">
           <thead>
             <tr>
@@ -91,6 +94,7 @@ export default function Employee() {
       </div>
 
       <div className="container mt-3">
+        {/* Button for user logout */}
         <button className="btn btn-primary" onClick={logout}>
           Logout
         </button>
