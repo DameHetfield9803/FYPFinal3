@@ -1,30 +1,33 @@
+//HRHOMEPAGEENQUANVERSION
 import { Link } from "react-router-dom";
 import "./HRHomepage.css";
+import Dashboard from "../Dashboard/dashboard";
 
 export default function HRHomepage() {
   return (
     <>
-      <h1 className="HR-homepage-h1">Human Resource Dashboard</h1>
-      <div className="HR-homepage-container">
-        <Link to="/Attendance" className="HR-homepage-link">Attendance</Link> <br></br>
-        <Link to="/viewAccolades" className="HR-homepage-link">Accolades</Link>
+      <h1>Human Resource Dashboard</h1>
+      <div className="HR-container">
+        <Link to="/Attendance">Attendance</Link> <br></br>
+        <Link to="/viewAccolades">Accolades</Link>
         <br></br>
-        <Link to="/AppraisalForm" className="HR-homepage-link">AppraisalForm</Link>
+        <Link to="/AppraisalForm">AppraisalForm</Link>
         <br></br>
-        <Link to="/AppraisalItem" className="HR-homepage-link">AppraisalItem</Link>
+        <Link to="/AppraisalItem">AppraisalItem</Link>
         <br></br>
-        <Link to="/Employee" className="HR-homepage-link">Employee</Link>
+        <Link to="/Employee">Employee</Link>
         <br></br>
-        <Link to="/PeerEvaluation" className="HR-homepage-link">PeerEvaluation</Link>
+        <Link to="/PeerEvaluation">PeerEvaluation</Link>
         <br></br>
-        <Link to="/SelfEvaluation" className="HR-homepage-link">SelfEvaluation</Link>
+        <Link to="/SelfEvaluation">SelfEvaluation</Link>
         <br></br>
-        <Link to="/ReportForm" className="HR-homepage-link">ReportForm</Link>
+        <Link to="/ReportForm">ReportForm</Link>
         <br></br>
-        <Link to="/ManagerFeedback" className="HR-homepage-link">ManagerFeedback</Link>
+        <Link to="/ManagerFeedback">ManagerFeedback</Link>
         <br></br>
-        <Link href="/userguides" className="HR-homepage-link">UserGuide</Link>
+        <Link href="/userguides">UserGuide</Link>
         <br></br>
+        <Dashboard />
       </div>
     </>
   );
