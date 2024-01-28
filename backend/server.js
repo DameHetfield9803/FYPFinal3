@@ -24,7 +24,7 @@ db.connect((err) => {
   console.log("MySQL successfully Connected...");
 });
 
-// Get staff ids
+// Get staffid
 app.get("/getstaffids", (req, res) => {
   const q = "SELECT staff_id FROM employee";
   db.query(q, (err, data) => {
@@ -37,7 +37,7 @@ app.get("/getstaffids", (req, res) => {
   });
 });
 
-// Get scores
+// manager feedback score
 app.get("/managerfeedback/score/:staffId", (req, res) => {
   const staffId = req.params.staffId;
 
@@ -56,6 +56,50 @@ app.get("/managerfeedback/score/:staffId", (req, res) => {
 
     const managerFeedbackScore = data[0].score; // Assuming score is in the first row
     return res.json({ managerFeedbackScore });
+  });
+});
+
+// peer feedback score
+app.get("/peerfeedback/score/:staffId", (req, res) => {
+  const staffId = req.params.staffId;
+
+  const sql = "SELECT score FROM peer_feedback WHERE staff_id = ?";
+  db.query(sql, [staffId], (err, data) => {
+    if (err) {
+      console.error("Error fetching peer feedback score:", err);
+      return res.status(500).json({ error: "Internal server error" });
+    }
+
+    if (data.length === 0) {
+      return res
+        .status(404)
+        .json({ error: "Peer feedback not found for the given staff_id" });
+    }
+
+    const peerFeedbackScore = data[0].score; // Assuming score is in the first row
+    return res.json({ peerFeedbackScore });
+  });
+});
+
+// self feedback score
+app.get("/selffeedback/score/:staffId", (req, res) => {
+  const staffId = req.params.staffId;
+
+  const sql = "SELECT score FROM self_feedback WHERE staff_id = ?";
+  db.query(sql, [staffId], (err, data) => {
+    if (err) {
+      console.error("Error fetching self feedback score:", err);
+      return res.status(500).json({ error: "Internal server error" });
+    }
+
+    if (data.length === 0) {
+      return res
+        .status(404)
+        .json({ error: "Self feedback not found for the given staff_id" });
+    }
+
+    const selfFeedbackScore = data[0].score; // Assuming score is in the first row
+    return res.json({ selfFeedbackScore });
   });
 });
 
@@ -312,14 +356,15 @@ app.get("/selffeedback", (req, res) => {
 });
 // Update self feedback (DAMIEN) (done)
 
-app.put("/updateselffeedback/:id", (req, res) => {
-  const { feedback_text, staff_id, op1, op2, op3, op4, op5, op6 } = req.body;
-  const self_feedback_id = req.params.id;
-
-  const vals = [feedback_text, op1, op2, op3, op4, op5, op6, self_feedback_id, staff_id];
-  
+app.put("/selffeedback", (req, res) => {
+  const vals = [
+    req.body.feedback_text,
+    req.body.self_feedback_id,
+    req.body.staff_id,
+  ]; // retrieving from front end
   db.query(
-    "UPDATE self_feedback SET feedback_text = ?, op1 = ?, op2 = ?, op3 = ?, op4 = ?, op5 = ?, op6 = ? WHERE self_feedback_id = ? AND staff_id = ?;",
+    "UPDATE self_feedback SET feedback_text = ? WHERE self_feedback_id = ? AND staff_id = ?;",
+    //Remove staff id
     vals,
     (err, data) => {
       if (err) return res.json(err);
@@ -327,7 +372,6 @@ app.put("/updateselffeedback/:id", (req, res) => {
     }
   );
 });
-
 //DONE Delete self feedback (DANIEL)
 
 app.delete("/selffeedback", (req, res) => {
