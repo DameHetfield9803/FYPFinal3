@@ -24,6 +24,19 @@ db.connect((err) => {
   console.log("MySQL successfully Connected...");
 });
 
+// Get staffid
+app.get("/getstaffids", (req, res) => {
+  const q = "SELECT staff_id FROM employee";
+  db.query(q, (err, data) => {
+    if (err) {
+      console.error("Error fetching staff IDs:", err);
+      return res.status(500).json({ error: "Internal server error" });
+    }
+    // Send staff IDs as JSON response within an object
+    return res.json({ staffIds: data.map((row) => row.staff_id) });
+  });
+});
+
 //------------------------------------------
 // Create employee (DAMIEN) (done)
 app.post("/createemployee", (req, res) => {

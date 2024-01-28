@@ -27,7 +27,6 @@ export default function HRHomepage() {
         <br></br>
         <Link href="/userguides">UserGuide</Link>
         <br></br>
-        <Dashboard />
       </div>
     </>
   );
