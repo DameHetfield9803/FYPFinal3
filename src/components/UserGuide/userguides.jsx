@@ -46,11 +46,11 @@ export default function UserGuides() {
   // Define an array of video options with titles, URLs, and descriptions.
   const videoOptions = [
     { id: 1, title: '1.) How To Edit User Profile', url: 'https://youtu.be/83f4KX3FR7M', description: 'Login > Homepage > My Profile > Edit > Save Changes' },
-    { id: 2, title: '2.) How To Provide Peer and Self Evaluation (Employee)', url: 'https://youtu.be/83f4KX3FR7M', description: 'Login > Homepage > Peer/Self Evaluation > Input Choices "Strongly Agree - Strongly Disagree" > Save Changes' },
-    { id: 3, title: '3.) How to Provide Manager Feedback(Employee)', url: 'https://youtu.be/83f4KX3FR7M', description: 'Login > Homepage > Manager Feedback > Edit > Input Choices "Strongly Agree - Strongly Disagree" > Save Changes' },
-    { id: 4, title: '4.) How to add in your Accolades (Employee)', url: 'https://youtu.be/83f4KX3FR7M', description: 'Login > Homepage > Accolades (In your navigation bar) > Input Items > Submit' },
+    { id: 2, title: '2.) How To Provide Self Evaluation', url: 'https://youtu.be/DUEMOE-sXtc', description: 'Login > Homepage > Peer/Self Evaluation > Input Choices "Strongly Agree - Strongly Disagree" > Save Changes' },
+    { id: 3, title: '3.) How to Provide Manager Feedback ', url: 'https://youtu.be/TWDYcdmFJz0', description: 'Login > Homepage > Manager Feedback > Edit > Input Choices "Strongly Agree - Strongly Disagree" > Save Changes' },
+    { id: 4, title: '4.) How to add in your Accolades', url: 'https://youtu.be/vVa2TxkZ-uo', description: 'Login > Homepage > Accolades (In your navigation bar) > Input Items > Submit' },
     { id: 5, title: '5.) How To Report An Issue', url: 'https://youtu.be/83f4KX3FR7M', description: 'Login > Homepage > Report Form > Input name, email and bug description > Submit' },
-    { id: 6, title: '6.) How to make an Appraisal Form (Human Resource)', url: 'https://youtu.be/83f4KX3FR7M', },
+    { id: 6, title: '6.) How to Submit Peer Feedback', url: 'https://youtu.be/oJlnMibr5UQ', },
     { id: 7, title: '7.) How to view Employee Table (Human Resource/Admin/Manager)', url: 'https://youtu.be/83f4KX3FR7M', },
     { id: 8, title: '8.) How to view Attendance Table (Human Resource/Admin/Manager)', url: 'https://youtu.be/83f4KX3FR7M', },
     { id: 9, title: '9.) How to fill in Appraisal Form (Manager)', url: 'https://youtu.be/83f4KX3FR7M', },

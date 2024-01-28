@@ -37,7 +37,6 @@ import CreateEmployee from "../src/components/Employees/CreateEmployee";
 import ViewEmployee from "./components/Employees/ViewEmployees";
 import UpdateEmployee from "./components/Employees/UpdateEmployee";
 import DeleteEmployee from "./components/Employees/DeleteEmployees";
-//import UpdateEmployeeJobRole from ""
 export default function App() {
   return (
     <Router>

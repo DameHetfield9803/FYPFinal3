@@ -7,8 +7,8 @@ import EmployeeNavBar from "../NavBar/EmployeeNavBar";
 import ManagerNavbar from "../NavBar/ManagerNavBar";
 
 //HR IMPORTS
-import HRNavbar from "../NavBar/HRNavBar";
-import HRHomepage from "./HRHomepage";
+import HRNavbar from "../NavBar/HR Navbar/HRNavBar";
+import HRHomepage from "../Home/HR Homepage/HRHomepage";
 
 //ADMIN IMPORTS
 
@@ -42,49 +42,50 @@ export default function Home() {
     case "employee":
       return (
         <div>
-          <div className="EmployeeContainer" >
-
-          <EmployeeNavBar></EmployeeNavBar>
-          <a href="/Attendance">Attendance</a> 
-          <br></br>
-          <a href="/Accolades">Accolades</a>
-          <br></br>
-          <a href="/PeerEvaluation">PeerEvaluation</a>
-          <br></br>
-          <a href="/SelfEvaluation">SelfEvaluation</a>
-          <br></br>
-          <a href="/ManagerFeedback">ManagerFeedback</a>
-          <br></br>
-          <a href="/ReportForm">ReportForm</a>
-          <br></br>
-          <a href="/userguides">UserGuide</a>
-        </div>
+          <div className="EmployeeContainer">
+            <EmployeeNavBar></EmployeeNavBar>
+            <a href="/Attendance">Attendance</a>
+            <br></br>
+            <a href="/Accolades">Accolades</a>
+            <br></br>
+            <a href="/PeerEvaluation">PeerEvaluation</a>
+            <br></br>
+            <a href="/SelfEvaluation">SelfEvaluation</a>
+            <br></br>
+            <a href="/ManagerFeedback">ManagerFeedback</a>
+            <br></br>
+            <a href="/ReportForm">ReportForm</a>
+            <br></br>
+            <a href="/userguides">UserGuide</a>
+          </div>
         </div>
       );
     case "manager":
       return (
         <div>
           <ManagerNavbar></ManagerNavbar>
-        <div className="ManagerContainer" >
-          <strong>Manager</strong>
-          <a href="/Attendance">Attendance</a> <br></br>
-          <a href="/AppraisalForm">AppraisalForm</a>
-          <br></br>
-          <a href="/Employee">Employee Table</a>
-          <br></br>
-          <a href="/PeerEvaluation">PeerEvaluation</a>
-          <br></br>
-          <a href="/SelfEvaluation">SelfEvaluation</a>
-          <br></br>
-          <a href="/ReportForm">ReportForm</a>
-          <br></br>
-          <a href="/userguides">UserGuide</a>
-          <br></br>
-          <a href="/ManagerFeedback">ManagerFeedback</a>
-          <br></br>
-          <a href="/feedbacklist">ViewManagerFeedbackList</a>
-          <br></br>
-        </div>
+          <div className="ManagerContainer">
+            <strong>Manager</strong>
+            <a href="/Attendance">Attendance</a> <br></br>
+            <a href="/AppraisalForm">AppraisalForm</a>
+            <br></br>
+            <a href="/Employee">Employee Table</a>
+            <br></br>
+            <a href="/Email">Send Email</a>
+            <br></br>
+            <a href="/PeerEvaluation">PeerEvaluation</a>
+            <br></br>
+            <a href="/SelfEvaluation">SelfEvaluation</a>
+            <br></br>
+            <a href="/ReportForm">ReportForm</a>
+            <br></br>
+            <a href="/userguides">UserGuide</a>
+            <br></br>
+            <a href="/ManagerFeedback">ManagerFeedback</a>
+            <br></br>
+            <a href="/feedbacklist">ViewManagerFeedbackList</a>
+            <br></br>
+          </div>
         </div>
       );
     case "admin":
