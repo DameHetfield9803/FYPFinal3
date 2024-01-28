@@ -1,4 +1,4 @@
-// HR Homepage
+// Employee Homepage
 import { Link } from "react-router-dom";
 import React from "react";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
@@ -10,13 +10,13 @@ export default function Home() {
 
   return (
     <div className="Employee-container">
+      <EmployeeNavBar></EmployeeNavBar>
       <strong>Employee</strong>
-      <Link to="/Attendance">Attendance</Link> <br></br>
+      <Link to="/Attendance">Attendance</Link>
+      <br></br>
       <Link to="/Accolades">Accolades</Link>
       <br></br>
-      <br></br>
       <Link to="/AppraisalItem">AppraisalItem</Link>
-      <br></br>
       <br></br>
       <Link to="/PeerEvaluation">PeerEvaluation</Link>
       <br></br>

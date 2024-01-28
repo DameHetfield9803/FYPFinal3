@@ -513,6 +513,14 @@ app.get(`/getempjobrole/:id`, (req, res) => {
   );
 }); // Done Firdaus
 
+app.put("/updateempreportingto", (req,res) => {
+  const vals = [req.body.reporting_to, req.body.staff_id]
+  db.query("UPDATE employee SET reporting_to =? WHERE staff_id=?;" , vals, (err,data) => {
+    if(err) return res.json(err);
+    return res.json(data);
+  })
+})
+
 app.put(`/updateempjobrole`, (req, res) => {
   const vals = [req.body.job_role, req.body.staff_id];
   db.query(

@@ -34,6 +34,10 @@ import SelfEvalList from "./components/SelfEvaluation/SelfEvalList";
 import ManagerNavbar from "./components/NavBar/ManagerNavBar";
 import AdminHome from "./admin/adminHome";
 import CreateEmployee from "../src/components/Employees/CreateEmployee";
+import ViewEmployee from "./components/Employees/ViewEmployees";
+import UpdateEmployee from "./components/Employees/UpdateEmployee";
+import DeleteEmployee from "./components/Employees/DeleteEmployees";
+//import UpdateEmployeeJobRole from ""
 export default function App() {
   return (
     <Router>
@@ -53,6 +57,18 @@ export default function App() {
 
           <Route exact path = "/adminhome/:id/createemployee">
             <CreateEmployee/>
+          </Route>
+
+          <Route exact path="/adminhome/:id/viewemployee">
+            <ViewEmployee/>
+          </Route>
+
+          <Route exact path="/adminhome/:id/updateemployee">
+            <UpdateEmployee/>
+          </Route>
+
+          <Route exact path="/adminhome/:id/deleteemployee">
+            <DeleteEmployee/>
           </Route>
 
           <Route exact path="/viewaccolades">

@@ -1,6 +1,18 @@
 // import { Link } from "react-router-dom";
+
+//EMPLOYEE IMPORTS
+
+import EmployeeNavBar from "../NavBar/EmployeeNavBar";
+//MANAGER IMPORTS
+import ManagerNavbar from "../NavBar/ManagerNavBar";
+
+//HR IMPORTS
 import HRNavbar from "../NavBar/HRNavBar";
 import HRHomepage from "./HRHomepage";
+
+//ADMIN IMPORTS
+
+//Other Imports
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import "./Home.css";
@@ -30,7 +42,11 @@ export default function Home() {
     case "employee":
       return (
         <div>
-          <a href="/Attendance">Attendance</a> <br></br>
+          <div className="EmployeeContainer" >
+
+          <EmployeeNavBar></EmployeeNavBar>
+          <a href="/Attendance">Attendance</a> 
+          <br></br>
           <a href="/Accolades">Accolades</a>
           <br></br>
           <a href="/PeerEvaluation">PeerEvaluation</a>
@@ -43,10 +59,13 @@ export default function Home() {
           <br></br>
           <a href="/userguides">UserGuide</a>
         </div>
+        </div>
       );
     case "manager":
       return (
         <div>
+          <ManagerNavbar></ManagerNavbar>
+        <div className="ManagerContainer" >
           <strong>Manager</strong>
           <a href="/Attendance">Attendance</a> <br></br>
           <a href="/AppraisalForm">AppraisalForm</a>
@@ -65,6 +84,7 @@ export default function Home() {
           <br></br>
           <a href="/feedbacklist">ViewManagerFeedbackList</a>
           <br></br>
+        </div>
         </div>
       );
     case "admin":

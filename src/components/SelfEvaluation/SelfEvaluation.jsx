@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Navbar from "../NavBar/NavBar";
 import axios from "axios";
 import "./SelfEvaluation.css";
+import { useHistory } from "react-router-dom";
 // import moment from "moment";
 
 export default function SelfEvaluation() {
@@ -29,6 +30,8 @@ export default function SelfEvaluation() {
       setValidStaffIds(ids);
     });
   }, []);
+
+  const history = useHistory();
 
   // Helper Functions
   const validateForm = () => {
@@ -82,8 +85,7 @@ export default function SelfEvaluation() {
         })
 
         .then(() => {
-          console.log("Successfully added to database!");
-          window.alert("Successfully Added!");
+          history.push("/selfevaluationsuccess");
         })
         .catch((error) => {
           console.error("Error: ", error);
