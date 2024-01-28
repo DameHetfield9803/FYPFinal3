@@ -7,7 +7,7 @@ import ManagerNavbar from "../NavBar/ManagerNavBar";
 
 export default function ManagerFeedback() {
   // React hooks
-  const [staffId, setStaffId] = useState(null);
+  const [staffId, setStaffId] = useState("");
   const [op1, setOp1] = useState(0);
   const [op2, setOp2] = useState(0);
   const [op3, setOp3] = useState(0);
@@ -43,7 +43,12 @@ export default function ManagerFeedback() {
     const errors = {};
 
     // Validate staffId
-    if (!staffId || isNaN(staffId) || parseInt(staffId) <= 0) {
+    if (
+      !staffId ||
+      staffId === "" ||
+      isNaN(staffId) ||
+      parseInt(staffId) <= 0
+    ) {
       errors.staffId = "Staff ID is required and must be a positive integer";
     } else if (!validStaffIds.includes(parseInt(staffId))) {
       errors.staffId = "Staff ID not found in the database";

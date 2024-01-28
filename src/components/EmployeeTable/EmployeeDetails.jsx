@@ -4,6 +4,7 @@ import './EmployeeDetails.css';
 
 
 const EmployeeDetails = ({ match }) => {
+    // State to store the selected employee details
     const [employee, setEmployee] = useState(null);
 
     useEffect(() => {
@@ -14,13 +15,13 @@ const EmployeeDetails = ({ match }) => {
         // Update the state with the selected employee details
         setEmployee(selectedEmployee);
     }, [match.params.id]);
-
+    // If employee details are not yet available, display a loading indicator
     if (!employee) {
-        return <div>Loading...</div>; // You can add a loading indicator here
+        return <div>Loading...</div>; // Loading indicator
     }
 
     return (
-    
+
         <div className="centrecontainer" >
             <h2>Employee Details</h2>
             <ul>
@@ -36,11 +37,10 @@ const EmployeeDetails = ({ match }) => {
                 <li>
                     <strong>Emp Name:</strong> {employee['Emp Name']}
                 </li>
-                {/* Add more details as needed */}
             </ul>
         </div>
-     
-       
+
+
     );
 };
 

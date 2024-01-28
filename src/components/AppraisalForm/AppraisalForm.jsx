@@ -6,6 +6,10 @@ const AppraisalForm = () => {
   const [staffIds, setStaffIds] = useState([]);
   const [selectedStaffId, setSelectedStaffId] = useState("");
   const [managerFeedbackScore, setManagerFeedbackScore] = useState(null);
+  const [peerFeedbackScore, setPeerFeedbackScore] = useState(null);
+  const [selfFeedbackScore, setSelfFeedbackScore] = useState(null);
+  // const [accoladesScore, setAccoladesScore] = useState(null);
+  // const [attendanceScore, setAttendanceScore] = useState(null);
 
   useEffect(() => {
     // Fetch staff IDs from the server using Axios
@@ -19,7 +23,7 @@ const AppraisalForm = () => {
       });
   }, []);
 
-  // Inside your React component (AppraisalForm.jsx)
+  // Manager Feedback score
   useEffect(() => {
     // Assuming selectedStaffId is the currently selected staff_id
     axios
@@ -33,7 +37,32 @@ const AppraisalForm = () => {
       });
   }, [selectedStaffId]); // Trigger the effect when selectedStaffId changes
 
-  // return jsx
+  // Peer Feedback score
+  useEffect(() => {
+    axios
+      .get(`http://localhost:3001/peerfeedback/score/${selectedStaffId}`)
+      .then((response) => {
+        const feedbackScore = response.data.peerFeedbackScore;
+        setPeerFeedbackScore(feedbackScore);
+      })
+      .catch((error) => {
+        console.error("Error fetching peer feedback score:", error);
+      });
+  }, [selectedStaffId]); // Trigger the effect when selectedStaffId changes
+
+  // Self Feedback score
+  useEffect(() => {
+    axios
+      .get(`http://localhost:3001/selffeedback/score/${selectedStaffId}`)
+      .then((response) => {
+        const feedbackScore = response.data.selfFeedbackScore;
+        setSelfFeedbackScore(feedbackScore);
+      })
+      .catch((error) => {
+        console.error("Error fetching self feedback score:", error);
+      });
+  }, [selectedStaffId]); // Trigger the effect when selectedStaffId changes
+
   return (
     <>
       <Navbar />
@@ -55,6 +84,14 @@ const AppraisalForm = () => {
       {/* Display Manager Feedback Score */}
       {managerFeedbackScore !== null && (
         <p>Manager Feedback Score: {managerFeedbackScore}</p>
+      )}
+      {/* Display Peer Feedback Score */}
+      {peerFeedbackScore !== null && (
+        <p>Peer Feedback Score: {peerFeedbackScore}</p>
+      )}
+      {/* Display Self Feedback Score */}
+      {selfFeedbackScore !== null && (
+        <p>Self Feedback Score: {selfFeedbackScore}</p>
       )}
     </>
   );
