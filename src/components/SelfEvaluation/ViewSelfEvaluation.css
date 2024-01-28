@@ -1,0 +1,70 @@
+/* ViewSelfEvaluation.css */
+
+.self-evaluation-container {
+    margin: 20px;
+  }
+  
+  .self-evaluation-container h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .self-evaluation-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  
+  .self-evaluation-table th,
+  .self-evaluation-table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+  }
+  
+  .self-evaluation-table th {
+    background-color: #f2f2f2;
+  }
+  
+  .self-evaluation-table tr:hover {
+    background-color: #f2f2f2;
+  }
+  
+  .self-evaluation-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .self-evaluation-popup p {
+    margin-bottom: 20px;
+  }
+  
+  .self-evaluation-popup button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .self-evaluation-popup button:hover {
+    background-color: #0056b3;
+  }
+  
+  .self-evaluation-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .self-evaluation-list li {
+    margin-bottom: 10px;
+  }
+  
