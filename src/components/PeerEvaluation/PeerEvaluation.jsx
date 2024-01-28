@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import "./PeerEvaluation.css";
-import Navbar from "../NavBar/NavBar";
+import EmployeeNavBar from '../NavBar/EmployeeNavBar';
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 
@@ -89,7 +89,7 @@ export default function PeerEvaluation() {
 
   return (
     <div>
-      <Navbar></Navbar>
+      <EmployeeNavBar></EmployeeNavBar>
       <div className="App">
         <form method="post" action="localhost:3001/peerfeedback">
           <div className="container">
@@ -97,7 +97,7 @@ export default function PeerEvaluation() {
             <b>
               {" "}
               <p className="mt-3">
-                (Lowest Rating: 1, Neutral : 3, Highest Rating: 5)
+              (1:Strongly_Disagree , 2:Disagree , 3:Neutral , 4:Agree , 5:Strongly_Agree)
               </p>
             </b>
 

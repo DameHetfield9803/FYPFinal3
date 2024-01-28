@@ -241,15 +241,37 @@ app.get("/peerfeedback", (req, res) => {
 });
 // Update peer feedback (DAMIEN) (done)
 
-app.put("/peerfeedback", (req, res) => {
+app.put("/peerfeedback/:id", (req, res) => {
+  const { id } = req.params;
+  const {
+    date,
+    feedback_text,
+    staff_id,
+    op1,
+    op2,
+    op3,
+    op4,
+    op5,
+    op6,
+    op7
+  } = req.body;
+
   const vals = [
-    req.body.date,
-    req.body.feedback_text,
-    req.body.staff_id,
-    req.body.peer_feedback_id,
+    date,
+    feedback_text,
+    staff_id,
+    op1,
+    op2,
+    op3,
+    op4,
+    op5,
+    op6,
+    op7,
+    id  // Include the id in the values array
   ];
+
   db.query(
-    "UPDATE `peerfeedback` SET `date` = (?), `feedback_text` = (?), `staff_id` = (?) WHERE `peer_feedback_id` = (?);",
+    "UPDATE `peer_feedback` SET `date` = (?), `feedback_text` = (?), `staff_id` = (?), `op1` = (?), `op2` = (?), `op3` = (?), `op4` = (?), `op5` = (?), `op6` = (?), `op7` = (?) WHERE `peer_feedback_id` = (?);",
     vals,
     (err, data) => {
       if (err) return res.json(err);
@@ -257,6 +279,8 @@ app.put("/peerfeedback", (req, res) => {
     }
   );
 });
+
+
 
 //DONE Delete peer feedback (En Quan)
 app.delete("/peerfeedback", (req, res) => {
@@ -302,6 +326,7 @@ app.post("/createselffeedback", (req, res) => {
     }
   );
 });
+
 // Read self feedback (DANIEL) (Done)
 app.get("/selffeedback", (req, res) => {
   db.query("SELECT * FROM self_feedback;", (err, data) => {

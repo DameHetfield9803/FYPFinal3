@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Navbar from "../NavBar/NavBar";
+import EmployeeNavBar from '../NavBar/EmployeeNavBar';
 import axios from "axios";
 import "./SelfEvaluation.css";
 import { useHistory } from "react-router-dom";
@@ -95,13 +95,13 @@ export default function SelfEvaluation() {
 
   return (
     <div className="App">
-      <Navbar />
+      <EmployeeNavBar></EmployeeNavBar>
       <div className="container">
         <h1 className="mt-3">Self Evaluation</h1>
         <b>
           {" "}
           <p className="mt-3">
-            (Lowest Rating: 1, Neutral : 3, Highest Rating: 5)
+            (1:Strongly_Disagree , 2:Disagree , 3:Neutral , 4:Agree , 5:Strongly_Agree)
           </p>
           {/* Include staff_id and submission_date here */}
           <label htmlFor="staffId">Staff ID:</label>
