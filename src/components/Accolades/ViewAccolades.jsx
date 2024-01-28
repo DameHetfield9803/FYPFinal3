@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./ViewAccolades.css";
+import EmployeeNavBar from '../NavBar/EmployeeNavBar';
 
 const ViewAccolades = () => {
   const [accolades, setAccolades] = useState([]);
@@ -96,6 +97,7 @@ const ViewAccolades = () => {
 
   return (
     <div>
+      <EmployeeNavBar></EmployeeNavBar>
       <h1>Overall Accolades</h1>
       {loading && <p>Loading...</p>}
       {error && <p>{error}</p>}
