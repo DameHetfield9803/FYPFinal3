@@ -73,12 +73,12 @@ app.put("/updateemployee", (req, res) => {
   });
 });
 
-app.get("/getstaffname", (req,res) => {
-  db.query("SELECT staff_name FROM employee;", (err,data) => {
-    if(err) return res.json(err)
-    return res.json(data)
-  })
-})
+app.get("/getstaffname", (req, res) => {
+  db.query("SELECT staff_name FROM employee;", (err, data) => {
+    if (err) return res.json(err);
+    return res.json(data);
+  });
+});
 
 // Delete employee (DAMIEN) (done)
 app.delete("/deleteemployee", (req, res) => {
@@ -490,12 +490,12 @@ app.delete("/deleteaccolade", (req, res) => {
 
 // CRUD employee.job_role
 
-app.get("/getjobroles", (req,res) => {
-  db.query("SELECT DISTINCT job_role FROM employee;" , (err,data)=> {
-    if(err) return res.json(err)
-    return res.json(data)
-  })
-})
+app.get("/getjobroles", (req, res) => {
+  db.query("SELECT DISTINCT job_role FROM employee;", (err, data) => {
+    if (err) return res.json(err);
+    return res.json(data);
+  });
+});
 
 app.get(`/getempjobrole/:id`, (req, res) => {
   const val = [req.params.id];
@@ -513,13 +513,17 @@ app.get(`/getempjobrole/:id`, (req, res) => {
   );
 }); // Done Firdaus
 
-app.put("/updateempreportingto", (req,res) => {
-  const vals = [req.body.reporting_to, req.body.staff_id]
-  db.query("UPDATE employee SET reporting_to =? WHERE staff_id=?;" , vals, (err,data) => {
-    if(err) return res.json(err);
-    return res.json(data);
-  })
-})
+app.put("/updateempreportingto", (req, res) => {
+  const vals = [req.body.reporting_to, req.body.staff_id];
+  db.query(
+    "UPDATE employee SET reporting_to =? WHERE staff_id=?;",
+    vals,
+    (err, data) => {
+      if (err) return res.json(err);
+      return res.json(data);
+    }
+  );
+});
 
 app.put(`/updateempjobrole`, (req, res) => {
   const vals = [req.body.job_role, req.body.staff_id];
