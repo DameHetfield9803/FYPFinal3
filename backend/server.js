@@ -81,7 +81,7 @@ app.post("/createemployee", (req, res) => {
 
 //DONE Read employee (EN QUAN)
 app.get("/getemployee", (req, res) => {
-  const q = "SELECT * FROM employee";
+  const q = "SELECT DISTINCT * FROM employee";
   db.query(q, (err, data) => {
     if (err) return res.json(err);
     return res.json(data);
@@ -139,7 +139,7 @@ app.post("/department", (req, res) => {
 });
 // Read department (DAMIEN) (done)
 app.get("/getdepartment", (req, res) => {
-  const q = "SELECT * FROM department;";
+  const q = "SELECT DISTINCT department_id FROM department;";
   db.query(q, (err, data) => {
     if (err) return res.json(err);
     return res.json(data);
@@ -531,6 +531,14 @@ app.get("/getjobroles", (req, res) => {
     return res.json(data);
   });
 });
+
+app.put("/updateempjobrole", (req,res) =>{
+  const vals = [req.body.job_role, req.body.staff_id];
+  db.query("UPDATE employee SET job_role=? WHERE staff_id=?;", vals , (err,data) => {
+    if(err) return res.json(err);
+    return res.json(data);
+  });
+})
 
 app.get(`/getempjobrole/:id`, (req, res) => {
   const val = [req.params.id];
