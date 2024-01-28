@@ -11,7 +11,7 @@ import Attendance from "./components/Attendance/Attendance";
 import ManagerFeedback from "./components/ManagerFeedback/ManagerFeedback";
 import AppraisalForm from "./components/AppraisalForm/AppraisalForm";
 import Profile from "./components/Profile/profilesettings";
-import AppraisalItem from "./components/AppraisalItem/AppraisalItem";
+import AppraisalItem from "./components/AppraisalItem/CreateAppraisalItem";
 import ReportForm from "./components/ReportForm/reporterror";
 import EmpTab from "./components/EmployeeTable/Employee";
 import UserGuide from "./components/UserGuide/userguides";
@@ -37,6 +37,7 @@ import CreateEmployee from "../src/components/Employees/CreateEmployee";
 import ViewEmployee from "./components/Employees/ViewEmployees";
 import UpdateEmployee from "./components/Employees/UpdateEmployee";
 import DeleteEmployee from "./components/Employees/DeleteEmployees";
+import CreateAppraisalItem from "./components/AppraisalItem/CreateAppraisalItem";
 export default function App() {
   return (
     <Router>
@@ -68,6 +69,10 @@ export default function App() {
 
           <Route exact path="/adminhome/:id/deleteemployee">
             <DeleteEmployee/>
+          </Route>
+
+          <Route exact path = "/adminhome/:id/createappraisalitem">
+            <CreateAppraisalItem/>
           </Route>
 
           <Route exact path="/viewaccolades">
