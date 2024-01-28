@@ -277,15 +277,14 @@ app.get("/selffeedback", (req, res) => {
 });
 // Update self feedback (DAMIEN) (done)
 
-app.put("/selffeedback", (req, res) => {
-  const vals = [
-    req.body.feedback_text,
-    req.body.self_feedback_id,
-    req.body.staff_id,
-  ]; // retrieving from front end
+app.put("/updateselffeedback/:id", (req, res) => {
+  const { feedback_text, staff_id, op1, op2, op3, op4, op5, op6 } = req.body;
+  const self_feedback_id = req.params.id;
+
+  const vals = [feedback_text, op1, op2, op3, op4, op5, op6, self_feedback_id, staff_id];
+  
   db.query(
-    "UPDATE self_feedback SET feedback_text = ? WHERE self_feedback_id = ? AND staff_id = ?;",
-    //Remove staff id
+    "UPDATE self_feedback SET feedback_text = ?, op1 = ?, op2 = ?, op3 = ?, op4 = ?, op5 = ?, op6 = ? WHERE self_feedback_id = ? AND staff_id = ?;",
     vals,
     (err, data) => {
       if (err) return res.json(err);
@@ -293,6 +292,7 @@ app.put("/selffeedback", (req, res) => {
     }
   );
 });
+
 //DONE Delete self feedback (DANIEL)
 
 app.delete("/selffeedback", (req, res) => {

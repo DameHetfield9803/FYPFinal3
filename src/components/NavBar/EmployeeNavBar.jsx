@@ -67,6 +67,7 @@ export default function Navbar() {
             <div className="dropdown-content">
               {/* Your custom links for Self Evaluation dropdown */}
               <a href="SelfEvaluation">Do Self Evaluation</a>
+              <a href="selfevaluationlist">View Self Evaluation</a>
             </div>
           )}
         </div>

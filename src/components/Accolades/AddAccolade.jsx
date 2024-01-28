@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./AddAccolade.css";
-import Navbar from '../NavBar/NavBar';
+import EmployeeNavBar from '../NavBar/EmployeeNavBar';
 import { useHistory } from "react-router-dom";
 
 const AddAccolade = () => {
@@ -72,7 +72,7 @@ const AddAccolade = () => {
 
   return (
     <div>
-      <Navbar />
+      <EmployeeNavBar></EmployeeNavBar>
       <h1>Add Accolade</h1>
       <form onSubmit={handleSubmit}>
         <label>
