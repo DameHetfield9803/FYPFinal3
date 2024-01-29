@@ -22,7 +22,6 @@ import AttendanceSummary from "./components/Attendance/Attendancesummary";
 import EmailAutomate from "./components/Email/EmailAutomate";
 import ViewAccolades from "./components/Accolades/ViewAccolades";
 import ViewFeedbackList from "./components/ManagerFeedback/ManagerFeedbackList";
-import UpdateFeedback from "./components/ManagerFeedback/UpdateManagerFeedback";
 import ManagerFeedbackSuccess from "./components/ManagerFeedback/ManagerFeedbackSuccess";
 import PeerFeedbackList from "./components/PeerEvaluation/PeerEvalList";
 import AddAccolade from "./components/Accolades/AddAccolade";
@@ -167,10 +166,6 @@ export default function App() {
 
           <Route exact path="/feedbacklist">
             <ViewFeedbackList />
-          </Route>
-
-          <Route exact path="/updatefeedback/:id">
-            <UpdateFeedback />
           </Route>
 
           <Route exact path="/managersuccess">
