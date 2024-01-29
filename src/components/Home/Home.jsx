@@ -1,5 +1,3 @@
-// import { Link } from "react-router-dom";
-
 //EMPLOYEE IMPORTS
 
 import EmployeeNavBar from "../NavBar/EmployeeNavBar";
