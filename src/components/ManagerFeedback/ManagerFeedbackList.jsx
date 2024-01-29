@@ -363,4 +363,4 @@ const ManagerFeedbackList = () => {
   );
 };
 
-export default ManagerFe
+export default ManagerFeedbackList;
