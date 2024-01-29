@@ -1,23 +1,40 @@
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import React from "react";
 import "./HRNavBar.css";
 
 export default function HRNavbar() {
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+
   return (
     <div>
-      {/* Navbar Items */}
       <div className="topnav">
-        {/* Logo */}
         <Link to="/Home/1" className="logo-link">
           <img src="/Assets/TSH.jpg" alt="Logo" width="310px" height="90px" />
         </Link>
 
-        {/* Navigation Links */}
+        <div className={`dropdown ${isDropdownOpen ? "open" : ""}`}>
+          <button className="dropbtn" onClick={toggleDropdown}>
+            Employee
+          </button>
+          {isDropdownOpen && (
+            <div className="dropdown-content-vertical">
+              <Link to="/hrhome/:id/viewemployee">View Employees</Link>
+              <Link to="/hrhome/:id/createemployee">Create Employees</Link>
+              <Link to="/hrhome/:id/updateemployee">Update Employees</Link>
+              <Link to="/hrhome/:id/deleteemployee">Delete Employees</Link>
+            </div>
+          )}
+        </div>
+
+        <Link to="/feedbackList">Supervisor feedback</Link>
         <Link to="/Attendance">Attendance</Link>
         <Link to="/viewAccolades">Accolades</Link>
         <Link to="/AppraisalForm">Appraisal Form</Link>
 
-        {/* My Profile link*/}
         <Link to="/Profile" className="profile">
           <img
             src="/Assets/Profile-icon.jpg"
@@ -28,7 +45,6 @@ export default function HRNavbar() {
           <span>My Profile</span>
         </Link>
       </div>
-      {/* End of Navbar Items */}
     </div>
   );
 }
