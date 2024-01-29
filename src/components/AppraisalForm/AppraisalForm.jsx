@@ -10,7 +10,7 @@ const AppraisalForm = () => {
   const [peerFeedbackTotalScore, setPeerFeedbackTotalScore] = useState(null);
   const [selfFeedbackTotalScore, setSelfFeedbackTotalScore] = useState(null);
   const [accoladesTotalScore, setAccoladesTotalScore] = useState(null);
-  // const [attendanceScore, setAttendanceScore] = useState(null);
+  const [attendanceTotalScore, setAttendanceTotalScore] = useState(null);
 
   useEffect(() => {
     // Fetch staff IDs from the server using Axios
@@ -78,17 +78,18 @@ const AppraisalForm = () => {
         console.error("Error fetching accolades score:", error);
       });
   }, [selectedStaffId]);
+
   // Attendance score
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/accolades/score/${selectedStaffId}`)
+      .get(`http://localhost:3001/attendance/score/${selectedStaffId}`)
       .then((response) => {
-        console.log("Accolade Response:", response.data);
+        console.log("Attendance Response:", response.data);
         const totalScore = response.data.totalScore;
-        setAccoladesTotalScore(totalScore);
+        setAttendanceTotalScore(totalScore);
       })
       .catch((error) => {
-        console.error("Error fetching accolades score:", error);
+        console.error("Error fetching attendance score:", error);
       });
   }, [selectedStaffId]);
 
@@ -125,6 +126,10 @@ const AppraisalForm = () => {
       {/* Display Accolades Score */}
       {accoladesTotalScore !== null && (
         <p>Accolades Feedback Score: {accoladesTotalScore}</p>
+      )}
+      {/* Display Attendance Score */}
+      {attendanceTotalScore !== null && (
+        <p>Attendance Feedback Score: {attendanceTotalScore}</p>
       )}
     </>
   );

@@ -136,7 +136,7 @@ app.get("/accolades/score/:staffId", (req, res) => {
 app.get("/attendance/score/:staffId", (req, res) => {
   const staffId = req.params.staffId;
 
-  const sql = "SELECT score FROM  WHERE staff_id = ?";
+  const sql = "SELECT score FROM attendance WHERE staff_id = ?";
   db.query(sql, [staffId], (err, data) => {
     if (err) {
       console.error("Error fetching attendance score:", err);
@@ -149,10 +149,7 @@ app.get("/attendance/score/:staffId", (req, res) => {
         .json({ error: "Attendance not found for the given staff_id" });
     }
     // Aggregate scores
-    const totalScore = data.reduce(
-      (sum, row) => sum + row.achievement_level,
-      0
-    );
+    const totalScore = data.reduce((sum, row) => sum + row.score, 0);
 
     return res.json({ totalScore });
   });
