@@ -246,7 +246,7 @@ const ManagerFeedbackList = () => {
             </label>
             <br />
             <label>
-              Date:
+             Insert Date:
               <input
                 type="date"
                 name="date"
@@ -258,7 +258,7 @@ const ManagerFeedbackList = () => {
             <br />
             {/* Option inputs */}
             <label>
-              Op1:
+            Option 1: Willingness to share and impact knowledge to subordinates/colleagues eg: Have a good knowledge of job , aware of the key result areas , performance standards and responsibilities
               <input
                 type="text"
                 name="op1"
@@ -269,7 +269,7 @@ const ManagerFeedbackList = () => {
             </label>
             <br />
             <label>
-              Op2:
+            Option 2:Quality of Work eg: Accurate,Attentive to details,Complete and Timely
               <input
                 type="text"
                 name="op2"
@@ -280,7 +280,7 @@ const ManagerFeedbackList = () => {
             </label>
             <br />
             <label>
-              Op3:
+            Option 3: Ability to meet deadlines eg: Consistency to meet the deadline
               <input
                 type="text"
                 name="op3"
@@ -291,7 +291,7 @@ const ManagerFeedbackList = () => {
             </label>
             <br />
             <label>
-              Op4:
+           Option 4: Communication eg: Effectively express and present ideas and information in both oral and written form so as to have the desired effect on the reader using acceptable language, grammar and style bearing in mind the culture and background.
               <input
                 type="text"
                 name="op4"
@@ -302,7 +302,7 @@ const ManagerFeedbackList = () => {
             </label>
             <br />
             <label>
-              Op5:
+            Option 5: Reliablity/Responsibility/Commitment eg: Reliable and responsible in all situations and does not require special supervisory attention. Keen to accept responsibilities.
               <input
                 type="text"
                 name="op5"
@@ -313,7 +313,7 @@ const ManagerFeedbackList = () => {
             </label>
             <br />
             <label>
-              Op6:
+            Option 6: Analytical Ability / Problem Solving eg: Have the ability to identify causes of problems and able to recommend effective solutions. At times able to make constructive suggestions.
               <input
                 type="text"
                 name="op6"
@@ -324,7 +324,7 @@ const ManagerFeedbackList = () => {
             </label>
             <br />
             <label>
-              Op7:
+            Option 7: Initiative eg: Enterprising, willingly assume greater responsibilities beyond his/her basic job	
               <input
                 type="text"
                 name="op7"
@@ -335,7 +335,7 @@ const ManagerFeedbackList = () => {
             </label>
             <br />
             <label>
-              Op8:
+            Option 8: Decision-Making eg: Able to make sound and decisive decision
               <input
                 type="text"
                 name="op8"
@@ -346,7 +346,7 @@ const ManagerFeedbackList = () => {
             </label>
             <br />
             <label>
-              Op9:
+            Option 9: Reaction under Pressure eg: Continue to be stable and productive under pressure
               <input
                 type="text"
                 name="op9"
@@ -357,7 +357,7 @@ const ManagerFeedbackList = () => {
             </label>
             <br />
             <label>
-              Op10:
+            Option 10: Adaptability & Flexibility eg: Adjust effectively in approach and behavior to new and changed situations and interacting with different people.
               <input
                 type="text"
                 name="op10"
@@ -368,7 +368,7 @@ const ManagerFeedbackList = () => {
             </label>
             <br />
             <label>
-              Op11:
+            Option 11: Innovation eg: Have an open mindset. Demonstrates originality and imagination in ideas and solutions that leads to novel ways to deal with work problems and opportunities.
               <input
                 type="text"
                 name="op11"
@@ -379,7 +379,7 @@ const ManagerFeedbackList = () => {
             </label>
             <br />
             <label>
-              Op12:
+            Option 12: Drive & Determination eg: Act with drive, confidence and personal commitment in setting and achieving departmental/company goals.
               <input
                 type="text"
                 name="op12"
