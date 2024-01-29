@@ -4,11 +4,11 @@ import axios from "axios";
 
 const AppraisalForm = () => {
   const [staffIds, setStaffIds] = useState([]);
-  const [selectedStaffId, setSelectedStaffId] = useState("");
+  const [selectedStaffId, setSelectedStaffId] = useState(null);
   const [managerFeedbackScore, setManagerFeedbackScore] = useState(null);
   const [peerFeedbackScore, setPeerFeedbackScore] = useState(null);
   const [selfFeedbackScore, setSelfFeedbackScore] = useState(null);
-  // const [accoladesScore, setAccoladesScore] = useState(null);
+  const [accoladesScore, setAccoladesScore] = useState(null);
   // const [attendanceScore, setAttendanceScore] = useState(null);
 
   useEffect(() => {
@@ -63,6 +63,19 @@ const AppraisalForm = () => {
       });
   }, [selectedStaffId]); // Trigger the effect when selectedStaffId changes
 
+  // Accolades score
+  useEffect(() => {
+    axios
+      .get(`http://localhost:3001/accolades/score/${selectedStaffId}`)
+      .then((response) => {
+        const feedbackScore = response.data.accoladesFeedbackScore;
+        setAccoladesScore(feedbackScore);
+      })
+      .catch((error) => {
+        console.error("Error fetching accolades feedback score:", error);
+      });
+  }, [selectedStaffId]); // Trigger the effect when selectedStaffId changes
+
   return (
     <>
       <Navbar />
@@ -93,6 +106,8 @@ const AppraisalForm = () => {
       {selfFeedbackScore !== null && (
         <p>Self Feedback Score: {selfFeedbackScore}</p>
       )}
+      {/* Display Accolades Score */}
+      {accoladesScore !== null && <p>Self Feedback Score: {accoladesScore}</p>}
     </>
   );
 };
