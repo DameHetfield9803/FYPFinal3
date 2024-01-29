@@ -5,11 +5,12 @@ import axios from "axios";
 const AppraisalForm = () => {
   const [staffIds, setStaffIds] = useState([]);
   const [selectedStaffId, setSelectedStaffId] = useState(null);
-  const [managerFeedbackScore, setManagerFeedbackScore] = useState(null);
-  const [peerFeedbackScore, setPeerFeedbackScore] = useState(null);
-  const [selfFeedbackScore, setSelfFeedbackScore] = useState(null);
-  const [accoladesScore, setAccoladesScore] = useState(null);
-  // const [attendanceScore, setAttendanceScore] = useState(null);
+  const [managerFeedbackTotalScore, setManagerFeedbackTotalScore] =
+    useState(null);
+  const [peerFeedbackTotalScore, setPeerFeedbackTotalScore] = useState(null);
+  const [selfFeedbackTotalScore, setSelfFeedbackTotalScore] = useState(null);
+  const [accoladesTotalScore, setAccoladesTotalScore] = useState(null);
+  const [attendanceTotalScore, setAttendanceTotalScore] = useState(null);
 
   useEffect(() => {
     // Fetch staff IDs from the server using Axios
@@ -25,56 +26,72 @@ const AppraisalForm = () => {
 
   // Manager Feedback score
   useEffect(() => {
-    // Assuming selectedStaffId is the currently selected staff_id
     axios
       .get(`http://localhost:3001/managerfeedback/score/${selectedStaffId}`)
       .then((response) => {
-        const feedbackScore = response.data.managerFeedbackScore;
-        setManagerFeedbackScore(feedbackScore);
+        const totalScore = response.data.totalScore; // Updated property name
+        setManagerFeedbackTotalScore(totalScore); // Updated state variable
       })
       .catch((error) => {
         console.error("Error fetching manager feedback score:", error);
       });
-  }, [selectedStaffId]); // Trigger the effect when selectedStaffId changes
+  }, [selectedStaffId]);
 
   // Peer Feedback score
   useEffect(() => {
     axios
       .get(`http://localhost:3001/peerfeedback/score/${selectedStaffId}`)
       .then((response) => {
-        const feedbackScore = response.data.peerFeedbackScore;
-        setPeerFeedbackScore(feedbackScore);
+        const totalScore = response.data.totalScore; // Updated property name
+        setPeerFeedbackTotalScore(totalScore); // Updated state variable
       })
       .catch((error) => {
         console.error("Error fetching peer feedback score:", error);
       });
-  }, [selectedStaffId]); // Trigger the effect when selectedStaffId changes
+  }, [selectedStaffId]);
 
   // Self Feedback score
   useEffect(() => {
     axios
       .get(`http://localhost:3001/selffeedback/score/${selectedStaffId}`)
       .then((response) => {
-        const feedbackScore = response.data.selfFeedbackScore;
-        setSelfFeedbackScore(feedbackScore);
+        console.log("Self Feedback Response:", response.data);
+        const totalScore = response.data.totalScore;
+        setSelfFeedbackTotalScore(totalScore);
       })
       .catch((error) => {
         console.error("Error fetching self feedback score:", error);
       });
-  }, [selectedStaffId]); // Trigger the effect when selectedStaffId changes
+  }, [selectedStaffId]);
 
-  // Accolades score
+  // Accolade score
+  // Accolade score
   useEffect(() => {
     axios
       .get(`http://localhost:3001/accolades/score/${selectedStaffId}`)
       .then((response) => {
-        const feedbackScore = response.data.accoladesFeedbackScore;
-        setAccoladesScore(feedbackScore);
+        console.log("Accolade Response:", response.data);
+        const totalScore = response.data.totalScore;
+        setAccoladesTotalScore(totalScore);
       })
       .catch((error) => {
-        console.error("Error fetching accolades feedback score:", error);
+        console.error("Error fetching accolades score:", error);
       });
-  }, [selectedStaffId]); // Trigger the effect when selectedStaffId changes
+  }, [selectedStaffId]);
+
+  // Attendance score
+  useEffect(() => {
+    axios
+      .get(`http://localhost:3001/attendance/score/${selectedStaffId}`)
+      .then((response) => {
+        console.log("Attendance Response:", response.data);
+        const totalScore = response.data.totalScore;
+        setAttendanceTotalScore(totalScore);
+      })
+      .catch((error) => {
+        console.error("Error fetching attendance score:", error);
+      });
+  }, [selectedStaffId]);
 
   return (
     <>
@@ -95,19 +112,25 @@ const AppraisalForm = () => {
       </select>
 
       {/* Display Manager Feedback Score */}
-      {managerFeedbackScore !== null && (
-        <p>Manager Feedback Score: {managerFeedbackScore}</p>
+      {managerFeedbackTotalScore !== null && (
+        <p>Manager Feedback Score: {managerFeedbackTotalScore}</p>
       )}
       {/* Display Peer Feedback Score */}
-      {peerFeedbackScore !== null && (
-        <p>Peer Feedback Score: {peerFeedbackScore}</p>
+      {peerFeedbackTotalScore !== null && (
+        <p>Peer Feedback Score: {peerFeedbackTotalScore}</p>
       )}
       {/* Display Self Feedback Score */}
-      {selfFeedbackScore !== null && (
-        <p>Self Feedback Score: {selfFeedbackScore}</p>
+      {selfFeedbackTotalScore !== null && (
+        <p>Self Feedback Score: {selfFeedbackTotalScore}</p>
       )}
       {/* Display Accolades Score */}
-      {accoladesScore !== null && <p>Self Feedback Score: {accoladesScore}</p>}
+      {accoladesTotalScore !== null && (
+        <p>Accolades Feedback Score: {accoladesTotalScore}</p>
+      )}
+      {/* Display Attendance Score */}
+      {attendanceTotalScore !== null && (
+        <p>Attendance Feedback Score: {attendanceTotalScore}</p>
+      )}
     </>
   );
 };
