@@ -228,25 +228,6 @@ app.put("/login", (req, res) => {
   );
 });
 
-//DONE Delete department (EN QUAN)
-// app.delete("/department", (req, res) => {
-//   const { department_id } = req.body;
-
-//   const q = "DELETE FROM department WHERE department_id = ?";
-//   db.query(q, [department_id], (err, data) => {
-//     if (err) {
-//       console.error(err);
-//       res.status(500).json({ message: "Error deleting department" });
-//     } else {
-//       if (data.affectedRows > 0) {
-//         res.json({ message: "Department deleted successfully" });
-//       } else {
-//         res.status(404).json({ message: "Department not found" });
-//       }
-//     }
-//   });
-// });
-
 app.delete("/department", (req, res) => {
   const val = [req.body.department_id];
   db.query(

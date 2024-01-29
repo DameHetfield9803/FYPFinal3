@@ -128,8 +128,8 @@ export default function UpdateEmployee() {
                     </option>
                   ))}
                 </select>
-                <button onClick={() => handleUpdateJobRole(employee.staff_id, employee.job_role)}>
-                  Update Job Role
+                <button onClick={() => handleReportingTo(employee.reporting_to, employee.staff_id)}>
+                  Update Reporting To
                 </button>
               </td>
             </tr>
