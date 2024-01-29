@@ -51,7 +51,7 @@ export default function EmailAutomate() {
   return (
     <div>
       <Navbar /> {/* Render the Navbar component */}
-      <h1>Send an email warning to an employee</h1>
+      <h1>Submit a warning to an employee</h1>
       
       <section className="email-auto-section">
         <aside className="email-auto-aside"></aside>
