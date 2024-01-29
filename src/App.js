@@ -11,7 +11,7 @@ import Attendance from "./components/Attendance/Attendance";
 import ManagerFeedback from "./components/ManagerFeedback/ManagerFeedback";
 import AppraisalForm from "./components/AppraisalForm/AppraisalForm";
 import Profile from "./components/Profile/profilesettings";
-import AppraisalItem from "./components/AppraisalItem/AppraisalItem";
+import AppraisalItem from "./components/AppraisalItem/CreateAppraisalItem";
 import ReportForm from "./components/ReportForm/reporterror";
 import EmpTab from "./components/EmployeeTable/Employee";
 import UserGuide from "./components/UserGuide/userguides";
@@ -37,6 +37,10 @@ import CreateEmployee from "../src/components/Employees/CreateEmployee";
 import ViewEmployee from "./components/Employees/ViewEmployees";
 import UpdateEmployee from "./components/Employees/UpdateEmployee";
 import DeleteEmployee from "./components/Employees/DeleteEmployees";
+import CreateAppraisalItem from "./components/AppraisalItem/CreateAppraisalItem";
+import ViewAppraisalItem from "./components/AppraisalItem/ViewAppraisalItem";
+import UpdateAppraisalItem from "./components/AppraisalItem/UpdateAppraisalItem";
+import DeleteAppraisalItem from "./components/AppraisalItem/DeleteAppraisalIem";
 export default function App() {
   return (
     <Router>
@@ -68,6 +72,22 @@ export default function App() {
 
           <Route exact path="/adminhome/:id/deleteemployee">
             <DeleteEmployee/>
+          </Route>
+
+          <Route exact path = "/adminhome/:id/createappraisalitem">
+            <CreateAppraisalItem/>
+          </Route>
+
+          <Route exact path="/adminhome/:id/viewappraisalitem">
+            <ViewAppraisalItem/>
+          </Route>
+
+          <Route exact path="/adminhome/:id/updateappraisalitem">
+            <UpdateAppraisalItem/>
+          </Route>
+
+          <Route exact path="/adminhome/:id/deleteappraisalitem">
+            <DeleteAppraisalItem/>
           </Route>
 
           <Route exact path="/viewaccolades">
@@ -140,7 +160,7 @@ export default function App() {
           <Route exact path="/updatefeedback/:id">
             <UpdateFeedback/>
           </Route>
-
+ 
           <Route exact path="/managersuccess">
             <ManagerFeedbackSuccess />
           </Route>

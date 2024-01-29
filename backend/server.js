@@ -307,15 +307,37 @@ app.get("/peerfeedback", (req, res) => {
 });
 // Update peer feedback (DAMIEN) (done)
 
-app.put("/peerfeedback", (req, res) => {
+app.put("/peerfeedback/:id", (req, res) => {
+  const { id } = req.params;
+  const {
+    date,
+    feedback_text,
+    staff_id,
+    op1,
+    op2,
+    op3,
+    op4,
+    op5,
+    op6,
+    op7
+  } = req.body;
+
   const vals = [
-    req.body.date,
-    req.body.feedback_text,
-    req.body.staff_id,
-    req.body.peer_feedback_id,
+    date,
+    feedback_text,
+    staff_id,
+    op1,
+    op2,
+    op3,
+    op4,
+    op5,
+    op6,
+    op7,
+    id  // Include the id in the values array
   ];
+
   db.query(
-    "UPDATE `peerfeedback` SET `date` = (?), `feedback_text` = (?), `staff_id` = (?) WHERE `peer_feedback_id` = (?);",
+    "UPDATE `peer_feedback` SET `date` = (?), `feedback_text` = (?), `staff_id` = (?), `op1` = (?), `op2` = (?), `op3` = (?), `op4` = (?), `op5` = (?), `op6` = (?), `op7` = (?) WHERE `peer_feedback_id` = (?);",
     vals,
     (err, data) => {
       if (err) return res.json(err);
@@ -323,6 +345,8 @@ app.put("/peerfeedback", (req, res) => {
     }
   );
 });
+
+
 
 //DONE Delete peer feedback (En Quan)
 app.delete("/peerfeedback", (req, res) => {
@@ -368,6 +392,7 @@ app.post("/createselffeedback", (req, res) => {
     }
   );
 });
+
 // Read self feedback (DANIEL) (Done)
 app.get("/selffeedback", (req, res) => {
   db.query("SELECT * FROM self_feedback;", (err, data) => {
@@ -475,6 +500,49 @@ app.put("/managerfeedback", (req, res) => {
     }
   });
 });
+
+
+// UPDATED Update manager feedback (FIRDAUS) for manager feedbacklist
+app.put("/managerfeedback/:id", (req, res) => {
+  const { id } = req.params;
+  const { feedback_text, op1, op2, op3, op4, op5, op6, op7, op8, op9, op10, op11, op12 } = req.body;
+
+  const q = `
+    UPDATE manager_feedback 
+    SET feedback_text = ?, 
+        op1 = ?, 
+        op2 = ?, 
+        op3 = ?, 
+        op4 = ?, 
+        op5 = ?, 
+        op6 = ?, 
+        op7 = ?, 
+        op8 = ?, 
+        op9 = ?, 
+        op10 = ?, 
+        op11 = ?, 
+        op12 = ? 
+    WHERE manager_feedback_id = ?`;
+  
+  const values = [feedback_text, op1, op2, op3, op4, op5, op6, op7, op8, op9, op10, op11, op12, id];
+
+  db.query(q, values, (err, result) => {
+    if (err) {
+      console.error("Error updating manager feedback:", err);
+      return res.status(500).json({ error: "Internal Server Error" });
+    }
+
+    if (result.affectedRows > 0) {
+      return res.json({
+        message: "Manager feedback updated successfully",
+        result,
+      });
+    } else {
+      return res.status(404).json({ message: "Manager feedback not found" });
+    }
+  });
+});
+
 
 //DONE Read manager feedback (EN QUAN)
 app.get("/managerfeedback", (req, res) => {

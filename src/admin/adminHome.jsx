@@ -37,6 +37,18 @@ export default function AdminHome(){
                             <a className="dropdown-item" href="/">Logout</a>
                         </div>
                     </li>
+                    <li className="nav-item dropdown">
+                        <a className="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Appraisal Item section
+                        </a>
+                        <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+                          <a className="dropdown-item" href={`/adminhome/${id}/createappraisalitem`}>Create Appraisal Item</a>
+                          <a className="dropdown-item" href={`/adminhome/${id}/viewappraisalitem`}>View Employees</a>
+                          <a className="dropdown-item" href={`/adminhome/${id}/updateappraisalitem`}>Update Employee</a>
+                          <a className="dropdown-item" href={`/adminhome/${id}/deleteappraisalitem`}>Delete Employee</a>
+                          <a className="dropdown-item" href="/">Logout</a>
+                          </div>
+                    </li>
                 </ul>
             </div>
         </nav>

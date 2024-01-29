@@ -38,28 +38,6 @@ export default function DeleteEmployees() {
 
   return (
     <div className="container text-center">
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
-            <a className="navbar-brand" href={`/adminhome/${id}`}>Home</a>
-            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span className="navbar-toggler-icon"></span>
-            </button>
-            <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul className="navbar-nav mr-auto">
-                    <li className="nav-item dropdown">
-                        <a className="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Employee section
-                        </a>
-                        <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a className="dropdown-item" href={`/adminhome/${id}/createemployee`}>Create Employee</a>
-                            <a className="dropdown-item" href={`/adminhome/${id}/viewemployee`}>View Employees</a>
-                            <a className="dropdown-item" href={`/adminhome/${id}/updateemployee`}>Update Employee</a>
-                            <a className="dropdown-item" href={`/adminhome/${id}/deleteemployee`}>Delete Employee</a>
-                            <a className="dropdown-item" href="/">Logout</a>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </nav>
       <h1>Delete Employee</h1>
       <br/>
       <table className="ml-auto mr-auto">
