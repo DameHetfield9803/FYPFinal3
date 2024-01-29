@@ -80,6 +80,7 @@ export default function Navbar() {
             <div className="dropdown-content">
               {/* Your custom links for Peer Evaluation dropdown */}
               <a href="/PeerEvaluation">Do Peer Evaluation</a>
+              <a href="/PeerEvaluationList">View Peer Evaluation</a>
             </div>
           )}  
         </div>

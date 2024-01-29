@@ -1,71 +1,274 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Navbar from "../NavBar/NavBar";
+import EmployeeNavBar from '../NavBar/EmployeeNavBar';
+import "./PeerFeedbackList.css";
 import { useHistory } from "react-router-dom";
 
-const PeerFeedbackList= () => {
+const PeerFeedbackList = () => {
   const [feedbackList, setFeedbackList] = useState([]);
-  const history = useHistory(); // Get access to the history object
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [showPopup, setShowPopup] = useState(false);
+  const [popupMessage, setPopupMessage] = useState("");
+  const [selectedFeedback, setSelectedFeedback] = useState(null);
+  const [feedbackData, setFeedbackData] = useState({
+    peer_feedback_id: "",
+    feedback_text: "",
+    staff_id: "",
+    op1: "",
+    op2: "",
+    op3: "",
+    op4: "",
+    op5: "",
+    op6: "",
+    op7: "",
+    date: ""
+  });
+  const history = useHistory();
 
   useEffect(() => {
-    // Fetch feedback data from the server
-    axios.get("http://localhost:3001/peerfeedback").then((response) => {
-      setFeedbackList(response.data);
-    });
+    fetchFeedbackList();
   }, []);
 
-  const handleUpdate = (id) => {
-    // Redirect to the update page for the selected feedback ID
-    history.push(`/updatefeedback/${id}`);
+  const fetchFeedbackList = async () => {
+    try {
+      const response = await axios.get("http://localhost:3001/peerfeedback");
+      setFeedbackList(response.data);
+      setLoading(false);
+    } catch (error) {
+      console.error("Error fetching peer feedback:", error);
+      setError("Error fetching peer feedback. Please check your server and try again.");
+      setLoading(false);
+    }
   };
 
-  const handleDelete = (id) => {
-    // Handle delete logic
-    axios.delete(`http://localhost:3001/peerfeedback/${id}`).then(() => {
-      console.log("Feedback deleted successfully!");
-      // Update local state after deletion
-      setFeedbackList((prevFeedbackList) =>
-        prevFeedbackList.filter((feedback) => feedback.peer_feedback_id !== id)
-      );
+  const handleDelete = async (id) => {
+    const confirmDelete = window.confirm("Are you sure you want to delete this peer feedback?");
+    if (!confirmDelete) {
+      return;
+    }
+
+    try {
+      await axios.delete("http://localhost:3001/peerfeedback", { data: { peer_feedback_id: id } });
+      setPopupMessage("Peer feedback deleted successfully");
+      setShowPopup(true);
+      fetchFeedbackList();
+    } catch (error) {
+      console.error("Error deleting peer feedback:", error);
+    }
+  };
+
+  const handleEdit = (feedback) => {
+    setSelectedFeedback(feedback);
+    setFeedbackData({
+      peer_feedback_id: feedback.peer_feedback_id,
+      feedback_text: feedback.feedback_text,
+      staff_id: feedback.staff_id,
+      op1: feedback.op1,
+      op2: feedback.op2,
+      op3: feedback.op3,
+      op4: feedback.op4,
+      op5: feedback.op5,
+      op6: feedback.op6,
+      op7: feedback.op7,
+      date: feedback.date
     });
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFeedbackData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await axios.put(`http://localhost:3001/peerfeedback/${selectedFeedback.peer_feedback_id}`, feedbackData);
+      setPopupMessage("Peer feedback updated successfully");
+      setShowPopup(true);
+      fetchFeedbackList();
+    } catch (error) {
+      console.error("Error updating peer feedback:", error);
+    }
   };
 
   return (
-    <div>
-      <Navbar />
-      <div className="container">
-        <h2>Feedback List</h2>
-        <table className="table table-striped">
-          <thead>
-            <tr>
-              <th>Staff ID</th>
-              <th>Date</th>
-              <th>Comments</th>
-              <th>Action</th>
+    <div className="peer-feedback-container">
+      <EmployeeNavBar></EmployeeNavBar>
+      <h1>Peer Feedback</h1>
+      {loading && <p>Loading...</p>}
+      {error && <p>{error}</p>}
+
+      <table className="peer-feedback-table">
+        <thead>
+          <tr>
+            <th>Peer Feedback ID</th>
+            <th>Staff ID</th>
+            <th>Date</th>
+            <th>Feedback Text</th>
+            <th>Options</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {feedbackList.map((feedback, index) => (
+            <tr key={index}>
+              <td>{feedback.peer_feedback_id}</td>
+              <td>{feedback.staff_id}</td>
+              <td>{feedback.date}</td>
+              <td>{feedback.feedback_text}</td>
+              <td>
+                <ul>
+                  <li><strong>Op1:</strong> {feedback.op1}</li>
+                  <li><strong>Op2:</strong> {feedback.op2}</li>
+                  <li><strong>Op3:</strong> {feedback.op3}</li>
+                  <li><strong>Op4:</strong> {feedback.op4}</li>
+                  <li><strong>Op5:</strong> {feedback.op5}</li>
+                  <li><strong>Op6:</strong> {feedback.op6}</li>
+                  <li><strong>Op7:</strong> {feedback.op7}</li>
+                </ul>
+              </td>
+              <td>
+                <button onClick={() => handleEdit(feedback)}>Edit</button>
+                <button onClick={() => handleDelete(feedback.peer_feedback_id)}>Delete</button>
+              </td>
             </tr>
-          </thead>
-          <tbody>
-            {feedbackList.map((feedback) => (
-              <tr key={feedback.peer_feedback_id}>
-                <td>{feedback.staff_id}</td>
-                <td>{feedback.date}</td>
-                <td>{feedback.feedback_text}</td>
-                <td>
-                  <button className="btn btn-primary" onClick={() => handleUpdate(feedback.peer_feedback_id)}>
-                    Update
-                  </button>
-                  <button className="btn btn-danger" onClick={() => handleDelete(feedback.peer_feedback_id)}>
-                    Delete
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-      <div className="mt-3">
-        <a href="/PeerEvaluation" className="btn btn-success">Add New Peer Feedback for an employee</a>
-      </div>
+          ))}
+        </tbody>
+      </table>
+
+      {/* Popup message */}
+      {showPopup && (
+        <div className="peer-feedback-popup">
+          <p>{popupMessage}</p>
+          <button onClick={() => setShowPopup(false)}>Close</button>
+        </div>
+      )}
+
+      {/* Peer feedback edit form */}
+      {selectedFeedback && (
+        <div>
+          <h3>Edit Peer Feedback</h3>
+          <form onSubmit={handleSubmit}>
+            <label>
+              Feedback Text:
+              <input
+                type="text"
+                name="feedback_text"
+                value={feedbackData.feedback_text}
+                onChange={handleChange}
+                required
+              />
+            </label>
+            <br />
+            <label>
+              Staff ID:
+              <input
+                type="text"
+                name="staff_id"
+                value={feedbackData.staff_id}
+                onChange={handleChange}
+                required
+              />
+            </label>
+            <br />
+            <label>
+              Date:
+              <input
+                type="date"
+                name="date"
+                value={feedbackData.date}
+                onChange={handleChange}
+                required
+              />
+            </label>
+            <br />
+            {/* Option inputs */}
+<label>
+  Op1:
+  <input
+    type="text"
+    name="op1"
+    value={feedbackData.op1}
+    onChange={handleChange}
+    required
+  />
+</label>
+<br />
+<label>
+  Op2:
+  <input
+    type="text"
+    name="op2"
+    value={feedbackData.op2}
+    onChange={handleChange}
+    required
+  />
+</label>
+<br />
+<label>
+  Op3:
+  <input
+    type="text"
+    name="op3"
+    value={feedbackData.op3}
+    onChange={handleChange}
+    required
+  />
+</label>
+<br />
+<label>
+  Op4:
+  <input
+    type="text"
+    name="op4"
+    value={feedbackData.op4}
+    onChange={handleChange}
+    required
+  />
+</label>
+<br />
+<label>
+  Op5:
+  <input
+    type="text"
+    name="op5"
+    value={feedbackData.op5}
+    onChange={handleChange}
+    required
+  />
+</label>
+<br />
+<label>
+  Op6:
+  <input
+    type="text"
+    name="op6"
+    value={feedbackData.op6}
+    onChange={handleChange}
+    required
+  />
+</label>
+<br />
+<label>
+  Op7:
+  <input
+    type="text"
+    name="op7"
+    value={feedbackData.op7}
+    onChange={handleChange}
+    required
+  />
+</label>
+<br />
+
+            <button type="submit">Update Peer Feedback</button>
+          </form>
+        </div>
+      )}
     </div>
   );
 };

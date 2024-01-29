@@ -1,0 +1,45 @@
+.peer-feedback-container {
+  padding: 20px;
+}
+
+.peer-feedback-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.peer-feedback-table th,
+.peer-feedback-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.peer-feedback-table th {
+  background-color: #f2f2f2;
+}
+
+.peer-feedback-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.peer-feedback-popup button {
+  margin-top: 10px;
+  padding: 5px 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.peer-feedback-popup button:hover {
+  background-color: #0056b3;
+}
