@@ -4,14 +4,12 @@ import { signOut } from 'firebase/auth';
 import { useHistory } from 'react-router-dom';
 import './Attendance.css';
 import Navbar from '../NavBar/NavBar';
-import attendanceData from './AttendanceData.json';
 import { Link } from 'react-router-dom';
-
-
+import * as XLSX from 'xlsx';
 
 export default function Attendance() {
   const history = useHistory();
-  const [jsonData] = useState(attendanceData);
+  const [jsonData, setJsonData] = useState([]);
   const [batchOptions, setBatchOptions] = useState([]);
   const [selectedBatch, setSelectedBatch] = useState('');
   const [presentCount, setPresentCount] = useState(0);
@@ -25,18 +23,22 @@ export default function Attendance() {
       history.push('/');
     } catch (err) {
       console.error(err);
-      // This is to display an error message to the user if needed
     }
   };
 
   const getStatus = (adjIn) => {
-    if (!adjIn || adjIn.trim() === '') {
+    if (!adjIn || typeof adjIn !== 'string') {
       return 'Not Present';
     }
-
-    const adjInTime = new Date(`2000-01-01T${adjIn}`);
+  
+    const trimmedAdjIn = adjIn.trim();
+    if (trimmedAdjIn === '') {
+      return 'Not Present';
+    }
+  
+    const adjInTime = new Date(`2000-01-01T${trimmedAdjIn}`);
     const eightAM = new Date(`2000-01-01T08:00:00`);
-
+  
     if (
       adjInTime.getHours() > eightAM.getHours() ||
       (adjInTime.getHours() === eightAM.getHours() && adjInTime.getMinutes() > eightAM.getMinutes())
@@ -46,20 +48,21 @@ export default function Attendance() {
       return 'Present';
     }
   };
-
-  // Declare filteredData here (i change it to dropdown function too)
+  
+  const formatDate = (dateString) => {
+    return dateString || ""; // Return the original date string as is
+  };
+  
   const filteredData = jsonData
     .filter((entry) => (selectedBatch ? entry.BatchNO.toString() === selectedBatch : true))
     .filter((entry) => !['Sat', 'Sun'].includes(entry['Week Day']));
 
-  // Fetch distinct BatchNO values
   useEffect(() => {
     const distinctBatches = [...new Set(jsonData.map((entry) => entry.BatchNO))];
     setBatchOptions(distinctBatches);
   }, [jsonData]);
 
   useEffect(() => {
-    // Update counts based on filtered data
     const counts = { Present: 0, 'Not Present': 0, Late: 0 };
 
     filteredData.forEach((entry) => {
@@ -71,15 +74,80 @@ export default function Attendance() {
     setNotPresentCount(counts['Not Present']);
     setLateCount(counts.Late);
 
-    // Calculate the new percentage and update the state changed the percentage to floor method which is to round down
     const totalEntries = counts.Present + counts['Not Present'];
     const percentage = Math.floor((counts.Present / totalEntries) * 100);
     setPresentToTotalPercentage(isNaN(percentage) ? 0 : percentage);
   }, [selectedBatch, jsonData, filteredData]);
 
+  const handleFileUpload = (event) => {
+    const file = event.target.files[0];
+  
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const data = new Uint8Array(e.target.result);
+        const workbook = XLSX.read(data, { type: 'array' });
+        const sheetName = workbook.SheetNames[0];
+        const sheet = workbook.Sheets[sheetName];
+        const excelData = XLSX.utils.sheet_to_json(sheet, {
+          header: 1,
+          raw: false, // Ensure values are not converted to numbers
+        });
+  
+        console.log('Excel Data:', excelData);
+  
+        const convertedData = excelData
+        .slice(1)
+        .map((row, rowIndex) => {
+          try {
+            const formattedRow = {
+              BatchNO: parseInt(row[0]),
+              DATE: formatDate(row[1]),
+              DEPT: row[2],
+              'Week Day': row[3],
+              'Shift Code': row[4],
+              Remark: row[5],
+              'Emp Name': row[6],
+              'Adj In': row[9] !== undefined ? row[9].toString() : '', // Convert to string or empty string if undefined
+              'Adj Out': row[10] !== undefined ? row[10].toString() : '', // Convert to string or empty string if undefined
+            };
+            return formattedRow;
+          } catch (error) {
+            console.error(`Error processing row at index ${rowIndex}:`, error);
+            return null; // Return null for the problematic row
+          }
+        })
+        .filter((row) => row !== null); // Filter out problematic rows
+      
+  
+        console.log('Converted Data:', convertedData);
+  
+        setJsonData(convertedData);
+      };
+  
+      reader.readAsArrayBuffer(file);
+    }
+  };
+  
+  
+  
+
   return (
     <div>
       <Navbar />
+      <div className="container mt-3">
+        <label htmlFor="fileInput" className="form-label">
+          Upload Excel File:
+        </label>
+        <input
+          type="file"
+          className="form-control"
+          id="fileInput"
+          accept=".xlsx, .xls"
+          onChange={handleFileUpload}
+        />
+      </div>
+
       <div className="container mt-3">
         <label htmlFor="batchSelect" className="form-label">
           Select BatchNO:
@@ -105,12 +173,11 @@ export default function Attendance() {
         <p>Total Late: {lateCount}</p>
         <p>Present to Total Percentage: {presentToTotalPercentage.toFixed(2)}%</p>
 
-      <div className="container mt-3">
-        {/* this is to view the attendance summary using the import link component */}
-        <Link to="/Attendancesummary" className="btn btn-secondary">
-          View Attendance Summary
-        </Link>
-      </div>
+        <div className="container mt-3">
+          <Link to="/Attendancesummary" className="btn btn-secondary">
+            View Attendance Summary
+          </Link>
+        </div>
 
         <table className="table table-hover">
           <thead>
@@ -156,9 +223,6 @@ export default function Attendance() {
             ))}
           </tbody>
         </table>
-      </div>
-
-      <div className="container mt-3">
       </div>
 
       <div className="container mt-3">

@@ -206,7 +206,7 @@ const SelfFeedback = () => {
             <br />
             {/* Option inputs */}
             <label>
-              Op1:
+              Op1(Do you understood what you did today.):
               <input
                 type="text"
                 name="op1"
@@ -217,7 +217,7 @@ const SelfFeedback = () => {
             </label>
             <br />
             <label>
-              Op2:
+              Op2(Are you confident that you can apply what I have learnt.):
               <input
                 type="text"
                 name="op2"
@@ -228,7 +228,7 @@ const SelfFeedback = () => {
             </label>
             <br />
             <label>
-              Op3:
+              Op3(I was able to do research or activities on my own.):
               <input
                 type="text"
                 name="op3"
@@ -239,7 +239,7 @@ const SelfFeedback = () => {
             </label>
             <br />
             <label>
-              Op4:
+              Op4(I shared useful ideas and resources with my team.):
               <input
                 type="text"
                 name="op4"
@@ -250,7 +250,7 @@ const SelfFeedback = () => {
             </label>
             <br />
             <label>
-              Op5:
+              Op5(I find the guides given to me useful for deepening my understanding):
               <input
                 type="text"
                 name="op5"
@@ -261,7 +261,7 @@ const SelfFeedback = () => {
             </label>
             <br />
             <label>
-              Op6:
+              Op6(Do you feel that you spent the time to perform quality work?):
               <input
                 type="text"
                 name="op6"
