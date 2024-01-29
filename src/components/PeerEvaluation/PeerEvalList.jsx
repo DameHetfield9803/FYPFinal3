@@ -188,7 +188,7 @@ const PeerFeedbackList = () => {
             <br />
             {/* Option inputs */}
 <label>
-  Op1:
+  Op1(The team member was cooperative):
   <input
     type="text"
     name="op1"
@@ -199,7 +199,7 @@ const PeerFeedbackList = () => {
 </label>
 <br />
 <label>
-  Op2:
+  Op2(This team member completed the task assigned to our team):
   <input
     type="text"
     name="op2"
@@ -210,7 +210,7 @@ const PeerFeedbackList = () => {
 </label>
 <br />
 <label>
-  Op3:
+  Op3(This team member did more than what was expected):
   <input
     type="text"
     name="op3"
@@ -221,7 +221,7 @@ const PeerFeedbackList = () => {
 </label>
 <br />
 <label>
-  Op4:
+  Op4(This team member contributed useful ideas.):
   <input
     type="text"
     name="op4"
@@ -232,7 +232,7 @@ const PeerFeedbackList = () => {
 </label>
 <br />
 <label>
-  Op5:
+  Op5(This team member has strong interpersonal skills and helps everyone feel welcome on the team):
   <input
     type="text"
     name="op5"
@@ -243,7 +243,7 @@ const PeerFeedbackList = () => {
 </label>
 <br />
 <label>
-  Op6:
+  Op6(This team member contributed useful ideas):
   <input
     type="text"
     name="op6"
@@ -254,7 +254,7 @@ const PeerFeedbackList = () => {
 </label>
 <br />
 <label>
-  Op7:
+  Op7(This team member exhibits strong leadership skills):
   <input
     type="text"
     name="op7"

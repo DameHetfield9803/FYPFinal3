@@ -132,7 +132,7 @@ export default function ManagerFeedback() {
               <b>
                 {" "}
                 <p className="mt-3">
-                  (Lowest Rating: 1, Neutral : 3, Highest Rating: 5)
+                (1:Strongly_Disagree , 2:Disagree , 3:Neutral , 4:Agree , 5:Strongly_Agree)
                 </p>
               </b>
               {/* Include staff_id and submission_date here */}

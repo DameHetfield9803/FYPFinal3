@@ -258,7 +258,7 @@ const ManagerFeedbackList = () => {
             <br />
             {/* Option inputs */}
             <label>
-              Op1:
+              Op1(Willingness to share and impact knowledge to subordinates/colleagues):
               <input
                 type="text"
                 name="op1"
@@ -269,7 +269,7 @@ const ManagerFeedbackList = () => {
             </label>
             <br />
             <label>
-              Op2:
+              Op2(Quality of Work):
               <input
                 type="text"
                 name="op2"
@@ -280,7 +280,7 @@ const ManagerFeedbackList = () => {
             </label>
             <br />
             <label>
-              Op3:
+              Op3(Ability to meet deadline):
               <input
                 type="text"
                 name="op3"
@@ -291,7 +291,7 @@ const ManagerFeedbackList = () => {
             </label>
             <br />
             <label>
-              Op4:
+              Op4(Communication):
               <input
                 type="text"
                 name="op4"
@@ -302,7 +302,7 @@ const ManagerFeedbackList = () => {
             </label>
             <br />
             <label>
-              Op5:
+              Op5(Reliablity/Responsibility/Commitment):
               <input
                 type="text"
                 name="op5"
@@ -313,7 +313,7 @@ const ManagerFeedbackList = () => {
             </label>
             <br />
             <label>
-              Op6:
+              Op6(Analytical Ability/Problem Solving):
               <input
                 type="text"
                 name="op6"
@@ -324,7 +324,7 @@ const ManagerFeedbackList = () => {
             </label>
             <br />
             <label>
-              Op7:
+              Op7(Initiative):
               <input
                 type="text"
                 name="op7"
@@ -335,7 +335,7 @@ const ManagerFeedbackList = () => {
             </label>
             <br />
             <label>
-              Op8:
+              Op8(Decision-Making):
               <input
                 type="text"
                 name="op8"
@@ -346,7 +346,7 @@ const ManagerFeedbackList = () => {
             </label>
             <br />
             <label>
-              Op9:
+              Op9(Reaction under Pressure):
               <input
                 type="text"
                 name="op9"
@@ -357,7 +357,7 @@ const ManagerFeedbackList = () => {
             </label>
             <br />
             <label>
-              Op10:
+              Op10(Adaptability & Flexibility):
               <input
                 type="text"
                 name="op10"
@@ -368,7 +368,7 @@ const ManagerFeedbackList = () => {
             </label>
             <br />
             <label>
-              Op11:
+              Op11(Innovation):
               <input
                 type="text"
                 name="op11"
@@ -379,7 +379,7 @@ const ManagerFeedbackList = () => {
             </label>
             <br />
             <label>
-              Op12:
+              Op12(Drive & Determination):
               <input
                 type="text"
                 name="op12"
