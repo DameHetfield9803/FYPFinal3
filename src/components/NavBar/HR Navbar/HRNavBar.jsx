@@ -16,6 +16,7 @@ export default function HRNavbar() {
           <img src="/Assets/TSH.jpg" alt="Logo" width="310px" height="90px" />
         </Link>
 
+        {/* Employee Dropdown */}
         <div className={`dropdown ${isDropdownOpen ? "open" : ""}`}>
           <button className="dropbtn" onClick={toggleDropdown}>
             Employee
@@ -30,11 +31,43 @@ export default function HRNavbar() {
           )}
         </div>
 
-        <Link to="/feedbackList">Supervisor feedback</Link>
-        <Link to="/Attendance">Attendance</Link>
-        <Link to="/viewAccolades">Accolades</Link>
-        <Link to="/AppraisalForm">Appraisal Form</Link>
+        {/* Other Dropdown Items */}
+        <div className="dropdown">
+          <button className="dropbtn">Supervisor feedback</button>
+          <div className="dropdown-content-vertical">
+            <Link to="/feedbackList">Supervisor feedback</Link>
+          </div>
+        </div>
 
+        <div className="dropdown">
+          <button className="dropbtn">Peer feedback</button>
+          <div className="dropdown-content-vertical">
+            <Link to="/peerevaluationlist">Peer feedback</Link>
+          </div>
+        </div>
+
+        <div className="dropdown">
+          <button className="dropbtn">Attendance</button>
+          <div className="dropdown-content-vertical">
+            <Link to="/Attendance">Attendance</Link>
+          </div>
+        </div>
+
+        <div className="dropdown">
+          <button className="dropbtn">Accolades</button>
+          <div className="dropdown-content-vertical">
+            <Link to="/viewAccolades">Accolades</Link>
+          </div>
+        </div>
+
+        <div className="dropdown">
+          <button className="dropbtn">Appraisal Form</button>
+          <div className="dropdown-content-vertical">
+            <Link to="/AppraisalForm">Appraisal Form</Link>
+          </div>
+        </div>
+
+        {/* My Profile link*/}
         <Link to="/Profile" className="profile">
           <img
             src="/Assets/Profile-icon.jpg"
