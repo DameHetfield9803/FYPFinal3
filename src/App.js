@@ -38,6 +38,9 @@ import ViewEmployee from "./components/Employees/ViewEmployees";
 import UpdateEmployee from "./components/Employees/UpdateEmployee";
 import DeleteEmployee from "./components/Employees/DeleteEmployees";
 import CreateAppraisalItem from "./components/AppraisalItem/CreateAppraisalItem";
+import ViewAppraisalItem from "./components/AppraisalItem/ViewAppraisalItem";
+import UpdateAppraisalItem from "./components/AppraisalItem/UpdateAppraisalItem";
+import DeleteAppraisalItem from "./components/AppraisalItem/DeleteAppraisalIem";
 export default function App() {
   return (
     <Router>
@@ -73,6 +76,18 @@ export default function App() {
 
           <Route exact path = "/adminhome/:id/createappraisalitem">
             <CreateAppraisalItem/>
+          </Route>
+
+          <Route exact path="/adminhome/:id/viewappraisalitem">
+            <ViewAppraisalItem/>
+          </Route>
+
+          <Route exact path="/adminhome/:id/updateappraisalitem">
+            <UpdateAppraisalItem/>
+          </Route>
+
+          <Route exact path="/adminhome/:id/deleteappraisalitem">
+            <DeleteAppraisalItem/>
           </Route>
 
           <Route exact path="/viewaccolades">
