@@ -112,6 +112,7 @@ export default function Attendancesummary() {
               <th>Not Present</th>
               <th>Late</th>
               <th>Percentage</th>
+              <th>RawData</th>
             </tr>
           </thead>
 
@@ -123,7 +124,7 @@ export default function Attendancesummary() {
               const date = new Date(`${dateParts[1]}/${dateParts[0]}/${dateParts[2]}`); // Construct the Date object with correct format
               const month = date.toLocaleString('default', { month: 'long' });
               const year = date.getFullYear();
-              const rawdata = batchEntry.Present / (batchEntry.Present + batchEntry['Not Present'] + batchEntry.Late);
+              const rawdata = (batchEntry.Present / (batchEntry.Present + batchEntry['Not Present'] + batchEntry.Late)).toFixed(2);
               const percentage = Math.floor(rawdata * 100);
 
               return (
@@ -136,6 +137,7 @@ export default function Attendancesummary() {
                   <td>{batchEntry['Not Present']}</td>
                   <td>{batchEntry.Late}</td>
                   <td style={{ backgroundColor: percentage < 50 ? 'red' : 'inherit' }}>{percentage}%</td>
+                  <td>{rawdata}</td>
                 </tr>
               );
             })}
