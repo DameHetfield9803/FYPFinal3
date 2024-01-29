@@ -25,7 +25,7 @@ const ManagerFeedbackList = () => {
     op10: "",
     op11: "",
     op12: "",
-    date: ""
+    date: "",
   });
 
   useEffect(() => {
@@ -39,13 +39,17 @@ const ManagerFeedbackList = () => {
       setLoading(false);
     } catch (error) {
       console.error("Error fetching manager feedback:", error);
-      setError("Error fetching manager feedback. Please check your server and try again.");
+      setError(
+        "Error fetching manager feedback. Please check your server and try again."
+      );
       setLoading(false);
     }
   };
 
   const handleDelete = async (id) => {
-    const confirmDelete = window.confirm("Are you sure you want to delete this manager feedback?");
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this manager feedback?"
+    );
     if (!confirmDelete) {
       return;
     }
@@ -78,7 +82,7 @@ const ManagerFeedbackList = () => {
       op10: feedback.op10,
       op11: feedback.op11,
       op12: feedback.op12,
-      date: feedback.date
+      date: feedback.date,
     });
   };
 
@@ -94,7 +98,10 @@ const ManagerFeedbackList = () => {
     e.preventDefault();
     try {
       console.log("Submitting form...", feedbackData);
-      await axios.put(`http://localhost:3001/managerfeedback/${selectedFeedback.manager_feedback_id}`, feedbackData);
+      await axios.put(
+        `http://localhost:3001/managerfeedback/${selectedFeedback.manager_feedback_id}`,
+        feedbackData
+      );
       console.log("Manager feedback updated successfully");
       setPopupMessage("Manager feedback updated successfully");
       setShowPopup(true);
@@ -117,7 +124,7 @@ const ManagerFeedbackList = () => {
         op10: "",
         op11: "",
         op12: "",
-        date: ""
+        date: "",
       });
     } catch (error) {
       console.error("Error updating manager feedback:", error);
@@ -130,7 +137,8 @@ const ManagerFeedbackList = () => {
       <ManagerNavBar />
 
       <div>
-        <h2>Feedback List</h2>
+        <h1>Manager Feedback List</h1>
+        <br></br>
         {/* Table to display feedback data */}
         <table className="table table-striped">
           <thead>
@@ -147,28 +155,54 @@ const ManagerFeedbackList = () => {
               <tr key={feedback.manager_feedback_id}>
                 <td>{feedback.staff_id}</td>
                 <td>{feedback.date}</td>
-                <td>
-                  {feedback.feedback_text}
-                </td>
+                <td>{feedback.feedback_text}</td>
                 <td>
                   <ul>
-                    <li><strong>Op1:</strong> {feedback.op1}</li>
-                    <li><strong>Op2:</strong> {feedback.op2}</li>
-                    <li><strong>Op3:</strong> {feedback.op3}</li>
-                    <li><strong>Op4:</strong> {feedback.op4}</li>
-                    <li><strong>Op5:</strong> {feedback.op5}</li>
-                    <li><strong>Op6:</strong> {feedback.op6}</li>
-                    <li><strong>Op7:</strong> {feedback.op7}</li>
-                    <li><strong>Op8:</strong> {feedback.op8}</li>
-                    <li><strong>Op9:</strong> {feedback.op9}</li>
-                    <li><strong>Op10:</strong> {feedback.op10}</li>
-                    <li><strong>Op11:</strong> {feedback.op11}</li>
-                    <li><strong>Op12:</strong> {feedback.op12}</li>
+                    <li>
+                      <strong>Op1:</strong> {feedback.op1}
+                    </li>
+                    <li>
+                      <strong>Op2:</strong> {feedback.op2}
+                    </li>
+                    <li>
+                      <strong>Op3:</strong> {feedback.op3}
+                    </li>
+                    <li>
+                      <strong>Op4:</strong> {feedback.op4}
+                    </li>
+                    <li>
+                      <strong>Op5:</strong> {feedback.op5}
+                    </li>
+                    <li>
+                      <strong>Op6:</strong> {feedback.op6}
+                    </li>
+                    <li>
+                      <strong>Op7:</strong> {feedback.op7}
+                    </li>
+                    <li>
+                      <strong>Op8:</strong> {feedback.op8}
+                    </li>
+                    <li>
+                      <strong>Op9:</strong> {feedback.op9}
+                    </li>
+                    <li>
+                      <strong>Op10:</strong> {feedback.op10}
+                    </li>
+                    <li>
+                      <strong>Op11:</strong> {feedback.op11}
+                    </li>
+                    <li>
+                      <strong>Op12:</strong> {feedback.op12}
+                    </li>
                   </ul>
                 </td>
                 <td>
                   <button onClick={() => handleEdit(feedback)}>Edit</button>
-                  <button onClick={() => handleDelete(feedback.manager_feedback_id)}>Delete</button>
+                  <button
+                    onClick={() => handleDelete(feedback.manager_feedback_id)}
+                  >
+                    Delete
+                  </button>
                 </td>
               </tr>
             ))}

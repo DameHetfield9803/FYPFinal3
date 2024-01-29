@@ -16,7 +16,7 @@ import ReportForm from "./components/ReportForm/reporterror";
 import EmpTab from "./components/EmployeeTable/Employee";
 import UserGuide from "./components/UserGuide/userguides";
 import Navbar from "./components/NavBar/NavBar";
-import EmployeeDetails from './components/EmployeeTable/EmployeeDetails';
+import EmployeeDetails from "./components/EmployeeTable/EmployeeDetails";
 import Home from "./components/Home/Home";
 import AttendanceSummary from "./components/Attendance/Attendancesummary";
 import EmailAutomate from "./components/Email/EmailAutomate";
@@ -25,7 +25,7 @@ import ViewFeedbackList from "./components/ManagerFeedback/ManagerFeedbackList";
 import UpdateFeedback from "./components/ManagerFeedback/UpdateManagerFeedback";
 import ManagerFeedbackSuccess from "./components/ManagerFeedback/ManagerFeedbackSuccess";
 import PeerFeedbackList from "./components/PeerEvaluation/PeerEvalList";
-import AddAccolade from "./components/Accolades/AddAccolade"; 
+import AddAccolade from "./components/Accolades/AddAccolade";
 import EmployeeNavBar from "./components/NavBar/EmployeeNavBar";
 import AccoladeSuccess from "./components/Accolades/AccoladeSuccess";
 import PeerEvaluationSuccess from "./components/PeerEvaluation/PeerEvaluationSuccess";
@@ -54,40 +54,52 @@ export default function App() {
             <Home />
           </Route>
 
-          <Route exact path ="/adminhome/:id">
-            <AdminHome/>
+          <Route exact path="/adminhome/:id">
+            <AdminHome />
           </Route>
 
-          <Route exact path = "/adminhome/:id/createemployee">
-            <CreateEmployee/>
+          <Route exact path="/adminhome/:id/createemployee">
+            <CreateEmployee />
           </Route>
 
           <Route exact path="/adminhome/:id/viewemployee">
-            <ViewEmployee/>
+            <ViewEmployee />
           </Route>
 
-          <Route exact path="/adminhome/:id/updateemployee">
-            <UpdateEmployee/>
+          <Route exact path="/hrhome/:id/viewemployee">
+            <ViewEmployee />
+          </Route>
+
+          <Route exact path="/hrhome/:id/createemployee">
+            <CreateEmployee />
+          </Route>
+
+          <Route exact path="/hrhome/:id/updateemployee">
+            <UpdateEmployee />
           </Route>
 
           <Route exact path="/adminhome/:id/deleteemployee">
-            <DeleteEmployee/>
+            <DeleteEmployee />
           </Route>
 
-          <Route exact path = "/adminhome/:id/createappraisalitem">
-            <CreateAppraisalItem/>
+          <Route exact path="/hrhome/:id/deleteemployee">
+            <DeleteEmployee />
+          </Route>
+
+          <Route exact path="/adminhome/:id/createappraisalitem">
+            <CreateAppraisalItem />
           </Route>
 
           <Route exact path="/adminhome/:id/viewappraisalitem">
-            <ViewAppraisalItem/>
+            <ViewAppraisalItem />
           </Route>
 
           <Route exact path="/adminhome/:id/updateappraisalitem">
-            <UpdateAppraisalItem/>
+            <UpdateAppraisalItem />
           </Route>
 
           <Route exact path="/adminhome/:id/deleteappraisalitem">
-            <DeleteAppraisalItem/>
+            <DeleteAppraisalItem />
           </Route>
 
           <Route exact path="/viewaccolades">
@@ -158,27 +170,27 @@ export default function App() {
           </Route>
 
           <Route exact path="/updatefeedback/:id">
-            <UpdateFeedback/>
+            <UpdateFeedback />
           </Route>
- 
+
           <Route exact path="/managersuccess">
             <ManagerFeedbackSuccess />
           </Route>
-          
+
           <Route exact path="/peerevaluationlist">
             <PeerFeedbackList />
           </Route>
 
           <Route exact path="/peerevaluationsuccess">
-            <PeerEvaluationSuccess/>
+            <PeerEvaluationSuccess />
           </Route>
 
           <Route exact path="/selfevaluationsuccess">
-            <SelfEvaluationSuccess/>
+            <SelfEvaluationSuccess />
           </Route>
 
           <Route exact path="/selfevaluationlist">
-            <SelfEvalList/>
+            <SelfEvalList />
           </Route>
 
           <Route exact path="/Navbar">
@@ -202,7 +214,6 @@ export default function App() {
           </Route>
         </Switch>
       </div>
-    </Router >
+    </Router>
   );
 }
-

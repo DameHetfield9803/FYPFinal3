@@ -1,7 +1,6 @@
 //HRHOMEPAGEENQUANVERSION
 import { Link } from "react-router-dom";
 import "./HRHomepage.css";
-import Dashboard from "../../NavBar/HR Navbar/HRNavBar";
 
 export default function HRHomepage() {
   return (
