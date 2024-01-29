@@ -479,6 +479,49 @@ app.put("/managerfeedback", (req, res) => {
   });
 });
 
+
+// UPDATED Update manager feedback (FIRDAUS) for manager feedbacklist
+app.put("/managerfeedback/:id", (req, res) => {
+  const { id } = req.params;
+  const { feedback_text, op1, op2, op3, op4, op5, op6, op7, op8, op9, op10, op11, op12 } = req.body;
+
+  const q = `
+    UPDATE manager_feedback 
+    SET feedback_text = ?, 
+        op1 = ?, 
+        op2 = ?, 
+        op3 = ?, 
+        op4 = ?, 
+        op5 = ?, 
+        op6 = ?, 
+        op7 = ?, 
+        op8 = ?, 
+        op9 = ?, 
+        op10 = ?, 
+        op11 = ?, 
+        op12 = ? 
+    WHERE manager_feedback_id = ?`;
+  
+  const values = [feedback_text, op1, op2, op3, op4, op5, op6, op7, op8, op9, op10, op11, op12, id];
+
+  db.query(q, values, (err, result) => {
+    if (err) {
+      console.error("Error updating manager feedback:", err);
+      return res.status(500).json({ error: "Internal Server Error" });
+    }
+
+    if (result.affectedRows > 0) {
+      return res.json({
+        message: "Manager feedback updated successfully",
+        result,
+      });
+    } else {
+      return res.status(404).json({ message: "Manager feedback not found" });
+    }
+  });
+});
+
+
 //DONE Read manager feedback (EN QUAN)
 app.get("/managerfeedback", (req, res) => {
   const q = "SELECT * FROM manager_feedback";
