@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import EmployeeNavBar from '../NavBar/EmployeeNavBar';
+import EmployeeNavBar from "../NavBar/EmployeeNavBar";
 import axios from "axios";
 import "./SelfEvaluation.css";
 import { useHistory } from "react-router-dom";
@@ -7,7 +7,7 @@ import { useHistory } from "react-router-dom";
 
 export default function SelfEvaluation() {
   //hooks
-  const [staffId, setStaffId] = useState(null);
+  const [staffId, setStaffId] = useState("");
   const [op1, setOp1] = useState(0);
   const [op2, setOp2] = useState(0);
   const [op3, setOp3] = useState(0);
@@ -101,7 +101,8 @@ export default function SelfEvaluation() {
         <b>
           {" "}
           <p className="mt-3">
-            (1:Strongly_Disagree , 2:Disagree , 3:Neutral , 4:Agree , 5:Strongly_Agree)
+            (1:Strongly_Disagree , 2:Disagree , 3:Neutral , 4:Agree ,
+            5:Strongly_Agree)
           </p>
           {/* Include staff_id and submission_date here */}
           <label htmlFor="staffId">Staff ID:</label>

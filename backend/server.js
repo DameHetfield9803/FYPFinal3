@@ -24,7 +24,7 @@ db.connect((err) => {
   console.log("MySQL successfully Connected...");
 });
 
-// Get staffid
+// Get staffid En Quan
 app.get("/getstaffids", (req, res) => {
   const q = "SELECT staff_id FROM employee";
   db.query(q, (err, data) => {
@@ -37,7 +37,7 @@ app.get("/getstaffids", (req, res) => {
   });
 });
 
-// manager feedback score
+// manager feedback score En Quan
 app.get("/managerfeedback/score/:staffId", (req, res) => {
   const staffId = req.params.staffId;
 
@@ -54,12 +54,13 @@ app.get("/managerfeedback/score/:staffId", (req, res) => {
         .json({ error: "Manager feedback not found for the given staff_id" });
     }
 
-    const managerFeedbackScore = data[0].score; // Assuming score is in the first row
-    return res.json({ managerFeedbackScore });
+    const totalScore = data.reduce((sum, row) => sum + row.score, 0);
+
+    return res.json({ totalScore });
   });
 });
 
-// peer feedback score
+// peer feedback score en quan
 app.get("/peerfeedback/score/:staffId", (req, res) => {
   const staffId = req.params.staffId;
 
@@ -76,12 +77,14 @@ app.get("/peerfeedback/score/:staffId", (req, res) => {
         .json({ error: "Peer feedback not found for the given staff_id" });
     }
 
-    const peerFeedbackScore = data[0].score; // Assuming score is in the first row
-    return res.json({ peerFeedbackScore });
+    // Aggregate scores
+    const totalScore = data.reduce((sum, row) => sum + row.score, 0);
+
+    return res.json({ totalScore });
   });
 });
 
-// self feedback score
+// self feedback score en quan
 app.get("/selffeedback/score/:staffId", (req, res) => {
   const staffId = req.params.staffId;
 
@@ -97,32 +100,82 @@ app.get("/selffeedback/score/:staffId", (req, res) => {
         .status(404)
         .json({ error: "Self feedback not found for the given staff_id" });
     }
+    // Aggregate scores
+    const totalScore = data.reduce((sum, row) => sum + row.score, 0);
 
-    const selfFeedbackScore = data[0].score; // Assuming score is in the first row
-    return res.json({ selfFeedbackScore });
+    return res.json({ totalScore });
   });
 });
 
-// self feedback score
+// Accolade score en quan
 app.get("/accolades/score/:staffId", (req, res) => {
   const staffId = req.params.staffId;
 
-  const sql = "SELECT score FROM accolade WHERE staff_id = ?";
+  const sql = "SELECT achievement_level FROM accolade WHERE staff_id = ?";
   db.query(sql, [staffId], (err, data) => {
     if (err) {
-      console.error("Error fetching accolades score:", err);
+      console.error("Error fetching accolade score:", err);
       return res.status(500).json({ error: "Internal server error" });
     }
 
     if (data.length === 0) {
       return res
         .status(404)
-        .json({ error: "Self feedback not found for the given staff_id" });
+        .json({ error: "Accolade not found for the given staff_id" });
+    }
+    // Aggregate scores
+    const totalScore = data.reduce(
+      (sum, row) => sum + row.achievement_level,
+      0
+    );
+
+    return res.json({ totalScore });
+  });
+});
+// !!TODO: Attendance score en quan
+app.get("/attendance/score/:staffId", (req, res) => {
+  const staffId = req.params.staffId;
+
+  const sql = "SELECT score FROM  WHERE staff_id = ?";
+  db.query(sql, [staffId], (err, data) => {
+    if (err) {
+      console.error("Error fetching attendance score:", err);
+      return res.status(500).json({ error: "Internal server error" });
     }
 
-    const accoladeScore = data[0].score; // Assuming score is in the first row
-    return res.json({ accoladeScore });
+    if (data.length === 0) {
+      return res
+        .status(404)
+        .json({ error: "Attendance not found for the given staff_id" });
+    }
+    // Aggregate scores
+    const totalScore = data.reduce(
+      (sum, row) => sum + row.achievement_level,
+      0
+    );
+
+    return res.json({ totalScore });
   });
+});
+
+//  to check if staff ID exists (En Quan)
+app.get("/checkStaffId/:staffId", (req, res) => {
+  const staffId = req.params.staffId;
+
+  // Perform a database query to check if staff ID exists
+  db.query(
+    "SELECT COUNT(*) AS count FROM employees WHERE staff_id = ?",
+    [staffId],
+    (err, result) => {
+      if (err) {
+        console.error("Database Error:", err);
+        return res.json({ error: "Error checking staff ID" });
+      }
+
+      const staffIdExists = result[0].count > 0;
+      return res.json({ exists: staffIdExists });
+    }
+  );
 });
 
 //------------------------------------------
@@ -290,18 +343,8 @@ app.get("/peerfeedback", (req, res) => {
 
 app.put("/peerfeedback/:id", (req, res) => {
   const { id } = req.params;
-  const {
-    date,
-    feedback_text,
-    staff_id,
-    op1,
-    op2,
-    op3,
-    op4,
-    op5,
-    op6,
-    op7
-  } = req.body;
+  const { date, feedback_text, staff_id, op1, op2, op3, op4, op5, op6, op7 } =
+    req.body;
 
   const vals = [
     date,
@@ -314,7 +357,7 @@ app.put("/peerfeedback/:id", (req, res) => {
     op5,
     op6,
     op7,
-    id  // Include the id in the values array
+    id, // Include the id in the values array
   ];
 
   db.query(
@@ -326,8 +369,6 @@ app.put("/peerfeedback/:id", (req, res) => {
     }
   );
 });
-
-
 
 //DONE Delete peer feedback (En Quan)
 app.delete("/peerfeedback", (req, res) => {
@@ -365,10 +406,14 @@ app.post("/createselffeedback", (req, res) => {
 
   vals.push(totalScore); // Add totalScore to the values array
   db.query(
-    "INSERT INTO self_feedback (  `feedback_text`, `staff_id`,`op1`,`op2`,`op3`,`op4`,`op5`,`op6`,`score`) VALUES ( ?, ?, ?,?,?,?,?,?,?);",
+    "INSERT INTO self_feedback (  `feedback_text`, `staff_id`,`op1`,`op2`,`op3`,`op4`,`op5`,`op6`,`score`) VALUES (?,?,?,?,?,?,?,?,?);",
     vals,
     (err, data) => {
-      if (err) return res.json(err); // querying and returning errors if errors exist.
+      if (err) {
+        console.error("Database Error:", err);
+        return res.json(err);
+      }
+      console.log("Insert Result:", data);
       return res.json(data); // returns data if no errors
     }
   );
@@ -482,11 +527,24 @@ app.put("/managerfeedback", (req, res) => {
   });
 });
 
-
 // UPDATED Update manager feedback (FIRDAUS) for manager feedbacklist
 app.put("/managerfeedback/:id", (req, res) => {
   const { id } = req.params;
-  const { feedback_text, op1, op2, op3, op4, op5, op6, op7, op8, op9, op10, op11, op12 } = req.body;
+  const {
+    feedback_text,
+    op1,
+    op2,
+    op3,
+    op4,
+    op5,
+    op6,
+    op7,
+    op8,
+    op9,
+    op10,
+    op11,
+    op12,
+  } = req.body;
 
   const q = `
     UPDATE manager_feedback 
@@ -504,8 +562,23 @@ app.put("/managerfeedback/:id", (req, res) => {
         op11 = ?, 
         op12 = ? 
     WHERE manager_feedback_id = ?`;
-  
-  const values = [feedback_text, op1, op2, op3, op4, op5, op6, op7, op8, op9, op10, op11, op12, id];
+
+  const values = [
+    feedback_text,
+    op1,
+    op2,
+    op3,
+    op4,
+    op5,
+    op6,
+    op7,
+    op8,
+    op9,
+    op10,
+    op11,
+    op12,
+    id,
+  ];
 
   db.query(q, values, (err, result) => {
     if (err) {
@@ -523,7 +596,6 @@ app.put("/managerfeedback/:id", (req, res) => {
     }
   });
 });
-
 
 //DONE Read manager feedback (EN QUAN)
 app.get("/managerfeedback", (req, res) => {
