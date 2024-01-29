@@ -35,28 +35,36 @@ export default function HRNavbar() {
         <div className="dropdown">
           <button className="dropbtn">Supervisor feedback</button>
           <div className="dropdown-content-vertical">
-            <Link to="/feedbackList">Supervisor feedback</Link>
+            <Link to="/feedbackList">View Supervisor feedback</Link>
+            {/* <Link to="/managerfeedback">Do Supervisor feedback</Link> */}
           </div>
         </div>
 
         <div className="dropdown">
           <button className="dropbtn">Peer feedback</button>
           <div className="dropdown-content-vertical">
-            <Link to="/peerevaluationlist">Peer feedback</Link>
+            <Link to="/peerevaluationlist">View Peer feedback</Link>
+          </div>
+        </div>
+
+        <div className="dropdown">
+          <button className="dropbtn">Self feedback</button>
+          <div className="dropdown-content-vertical">
+            <Link to="/selfevaluationlist">View Self feedback</Link>
           </div>
         </div>
 
         <div className="dropdown">
           <button className="dropbtn">Attendance</button>
           <div className="dropdown-content-vertical">
-            <Link to="/Attendance">Attendance</Link>
+            <Link to="/Attendance">View Attendance</Link>
           </div>
         </div>
 
         <div className="dropdown">
           <button className="dropbtn">Accolades</button>
           <div className="dropdown-content-vertical">
-            <Link to="/viewAccolades">Accolades</Link>
+            <Link to="/viewAccolades">View Accolades</Link>
           </div>
         </div>
 
