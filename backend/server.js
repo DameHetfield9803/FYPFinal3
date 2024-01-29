@@ -103,6 +103,28 @@ app.get("/selffeedback/score/:staffId", (req, res) => {
   });
 });
 
+// self feedback score
+app.get("/accolades/score/:staffId", (req, res) => {
+  const staffId = req.params.staffId;
+
+  const sql = "SELECT score FROM accolade WHERE staff_id = ?";
+  db.query(sql, [staffId], (err, data) => {
+    if (err) {
+      console.error("Error fetching accolades score:", err);
+      return res.status(500).json({ error: "Internal server error" });
+    }
+
+    if (data.length === 0) {
+      return res
+        .status(404)
+        .json({ error: "Self feedback not found for the given staff_id" });
+    }
+
+    const accoladeScore = data[0].score; // Assuming score is in the first row
+    return res.json({ accoladeScore });
+  });
+});
+
 //------------------------------------------
 // Create employee (DAMIEN) (done)
 app.post("/createemployee", (req, res) => {
@@ -644,13 +666,17 @@ app.get("/getjobroles", (req, res) => {
   });
 });
 
-app.put("/updateempjobrole", (req,res) =>{
+app.put("/updateempjobrole", (req, res) => {
   const vals = [req.body.job_role, req.body.staff_id];
-  db.query("UPDATE employee SET job_role=? WHERE staff_id=?;", vals , (err,data) => {
-    if(err) return res.json(err);
-    return res.json(data);
-  });
-})
+  db.query(
+    "UPDATE employee SET job_role=? WHERE staff_id=?;",
+    vals,
+    (err, data) => {
+      if (err) return res.json(err);
+      return res.json(data);
+    }
+  );
+});
 
 app.get(`/getempjobrole/:id`, (req, res) => {
   const val = [req.params.id];
