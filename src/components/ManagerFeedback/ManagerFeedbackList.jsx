@@ -1,7 +1,14 @@
+// Import the React library and specific functions (useState, useEffect) from it.
 import React, { useState, useEffect } from "react";
+
+// Import the axios library, which is used for making HTTP requests.
 import axios from "axios";
+
+// Import the ManagerNavBar component from the "../NavBar/ManagerNavBar" file.
 import ManagerNavBar from "../NavBar/ManagerNavBar";
 
+
+// Object to store form data for manager feedback.
 const ManagerFeedbackList = () => {
   const [feedbackList, setFeedbackList] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -28,44 +35,58 @@ const ManagerFeedbackList = () => {
     date: "",
   });
 
+  // useEffect hook to fetch manager feedback data when the component mounts.
   useEffect(() => {
     fetchFeedbackList();
   }, []);
 
+    // Function to fetch manager feedback data from the server.
   const fetchFeedbackList = async () => {
     try {
+      // Make a GET request to the specified URL.
       const response = await axios.get("http://localhost:3001/managerfeedback");
       setFeedbackList(response.data);
+      // Set loading to false as data has been successfully loaded.
       setLoading(false);
     } catch (error) {
+      // Handle errors that may occur during the data fetching process.
       console.error("Error fetching manager feedback:", error);
       setError(
         "Error fetching manager feedback. Please check your server and try again."
       );
+      // Set loading to false even if an error occurs.
       setLoading(false);
     }
   };
-
+// Function to handle the deletion of manager feedback.
   const handleDelete = async (id) => {
     const confirmDelete = window.confirm(
       "Are you sure you want to delete this manager feedback?"
     );
+      // If the user cancels the deletion, return from the function.
     if (!confirmDelete) {
       return;
     }
 
     try {
+       // Make a DELETE request to the specified URL.
       await axios.delete(`http://localhost:3001/managerfeedback/${id}`);
+      // Set a success message for the popup.
       setPopupMessage("Manager feedback deleted successfully");
+       // Show the popup.
       setShowPopup(true);
+       // Fetch the updated feedback list.
       fetchFeedbackList();
     } catch (error) {
+      // Handle errors that may occur during the deletion process.
       console.error("Error deleting manager feedback:", error);
     }
   };
-
+// Function to handle editing manager feedback.
   const handleEdit = (feedback) => {
+    // Set the selectedFeedback state with the feedback data to be edited.
     setSelectedFeedback(feedback);
+     // Set the feedbackData state with the selected feedback data.
     setFeedbackData({
       manager_feedback_id: feedback.manager_feedback_id,
       feedback_text: feedback.feedback_text,
@@ -85,27 +106,38 @@ const ManagerFeedbackList = () => {
       date: feedback.date,
     });
   };
+  // Function to handle changes in the form input fields.
 
   const handleChange = (e) => {
+    // Destructure the name and value from the event target.
     const { name, value } = e.target;
+    // Update the feedbackData state with the new values.
     setFeedbackData((prevData) => ({
       ...prevData,
       [name]: value,
     }));
   };
-
+// Function to handle the submission of the feedback form.
   const handleSubmit = async (e) => {
+    // Prevent the default form submission behavior.
     e.preventDefault();
     try {
+      // Log the form data to the console (for debugging purposes).
       console.log("Submitting form...", feedbackData);
+       // Make a PUT request to update the manager feedback with the given ID.
       await axios.put(
         `http://localhost:3001/managerfeedback/${selectedFeedback.manager_feedback_id}`,
         feedbackData
       );
+       // Log a success message to the console.
       console.log("Manager feedback updated successfully");
+      // Set a success message for the popup.
       setPopupMessage("Manager feedback updated successfully");
+      // Show the popup.
       setShowPopup(true);
+       // Fetch the updated feedback list.
       fetchFeedbackList();
+      // Reset the selectedFeedback state to null.
       setSelectedFeedback(null);
       // Reset feedbackData state to initial values
       setFeedbackData({
@@ -127,10 +159,11 @@ const ManagerFeedbackList = () => {
         date: "",
       });
     } catch (error) {
+      // Handle errors that may occur during the update process.
       console.error("Error updating manager feedback:", error);
     }
   };
-
+// Return the JSX structure of the component.
   return (
     <div>
       {/* Render ManagerNavBar component */}
@@ -397,4 +430,6 @@ const ManagerFeedbackList = () => {
   );
 };
 
+// Export the ManagerFeedbackList component.
 export default ManagerFeedbackList;
+
