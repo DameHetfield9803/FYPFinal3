@@ -3,10 +3,7 @@ import axios from "axios";
 
 export default function UpdateEmployee() {
   const [employees, setEmployees] = useState([]);
-  const [jobRoles, setJobRoles] = useState([]); // Change state variable name to jobRoles
-  const [selectedJobRole, setSelectedJobRole] = useState("");
-  const [selectedDepartment, setSelectedDepartment] = useState("");
-  const [selectedReportingTo, setSelectedReportingTo] = useState("");
+  const [jobRoles, setJobRoles] = useState([]);
 
   const fetchEmployees = async () => {
     try {
@@ -24,7 +21,7 @@ export default function UpdateEmployee() {
   const fetchJobRoles = async () => {
     try {
       const response = await axios.get("http://localhost:3001/getjobroles");
-      setJobRoles(response.data); // Set jobRoles state with fetched data
+      setJobRoles(response.data);
     } catch (error) {
       console.error("Error fetching job roles: ", error);
     }
@@ -96,41 +93,31 @@ export default function UpdateEmployee() {
               <td>{employee.job_role}</td>
               <td>{employee.reporting_to}</td>
               <td>
-                <select onChange={(e) => setSelectedJobRole(e.target.value)}>
-                  {/* Use jobRoles state for job role dropdown */}
+                <select onChange={(e) => handleUpdateJobRole(employee.staff_id, e.target.value)}>
                   {jobRoles.map((role) => (
-                    <option key={role.job_role_id} value={role.job_role}>
+                    <option key={role.job_role} value={role.job_role}>
                       {role.job_role}
                     </option>
                   ))}
                 </select>
-                <button onClick={() => handleUpdateJobRole(employee.staff_id, selectedJobRole)}>
-                  Update Job Role
-                </button>
               </td>
               <td>
-                <select onChange={(e) => setSelectedDepartment(e.target.value)}>
+                <select onChange={(e) => handleUpdateDepartment(employee.staff_id, e.target.value)}>
                   {employees.map((emp) => (
-                    <option key={emp.staff_id} value={emp.department_id}>
+                    <option key={emp.department_id} value={emp.department_id}>
                       {emp.department_id}
                     </option>
                   ))}
                 </select>
-                <button onClick={() => handleUpdateDepartment(employee.staff_id, selectedDepartment)}>
-                  Update Department
-                </button>
               </td>
               <td>
-                <select onChange={(e) => setSelectedReportingTo(e.target.value)}>
+                <select onChange={(e) => handleReportingTo(employee.staff_id, e.target.value)}>
                   {employees.map((emp) => (
                     <option key={emp.staff_id} value={emp.staff_id}>
                       {emp.staff_name}
                     </option>
                   ))}
                 </select>
-                <button onClick={() => handleReportingTo(employee.reporting_to, employee.staff_id)}>
-                  Update Reporting To
-                </button>
               </td>
             </tr>
           ))}

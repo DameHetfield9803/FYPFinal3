@@ -65,6 +65,14 @@ export default function App() {
             <ViewEmployee />
           </Route>
 
+          <Route exact path="/adminhome/:id/updateemployee">
+            <UpdateEmployee/>
+          </Route>
+
+          <Route exact path="/adminhome/:id/deleteemployee">
+            <DeleteEmployee/>
+          </Route>
+
           <Route exact path="/hrhome/:id/viewemployee">
             <ViewEmployee />
           </Route>

@@ -789,6 +789,22 @@ app.post("/login", (req, res) => {
   );
 });
 
+app.get("/getjobrolebystaffname", (req,res) => {
+  const vals =[req.body.staff_name];
+  db.query("SELECT job_role FROM employee WHERE staff_name = ?;", vals, (err,data) => {
+    if(err) return res.json(err);
+    return res.json(data);
+  });
+});
+
+app.put("/updatejobrolebystaffname", (req,res) => {
+  const vals = [req.body.job_role, req.body.staff_name]
+  db.query("UPDATE employee set job_role = ? WHERE staff_name =?;", vals, (err,data) =>{
+    if(err) return res.json(err)
+    return res.json(data)
+  })
+});
+
 // update employee email
 app.put("/updateuseremail", (req, res) => {
   const vals = [req.body.email, req.body.staff_id];
